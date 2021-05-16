@@ -7,7 +7,8 @@ import welcome from './Welcome.module.css'
 
 import Section from "../component/Section/Section";
 import Footer from "../component/Footer/Footer";
-import CommentList from "../component/Comment/CommentList";
+import CommentList from "../component/CommentList/CommentList";
+import ProjectList from "../component/ProjectList/ProjectList";
 
 import fuchuang from "../assets/images/contest/fuchuang.png";
 import logo from "../assets/images/logo.png"
@@ -16,7 +17,7 @@ import SD from "../assets/images/department/software-depertment.png"
 import HD from "../assets/images/department/hardware-department.png"
 import OD from "../assets/images/department/organization-department.png"
 
-const {Title, Paragraph} = Typography;
+const {Title} = Typography;
 
 class Welcome extends Component {
     render() {
@@ -72,13 +73,13 @@ class Welcome extends Component {
                     </div>
                 </Section>
 
-                <Section title="不知道标题">
+                <Section title="我们希望倾听你的声音">
                     <div className={welcome.contestContainer}>
                         <div className={welcome.comment}>
                             <CommentList/>
                         </div>
                         <div className={welcome.comment}>
-                            <CommentList/>
+                            <ProjectList/>
                         </div>
                     </div>
                 </Section>

@@ -1,7 +1,37 @@
 import React, {Component} from 'react';
-import {Comment, Tooltip, List} from 'antd';
+import {Comment, Tooltip, List, Typography} from 'antd';
 import moment from 'moment';
 import './Comment.css'
+
+const {Title} = Typography
+
+class CommentList extends Component {
+    render() {
+        return (
+            <div>
+                <List
+                    className="comment-list"
+                    header={<Title level={3}>来自桂电</Title>}
+                    itemLayout="horizontal"
+                    dataSource={data}
+                    renderItem={item => (
+                        <li>
+                            <Comment
+                                actions={item.actions}
+                                author={item.author}
+                                avatar={item.avatar}
+                                content={item.content}
+                                datetime={item.datetime}
+                            />
+                        </li>
+                    )}
+                />
+            </div>
+        );
+    }
+}
+
+export default CommentList;
 
 const data = [
     {
@@ -39,32 +69,3 @@ const data = [
         ),
     },
 ];
-
-
-class CommentList extends Component {
-    render() {
-        return (
-            <div>
-                <List
-                    className="comment-list"
-                    header={`来自桂电`}
-                    itemLayout="horizontal"
-                    dataSource={data}
-                    renderItem={item => (
-                        <li>
-                            <Comment
-                                actions={item.actions}
-                                author={item.author}
-                                avatar={item.avatar}
-                                content={item.content}
-                                datetime={item.datetime}
-                            />
-                        </li>
-                    )}
-                />
-            </div>
-        );
-    }
-}
-
-export default CommentList;
