@@ -6,28 +6,83 @@ import {Typography} from 'antd';
 const {Title} = Typography;
 
 class Footer extends Component {
+    items = [
+        {
+            title: '学习文档',
+            list: [
+                {
+                    name: '工具箱的深度學習記事簿',
+                    url: 'https://ml.akasaki.space',
+                }, {
+                    name: 'CottonPaper',
+                    url: 'https://cp.therainisme.com'
+                }
+            ]
+        },
+        {
+            title: '与我相聚',
+            list: [
+                {
+                    name: '微信公众号',
+                    url: 'https://ml.akasaki.space',
+                }, {
+                    name: '招新QQ群',
+                    url: 'https://cp.therainisme.com'
+                }, {
+                    name: '招新报名表',
+                    url: 'https://cp.therainisme.com'
+                }
+            ]
+        },
+        {
+            title: '科协相关',
+            list: [
+                {
+                    name: 'OnlineJudge',
+                    url: 'https://ml.akasaki.space',
+                },
+                {
+                    name: 'GitHub',
+                    url: 'https://github.com/sanyuankexie',
+                }
+            ]
+        },
+        {
+            title: '友情链接',
+            list: [
+                {
+                    name: '七院创新基地',
+                    url: 'https://七院创新基地.cn/',
+                }
+            ]
+        },
+    ]
+
     render() {
         return (
             <footer className={footer.container}>
                 <div className={footer.blank}/>
                 <div className={footer.itemsContainer}>
-                    {this.dataToTItems()}
-                    {this.dataToTItems()}
-                    {this.dataToTItems()}
-                    {this.dataToTItems()}
+                    {this.items.map((self) => {
+                        return this.dataToItems(self)
+                    })}
                 </div>
             </footer>
         );
     }
 
-    dataToTItems() {
+    dataToItems(item) {
         return (
             <div>
-                <Title level={3} className={footer.title}>标题</Title>
+                <Title level={3} className={footer.title}>{item.title}</Title>
                 <ul className={footer.items}>
-                    <li className={footer.item}>链接1</li>
-                    <li className={footer.item}>链接2</li>
-                    <li className={footer.item}>链接3</li>
+                    {item.list.map((self) => {
+                        return (
+                            <a target="_blank" href={self.url} style={{color: "white"}}>
+                                <li className={footer.item}>{self.name}</li>
+                            </a>
+                        )
+                    })}
                 </ul>
             </div>
         );

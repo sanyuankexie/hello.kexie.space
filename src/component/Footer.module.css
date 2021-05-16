@@ -17,6 +17,7 @@
     flex-direction: row;
     justify-content: space-between;
     width: 80vw;
+    flex-wrap: wrap;
 }
 
 .items{
