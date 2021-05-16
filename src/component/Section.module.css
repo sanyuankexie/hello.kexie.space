@@ -1,0 +1,18 @@
+.title{
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #FBF9F8;
+    height: 800px;
+}
+
+.blank{
+    height: 10em;
+}
+
+.banner{
+    width: 100%;
+}
