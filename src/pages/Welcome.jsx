@@ -7,10 +7,12 @@ import welcome from './Welcome.module.css'
 
 import Section from "../component/Section";
 import Footer from "../component/Footer";
-import CSvg from "../assets/images/c.png";
 import fuchuang from "../assets/images/contest/fuchuang.png";
-
-
+import logo from "../assets/images/logo.png"
+import MD from "../assets/images/department/multimedia-department.png"
+import SD from "../assets/images/department/software-depertment.png"
+import HD from "../assets/images/department/hardware-department.png"
+import OD from "../assets/images/department/organization-department.png"
 
 const {Title, Paragraph} = Typography;
 
@@ -20,13 +22,13 @@ class Welcome extends Component {
             <div>
                 <section className={welcome.container}>
                     <div className={welcome.blank}/>
-                    <img src="http://therainisme.com:1225/kexie/logo_black.png"
+                    <img src={logo}
                          alt=""
-                         width={150}
-                         height={150}/>
+                         width={200}
+                         height={200}/>
                     <Title className={welcome.title} level={1}>桂电三院科协</Title>
 
-                    <Paragraph className={welcome.description}>啦啦啦啦啦啊啦啦啊啦啦啦啦啦</Paragraph>
+                    <p className={welcome.description}>啦啦啦啦啦啊啦啦啊啦啦啦啦啦</p>
 
                     <div className={welcome.btnGroup}>
                         <Button className={welcome.btn} type="primary" shape="round" icon={<GithubOutlined/>}
@@ -40,22 +42,31 @@ class Welcome extends Component {
                     </div>
                 </section>
 
-                <Section title="啊邦措德弗尔代" description="有时我会孤独无助，就像山坡上滚落的石子。啦啦啦啦啦啦">
+                <Section title="四大部门" description="科协有四大部门，不同的部门下有不同的学习方向">
+                    <div className={welcome.departmentContainer}>
+                        <div className={welcome.department}>
+                            <img src={MD} width={250} alt=""/>
+                        </div>
+                        <div className={welcome.department}>
+                            <img src={SD} width={250} alt=""/>
+                        </div>
 
-                    {/*<div>*/}
-                    {/*    <img src={CSvg} alt=""/>*/}
-                    {/*</div>*/}
-                    {/*<div>*/}
-                    {/*    <img src={CSvg} alt=""/>*/}
-                    {/*</div>*/}
+                        <div className={welcome.department}>
+                            <img src={HD} width={250} alt=""/>
+                        </div>
+                        <div className={welcome.department}>
+                            <img src={OD} width={250} alt=""/>
+                        </div>
+                    </div>
 
                 </Section>
-                <Section title="获得奖项">
+
+                <Section title="近年参赛获奖">
                     <div className={welcome.contestContainer}>
-                        {this.test()}
-                        {this.test()}
-                        {this.test()}
-                        {this.test()}
+                        {this.parseContest()}
+                        {this.parseContest()}
+                        {this.parseContest()}
+                        {this.parseContest()}
                     </div>
                 </Section>
                 <Footer/>
@@ -63,10 +74,10 @@ class Welcome extends Component {
         );
     }
 
-    test() {
+    parseContest() {
         return (
             <div className={welcome.contest}>
-                <Title style={{textAlign: "center"}} level={4}>中国大学生服务<br/>外包创新创业大赛</Title>
+                <Title style={{textAlign: "center"}} level={4}>大学生服务外包创新创业大赛</Title>
                 <img src={fuchuang} alt="" width={88}/>
                 <ul>
                     <li>卢畅——全国二等奖</li>

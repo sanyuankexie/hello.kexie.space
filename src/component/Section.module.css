@@ -1,4 +1,5 @@
-.title{
+.description{
+
 }
 
 .container {
@@ -6,7 +7,6 @@
     flex-direction: column;
     align-items: center;
     background: #FBF9F8;
-    height: 800px;
 }
 
 .blank{
@@ -18,4 +18,10 @@
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+}
+
+@media screen and (max-width: 768px) {
+    .description{
+        width: 80%;
+    }
 }

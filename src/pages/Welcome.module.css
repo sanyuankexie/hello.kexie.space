@@ -36,16 +36,32 @@
     height: 10em;
 }
 
-.contestContainer{
+.contestContainer, .departmentContainer{
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
     width: 80vw;
 }
 
-.contest{
+.contest, .department{
     margin-top: 2em;
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.department, .contest{
+    width: 20%;
+}
+
+@media screen and (max-width: 1080px) {
+    .department, .contest{
+        width: 45%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .department, .contest{
+        width: 100%;
+    }
 }

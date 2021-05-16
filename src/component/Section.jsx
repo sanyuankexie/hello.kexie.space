@@ -13,7 +13,7 @@ class Section extends Component {
             <section className={section.container}>
                 <div className={section.blank}/>
                 <Title level={1}>{title}</Title>
-                <Paragraph className={section.title}>{description}</Paragraph>
+                <p className={section.description}>{description}</p>
                 <div className={section.banner}>
                     {this.props.children}
                 </div>
