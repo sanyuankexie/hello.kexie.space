@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
-import {Button} from 'antd';
+import {Button, Comment, List} from 'antd';
 import {GithubOutlined, CodeFilled} from '@ant-design/icons';
 
 import {Typography} from 'antd';
 import welcome from './Welcome.module.css'
 
-import Section from "../component/Section";
-import Footer from "../component/Footer";
+import Section from "../component/Section/Section";
+import Footer from "../component/Footer/Footer";
+import CommentList from "../component/Comment/CommentList";
+
 import fuchuang from "../assets/images/contest/fuchuang.png";
 import logo from "../assets/images/logo.png"
 import MD from "../assets/images/department/multimedia-department.png"
@@ -69,6 +71,18 @@ class Welcome extends Component {
                         {this.parseContest()}
                     </div>
                 </Section>
+
+                <Section title="不知道标题">
+                    <div className={welcome.contestContainer}>
+                        <div className={welcome.comment}>
+                            <CommentList/>
+                        </div>
+                        <div className={welcome.comment}>
+                            <CommentList/>
+                        </div>
+                    </div>
+                </Section>
+
                 <Footer/>
             </div>
         );

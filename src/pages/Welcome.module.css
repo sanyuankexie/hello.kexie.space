@@ -54,6 +54,12 @@
     width: 20%;
 }
 
+.comment {
+    flex: 1;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
 @media screen and (max-width: 1080px) {
     .department, .contest{
         width: 45%;
@@ -63,5 +69,10 @@
 @media screen and (max-width: 768px) {
     .department, .contest{
         width: 100%;
+    }
+    .comment {
+        flex: 0 1 auto;
+        margin-left: 0;
+        margin-right: 0;
     }
 }
