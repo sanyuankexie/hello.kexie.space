@@ -35,7 +35,7 @@ export default CommentList;
 const data = [
     {
         author: 'Therainisme',
-        avatar: 'http://therainisme.com:1225/Therainisme/img/avatar.jpg',
+        avatar: 'https://avatars.githubusercontent.com/u/41776735?v=4',
         content: (
             <p>
                 我们会一起遇见鲸鱼吗？
