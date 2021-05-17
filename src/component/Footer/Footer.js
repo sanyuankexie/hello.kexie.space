@@ -24,13 +24,13 @@ class Footer extends Component {
             list: [
                 {
                     name: '微信公众号',
-                    url: '',
+                    url: 'https://github.com/sanyuankexie',
                 }, {
                     name: '招新QQ群',
-                    url: ''
+                    url: 'https://github.com/sanyuankexie'
                 }, {
                     name: '招新报名表',
-                    url: ''
+                    url: 'https://github.com/sanyuankexie'
                 }
             ]
         },
@@ -39,11 +39,11 @@ class Footer extends Component {
             list: [
                 {
                     name: 'OnlineJudge',
-                    url: '',
+                    url: 'https://github.com/sanyuankexie',
                 },
                 {
                     name: 'GitHub',
-                    url: '',
+                    url: 'https://github.com/sanyuankexie',
                 }
             ]
         },

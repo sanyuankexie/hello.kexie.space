@@ -50,4 +50,4 @@ jobs:
           publish_dir: build/
           publish_branch: gh-pages
           force_orphan: true
-          cname: 'kexie.space'
+          cname: 'hello.kexie.space'
