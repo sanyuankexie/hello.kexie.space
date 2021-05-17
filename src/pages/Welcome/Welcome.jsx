@@ -5,17 +5,18 @@ import {GithubOutlined, CodeFilled} from '@ant-design/icons';
 import {Typography} from 'antd';
 import welcome from './Welcome.module.css'
 
-import Section from "../component/Section/Section";
-import Footer from "../component/Footer/Footer";
-import CommentList from "../component/CommentList/CommentList";
-import ProjectList from "../component/ProjectList/ProjectList";
+import Section from "../../component/Section/Section";
+import Footer from "../../component/Footer/Footer";
+import CommentList from "./CommentList/CommentList";
+import ProjectList from "./ProjectList/ProjectList";
+import ContestList from "./ContestList/ContestList";
+import LearningDirectionList from "./LearningDirectionList/LearningDirectionList";
 
-import fuchuang from "../assets/images/contest/fuchuang.png";
-import logo from "../assets/images/logo.png"
-import MD from "../assets/images/department/multimedia-department.png"
-import SD from "../assets/images/department/software-depertment.png"
-import HD from "../assets/images/department/hardware-department.png"
-import OD from "../assets/images/department/organization-department.png"
+import logo from "../../assets/images/logo.png"
+import MD from "../../assets/images/department/multimedia-department.png"
+import SD from "../../assets/images/department/software-depertment.png"
+import HD from "../../assets/images/department/hardware-department.png"
+import OD from "../../assets/images/department/organization-department.png"
 
 const {Title} = Typography;
 
@@ -24,7 +25,7 @@ class Welcome extends Component {
         return (
             <div>
                 <section className={welcome.container}>
-                    <div className={welcome.blank}/>
+                    <div className={welcome.blank} style={{height: "20vh"}}/>
                     <img src={logo}
                          alt=""
                          width={200}
@@ -46,7 +47,7 @@ class Welcome extends Component {
                 </section>
 
                 <Section title="四大部门" description="科协有四大部门，不同的部门下有不同的学习方向">
-                    <div className={welcome.departmentContainer}>
+                    <div className={welcome.sectionContainer}>
                         <div className={welcome.department}>
                             <img src={MD} width={250} alt=""/>
                         </div>
@@ -64,17 +65,20 @@ class Welcome extends Component {
 
                 </Section>
 
-                <Section title="近年参赛获奖">
-                    <div className={welcome.contestContainer}>
-                        {this.parseContest()}
-                        {this.parseContest()}
-                        {this.parseContest()}
-                        {this.parseContest()}
+                <Section title="学习方向">
+                    <div className={welcome.sectionContainer}>
+                        <LearningDirectionList/>
                     </div>
                 </Section>
 
-                <Section title="我们希望倾听你的声音">
-                    <div className={welcome.contestContainer}>
+                <Section title="近年参赛获奖" description="很多，还在整理当中......">
+                    <div className={welcome.sectionContainer}>
+                        {/*<ContestList/>*/}
+                    </div>
+                </Section>
+
+                <Section title="心灵之声">
+                    <div className={welcome.sectionContainer} style={{marginBottom: "10vh"}}>
                         <div className={welcome.comment}>
                             <CommentList/>
                         </div>
@@ -87,20 +91,6 @@ class Welcome extends Component {
                 <Footer/>
             </div>
         );
-    }
-
-    parseContest() {
-        return (
-            <div className={welcome.contest}>
-                <Title style={{textAlign: "center"}} level={4}>大学生服务外包创新创业大赛</Title>
-                <img src={fuchuang} alt="" width={88}/>
-                <ul>
-                    <li>卢畅——全国二等奖</li>
-                    <li>卢畅——全国二等奖</li>
-                    <li>卢畅——全国二等奖</li>
-                </ul>
-            </div>
-        )
     }
 }
 

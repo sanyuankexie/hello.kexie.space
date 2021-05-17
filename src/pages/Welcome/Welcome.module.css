@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: center;
     background: #252630;
-    height: 800px;
+    height: 105vh;
 }
 
 .title, .description {
@@ -36,22 +36,22 @@
     height: 10em;
 }
 
-.contestContainer, .departmentContainer{
+.sectionContainer{
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
     width: 80vw;
 }
 
-.contest, .department{
-    margin-top: 2em;
+.displayItem, .department{
+    margin-top: 3em;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.department, .contest{
-    width: 20%;
+.department, .displayItem{
+    width: 21%;
 }
 
 .comment {
@@ -61,18 +61,21 @@
 }
 
 @media screen and (max-width: 1080px) {
-    .department, .contest{
+    .department, .displayItem{
         width: 45%;
     }
 }
 
 @media screen and (max-width: 768px) {
-    .department, .contest{
+    .department, .displayItem{
         width: 100%;
     }
     .comment {
         flex: 0 1 auto;
         margin-left: 0;
         margin-right: 0;
+    }
+    .container {
+        height: 120vh;
     }
 }

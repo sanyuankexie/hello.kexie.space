@@ -11,7 +11,7 @@ class CommentList extends Component {
             <div>
                 <List
                     className="comment-list"
-                    header={<Title level={3}>来自桂电</Title>}
+                    header={<Title level={3}>畅心所言</Title>}
                     itemLayout="horizontal"
                     dataSource={data}
                     renderItem={item => (
@@ -40,9 +40,7 @@ const data = [
         avatar: 'http://therainisme.com:1225/Therainisme/img/avatar.jpg',
         content: (
             <p>
-                We supply a series of design principles, practical patterns and high quality design
-                resources (Sketch and Axure), to help people create their product prototypes beautifully and
-                efficiently.
+                我们会一起遇见鲸鱼吗？
             </p>
         ),
         datetime: (
