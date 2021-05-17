@@ -3,10 +3,14 @@ import React, {Component} from 'react';
 import {Typography} from 'antd';
 import section from './Section.module.css'
 
+const {Title} = Typography;
 
-const {Title, Paragraph} = Typography;
+export interface Props {
+    title: string;
+    description?: string;
+}
 
-class Section extends Component {
+class Section extends Component<Props, object> {
     render() {
         const {title, description} = this.props
         return (

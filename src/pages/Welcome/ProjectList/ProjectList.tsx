@@ -1,9 +1,18 @@
 import React, {Component} from 'react';
-import {List, Typography, Divider} from 'antd';
+import {List, Typography} from 'antd';
 
 import project from './Project.module.css'
 
 const {Title} = Typography
+
+interface TProject {
+    name: string
+    description: string
+    language: string
+    avatar: string
+    url: string
+    languageColor: string
+}
 
 class ProjectList extends Component {
     render() {
@@ -28,7 +37,7 @@ class ProjectList extends Component {
     }
 }
 
-class Project extends Component {
+class Project extends Component<TProject, Object> {
     render() {
         const {name, description, language, avatar, url, languageColor} = this.props
         return (
@@ -53,7 +62,7 @@ class Project extends Component {
 
 export default ProjectList;
 
-const data = [
+const data: Array<TProject> = [
     {
         name: "Flexml",
         description: "🚀基于Litho的Android高性能动态业务容器。",
@@ -67,7 +76,7 @@ const data = [
         description: "请跳转到仓库网页查看： https://ml.akasaki.space 。带有代码的深度学习方法从入门到放弃。talk is cheap, show me the code。如果有用请施舍一个star。",
         language: "Python",
         avatar: "https://avatars.githubusercontent.com/u/33346934?v=4",
-        url: "https://github.com/visualDust/ml.akasaki.space",
+        url: "https://ml.akasaki.space",
         languageColor: "#3572A5"
     },
     {

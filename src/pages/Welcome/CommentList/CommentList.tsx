@@ -5,6 +5,13 @@ import './Comment.css'
 
 const {Title} = Typography
 
+interface MComment {
+    author: string
+    avatar: string
+    content: JSX.Element | string
+    datetime: JSX.Element | string
+}
+
 class CommentList extends Component {
     render() {
         return (
@@ -14,7 +21,7 @@ class CommentList extends Component {
                     header={<Title level={3}>畅心所言</Title>}
                     itemLayout="horizontal"
                     dataSource={data}
-                    renderItem={item => (
+                    renderItem={(item: MComment) => (
                         <li>
                             <Comment
                                 author={item.author}
@@ -32,7 +39,7 @@ class CommentList extends Component {
 
 export default CommentList;
 
-const data = [
+const data: Array<MComment> = [
     {
         author: 'Therainisme',
         avatar: 'https://avatars.githubusercontent.com/u/41776735?v=4',
@@ -62,11 +69,11 @@ const data = [
         ),
     },
     {
-        author: 'Visualdust',
+        author: 'VisualDust',
         avatar: 'https://avatars.githubusercontent.com/u/33346934?v=4',
         content: (
             <p>
-                预告一下，可能接下来两天有事要做，但我觉得，我只想写实验报告。
+                Akasaki told me there would be a Miracle.
             </p>
         ),
         datetime: (
