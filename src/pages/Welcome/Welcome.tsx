@@ -9,7 +9,6 @@ import Section from "../../component/Section/Section";
 import Footer from "../../component/Footer/Footer";
 import CommentList from "./CommentList/CommentList";
 import ProjectList from "./ProjectList/ProjectList";
-import ContestList from "./ContestList/ContestList";
 import LearningDirectionList from "./LearningDirectionList/LearningDirectionList";
 
 import logo from "../../assets/images/logo.png"
@@ -73,7 +72,6 @@ class Welcome extends Component {
 
                 <Section title="近年参赛获奖" description="很多，还在整理当中......">
                     <div className={welcome.sectionContainer}>
-                        {/*<ContestList/>*/}
                     </div>
                 </Section>
 
