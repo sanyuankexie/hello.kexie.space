@@ -17,7 +17,6 @@ class CommentList extends Component {
                     renderItem={item => (
                         <li>
                             <Comment
-                                actions={item.actions}
                                 author={item.author}
                                 avatar={item.avatar}
                                 content={item.content}
@@ -35,7 +34,6 @@ export default CommentList;
 
 const data = [
     {
-        actions: [<span key="comment-list-reply-to-0">Reply to</span>],
         author: 'Therainisme',
         avatar: 'http://therainisme.com:1225/Therainisme/img/avatar.jpg',
         content: (
@@ -50,14 +48,25 @@ const data = [
         ),
     },
     {
-        actions: [<span key="comment-list-reply-to-0">Reply to</span>],
+        author: 'gaizi',
+        avatar: 'https://avatars.githubusercontent.com/u/57099417?v=4',
+        content: (
+            <p>
+                天龙人永不为奴！！！
+            </p>
+        ),
+        datetime: (
+            <Tooltip title={moment().subtract(2, 'days').format('YYYY-MM-DD HH:mm:ss')}>
+                <span>{moment().subtract(2, 'days').fromNow()}</span>
+            </Tooltip>
+        ),
+    },
+    {
         author: 'Visualdust',
         avatar: 'https://avatars.githubusercontent.com/u/33346934?v=4',
         content: (
             <p>
-                We supply a series of design principles, practical patterns and high quality design
-                resources (Sketch and Axure), to help people create their product prototypes beautifully and
-                efficiently.
+                预告一下，可能接下来两天有事要做，但我觉得，我只想写实验报告。
             </p>
         ),
         datetime: (

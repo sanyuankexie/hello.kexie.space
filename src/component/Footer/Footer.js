@@ -24,13 +24,13 @@ class Footer extends Component {
             list: [
                 {
                     name: '微信公众号',
-                    url: 'https://ml.akasaki.space',
+                    url: '',
                 }, {
                     name: '招新QQ群',
-                    url: 'https://cp.therainisme.com'
+                    url: ''
                 }, {
                     name: '招新报名表',
-                    url: 'https://cp.therainisme.com'
+                    url: ''
                 }
             ]
         },
@@ -39,11 +39,11 @@ class Footer extends Component {
             list: [
                 {
                     name: 'OnlineJudge',
-                    url: 'https://ml.akasaki.space',
+                    url: '',
                 },
                 {
                     name: 'GitHub',
-                    url: 'https://github.com/sanyuankexie',
+                    url: '',
                 }
             ]
         },
