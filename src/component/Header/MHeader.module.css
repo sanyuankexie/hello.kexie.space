@@ -1,0 +1,31 @@
+.header {
+    z-Index: 100;
+    position: fixed;
+    width: 100%;
+    padding: 0 !important;
+}
+
+.menu, .header, .item {
+    height: 64px !important;
+}
+.menu {
+    line-height: 64px !important;
+}
+
+@media screen and (max-width: 992px) {
+    .menu, .header, .item {
+        height: 54px !important;
+    }
+    .menu {
+        line-height: 54px !important;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .menu, .header, .item {
+        height: 48px !important;
+    }
+    .menu {
+        line-height: 48px !important;
+    }
+}

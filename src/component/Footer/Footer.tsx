@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import footer from './Footer.module.css'
+import css from './Footer.module.css'
 
 import {Typography} from 'antd';
 
@@ -19,9 +19,9 @@ class Footer extends Component {
 
     render() {
         return (
-            <footer className={footer.container}>
-                <div className={footer.blank}/>
-                <div className={footer.itemsContainer}>
+            <footer className={css.container}>
+                <div className={css.blank}/>
+                <div className={css.itemsContainer}>
                     {data.map((self: Table) => {
                         return this.dataToItems(self)
                     })}
@@ -33,12 +33,12 @@ class Footer extends Component {
     dataToItems(item: Table) {
         return (
             <div>
-                <Title level={3} className={footer.title}>{item.title}</Title>
-                <ul className={footer.items}>
+                <Title level={3} className={css.title}>{item.title}</Title>
+                <ul className={css.items}>
                     {item.list.map((self: Item) => {
                         return (
                             <a target="_blank" href={self.url} style={{color: "white"}}>
-                                <li className={footer.item}>{self.name}</li>
+                                <li className={css.item}>{self.name}</li>
                             </a>
                         )
                     })}

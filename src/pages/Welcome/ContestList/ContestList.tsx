@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Typography} from 'antd';
-import welcome from "../Welcome.module.css";
+import css from "../Welcome.module.css";
 import fuchuang from "../../../assets/images/contest/fuchuang.png";
 
 const {Title} = Typography
@@ -19,7 +19,7 @@ class ContestList extends Component {
     render() {
         return data.map((self: Contest) => {
             return (
-                <div className={welcome.displayItem}>
+                <div className={css.displayItem}>
                     <Title style={{textAlign: "center"}} level={4}>{self.name}</Title>
                     <img src={self.logo} alt="" width={88}/>
                     <ul>

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {List, Typography} from 'antd';
 
-import project from './Project.module.css'
+import css from './Project.module.css'
 
 const {Title} = Typography
 
@@ -41,20 +41,20 @@ class Project extends Component<TProject, Object> {
     render() {
         const {name, description, language, avatar, url, languageColor} = this.props
         return (
-            <div className={project.project}>
+            <div className={css.project}>
                 <span>
-                <span className={project.name}>
+                <span className={css.name}>
                     <a href={url} target="_blank">
-                        <img className={project.avatar} src={avatar} alt=""/>
+                        <img className={css.avatar} src={avatar} alt=""/>
                         {name}
                     </a>
-                    <span className={project.tags}>
+                    <span className={css.tags}>
                         {language}
-                        <span className={project.languageColor} style={{background: languageColor}}/>
+                        <span className={css.languageColor} style={{background: languageColor}}/>
                     </span>
                 </span>
                 </span>
-                <span className={project.description}>{description}</span>
+                <span className={css.description}>{description}</span>
             </div>
         )
     }
