@@ -5,8 +5,10 @@ import logo from '../../assets/images/logo.png'
 class FloatMenu extends Component {
 
     state = {
-        top: 100,
-        left: 100,
+        nowY: 100,
+        nowX: 100,
+        targetX: 100,
+        targetY: 100,
         cursor: "pointer",
         dTop: 0, // top的增量
         dLeft: 0, // left的增量
@@ -16,12 +18,12 @@ class FloatMenu extends Component {
     private menu: React.RefObject<HTMLDivElement> = React.createRef()
 
     render() {
-        const {top, left, cursor} = this.state
+        const {nowY, nowX, cursor} = this.state
         return (
             <div>
                 <div ref={this.menu}
                      className={css.container}
-                     style={{top: top + 'px', left: left + 'px', cursor}}
+                     style={{top: nowY + 'px', left: nowX + 'px', cursor}}
                      onMouseDown={event => this.startMoving(event)}
                      onDragStart={event => event.preventDefault()}>
                     <img className={css.logo} src={logo} alt=""/>
@@ -31,41 +33,52 @@ class FloatMenu extends Component {
     }
 
     startMoving(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
-
         this.setState({cursor: "move"})
-        document.onmousemove = this.moving()
-        document.onmouseup = this.endMoving()
+        document.onmousemove = this.moving
+        document.onmouseup = this.endMoving
     }
 
-    moving = () => {
-        return (e: MouseEvent) => {
-            const mouseX = e.clientX - this.menu.current!.offsetLeft
-            const mouseY = e.clientY - this.menu.current!.offsetTop
-            let {left, top} = this.state
-            let nextLeft = mouseX / 60
-            let nextTop = mouseY / 60
-            console.log(mouseY, mouseX)
-            this.setState({nextLeft, nextTop})
-            // 移动当前元素
-            if (nextLeft <= window.innerWidth - this.menu.current!.offsetWidth) {
+    moving = (e: MouseEvent) => {
+        // 获取当前鼠标位置作为目标位置
+        // 如果鼠标不移动，将不会变更目标位置
+        let targetX = e.clientX
+        let targetY = e.clientY
+        let mouseX = e.clientX - this.menu.current!.offsetLeft
+        let mouseY = e.clientY - this.menu.current!.offsetTop
+        this.setState({targetX, targetY})
+        if (!this.state.interval) {
+            const interval = setInterval(() => {
+                // 进入定时器内部
+                // 获取当前元素位置
+                let {nowX, nowY, targetX, targetY} = this.state
+                targetX -= mouseX
+                targetY -= mouseY
+                // 计算增量
+                let dLeft = (targetX - nowX) / 16
+                let dTop = (targetY - nowY) / 16
+                // 移动当前元素
                 this.setState({
-                    left: left + nextLeft,
+                    nowX: nowX + dLeft,
+                    nowY: nowY + dTop,
                 })
-            }
-            if (nextTop <= window.innerHeight - this.menu.current!.offsetHeight) {
-                this.setState({
-                    top: top + nextTop,
-                })
-            }
+                if (Math.abs(dLeft) < 0.03 && Math.abs(dTop) < 0.03) {
+                    console.log("clear")
+                    clearInterval(this.state.interval!)
+                    this.setState({
+                        nowX: targetX,
+                        nowY: targetY,
+                        interval: null,
+                    })
+                }
+            }, 16)
+            this.setState({interval})
         }
     }
 
-    endMoving() {
-        return (e: MouseEvent) => {
-            document.onmousemove = null
-            document.onmouseup = null
-            this.setState({cursor: "pointer"})
-        }
+    endMoving = (e: MouseEvent) => {
+        document.onmousemove = null
+        document.onmouseup = null
+        this.setState({cursor: "pointer"})
     }
 }
 
