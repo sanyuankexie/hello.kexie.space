@@ -25,7 +25,7 @@ class LearningDirectionList extends Component {
     render() {
         return data.map((self: LDirection) => {
             return (
-                <div className={welcome.displayItem}>
+                <div key={self.name} className={welcome.displayItem}>
                     <Title style={{textAlign: "center"}} level={2}>{self.name}</Title>
                     <img src={self.logo} alt="" width={self.width} style={self.style || {}}/>
                 </div>

@@ -67,7 +67,7 @@ const data: Array<TProject> = [
         name: "Flexml",
         description: "🚀基于Litho的Android高性能动态业务容器。",
         language: "Kotlin",
-        avatar: "https://avatars.githubusercontent.com/u/10202588?s=48&v=4",
+        avatar: "https://avatars.githubusercontent.com/u/25474959?v=4",
         url: "https://github.com/sanyuankexie/Flexml",
         languageColor: "#F18E33"
     },

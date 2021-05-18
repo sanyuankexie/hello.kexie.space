@@ -32,12 +32,12 @@ class Footer extends Component {
 
     dataToItems(item: Table) {
         return (
-            <div>
+            <div key={item.title}>
                 <Title level={3} className={css.title}>{item.title}</Title>
                 <ul className={css.items}>
                     {item.list.map((self: Item) => {
                         return (
-                            <a target="_blank" href={self.url} style={{color: "white"}}>
+                            <a key={self.name}  target="_blank" href={self.url} style={{color: "white"}}>
                                 <li className={css.item}>{self.name}</li>
                             </a>
                         )
