@@ -5,14 +5,14 @@ import logo from '../../assets/images/logo.png'
 class FloatMenu extends Component {
 
     state = {
-        nowY: 100,
-        nowX: 100,
+        nowY: 10,
+        nowX: 10,
         targetX: 100,
         targetY: 100,
+        mouseX: 0,
+        mouseY: 0,
         cursor: "pointer",
-        dTop: 0, // top的增量
-        dLeft: 0, // left的增量
-        interval: null
+        raf: null
     }
 
     private menu: React.RefObject<HTMLDivElement> = React.createRef()
@@ -33,52 +33,59 @@ class FloatMenu extends Component {
     }
 
     startMoving(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
-        this.setState({cursor: "move"})
-        document.onmousemove = this.moving
-        document.onmouseup = this.endMoving
-    }
+        this.setState({
+            cursor: "move",
+            mouseX: e.clientX - this.menu.current!.offsetLeft,
+            mouseY: e.clientY - this.menu.current!.offsetTop
+        })
 
-    moving = (e: MouseEvent) => {
-        // 获取当前鼠标位置作为目标位置
-        // 如果鼠标不移动，将不会变更目标位置
-        let targetX = e.clientX
-        let targetY = e.clientY
-        let mouseX = e.clientX - this.menu.current!.offsetLeft
-        let mouseY = e.clientY - this.menu.current!.offsetTop
-        this.setState({targetX, targetY})
-        if (!this.state.interval) {
-            const interval = setInterval(() => {
-                // 进入定时器内部
-                // 获取当前元素位置
-                let {nowX, nowY, targetX, targetY} = this.state
-                targetX -= mouseX
-                targetY -= mouseY
-                // 计算增量
-                let dLeft = (targetX - nowX) / 16
-                let dTop = (targetY - nowY) / 16
-                // 移动当前元素
-                this.setState({
-                    nowX: nowX + dLeft,
-                    nowY: nowY + dTop,
-                })
-                if (Math.abs(dLeft) < 0.03 && Math.abs(dTop) < 0.03) {
-                    console.log("clear")
-                    clearInterval(this.state.interval!)
-                    this.setState({
-                        nowX: targetX,
-                        nowY: targetY,
-                        interval: null,
-                    })
+        const moving = (e: MouseEvent) => {
+            // 获取当前鼠标位置作为目标位置
+            // 如果鼠标不移动，将不会变更目标位置
+            let targetX = e.clientX
+            let targetY = e.clientY
+            let lastTime = Date.now();
+            // 鼠标点击元素的位置
+            this.setState({targetX, targetY})
+            if (!this.state.raf) {
+                const callback = () => {
+                    // 进入定时器内部
+                    // 获取当前元素位置
+                    let {nowX, nowY, targetX, targetY, mouseX, mouseY} = this.state
+                    targetX -= mouseX
+                    targetY -= mouseY
+                    // 计算增量
+                    const now = Date.now()
+                    let dTime = now - lastTime
+                    lastTime = now
+                    let dLeft = (targetX - nowX) * dTime / 256
+                    let dTop = (targetY - nowY) * dTime / 256
+                    if (Math.abs(dLeft) < 0.03 && Math.abs(dTop) < 0.03) {
+                        this.setState({
+                            nowX: targetX,
+                            nowY: targetY,
+                            raf: null,
+                        })
+                    } else {
+                        this.setState({
+                            nowX: nowX + dLeft,
+                            nowY: nowY + dTop,
+                        })
+                        requestAnimationFrame(callback)
+                    }
                 }
-            }, 16)
-            this.setState({interval})
+                const raf = requestAnimationFrame(callback)
+                this.setState({raf})
+            }
         }
-    }
 
-    endMoving = (e: MouseEvent) => {
-        document.onmousemove = null
-        document.onmouseup = null
-        this.setState({cursor: "pointer"})
+        const endMoving = (e: MouseEvent) => {
+            document.removeEventListener('mousemove', moving);
+            document.removeEventListener('mouseup', endMoving);
+            this.setState({cursor: "pointer"})
+        }
+        document.addEventListener('mousemove', moving);
+        document.addEventListener('mouseup', endMoving);
     }
 }
 
