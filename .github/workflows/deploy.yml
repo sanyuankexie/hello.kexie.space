@@ -41,7 +41,7 @@ jobs:
         run: |
           npm i
       - name: Build
-        run: npm run build
+        run: yarn build
 
       - name: Deploy to Github Pages
         uses: peaceiris/actions-gh-pages@v3
