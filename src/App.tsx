@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Route, Switch} from 'react-router-dom'
 
 import FloatMenu from "./component/FloatMenu/FloatMenu";
 import Welcome from "./pages/Welcome/Welcome";
@@ -13,8 +14,10 @@ class App extends Component {
             <div>
                 <div>
                     <FloatMenu/>
-                    {/*<Article/>*/}
-                    <Welcome/>
+                    <Switch>
+                        <Route path="/mp" component={Article}/>
+                        <Route path="/" component={Welcome}/>
+                    </Switch>
                     <Footer/>
                 </div>
             </div>

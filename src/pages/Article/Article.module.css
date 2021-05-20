@@ -7,11 +7,11 @@
     margin: auto auto 200px;
 }
 
-.article p, li, th, td{
+.article p, .article li, .article th, .article td{
     font-size: 20px;
 }
 
-.article h1,h2,h3,h4,h5{
+.article h1, .article h2, .article h3, .article h4, .article h5{
     margin: 0 !important;
     font-weight: bold;
 }
@@ -22,7 +22,7 @@
     border-bottom: 1px solid #eaecef;
 }
 
-.article h3, h4, h5, h6 {
+.article h3, .article h4, .article h5, .article h6 {
     font-size: 1.35rem;
     margin-top: -3.1rem;
     padding-top: 1.6rem;
@@ -33,11 +33,11 @@
     margin-block-end: 1em;
 }
 
-.article ol,ul{
+.article ol, .article ul{
     padding-left: 1.2em;
 }
 
-.article ol, p, ul {
+.article ol, .article p, .article ul {
     line-height: 1.7;
 }
 
@@ -55,7 +55,7 @@
     background-color: #f6f8fa;
 }
 
-.article td, th {
+.article td, .article th {
     border: 1px solid #dfe2e5;
     padding: .6em 1em;
 }
@@ -90,7 +90,7 @@
 }
 
 @media screen and (max-width: 767px) {
-    .article p, li, th, td{
+    .article p, .article li, .article th, .article td{
         font-size: 16px;
     }
 }
