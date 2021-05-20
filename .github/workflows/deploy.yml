@@ -28,8 +28,7 @@ jobs:
         with:
           path: |
             node_modules
-            package-lock.json
-          key: ${{ runner.os }}-${{ hashFiles('package.json') }}
+          key: ${{ runner.os }}-${{ hashFiles('yarn.lock') }}
 
       - name: Use Node.js 12.x
         uses: actions/setup-node@v2
