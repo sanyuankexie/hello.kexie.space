@@ -36,6 +36,7 @@ class Article extends Component<Props> {
         const {target} = this.props.match.params
         const md = new MarkdownIt();
         this.setState({content: md.render(content)})
+        document.body.scrollTop = 0
     }
 }
 
