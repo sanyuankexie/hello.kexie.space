@@ -5,17 +5,23 @@ import Header from "./Header/Header";
 
 const MarkdownIt = require('markdown-it')
 
+interface Props {
+    location: any
+    match: any
+}
 
-class Article extends Component {
+class Article extends Component<Props> {
     state = {
         content: ""
     }
 
     render() {
+        const {icon} = this.props.location.state
         return (
             <article className={`${css.article} ${css.container}`}>
                 <Header
-                    content="这里应该是用来写标题的，我先写这吧"
+                    icon={icon}
+                    content="我现在是想测试一下多媒体部的效果"
                     author="Therainisme"
                     published="March 22, 2021"
                 />
@@ -26,6 +32,8 @@ class Article extends Component {
     }
 
     componentDidMount() {
+        // todo get markdown text from server
+        const {target} = this.props.match.params
         const md = new MarkdownIt();
         this.setState({content: md.render(content)})
     }

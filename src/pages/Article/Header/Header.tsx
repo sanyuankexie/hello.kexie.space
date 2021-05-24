@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import css from './Header.module.css'
 
 interface Props {
+    icon: string
     content: string
     author: string
     published: string
@@ -10,10 +11,11 @@ interface Props {
 
 class Header extends Component<Props> {
     render() {
-        const {content, author, published} = this.props
+        const {content, author, published, icon} = this.props
         return (
             <div className={css.container}>
                 <h1 className={css.h1}>
+                    <img src={icon} alt="" className={css.icon}/>
                     {content}
                 </h1>
                 <span className={css.author}>

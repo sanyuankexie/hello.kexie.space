@@ -15,7 +15,7 @@ class App extends Component {
                 <div>
                     <FloatMenu/>
                     <Switch>
-                        <Route path="/mp" component={Article}/>
+                        <Route path="/introduction/:target" component={Article}/>
                         <Route path="/" component={Welcome}/>
                     </Switch>
                     <Footer/>

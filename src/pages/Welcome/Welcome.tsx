@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Button} from 'antd';
 import {GithubOutlined, CodeFilled} from '@ant-design/icons';
-
+import {NavLink} from 'react-router-dom'
 import {Typography} from 'antd';
 import css from './Welcome.module.css'
 
@@ -47,7 +47,9 @@ class Welcome extends Component {
                 <Section title="四大部门" description="科协有四大部门，不同的部门下有不同的学习方向">
                     <div className={css.sectionContainer}>
                         <div className={css.department}>
-                            <img src={MD} width={250} alt=""/>
+                            <NavLink to={{pathname: '/introduction/multimedia-department', state: {icon: MD}}}>
+                                <img src={MD} className={css.imgScale} width={250} alt=""/>
+                            </NavLink>
                         </div>
                         <div className={css.department}>
                             <img src={SD} width={250} alt=""/>
