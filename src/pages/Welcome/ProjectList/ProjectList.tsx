@@ -44,7 +44,7 @@ class Project extends Component<TProject, Object> {
             <div className={css.project}>
                 <span>
                 <span className={css.name}>
-                    <a href={url} target="_blank">
+                    <a href={url} target="_blank" rel="noreferrer">
                         <img className={css.avatar} src={avatar} alt=""/>
                         {name}
                     </a>
