@@ -30,7 +30,7 @@ class LearningDirectionList extends Component {
                 <div key={self.key} className={welcome.displayItem}>
                     <Title style={{textAlign: "center"}} level={2}>{self.name}</Title>
                     <NavLink to={{pathname: `introduction/${subordiantion.get(self.name)}#${self.key}`}}>
-                        <img src={self.logo} alt="" width={self.width} style={self.style || {}}/>
+                        <img src={self.logo} alt="" width={self.width} style={self.style || {}} className={welcome.imgScale}/>
                     </NavLink>
                 </div>
             )
