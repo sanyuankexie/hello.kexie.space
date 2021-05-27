@@ -15,6 +15,7 @@ import MD from "../../assets/images/department/multimedia-department.png"
 import SD from "../../assets/images/department/software-depertment.png"
 import HD from "../../assets/images/department/hardware-department.png"
 import OD from "../../assets/images/department/organization-department.png"
+import { Department } from '../../static/resource';
 
 const {Title} = Typography;
 
@@ -47,7 +48,7 @@ class Welcome extends Component {
                 <Section title="四大部门" description="科协有四大部门，不同的部门下有不同的学习方向">
                     <div className={css.sectionContainer}>
                         <div className={css.department}>
-                            <NavLink to={{pathname: '/introduction/multimedia-department', state: {icon: MD}}}>
+                            <NavLink to={{pathname: `/introduction/${Department.MD.FullName}`, state: {icon: Department.MD.Logo}}}>
                                 <img src={MD} className={css.imgScale} width={250} alt=""/>
                             </NavLink>
                         </div>

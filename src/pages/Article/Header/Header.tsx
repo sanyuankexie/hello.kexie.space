@@ -4,14 +4,14 @@ import css from './Header.module.css'
 
 interface Props {
     icon: string
-    content: string
+    title: string
     author: string
     published: string
 }
 
 class Header extends Component<Props> {
     render() {
-        const {content, author, published, icon} = this.props
+        const {title: content, author, published, icon} = this.props
         return (
             <div className={css.container}>
                 <h1 className={css.h1}>

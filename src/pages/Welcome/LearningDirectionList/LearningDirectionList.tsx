@@ -1,5 +1,6 @@
-import React, {Component, CSSProperties} from 'react';
-import {Typography} from 'antd';
+import React, { Component, CSSProperties } from 'react';
+import { NavLink } from 'react-router-dom';
+import { Typography } from 'antd';
 
 import welcome from "../Welcome.module.css";
 
@@ -11,9 +12,10 @@ import wechat from "../../../assets/images/learning-direction/wechat.png"
 import embedded from "../../../assets/images/learning-direction/embedded.svg"
 import bilibili from "../../../assets/images/learning-direction/bilibili.png"
 import ui from "../../../assets/images/learning-direction/ui.png"
-import { NavLink } from 'react-router-dom';
 
-const {Title} = Typography
+import { Department } from './../../../static/resource';
+
+const { Title } = Typography
 
 interface LDirection {
     name: string
@@ -28,9 +30,9 @@ class LearningDirectionList extends Component {
         return data.map((self: LDirection) => {
             return (
                 <div key={self.key} className={welcome.displayItem}>
-                    <Title style={{textAlign: "center"}} level={2}>{self.name}</Title>
-                    <NavLink to={{pathname: `introduction/${subordiantion.get(self.name)}#${self.key}`}}>
-                        <img src={self.logo} alt="" width={self.width} style={self.style || {}} className={welcome.imgScale}/>
+                    <Title style={{ textAlign: "center" }} level={2}>{self.name}</Title>
+                    <NavLink to={{ pathname: `introduction/${Department.getByLearningDirection(self.name).FullName}#${self.key}` }}>
+                        <img src={self.logo} alt="" width={self.width} style={self.style || {}} className={welcome.imgScale} />
                     </NavLink>
                 </div>
             )
@@ -51,7 +53,7 @@ const data: Array<LDirection> = [
         key: "game",
         logo: unity,
         width: 270,
-        style: {marginTop: "2em"}
+        style: { marginTop: "2em" }
     }, {
         name: "安卓开发",
         key: "android",
@@ -62,13 +64,13 @@ const data: Array<LDirection> = [
         key: "ui",
         logo: ui,
         width: 200,
-        style: {marginTop: "0.5em"}
+        style: { marginTop: "0.5em" }
     }, {
         name: "硬件开发",
         key: "hardware",
         logo: embedded,
         width: 140,
-        style: {background: "#2e2459", marginTop: "0.6em"}
+        style: { background: "#2e2459", marginTop: "0.6em" }
     }, {
         name: "机器学习",
         key: "machine-learning",
@@ -86,14 +88,3 @@ const data: Array<LDirection> = [
         width: 150,
     },
 ]
-
-const subordiantion = new Map([
-    ['网站开发', 'multimedia-department'],
-    ['UI设计', 'multimedia-department'],
-    ['视频剪辑', 'multimedia-department'],
-    ['小程序', 'multimedia-department'],
-    ['游戏制作', 'software-department'],
-    ['安卓开发', 'software-department'],
-    ['机器学习', 'software-department'],
-    ['硬件开发', 'hardware-department'],
-]);
