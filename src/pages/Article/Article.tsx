@@ -4,7 +4,7 @@ import css from './Article.module.css'
 import Header from "./Header/Header";
 
 import logo from "../../assets/images/logo.png"
-import {Department} from "../../static/resource"
+import {Department} from "../../static/department"
 
 import { DocumentAPI } from './../../api/document';
 
@@ -25,7 +25,7 @@ class Article extends Component<Props> {
     render() {
         const {params} = this.props.match
         const department = params.target.split('#')[0]
-        const icon = Department.getByFullName(department).Logo
+        const icon = Department.getByFullName(department).logo
         return (
             <article className={`${css.article} ${css.container}`}>
                 <Header

@@ -13,7 +13,7 @@ import embedded from "../../../assets/images/learning-direction/embedded.svg"
 import bilibili from "../../../assets/images/learning-direction/bilibili.png"
 import ui from "../../../assets/images/learning-direction/ui.png"
 
-import { Department } from './../../../static/resource';
+import { Department } from '../../../static/department';
 
 const { Title } = Typography
 
@@ -31,7 +31,7 @@ class LearningDirectionList extends Component {
             return (
                 <div key={self.key} className={welcome.displayItem}>
                     <Title style={{ textAlign: "center" }} level={2}>{self.name}</Title>
-                    <NavLink to={{ pathname: `introduction/${Department.getByLearningDirection(self.name).FullName}#${self.key}` }}>
+                    <NavLink to={{ pathname: `introduction/${Department.getByLearningDirection(self.name).fullName}#${self.key}` }}>
                         <img src={self.logo} alt="" width={self.width} style={self.style || {}} className={welcome.imgScale} />
                     </NavLink>
                 </div>
