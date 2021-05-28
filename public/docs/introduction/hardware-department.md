@@ -15,7 +15,7 @@ The introduction serves two purposes:
 - Stimulating and interests the subject
 - Putting the article in the large context
 
-Generally introductions achieve these goals by leading the reader from the \`General\`(what is already known to the topic), to the \`Specific\`(what is not yet known), to the \`Focused Question\`(what the authors are asking). Thus, the authors describe previous works and how they are related to it.
+Generally introductions achieve these goals by leading the reader from the `General`(what is already known to the topic), to the `Specific`(what is not yet known), to the `Focused Question`(what the authors are asking). Thus, the authors describe previous works and how they are related to it.
 
 Before we move on to the next section, ask yourself why the authors did this study, and, does the researched question match up with the conclusions in the discussion?
 
@@ -24,6 +24,6 @@ The introduction serves two purposes:
 - Stimulating and interests the subject
 - Putting the article in the large context
 
-Generally introductions achieve these goals by leading the reader from the \`General\`(what is already known to the topic), to the \`Specific\`(what is not yet known), to the \`Focused Question\`(what the authors are asking). Thus, the authors describe previous works and how they are related to it.
+Generally introductions achieve these goals by leading the reader from the `General`(what is already known to the topic), to the `Specific`(what is not yet known), to the `Focused Question`(what the authors are asking). Thus, the authors describe previous works and how they are related to it.
 
 Before we move on to the next section, ask yourself why the authors did this study, and, does the researched question match up with the conclusions in the discussion?
