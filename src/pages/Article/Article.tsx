@@ -17,7 +17,8 @@ interface Props {
 
 class Article extends Component<Props> {
     state = {
-        content: ""
+        content: "",
+        title: ""
     }
 
     private markdownElements: React.RefObject<HTMLElement> = React.createRef()
@@ -26,28 +27,32 @@ class Article extends Component<Props> {
         const {params} = this.props.match
         const department = params.target.split('#')[0]
         const icon = Department.getByFullName(department).logo
+
+        const {title, content} = this.state
         return (
             <article className={`${css.article} ${css.container}`}>
                 <Header
                     icon={icon}
-                    title="我现在是想测试一下多媒体部的效果"
+                    title={title}
                     author="Therainisme"
                     published="March 22, 2021"
                 />
-                <span dangerouslySetInnerHTML={{__html: this.state.content}} ref={this.markdownElements}>
+                <span dangerouslySetInnerHTML={{__html: content}} ref={this.markdownElements}>
                 </span>
             </article>
         );
     }
 
     componentDidMount() {
-        // todo get markdown text from server
-        const {target} = this.props.match.params
+        const {params} = this.props.match
+        const department = params.target.split('#')[0]
         const md = new MarkdownIt();
-        DocumentAPI.getMarkdownByUrl('/docs/introduction/multimedia-department.md')
+        DocumentAPI.getMarkdownByUrl(`/docs/introduction/${department}.md`)
         .then((res) => {
-            const content = md.render(res.data)
-            this.setState({content})
+            let content = md.render(res.data)
+            const title = content.match(/<h1>(\S*)<\/h1>/)[1]
+            content = content.replace(content.match(/<h1>(\S*)<\/h1>/)[0], "")
+            this.setState({content, title})
         })
     }
 

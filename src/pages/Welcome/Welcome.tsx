@@ -11,11 +11,7 @@ import ProjectList from "./ProjectList/ProjectList";
 import LearningDirectionList from "./LearningDirectionList/LearningDirectionList";
 
 import logo from "../../assets/images/logo.png"
-import MD from "../../assets/images/department/multimedia-department.png"
-import SD from "../../assets/images/department/software-depertment.png"
-import HD from "../../assets/images/department/hardware-department.png"
-import OD from "../../assets/images/department/organization-department.png"
-import { Department } from '../../static/department';
+import { departmentShortNameMap } from '../../static/department';
 
 const {Title} = Typography;
 
@@ -47,23 +43,14 @@ class Welcome extends Component {
 
                 <Section title="四大部门" description="科协有四大部门，不同的部门下有不同的学习方向">
                     <div className={css.sectionContainer}>
-                        <div className={css.department}>
-                            <NavLink to={{pathname: `/introduction/${Department.MD.fullName}`, state: {icon: Department.MD.logo}}}>
-                                <img src={MD} className={css.imgScale} width={250} alt=""/>
-                            </NavLink>
-                        </div>
-                        <div className={css.department}>
-                            <img src={SD} width={250} alt=""/>
-                        </div>
-
-                        <div className={css.department}>
-                            <img src={HD} width={250} alt=""/>
-                        </div>
-                        <div className={css.department}>
-                            <img src={OD} width={250} alt=""/>
-                        </div>
+                        {Object.values(departmentShortNameMap).map(x => (
+                            <div className={css.department}>
+                                <NavLink to={{pathname: `/introduction/${x.fullName}`, state: {icon: x.logo}}}>
+                                    <img src={x.logo} className={css.imgScale} width={250} alt=""/>
+                                </NavLink>
+                            </div>
+                        ))}
                     </div>
-
                 </Section>
 
                 <Section title="学习方向">

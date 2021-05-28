@@ -56,9 +56,7 @@ type DepartmentShortName = AnyDepartment['shortName']
 
 type DepartmentFullName = AnyDepartment['fullName']
 
-var departmentKeys = Object.keys(departmentsMap) as Array<DepartmentKey>;
-
-var departmentShortNameMap = Object.fromEntries(
+export const departmentShortNameMap = Object.fromEntries(
     departments.map(x => [x.shortName, x])
 ) as unknown as Record<DepartmentShortName, Department>
 
@@ -67,7 +65,7 @@ export const Department = {
     ...departmentShortNameMap,
     getByFullName: (fullname: DepartmentFullName) => {
         return departments.find(dept => {
-            return dept.fullName == fullname;
+            return dept.fullName === fullname;
         })!;
     },
     getByLearningDirection: (learningDirection: string) => {
