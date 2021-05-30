@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
-import css from './Footer.module.css'
+import React, { Component } from 'react';
+import { Typography, Popover  } from 'antd';
+import css from './Footer.module.css';
+import WeChatQRCode from '../../assets/images/wechat_QR_code.jpg';
 
-import {Typography} from 'antd';
-
-const {Title} = Typography;
+const { Title } = Typography;
 
 interface Table {
     title: string
@@ -20,7 +20,7 @@ class Footer extends Component {
     render() {
         return (
             <footer className={css.container}>
-                <div className={css.blank}/>
+                <div className={css.blank} />
                 <div className={css.itemsContainer}>
                     {data.map((self: Table) => {
                         return this.dataToItems(self)
@@ -36,11 +36,22 @@ class Footer extends Component {
                 <Title level={3} className={css.title}>{item.title}</Title>
                 <ul className={css.items}>
                     {item.list.map((self: Item) => {
-                        return (
-                            <a key={self.name}  target="_blank" href={self.url} style={{color: "white"}} rel="noreferrer">
-                                <li className={css.item}>{self.name}</li>
-                            </a>
-                        )
+                        switch (self.name) {
+                            case "微信公众号":
+                                return (
+                                    <Popover content={<img src={WeChatQRCode} alt="" />} trigger="click" style={{ padding: "0 !important" }}>
+                                        <a key={self.name} target="_blank" href={self.url} style={{ color: "white" }} rel="noreferrer">
+                                            <li className={css.item}>{self.name}</li>
+                                        </a>
+                                    </Popover>
+                                )
+                            default:
+                                return (
+                                    <a key={self.name} target="_blank" href={self.url} style={{ color: "white" }} rel="noreferrer">
+                                        <li className={css.item}>{self.name}</li>
+                                    </a>
+                                )
+                        }
                     })}
                 </ul>
             </div>
