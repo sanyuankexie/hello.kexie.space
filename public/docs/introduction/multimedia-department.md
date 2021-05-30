@@ -8,22 +8,75 @@
 
 多媒体部同时也会承担一些科协内部的宣传工作。如果你想开发出自己独特的网站、剪辑出超爆款视频、设计出精美的UI以及模型，那么加入多媒体是你不二之选！
 
+> Building......
+
 ## 网站开发
 
-The introduction serves two purposes:
+这是是一个测试代码 `Test code`
 
-- Stimulating and interests the subject
-- Putting the article in the large context
+```cpp
+#include <iostream>
+#include <cstring>
+#include <algorithm>
 
-Generally introductions achieve these goals by leading the reader from the `General`(what is already known to the topic), to the `Specific`(what is not yet known), to the `Focused Question`(what the authors are asking). Thus, the authors describe previous works and how they are related to it.
+using namespace std;
 
-Before we move on to the next section, ask yourself why the authors did this study, and, does the researched question match up with the conclusions in the discussion?
+const int N = 200010;
 
-The introduction serves two purposes:
+int n, m;
+int cnt, res;
+int father[N];
 
-- Stimulating and interests the subject
-- Putting the article in the large context
+struct Edge{
+    int a, b, w;
+    bool operator< (const Edge &E) const {
+        return w < E.w;
+    }
+}edges[N];
 
-Generally introductions achieve these goals by leading the reader from the `General`(what is already known to the topic), to the `Specific`(what is not yet known), to the `Focused Question`(what the authors are asking). Thus, the authors describe previous works and how they are related to it.
+/* 
+    并查集模板
+*/
+int find(int x) {
+    if (father[x] != x) father[x] = find(father[x]);
+    return father[x];
+}
 
-Before we move on to the next section, ask yourself why the authors did this study, and, does the researched question match up with the conclusions in the discussion?
+int kruskal() {
+    // 将邻接表从小到大排序
+    sort(edges, edges + m);
+    
+    // 初始化并查集
+    for (int i = 1; i <= n; ++ i) father[i] = i;
+    
+    //krusal
+    for (int i = 0; i < m; ++ i) {
+        int a = edges[i].a, b = edges[i].b;
+        a = find(a), b = find(b);
+        // 如果他俩不在一个集合内
+        if (a != b) {
+            res += edges[i].w;
+            cnt ++;
+            father[a] = b;
+        }
+    }
+    
+    return res;
+}
+
+int main () {
+    cin >> n >> m;
+    for (int i = 0; i < m; ++ i) {
+        int a, b, w;
+        cin >> a >> b >> w;
+        edges[i] = {a, b, w};
+    }
+    
+    res = kruskal();
+    // 如果选取的边少于n-1,那么这个图不连通
+    if (cnt < n - 1) cout << "impossible" << endl;
+    else cout << res << endl;
+    
+    return 0;
+}
+```

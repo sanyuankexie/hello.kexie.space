@@ -2,28 +2,87 @@
 
 ## 部门介绍
 
-三院科协多媒体部，是科协的三大技术部门之一。 （多媒体部有很多好看的师兄师姐的） 
+三院科协组织部，是科协的四大部门之一。 
 
-多媒体部现有的学习方向有：网站开发、UI设计、3D建模以及视频剪辑。 它旨在培养一批充满活力，具有设计美感，掌握本专业所需的基础理论、专业知识以及具有创新精神的复合型人才。
+> Building......
 
-多媒体部同时也会承担一些科协内部的宣传工作。如果你想开发出自己独特的网站、剪辑出超爆款视频、设计出精美的UI以及模型，那么加入多媒体是你不二之选！
+## 啊啦啦啦啦
 
-## 网站开发
+```ts
+import MD from "../assets/images/department/multimedia-department.png"
+import SD from "../assets/images/department/software-depertment.png"
+import HD from "../assets/images/department/hardware-department.png"
+import OD from "../assets/images/department/organization-department.png"
 
-The introduction serves two purposes:
+interface Department {
+    fullName: string
+    logo: string
+    learningDirection: Array<string>
+}
 
-- Stimulating and interests the subject
-- Putting the article in the large context
+const departmentsMap = {
+    Multimedia: {
+        shortName: 'MD',
+        fullName: "multimedia-department",
+        logo: MD,
+        learningDirection: [
+            "网站开发", "UI设计", "视频剪辑", "小程序"
+        ]
+    },
 
-Generally introductions achieve these goals by leading the reader from the `General`(what is already known to the topic), to the `Specific`(what is not yet known), to the `Focused Question`(what the authors are asking). Thus, the authors describe previous works and how they are related to it.
+    Software: {
+        shortName: 'SD',
+        fullName: "software-depertment",
+        logo: SD,
+        learningDirection: [
+            "游戏制作", "安卓开发", "机器学习"
+        ]
+    },
 
-Before we move on to the next section, ask yourself why the authors did this study, and, does the researched question match up with the conclusions in the discussion?
+    Hardware: {
+        shortName: 'HD',
+        fullName: "hardware-department",
+        logo: HD,
+        learningDirection: [
+            "硬件开发"
+        ]
+    },
 
-The introduction serves two purposes:
+    Organization: {
+        shortName: 'OD',
+        fullName: "organization-department",
+        logo: OD,
+        learningDirection: [
+        ]
+    }
+} as const
 
-- Stimulating and interests the subject
-- Putting the article in the large context
+const departments = Object.values(departmentsMap);
 
-Generally introductions achieve these goals by leading the reader from the `General`(what is already known to the topic), to the `Specific`(what is not yet known), to the `Focused Question`(what the authors are asking). Thus, the authors describe previous works and how they are related to it.
+type DepartmentKey = keyof typeof departmentsMap
 
-Before we move on to the next section, ask yourself why the authors did this study, and, does the researched question match up with the conclusions in the discussion?
+type AnyDepartment = (typeof departmentsMap)[DepartmentKey];
+
+type DepartmentShortName = AnyDepartment['shortName']
+
+type DepartmentFullName = AnyDepartment['fullName']
+
+export const departmentShortNameMap = Object.fromEntries(
+    departments.map(x => [x.shortName, x])
+) as unknown as Record<DepartmentShortName, Department>
+
+
+export const Department = {
+    ...departmentShortNameMap,
+    getByFullName: (fullname: DepartmentFullName) => {
+        return departments.find(dept => {
+            return dept.fullName === fullname;
+        })!;
+    },
+    getByLearningDirection: (learningDirection: string) => {
+        return departments.find(dept => {
+            return (dept.learningDirection as readonly string[]).includes(learningDirection)
+        })!;
+    }
+}
+```

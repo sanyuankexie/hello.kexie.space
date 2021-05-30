@@ -2,28 +2,108 @@
 
 ## 部门介绍
 
-三院科协多媒体部，是科协的三大技术部门之一。 （多媒体部有很多好看的师兄师姐的） 
+三院科协硬件部，是科协的三大技术部门之一。
 
-多媒体部现有的学习方向有：网站开发、UI设计、3D建模以及视频剪辑。 它旨在培养一批充满活力，具有设计美感，掌握本专业所需的基础理论、专业知识以及具有创新精神的复合型人才。
+> Building......
 
-多媒体部同时也会承担一些科协内部的宣传工作。如果你想开发出自己独特的网站、剪辑出超爆款视频、设计出精美的UI以及模型，那么加入多媒体是你不二之选！
+## 嵌入式
 
-## 网站开发
+```java
+public class MainActivity extends Activity {
+    TextView air_temperature;//温度
+    TextView air_humidity;//湿度
+    TextView air_smoke;//烟雾
+    TextView air_carbon;//一氧化碳
 
-The introduction serves two purposes:
+    private static String DeviceID ="584160273";//设备ID
+    private static String ApiKey = "NlkAlp0buwYCSbyc8=A5MnvJIRw=";//密钥
+    private static final String url_g="http://api.heclouds.com/devices/" + DeviceID + "/datapoints";
 
-- Stimulating and interests the subject
-- Putting the article in the large context
+    String string="";
+    int count = 4;//获取数据的数量
+    String[] array=new String[count];
 
-Generally introductions achieve these goals by leading the reader from the `General`(what is already known to the topic), to the `Specific`(what is not yet known), to the `Focused Question`(what the authors are asking). Thus, the authors describe previous works and how they are related to it.
 
-Before we move on to the next section, ask yourself why the authors did this study, and, does the researched question match up with the conclusions in the discussion?
+    private Handler mainHandle = new Handler(Looper.getMainLooper());
+    private Thread networkThread = new Thread(){
+        @Override
+        public void run() {
+            super.run();
+            while (true) {
+                try {
+                    Get();
+                    Thread.sleep(3000);
+                }catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    };
 
-The introduction serves two purposes:
 
-- Stimulating and interests the subject
-- Putting the article in the large context
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.air_info);
 
-Generally introductions achieve these goals by leading the reader from the `General`(what is already known to the topic), to the `Specific`(what is not yet known), to the `Focused Question`(what the authors are asking). Thus, the authors describe previous works and how they are related to it.
+        air_temperature=findViewById(R.id.temperature);//温度
+        air_carbon=findViewById(R.id.carbon);//co
+        air_smoke=findViewById(R.id.smoke);//烟雾
+        air_humidity=findViewById(R.id.humidity);//湿度
 
-Before we move on to the next section, ask yourself why the authors did this study, and, does the researched question match up with the conclusions in the discussion?
+        networkThread.start();
+    }
+
+    public void Get() {
+        final String[] a=new String[4];
+            try {
+                OkHttpClient client = new OkHttpClient();
+                Request request = new Request.Builder().url(url_g)
+                                                        .header("api-key", ApiKey)
+                                                        .build();
+                Response response = client.newCall(request).execute();
+                String responseData = response.body().string();
+                parseJSONWithGSON(responseData);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+    }
+
+    private void parseJSONWithGSON(String jsonData) {
+
+        JsonRootBean app = new Gson().fromJson(jsonData, JsonRootBean.class);
+        List<Datastreams> streams = app.getData().getDatastreams();
+        //获取数据流名称
+        for (int j=0;j<streams.size();j++){
+            String id = streams.get(j).getId();
+            Log.w("id","id="+id);
+            String toValue = null; //承接value值
+            List<Datapoints> points = streams.get(j).getDatapoints();
+            for (int i = 0; i < points.size(); i++) {
+                String time = points.get(i).getAt();
+                String value = points.get(i).getValue();
+                Log.w("tag","time="+time);
+                Log.w("tag","value="+value);
+                Log.w("tag","string="+count);
+                toValue=value;
+            }
+            array[j]=toValue;
+        }
+        mainHandle.post(new Runnable() {
+            @Override
+            public void run() {
+                //UI更新
+                air_carbon.setText(array[0]);
+                air_temperature.setText(array[1]);
+                air_humidity.setText(array[2]);
+                air_smoke.setText(array[3]);
+            }
+        });
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        networkThread.interrupt();
+    }
+}
+```
