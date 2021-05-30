@@ -44,7 +44,7 @@ class Welcome extends Component {
                 <Section title="四大部门" description="科协有四大部门，不同的部门下有不同的学习方向">
                     <div className={css.sectionContainer}>
                         {Object.values(departmentShortNameMap).map(x => (
-                            <div className={css.department}>
+                            <div className={css.department} key={x.fullName}>
                                 <NavLink to={{pathname: `/introduction/${x.fullName}`, state: {icon: x.logo}}}>
                                     <img src={x.logo} className={css.imgScale} width={250} alt=""/>
                                 </NavLink>

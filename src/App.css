@@ -3,7 +3,7 @@ p, li {
 }
 
 body {
-    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+    font-family: -apple-system,BlinkMacSystemFont,Noto Sans CJK SC,Arial,Helvetica Neue !important;
     background: #FBF9F8 !important;
 }
 

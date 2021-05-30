@@ -50,7 +50,6 @@ class Article extends Component<Props> {
         DocumentAPI.getMarkdownByUrl(`/docs/introduction/${department}.md`)
         .then((res) => {
             let content = md.render(res.data)
-            console.log(content)
             const title = content.match(/<h1>(\S*)<\/h1>/)[1]
             content = content.replace(content.match(/<h1>(\S*)<\/h1>/)[0], "")
             this.setState({content, title})
