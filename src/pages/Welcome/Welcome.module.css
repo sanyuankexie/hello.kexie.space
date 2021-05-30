@@ -15,6 +15,15 @@
     text-align: center;
 }
 
+.imgScale{
+    transform: scale(1);
+    transition: transform 0.5s;
+}
+
+.imgScale:hover{
+    transform: scale(1.1);
+}
+
 .btnGroup {
     display: flex;
     width: 350px;

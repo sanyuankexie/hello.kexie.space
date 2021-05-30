@@ -37,7 +37,7 @@ class Footer extends Component {
                 <ul className={css.items}>
                     {item.list.map((self: Item) => {
                         return (
-                            <a key={self.name}  target="_blank" href={self.url} style={{color: "white"}}>
+                            <a key={self.name}  target="_blank" href={self.url} style={{color: "white"}} rel="noreferrer">
                                 <li className={css.item}>{self.name}</li>
                             </a>
                         )

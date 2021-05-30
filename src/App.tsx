@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
+import {Route, Switch} from 'react-router-dom'
 
 import FloatMenu from "./component/FloatMenu/FloatMenu";
 import Welcome from "./pages/Welcome/Welcome";
 import Footer from "./component/Footer/Footer";
 import './App.css'
+import Article from "./pages/Article/Article";
 
 
 class App extends Component {
@@ -12,7 +14,10 @@ class App extends Component {
             <div>
                 <div>
                     <FloatMenu/>
-                    <Welcome/>
+                    <Switch>
+                        <Route path="/introduction/:target" component={Article}/>
+                        <Route path="/" component={Welcome}/>
+                    </Switch>
                     <Footer/>
                 </div>
             </div>

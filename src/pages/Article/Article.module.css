@@ -1,0 +1,130 @@
+.article {
+    overflow-wrap: break-word;
+}
+
+.container {
+    width: 52%;
+    margin: auto auto 200px;
+}
+
+.article p, .article li, .article th, .article td{
+    font-size: 20px;
+}
+
+.article h1, .article h2, .article h3, .article h4, .article h5{
+    margin: 0 !important;
+    font-weight: bold;
+}
+
+.article h2{
+    font-size: 1.65rem;
+    padding-bottom: .3rem;
+    border-bottom: 1px solid #eaecef;
+}
+
+.article h3, .article h4, .article h5, .article h6 {
+    font-size: 1.35rem;
+    margin-top: -3.1rem;
+    padding-top: 1.6rem;
+}
+
+.article p{
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+}
+
+.article ol, .article ul{
+    padding-left: 1.2em;
+}
+
+.article ol, .article p, .article ul {
+    line-height: 1.7;
+}
+
+.article table{
+    margin: 1rem 0;
+    display: block;
+    overflow-x: auto;
+}
+
+.article tr {
+    border-top: 1px solid #dfe2e5;
+}
+
+.article tr:nth-child(2n) {
+    background-color: #f6f8fa;
+}
+
+.article td, .article th {
+    border: 1px solid #dfe2e5;
+    padding: .6em 1em;
+}
+.article hr{
+    border: 0;
+    border-top: 1px solid #eaecef;
+}
+
+.article code {
+    color: #e96900;
+    padding: .25rem .5rem;
+    margin: 0;
+    background-color: rgba(27,31,35,.05);
+    border-radius: 3px;
+}
+
+.article blockquote {
+    color: #999;
+    border-left: 0.2rem solid #dfe2e5;
+    margin: 1rem 0;
+    padding: 0.25rem 0 0.25rem 1rem;
+}
+
+.article blockquote p{
+    margin: 0;
+}
+
+:global(.code-block){
+    padding: 1.25rem 1.5rem;
+    background-color: #282c34;
+    border-radius: 6px;
+    overflow: auto;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+}
+
+:global(.token) {
+    color: #ddd;
+}
+
+:global(.code-block code) {
+    font-size: 1.05em;
+    padding: 0;
+    color: #ddd;
+}
+
+.article img{
+    max-width: 100%;
+}
+
+@media screen and (max-width: 1600px) {
+    .container {
+        width: 800px;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .container {
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .article p, .article li, .article th, .article td{
+        font-size: 16px;
+    }
+}
+
+
+
