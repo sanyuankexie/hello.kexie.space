@@ -39,7 +39,7 @@ class Footer extends Component {
                         switch (self.name) {
                             case "微信公众号":
                                 return (
-                                    <Popover content={<img src={WeChatQRCode} alt="" />} trigger="click" style={{ padding: "0 !important" }}>
+                                    <Popover content={<img src={WeChatQRCode} alt="" />} trigger="click" style={{ padding: "0 !important" }} key={self.name}>
                                         <a key={self.name} target="_blank" href={self.url} style={{ color: "white" }} rel="noreferrer">
                                             <li className={css.item}>{self.name}</li>
                                         </a>

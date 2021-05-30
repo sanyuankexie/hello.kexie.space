@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import css from './FloatMenu.module.css'
 import logo from '../../assets/images/logo.png'
 
@@ -24,28 +24,27 @@ class FloatMenu extends Component {
                 <div ref={this.menu}
                     className={css.container}
                     style={{ top: nowY + 'px', left: nowX + 'px', cursor }}
-                    onMouseDown={event => { this.handleMove(event); }}
-                    onTouchStart={event => { this.handleMove(event); }}
-                    onDragStart={event => event.preventDefault()}>
+                >
                     <img className={css.logo} src={logo} alt="" />
                 </div>
             </div>
         );
     }
 
-    handleMove(e: React.MouseEvent<HTMLDivElement, MouseEvent> | React.TouchEvent<HTMLDivElement>) {
+    handleMove(e: MouseEvent | TouchEvent) {
+        console.info(e);
         e.preventDefault();
-        const isTouch = !(e as React.MouseEvent<HTMLDivElement, MouseEvent>).clientX
+        const isTouch = !(e as MouseEvent).clientX
         if (isTouch) {
             this.setState({
-                mouseX: (e as React.TouchEvent<HTMLDivElement>).changedTouches[0].clientX - this.menu.current!.offsetLeft,
-                mouseY: (e as React.TouchEvent<HTMLDivElement>).changedTouches[0].clientY - this.menu.current!.offsetTop
+                mouseX: (e as TouchEvent).changedTouches[0].clientX - this.menu.current!.offsetLeft,
+                mouseY: (e as TouchEvent).changedTouches[0].clientY - this.menu.current!.offsetTop
             })
         } else {
             this.setState({
                 cursor: "move",
-                mouseX: (e as React.MouseEvent<HTMLDivElement, MouseEvent>).clientX - this.menu.current!.offsetLeft,
-                mouseY: (e as React.MouseEvent<HTMLDivElement, MouseEvent>).clientY - this.menu.current!.offsetTop
+                mouseX: (e as MouseEvent).clientX - this.menu.current!.offsetLeft,
+                mouseY: (e as MouseEvent).clientY - this.menu.current!.offsetTop
             })
         }
         const moving = (e: MouseEvent | TouchEvent) => {
@@ -61,17 +60,23 @@ class FloatMenu extends Component {
             }
             this.moveTo(targetX, targetY)
         }
-        // todo 
         const endMoving = (e: MouseEvent | TouchEvent) => {
             this.setState({ cursor: "pointer" })
             document.removeEventListener('mousemove', moving);
             document.removeEventListener('mouseup', endMoving);
             document.removeEventListener('touchmove', moving)
+            document.removeEventListener('touchend', endMoving)
         }
         document.addEventListener('mousemove', moving);
         document.addEventListener('mouseup', endMoving);
         document.addEventListener('touchmove', moving)
         document.addEventListener('touchend', endMoving)
+    }
+
+    componentDidMount() {
+        const el = this.menu.current!
+        el.addEventListener("mousedown", event => { this.handleMove(event); })
+        el.addEventListener("touchstart", event => { this.handleMove(event); })
     }
 
     moveTo(targetX: number, targetY: number) {
