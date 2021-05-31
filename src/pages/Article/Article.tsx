@@ -6,8 +6,8 @@ import css from './Article.module.css'
 import Header from "./Header/Header";
 
 import { Department } from "../../static/department"
-import { DocumentAPI } from './../../api/document';
 import MarkdownParser from './../../utils/markdown';
+import axios from 'axios';
 
 interface IProps {
     location: any
@@ -24,7 +24,7 @@ function Article({ location, match }: IProps) {
     const icon = Department.getByFullName(department).logo
 
     useEffect(() => {
-        DocumentAPI.getMarkdownByUrl(`/docs/introduction/${department}.md`)
+        axios.get(`/docs/introduction/${department}.md`)
             .then((res) => {
                 let content = MarkdownParser.render(res.data)
                 const title = content.match(/<h1>(\S*)<\/h1>/)[1]

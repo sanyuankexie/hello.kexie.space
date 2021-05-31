@@ -1,10 +1,11 @@
 import { Comment, List, Typography } from 'antd';
-import moment from 'moment';
-import './Comment.css'
-import css from './Comment.module.css'
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import moment from 'moment';
 import MarkdownParser from './../../../utils/markdown';
+import { CommentAPI } from '../../../api';
+import './Comment.css'
+import css from './Comment.module.css'
 
 const { Title } = Typography
 
@@ -19,13 +20,11 @@ function CommentList() {
     const [commentList, setCommentList] = useState<Array<IComment>>();
 
     useEffect(() => {
-        axios.get('https://api.github.com/repos/sanyuankexie/hellokexie/issues/6/comments')
+        axios.get(CommentAPI.GithubIssueUrl)
             .then((res) => {
-                console.log(res.data)
-                const test = res.data.map((x: any): IComment => {
+                const commmentList = res.data.map((x: any): IComment => {
                     const { user, body, updated_at } = x;
                     const { login, avatar_url } = user
-                    console.log(moment(updated_at).format('YYYY-MM-DD HH:mm:ss') as unknown as string)
                     return {
                         author: login,
                         avatar: avatar_url,
@@ -33,7 +32,7 @@ function CommentList() {
                         datetime: moment(updated_at).format('YYYY-MM-DD HH:mm:ss') as unknown as string
                     }
                 })
-                setCommentList(test)
+                setCommentList(commmentList)
             })
     }, []);
 

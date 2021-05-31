@@ -5,3 +5,7 @@ export class DocumentAPI {
         return await axios.get(url)
     }
 }
+
+export class CommentAPI {
+    static GithubIssueUrl: string = "https://api.github.com/repos/sanyuankexie/hellokexie/issues/6/comments"
+}
