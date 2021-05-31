@@ -42,7 +42,7 @@ const Project: FC<IProject> = ({ name, description, language, avatar, url, langu
             <span>
                 <span className={css.name}>
                     <a href={url} target="_blank" rel="noreferrer">
-                        <img className={css.avatar} src={avatar} alt="" />
+                        <img className={css.avatar} src={`${avatar}&s=20`} alt="" />
                         {name}
                     </a>
                     <span className={css.tags}>

@@ -9,5 +9,5 @@ body {
 
 img {
     image-rendering: -webkit-optimize-contrast;
-    transform: translateZ(0);
+    /* transform: translateZ(0); */
 }

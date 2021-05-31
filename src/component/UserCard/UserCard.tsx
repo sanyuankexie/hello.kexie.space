@@ -29,9 +29,9 @@ function UserCard({ login }: IProps) {
         else {
             setContent(
                 <div className={css.container}>
-                    <img className={css.avatar} src={user.avatar} alt="" />
+                    <img className={css.avatar} src={`${user.avatar}&s=60`} alt="" />
                     <span className={css.right}>
-                        <span className={css.name}>{user.name}</span>
+                        <span className={css.name}>{user.login}</span>
                         <span className={css.bio}>{user.bio}</span>
                         <span className={css.location}>
                             <CommentOutlined style={{ marginRight: "5px" }} />

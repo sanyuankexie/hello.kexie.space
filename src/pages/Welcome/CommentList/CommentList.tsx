@@ -1,5 +1,5 @@
 import React from 'react';
-import { Comment, List, Typography, Popover, } from 'antd';
+import { Comment, List, Typography, Popover, ListProps, } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons'
 import { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -30,7 +30,7 @@ function CommentList() {
                     const { login, avatar_url } = user
                     return {
                         author: login,
-                        avatar: avatar_url,
+                        avatar: `${avatar_url}&s=40`,
                         content: MarkdownParser.render(body),
                         datetime: moment(updated_at).format('YYYY-MM-DD HH:mm:ss') as unknown as string
                     }
@@ -39,7 +39,7 @@ function CommentList() {
             })
     }, []);
 
-    const [loading, setLoading] = useState<any>(false);
+    const [loading, setLoading] = useState(false as ListProps<any>['loading']);
     useEffect(() => {
         if (!!commentList) {
             setLoading(false)
