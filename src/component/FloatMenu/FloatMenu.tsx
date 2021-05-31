@@ -1,4 +1,4 @@
-import React, { Component, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { Component } from 'react';
 import css from './FloatMenu.module.css'
 import logo from '../../assets/images/logo.png'
 
@@ -23,8 +23,7 @@ class FloatMenu extends Component {
             <div>
                 <div ref={this.menu}
                     className={css.container}
-                    style={{ top: nowY + 'px', left: nowX + 'px', cursor }}
-                >
+                    style={{ top: nowY + 'px', left: nowX + 'px', cursor }}>
                     <img className={css.logo} src={logo} alt="" />
                 </div>
             </div>
@@ -32,7 +31,6 @@ class FloatMenu extends Component {
     }
 
     handleMove(e: MouseEvent | TouchEvent) {
-        console.info(e);
         e.preventDefault();
         const isTouch = !(e as MouseEvent).clientX
         if (isTouch) {

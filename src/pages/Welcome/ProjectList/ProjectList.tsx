@@ -1,11 +1,32 @@
-import React, {Component} from 'react';
-import {List, Typography} from 'antd';
+import { FC } from 'react';
+import { List, Typography } from 'antd';
 
 import css from './Project.module.css'
 
-const {Title} = Typography
+const { Title } = Typography
 
-interface TProject {
+function ProjectList() {
+    return (
+        <List
+            header={<Title level={3}>开源项目</Title>}
+            dataSource={data}
+            renderItem={item => (
+                <li style={{ borderBottom: '1px solid #f0f0f0' }}>
+                    <Project
+                        name={item.name}
+                        description={item.description}
+                        language={item.language}
+                        avatar={item.avatar}
+                        url={item.url}
+                        languageColor={item.languageColor}
+                    />
+                </li>
+            )}
+        />
+    );
+}
+
+interface IProject {
     name: string
     description: string
     language: string
@@ -14,55 +35,29 @@ interface TProject {
     languageColor: string
 }
 
-class ProjectList extends Component {
-    render() {
-        return (
-            <List
-                header={<Title level={3}>开源项目</Title>}
-                dataSource={data}
-                renderItem={item => (
-                    <li style={{borderBottom: '1px solid #f0f0f0'}}>
-                        <Project
-                            name={item.name}
-                            description={item.description}
-                            language={item.language}
-                            avatar={item.avatar}
-                            url={item.url}
-                            languageColor={item.languageColor}
-                        />
-                    </li>
-                )}
-            />
-        );
-    }
-}
-
-class Project extends Component<TProject, Object> {
-    render() {
-        const {name, description, language, avatar, url, languageColor} = this.props
-        return (
-            <div className={css.project}>
-                <span>
+const Project: FC<IProject> = ({ name, description, language, avatar, url, languageColor }) => {
+    return (
+        <div className={css.project}>
+            <span>
                 <span className={css.name}>
                     <a href={url} target="_blank" rel="noreferrer">
-                        <img className={css.avatar} src={avatar} alt=""/>
+                        <img className={css.avatar} src={avatar} alt="" />
                         {name}
                     </a>
                     <span className={css.tags}>
                         {language}
-                        <span className={css.languageColor} style={{background: languageColor}}/>
+                        <span className={css.languageColor} style={{ background: languageColor }} />
                     </span>
                 </span>
-                </span>
-                <span className={css.description}>{description}</span>
-            </div>
-        )
-    }
+            </span>
+            <span className={css.description}>{description}</span>
+        </div>
+    )
 }
 
 export default ProjectList;
 
-const data: Array<TProject> = [
+const data: Array<IProject> = [
     {
         name: "Flexml",
         description: "🚀基于Litho的Android高性能动态业务容器。",

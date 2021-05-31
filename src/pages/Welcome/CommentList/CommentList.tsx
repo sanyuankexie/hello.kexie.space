@@ -1,45 +1,42 @@
-import React, {Component} from 'react';
-import {Comment, Tooltip, List, Typography} from 'antd';
+import { Comment, Tooltip, List, Typography } from 'antd';
 import moment from 'moment';
 import './Comment.css'
 
-const {Title} = Typography
+const { Title } = Typography
 
-interface MComment {
+interface IComment {
     author: string
     avatar: string
     content: JSX.Element | string
     datetime: JSX.Element | string
 }
 
-class CommentList extends Component {
-    render() {
-        return (
-            <div>
-                <List
-                    className="comment-list"
-                    header={<Title level={3}>畅心所言</Title>}
-                    itemLayout="horizontal"
-                    dataSource={data}
-                    renderItem={(item: MComment) => (
-                        <li>
-                            <Comment
-                                author={item.author}
-                                avatar={item.avatar}
-                                content={item.content}
-                                datetime={item.datetime}
-                            />
-                        </li>
-                    )}
-                />
-            </div>
-        );
-    }
+function CommentList() {
+    return (
+        <div>
+            <List
+                className="comment-list"
+                header={<Title level={3}>畅心所言</Title>}
+                itemLayout="horizontal"
+                dataSource={data}
+                renderItem={(item: IComment) => (
+                    <li>
+                        <Comment
+                            author={item.author}
+                            avatar={item.avatar}
+                            content={item.content}
+                            datetime={item.datetime}
+                        />
+                    </li>
+                )}
+            />
+        </div>
+    )
 }
 
 export default CommentList;
 
-const data: Array<MComment> = [
+const data: Array<IComment> = [
     {
         author: 'Therainisme',
         avatar: 'https://avatars.githubusercontent.com/u/41776735?v=4',

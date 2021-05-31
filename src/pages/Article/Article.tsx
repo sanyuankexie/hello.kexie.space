@@ -1,7 +1,5 @@
-import React, { Component } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-// import 'highlight.js/styles/railscasts.css'
-// import 'highlightjs-material-dark-theme/css/materialdark.css'
 import './code.css'
 
 import css from './Article.module.css'
@@ -16,7 +14,7 @@ const md = new MarkdownIt({
     highlight: function (str: string, lang: string) {
         try {
             return '<pre class="code-block"><code>' +
-            hljs.highlight(str, { language: lang }).value +
+                hljs.highlight(str, { language: lang }).value +
                 '</code></pre>'
         } catch (__) { }
         return '';
@@ -24,57 +22,51 @@ const md = new MarkdownIt({
 });
 
 
-interface Props {
+interface IProps {
     location: any
     match: any
 }
 
-class Article extends Component<Props> {
-    state = {
-        content: "",
-        title: ""
-    }
+function Article({ location, match }: IProps) {
+    const [content, setContent] = useState<string>("");
+    const [title, setTitle] = useState<string>("");
+    const markdownElementsContainer = useRef<HTMLDivElement>(null);
 
-    private markdownElements: React.RefObject<HTMLElement> = React.createRef()
+    const { params } = match
+    const department = params.target.split('#')[0]
+    const icon = Department.getByFullName(department).logo
 
-    render() {
-        const { params } = this.props.match
-        const department = params.target.split('#')[0]
-        const icon = Department.getByFullName(department).logo
-
-        const { title, content } = this.state
-        return (
-            <article className={`${css.article} ${css.container}`}>
-                <Header
-                    icon={icon}
-                    title={title}
-                    author="Therainisme"
-                    published="March 22, 2021"
-                />
-                <span dangerouslySetInnerHTML={{ __html: content }} ref={this.markdownElements}>
-                </span>
-            </article>
-        );
-    }
-
-    componentDidMount() {
-        const { params } = this.props.match
-        const department = params.target.split('#')[0]
+    useEffect(() => {
         DocumentAPI.getMarkdownByUrl(`/docs/introduction/${department}.md`)
             .then((res) => {
                 let content = md.render(res.data)
                 const title = content.match(/<h1>(\S*)<\/h1>/)[1]
                 content = content.replace(content.match(/<h1>(\S*)<\/h1>/)[0], "")
-                this.setState({ content, title })
+                setContent(content)
+                setTitle(title)
             })
-    }
+    }, []);
 
-    componentDidUpdate(prevProps: Readonly<Props>, prevState: Readonly<{}>, snapshot?: any) {
-        const h2List: HTMLCollection = this.markdownElements.current!.getElementsByTagName('h2')
+    useEffect(() => {
+        const h2List: HTMLCollection = markdownElementsContainer.current!.getElementsByTagName('h2')
         const scroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
-        const { hash } = window.location;
+        const { hash } = location;
+        document.documentElement.scrollTop = 110
         // todo modified scroll height
-    }
+    }, [content]);
+
+    return (
+        <article className={`${css.article} ${css.container}`}>
+            <Header
+                icon={icon}
+                title={title}
+                author="Therainisme"
+                published="March 22, 2021"
+            />
+            <span dangerouslySetInnerHTML={{ __html: content }} ref={markdownElementsContainer}>
+            </span>
+        </article>
+    );
 }
 
 export default Article;

@@ -1,41 +1,29 @@
-import React, { Component } from 'react';
-import { Typography, Popover  } from 'antd';
+import { Typography, Popover } from 'antd';
 import css from './Footer.module.css';
 import WeChatQRCode from '../../assets/images/wechat_QR_code.jpg';
 
 const { Title } = Typography;
 
-interface Table {
-    title: string
-    list: Array<Item>
+function Footer() {
+    return (
+        <footer className={css.container}>
+            <div className={css.blank} />
+            <div className={css.itemsContainer}>
+                {data.map((self: ITable) => {
+                    return dataToItems(self)
+                })}
+            </div>
+        </footer>
+    );
 }
 
-interface Item {
-    name: string
-    url: string
-}
-
-class Footer extends Component {
-
-    render() {
-        return (
-            <footer className={css.container}>
-                <div className={css.blank} />
-                <div className={css.itemsContainer}>
-                    {data.map((self: Table) => {
-                        return this.dataToItems(self)
-                    })}
-                </div>
-            </footer>
-        );
-    }
-
-    dataToItems(item: Table) {
-        return (
-            <div key={item.title}>
-                <Title level={3} className={css.title}>{item.title}</Title>
-                <ul className={css.items}>
-                    {item.list.map((self: Item) => {
+function dataToItems(item: ITable) {
+    return (
+        <div key={item.title}>
+            <Title level={3} className={css.title}>{item.title}</Title>
+            <ul className={css.items}>
+                {
+                    item.list.map((self: IItem) => {
                         switch (self.name) {
                             case "微信公众号":
                                 return (
@@ -52,16 +40,26 @@ class Footer extends Component {
                                     </a>
                                 )
                         }
-                    })}
-                </ul>
-            </div>
-        );
-    }
+                    })
+                }
+            </ul>
+        </div>
+    );
+}
+
+interface ITable {
+    title: string
+    list: Array<IItem>
+}
+
+interface IItem {
+    name: string
+    url: string
 }
 
 export default Footer;
 
-const data: Array<Table> = [
+const data: Array<ITable> = [
     {
         title: '学习文档',
         list: [

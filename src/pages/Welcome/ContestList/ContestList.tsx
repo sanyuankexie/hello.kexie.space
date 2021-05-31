@@ -1,41 +1,38 @@
-import React, {Component} from 'react';
 import {Typography} from 'antd';
 import css from "../Welcome.module.css";
 import fuchuang from "../../../assets/images/contest/fuchuang.png";
 
 const {Title} = Typography
 
-interface Contest {
-    name: string
-    logo: string
-    students: Array<Award>
-}
-
-interface Award {
-    content: string
-}
-
-class ContestList extends Component {
-    render() {
-        return data.map((self: Contest) => {
-            return (
-                <div className={css.displayItem}>
-                    <Title style={{textAlign: "center"}} level={4}>{self.name}</Title>
-                    <img src={self.logo} alt="" width={88}/>
-                    <ul>
-                        {self.students.map((item: Award) => {
-                            return <li dangerouslySetInnerHTML={{__html: item.content}}/>
-                        })}
-                    </ul>
-                </div>
-            )
-        });
-    }
+function ContestList() {
+    return data.map((self: IContest) => {
+        return (
+            <div className={css.displayItem}>
+                <Title style={{textAlign: "center"}} level={4}>{self.name}</Title>
+                <img src={self.logo} alt="" width={88}/>
+                <ul>
+                    {self.students.map((item: IAward) => {
+                        return <li dangerouslySetInnerHTML={{__html: item.content}}/>
+                    })}
+                </ul>
+            </div>
+        )
+    });
 }
 
 export default ContestList;
 
-const data: Array<Contest> = [
+interface IContest {
+    name: string
+    logo: string
+    students: Array<IAward>
+}
+
+interface IAward {
+    content: string
+}
+
+const data: Array<IContest> = [
     {
         name: "中国软件杯大学生软件设计大赛",
         logo: fuchuang,

@@ -1,5 +1,4 @@
-import React, {Component} from 'react';
-import {Route, Switch} from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 
 import FloatMenu from "./component/FloatMenu/FloatMenu";
 import Welcome from "./pages/Welcome/Welcome";
@@ -8,21 +7,20 @@ import './App.css'
 import Article from "./pages/Article/Article";
 
 
-class App extends Component {
-    render() {
-        return (
+function App() {
+    return (
+        <div>
             <div>
-                <div>
-                    <FloatMenu/>
-                    <Switch>
-                        <Route path="/introduction/:target" component={Article}/>
-                        <Route path="/" component={Welcome}/>
-                    </Switch>
-                    <Footer/>
-                </div>
+                <FloatMenu />
+                <Switch>
+                    <Route path="/introduction/:target" component={Article} />
+                    <Route path="/" component={Welcome} />
+                </Switch>
+                <Footer />
             </div>
-        );
-    }
+        </div>
+    );
 }
+
 
 export default App;
