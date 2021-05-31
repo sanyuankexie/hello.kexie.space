@@ -1,30 +1,57 @@
-import { Comment, Tooltip, List, Typography } from 'antd';
+import { Comment, List, Typography } from 'antd';
 import moment from 'moment';
 import './Comment.css'
+import css from './Comment.module.css'
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import MarkdownParser from './../../../utils/markdown';
 
 const { Title } = Typography
 
 interface IComment {
     author: string
     avatar: string
-    content: JSX.Element | string
+    content: any
     datetime: JSX.Element | string
 }
 
 function CommentList() {
+    const [commentList, setCommentList] = useState<Array<IComment>>();
+
+    useEffect(() => {
+        axios.get('https://api.github.com/repos/sanyuankexie/hellokexie/issues/6/comments')
+            .then((res) => {
+                console.log(res.data)
+                const test = res.data.map((x: any): IComment => {
+                    const { user, body, updated_at } = x;
+                    const { login, avatar_url } = user
+                    console.log(moment(updated_at).format('YYYY-MM-DD HH:mm:ss') as unknown as string)
+                    return {
+                        author: login,
+                        avatar: avatar_url,
+                        content: MarkdownParser.render(body),
+                        datetime: moment(updated_at).format('YYYY-MM-DD HH:mm:ss') as unknown as string
+                    }
+                })
+                setCommentList(test)
+            })
+    }, []);
+
     return (
         <div>
             <List
-                className="comment-list"
                 header={<Title level={3}>畅心所言</Title>}
                 itemLayout="horizontal"
-                dataSource={data}
+                dataSource={commentList}
                 renderItem={(item: IComment) => (
                     <li>
                         <Comment
+                            className={css.comment}
                             author={item.author}
                             avatar={item.avatar}
-                            content={item.content}
+                            content={(
+                                <span dangerouslySetInnerHTML={{ __html: item.content }}></span>
+                            )}
                             datetime={item.datetime}
                         />
                     </li>
@@ -35,48 +62,3 @@ function CommentList() {
 }
 
 export default CommentList;
-
-const data: Array<IComment> = [
-    {
-        author: 'Therainisme',
-        avatar: 'https://avatars.githubusercontent.com/u/41776735?v=4',
-        content: (
-            <p>
-                我们会一起遇见鲸鱼吗？
-            </p>
-        ),
-        datetime: (
-            <Tooltip title={moment().subtract(1, 'days').format('YYYY-MM-DD HH:mm:ss')}>
-                <span>{moment().subtract(1, 'days').fromNow()}</span>
-            </Tooltip>
-        ),
-    },
-    {
-        author: 'gaizi',
-        avatar: 'https://avatars.githubusercontent.com/u/57099417?v=4',
-        content: (
-            <p>
-                天龙人永不为奴！！！
-            </p>
-        ),
-        datetime: (
-            <Tooltip title={moment().subtract(2, 'days').format('YYYY-MM-DD HH:mm:ss')}>
-                <span>{moment().subtract(2, 'days').fromNow()}</span>
-            </Tooltip>
-        ),
-    },
-    {
-        author: 'VisualDust',
-        avatar: 'https://avatars.githubusercontent.com/u/33346934?v=4',
-        content: (
-            <p>
-                Akasaki told me there would be a Miracle.
-            </p>
-        ),
-        datetime: (
-            <Tooltip title={moment().subtract(2, 'days').format('YYYY-MM-DD HH:mm:ss')}>
-                <span>{moment().subtract(2, 'days').fromNow()}</span>
-            </Tooltip>
-        ),
-    },
-];
