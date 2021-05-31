@@ -1,5 +1,5 @@
-const MarkdownIt = require('markdown-it')
-const hljs = require('highlight.js')
+import MarkdownIt from 'markdown-it';
+import hljs from 'highlight.js';
 const md = new MarkdownIt({
     highlight: function (str: string, lang: string) {
         try {

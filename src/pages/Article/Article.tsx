@@ -1,3 +1,4 @@
+import React from 'react';
 import { useEffect, useRef, useState } from 'react';
 
 import './code.css'
@@ -23,12 +24,13 @@ function Article({ location, match }: IProps) {
     const department = params.target.split('#')[0]
     const icon = Department.getByFullName(department).logo
 
+    
     useEffect(() => {
         axios.get(`/docs/introduction/${department}.md`)
             .then((res) => {
                 let content = MarkdownParser.render(res.data)
-                const title = content.match(/<h1>(\S*)<\/h1>/)[1]
-                content = content.replace(content.match(/<h1>(\S*)<\/h1>/)[0], "")
+                const title = content.match(/<h1>(\S*)<\/h1>/)![1]
+                content = content.replace(content.match(/<h1>(\S*)<\/h1>/)![0], "")
                 setContent(content)
                 setTitle(title)
             })

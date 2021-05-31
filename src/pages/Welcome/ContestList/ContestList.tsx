@@ -1,3 +1,4 @@
+import React from 'react';
 import {Typography} from 'antd';
 import css from "../Welcome.module.css";
 import fuchuang from "../../../assets/images/contest/fuchuang.png";

@@ -5,6 +5,7 @@ import Welcome from "./pages/Welcome/Welcome";
 import Footer from "./component/Footer/Footer";
 import './App.css'
 import Article from "./pages/Article/Article";
+import React from 'react';
 
 
 function App() {

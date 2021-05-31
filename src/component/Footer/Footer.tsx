@@ -1,3 +1,4 @@
+import React from 'react';
 import { Typography, Popover } from 'antd';
 import css from './Footer.module.css';
 import WeChatQRCode from '../../assets/images/wechat_QR_code.jpg';
