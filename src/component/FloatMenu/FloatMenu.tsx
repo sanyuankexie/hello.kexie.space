@@ -92,19 +92,23 @@ class FloatMenu extends Component {
                 lastTime = now
                 let dLeft = (targetX - nowX) * dTime / 256
                 let dTop = (targetY - nowY) * dTime / 256
+                let willX, willY;
                 if (Math.abs(dLeft) < 0.03 && Math.abs(dTop) < 0.03) {
-                    this.setState({
-                        nowX: targetX,
-                        nowY: targetY,
-                        raf: null,
-                    })
+                    willX = targetX, willY = targetY
+                    this.setState({ raf: null, })
                 } else {
-                    this.setState({
-                        nowX: nowX + dLeft,
-                        nowY: nowY + dTop,
-                    })
+                    willX = nowX + dLeft, willY = nowY + dTop
                     requestAnimationFrame(callback)
                 }
+                const border = { top: 10, left: 10, bottom: document.documentElement.clientHeight - 60, right: document.documentElement.clientWidth - 60 }
+                if (willX < border.left) willX = border.left
+                if (willY < border.top) willY = border.top
+                if (willX >= border.right) willX = border.right
+                if (willY >= border.bottom) willY = border.bottom
+                this.setState({
+                    nowX: willX,
+                    nowY: willY,
+                })
             }
             const raf = requestAnimationFrame(callback)
             this.setState({ raf })
