@@ -1,4 +1,4 @@
-import { Comment, List, Typography } from 'antd';
+import { Comment, List, Typography, Popover } from 'antd';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import moment from 'moment';
@@ -6,6 +6,7 @@ import MarkdownParser from './../../../utils/markdown';
 import { CommentAPI } from '../../../api';
 import './Comment.css'
 import css from './Comment.module.css'
+import UserCard from './../../../component/UserCard/UserCard';
 
 const { Title } = Typography
 
@@ -47,7 +48,11 @@ function CommentList() {
                         <Comment
                             className={css.comment}
                             author={item.author}
-                            avatar={item.avatar}
+                            avatar={
+                                <Popover content={<UserCard login={item.author}/>} placement="topLeft">
+                                    <img src={item.avatar} alt="" />
+                                </Popover>
+                            }
                             content={(
                                 <span dangerouslySetInnerHTML={{ __html: item.content }}></span>
                             )}
