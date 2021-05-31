@@ -45,7 +45,7 @@ function CommentList() {
             setLoading(false)
         }
         else {
-            setLoading({ indicator: <LoadingOutlined style={{ fontSize: 50 }} spin /> })
+            setLoading(true)
         }
     }, [commentList]);
 

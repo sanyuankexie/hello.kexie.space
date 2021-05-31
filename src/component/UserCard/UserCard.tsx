@@ -34,8 +34,9 @@ function UserCard({ login }: IProps) {
                         <span className={css.name}>{user.login}</span>
                         <span className={css.bio}>{user.bio}</span>
                         <span className={css.location}>
-                            <CommentOutlined style={{ marginRight: "5px" }} />
-                            {user.company}
+                            {console.log(!user.company && !user.location)}
+                            {!user.company && !user.location ? '' : <CommentOutlined style={{ marginRight: "5px" }} />}
+                            {user.company ? user.company : user.location}
                         </span>
                     </span>
                 </div>
