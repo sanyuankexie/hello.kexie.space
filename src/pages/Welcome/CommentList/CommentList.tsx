@@ -1,4 +1,5 @@
-import { Comment, List, Typography, Popover } from 'antd';
+import { Comment, List, Typography, Popover, } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons'
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import moment from 'moment';
@@ -37,10 +38,21 @@ function CommentList() {
             })
     }, []);
 
+    const [loading, setLoading] = useState<any>(false);
+    useEffect(() => {
+        if (!!commentList) {
+            setLoading(false)
+        }
+        else {
+            setLoading({ indicator: <LoadingOutlined style={{ fontSize: 50 }} spin /> })
+        }
+    }, [commentList]);
+
     return (
         <div>
             <List
                 header={<Title level={3}>畅心所言</Title>}
+                loading={loading}
                 itemLayout="horizontal"
                 dataSource={commentList}
                 renderItem={(item: IComment) => (
@@ -49,7 +61,7 @@ function CommentList() {
                             className={css.comment}
                             author={item.author}
                             avatar={
-                                <Popover content={<UserCard login={item.author}/>} placement="topLeft">
+                                <Popover content={<UserCard login={item.author} />} placement="topLeft">
                                     <img src={item.avatar} alt="" />
                                 </Popover>
                             }
