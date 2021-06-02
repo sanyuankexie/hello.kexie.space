@@ -68,7 +68,7 @@ const data: Array<ITable> = [
                 name: 'CottonPaper',
                 url: 'https://cp.therainisme.com',
             }, {
-                name: '工具箱的深度學習記事簿',
+                name: '工具箱的深度學習記事簿 ',
                 url: 'https://ml.akasaki.space'
             }
         ]
