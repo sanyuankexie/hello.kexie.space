@@ -65,11 +65,11 @@ const data: Array<ITable> = [
         title: '学习文档',
         list: [
             {
-                name: '工具箱的深度學習記事簿',
-                url: 'https://ml.akasaki.space',
-            }, {
                 name: 'CottonPaper',
-                url: 'https://cp.therainisme.com'
+                url: 'https://cp.therainisme.com',
+            }, {
+                name: '工具箱的深度學習記事簿',
+                url: 'https://ml.akasaki.space'
             }
         ]
     },
