@@ -30,7 +30,7 @@ class Float extends Component<IProp> {
         return (
             <div>
                 <div ref={this.menu}
-                    style={{ top: nowY + 'px', left: nowX + 'px', cursor, position: "absolute" }}
+                    style={{ top: nowY + 'px', left: nowX + 'px', cursor, position: "absolute", zIndex: 100 }}
                 >
                     {children}
                 </div>

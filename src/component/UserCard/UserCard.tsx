@@ -9,9 +9,10 @@ import { Loading } from "../Spin";
 
 interface IProps {
     login: string
+    displayAvatar?: boolean
 }
 
-function UserCard({ login }: IProps) {
+function UserCard({ login, displayAvatar }: IProps) {
     const [user, setUser] = useState<IUser>();
     useEffect(() => {
         axios.get(`https://api.github.com/users/${login}`)
@@ -29,7 +30,7 @@ function UserCard({ login }: IProps) {
         else {
             setContent(
                 <div className={css.container}>
-                    <img className={css.avatar} src={`${user.avatar}&s=60`} alt="" />
+                    {!!displayAvatar || displayAvatar === undefined ? <img className={css.avatar} src={`${user.avatar}&s=60`} alt="" /> : ""}
                     <span className={css.right}>
                         <span className={css.name}>{user.login}</span>
                         <span className={css.bio}>{user.bio}</span>

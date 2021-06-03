@@ -1,0 +1,53 @@
+.logo {
+    position: fixed;
+    width: 50px;
+    height: 50px;
+    z-index: 2;
+    border-radius: 50%;
+    box-shadow: 0 0 6px 2px #13c2c2;
+    background: black;
+    transition: box-shadow 1s linear;
+    animation: shine 2s infinite;
+}
+
+@keyframes shine {
+    0% {
+        box-shadow: 0 0 10px 2px #13c2c2;
+    }
+    50% {
+        box-shadow: 0 0 20px 2px #13c2c2;
+    }
+    100% {
+        box-shadow: 0 0 10px 2px #13c2c2;
+    }
+}
+
+.CardContainer{
+    position: fixed !important;
+    margin-left: 60px;
+    display: flex;
+}
+
+.triangle{
+    width: 0px;
+    height: 0px;
+    border: 10px solid;
+    margin-top: 15px;
+    border-color: transparent black transparent transparent;
+}
+.card{
+    background:black;
+    border: 0;
+    padding: 10px;
+    width: 290px;
+    min-height: 50px;
+}
+
+.cardFont{
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 26px;
+    color: #ffffff;
+}

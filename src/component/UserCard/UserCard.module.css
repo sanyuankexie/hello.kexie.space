@@ -18,13 +18,13 @@
 .name{
     font-size: 16px;
     font-weight: bolder;
-    color: #333333;
+    /* color: #333333; */
 }
 
 .bio{
-    color: #444444;
+    /* color: #444444; */
 }
 
 .location{
-    color: #666666;
+    /* color: #666666; */
 }
