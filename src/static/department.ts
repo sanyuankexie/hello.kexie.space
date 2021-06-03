@@ -4,13 +4,14 @@ import HD from "../assets/images/department/hardware-department.png"
 import OD from "../assets/images/department/organization-department.png"
 
 interface Department {
+    shortName: string
     fullName: string
     logo: string
     learningDirection: Array<string>
 }
 
 const departmentsMap = {
-    Multimedia: {
+    Multimedia:  {
         shortName: 'MD',
         fullName: "multimedia-department",
         logo: MD,

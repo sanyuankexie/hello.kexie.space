@@ -1,20 +1,12 @@
-.container {
+.logo {
     position: fixed;
-    border-radius: 50%;
-}
-
-.container, .logo {
     width: 50px;
     height: 50px;
     z-index: 2;
-}
-
-.logo {
     border-radius: 50%;
     box-shadow: 0 0 6px 2px #13c2c2;
     background: black;
     transition: box-shadow 1s linear;
-
     animation: shine 2s infinite;
 }
 

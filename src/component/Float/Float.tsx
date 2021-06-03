@@ -1,9 +1,13 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router'
-import css from './FloatMenu.module.css'
-import logo from '../../assets/images/logo.png'
+import React from "react";
+import { Component } from "react";
 
-class FloatMenu extends Component<any> {
+interface IProp {
+    children: React.ReactNode
+    crossBorder?: boolean
+    speed: number
+}
+
+class Float extends Component<IProp> {
 
     state = {
         nowY: 10,
@@ -19,14 +23,14 @@ class FloatMenu extends Component<any> {
     private menu: React.RefObject<HTMLDivElement> = React.createRef()
 
     render() {
+        const { children } = this.props
         const { nowY, nowX, cursor } = this.state
         return (
             <div>
                 <div ref={this.menu}
-                    className={css.container}
-                    style={{ top: nowY + 'px', left: nowX + 'px', cursor }}
+                    style={{ top: nowY + 'px', left: nowX + 'px', cursor, position: "absolute" }}
                 >
-                    <img className={css.logo} src={logo} alt="" />
+                    {children}
                 </div>
             </div>
         );
@@ -92,8 +96,8 @@ class FloatMenu extends Component<any> {
                 const now = Date.now()
                 let dTime = now - lastTime
                 lastTime = now
-                let dLeft = (targetX - nowX) * dTime / 256
-                let dTop = (targetY - nowY) * dTime / 256
+                let dLeft = (targetX - nowX) * dTime / this.props.speed
+                let dTop = (targetY - nowY) * dTime / this.props.speed
                 let willX, willY;
                 if (Math.abs(dLeft) < 0.03 && Math.abs(dTop) < 0.03) {
                     willX = targetX, willY = targetY
@@ -102,11 +106,13 @@ class FloatMenu extends Component<any> {
                     willX = nowX + dLeft, willY = nowY + dTop
                     requestAnimationFrame(callback)
                 }
-                const border = { top: 10, left: 10, bottom: document.documentElement.clientHeight - 60, right: document.documentElement.clientWidth - 60 }
-                if (willX < border.left) willX = border.left
-                if (willY < border.top) willY = border.top
-                if (willX >= border.right) willX = border.right
-                if (willY >= border.bottom) willY = border.bottom
+                if (this.props.crossBorder === true) {
+                    const border = { top: 10, left: 10, bottom: document.documentElement.clientHeight - 60, right: document.documentElement.clientWidth - 60 }
+                    if (willX < border.left) willX = border.left
+                    if (willY < border.top) willY = border.top
+                    if (willX >= border.right) willX = border.right
+                    if (willY >= border.bottom) willY = border.bottom
+                }
                 this.setState({
                     nowX: willX,
                     nowY: willY,
@@ -118,4 +124,4 @@ class FloatMenu extends Component<any> {
     }
 }
 
-export default withRouter(FloatMenu);
+export default Float;

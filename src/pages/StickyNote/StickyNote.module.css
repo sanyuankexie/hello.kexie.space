@@ -1,0 +1,21 @@
+.container{
+    position: absolute;
+    background: #161616;
+    width: 100vw;
+    height: 100vh;
+    cursor: move;
+}
+
+.title{
+    font-family: Inter;
+    font-size: 70px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 91px;
+    letter-spacing: 0em;
+    color: #FFFFFF;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
