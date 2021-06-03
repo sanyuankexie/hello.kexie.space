@@ -6,7 +6,6 @@ import Footer from "./component/Footer/Footer";
 import './App.css'
 import Article from "./pages/Article/Article";
 import React from 'react';
-import StickyNote from './pages/StickyNote/StickyNote';
 
 
 function App() {
@@ -15,7 +14,6 @@ function App() {
             <div>
                 <Menu />
                 <Switch>
-                    <Route path="/sticky-note" component={StickyNote}></Route>
                     <Route path="/introduction/:target" component={Article} />
                     <Route path="/" component={Welcome} />
                 </Switch>

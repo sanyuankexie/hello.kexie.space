@@ -5,13 +5,15 @@ interface IProp {
     children: React.ReactNode
     crossBorder?: boolean
     speed: number
+    initialLocation?: { x: number, y: number }
 }
 
 class Float extends Component<IProp> {
+    
 
     state = {
-        nowY: 10,
-        nowX: 10,
+        nowY: this.props.initialLocation ? this.props.initialLocation.y : 10,
+        nowX: this.props.initialLocation ? this.props.initialLocation.x : 10,
         targetX: 100,
         targetY: 100,
         mouseX: 0,
@@ -23,7 +25,7 @@ class Float extends Component<IProp> {
     private menu: React.RefObject<HTMLDivElement> = React.createRef()
 
     render() {
-        const { children } = this.props
+        const { children, initialLocation: initialXY } = this.props
         const { nowY, nowX, cursor } = this.state
         return (
             <div>
