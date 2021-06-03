@@ -13,6 +13,14 @@ function Ball() {
     const [cardDisplay, setCardDisplay] = useState(false);
 
     const [cardContent, setCardContent] = useState<JSX.Element>();
+    useEffect(() => {
+        if (!!cardContent) {
+            setCardDisplay(true)
+            setTimeout(() => {
+                setCardDisplay(false)
+            }, 2000)
+        }
+    }, [cardContent]);
 
     const [user, setUser] = useState<{ name: string, avatar: string, token: string }>();
 
@@ -31,9 +39,6 @@ function Ball() {
                 {msg}
             </div>
         )
-        setTimeout(() => {
-            setCardDisplay(false)
-        }, 1000)
     }
 
     function handlerGithubLogin(e: React.MouseEvent) {
@@ -65,9 +70,8 @@ function Ball() {
             )
             setCardContent(info)
         }
-        setCardDisplay(!cardDisplay)
     }
-
+    console.log(cardDisplay)
     return (
         <div>
             <Float speed={256} crossBorder={true}>
@@ -75,7 +79,7 @@ function Ball() {
                     <img className={css.logo} src={user === undefined ? logo : user.avatar} alt="" />
                 </span>
 
-                <span style={{ display: cardDisplay ? "block" : "none" }}>
+                <span style={{ display: !cardDisplay ? "none" : "block" }}>
                     <div className={css.CardContainer}>
                         <div className={css.triangle}></div>
                         <div className={css.card}>
