@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { Button } from 'antd';
+import React, { useEffect, useState, useRef, RefObject } from 'react';
+import { Button, Input } from 'antd';
 import { WechatOutlined, GithubOutlined } from '@ant-design/icons';
 import { withRouter } from 'react-router'
-import css from './Ball.module.css'
+import css from './index.module.css'
 import welcomeCss from '../../pages/Welcome/Welcome.module.css'
 import logo from '../../assets/images/logo.png'
 import Float from '../Float/Float';
@@ -11,8 +11,18 @@ import config from '../../static/config';
 
 function Ball() {
     const [cardDisplay, setCardDisplay] = useState(false);
-
+    const [user, setUser] = useState<{ name: string, avatar: string, token: string }>();
     const [cardContent, setCardContent] = useState<JSX.Element>();
+
+    const inputRef = useRef<Input>(null)
+
+    useEffect(() => {
+        //todo get user by token
+        const user = { name: "therainisme", avatar: "https://avatars.githubusercontent.com/u/41776735?v=4&s=60", token: "" }
+        // setUser(user)
+
+    }, []);
+
     useEffect(() => {
         if (!!cardContent) {
             setCardDisplay(true)
@@ -22,23 +32,15 @@ function Ball() {
         }
     }, [cardContent]);
 
-    const [user, setUser] = useState<{ name: string, avatar: string, token: string }>();
-
-
-    useEffect(() => {
-        //todo get user by token
-        const user = { name: "therainisme", avatar: "https://avatars.githubusercontent.com/u/41776735?v=4&s=60", token: "" }
-        // setUser(user)
-
-    }, []);
-
-    function handlerSendMsg(msg: string) {
-        setCardDisplay(true)
-        setCardContent(
-            <div className={css.cardFont}>
-                {msg}
-            </div>
-        )
+    function handleSendMsg(msg: string) {
+        if (!!msg) {
+            setCardDisplay(true)
+            setCardContent(
+                <div className={css.cardFont}>
+                    {msg}
+                </div>
+            )
+        }
     }
 
     function handlerGithubLogin(e: React.MouseEvent) {
@@ -71,7 +73,6 @@ function Ball() {
             setCardContent(info)
         }
     }
-    console.log(cardDisplay)
     return (
         <div>
             <Float speed={256} crossBorder={true}>
@@ -88,6 +89,12 @@ function Ball() {
                     </div>
                 </span>
             </Float>
+
+
+            <div className={css.inputContainer}>
+                <Input placeholder="想说的话都可以说呀啦啦啦啦啊啊啊" className={css.inputMsg} ref={inputRef} />
+                <Button type="primary" onClick={e => handleSendMsg(inputRef.current!.state.value)} className={css.btn}>发送</Button>
+            </div>
         </div>
     );
 }
