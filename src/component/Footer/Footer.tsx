@@ -92,11 +92,11 @@ const data: Array<ITable> = [
         title: '科协相关',
         list: [
             {
-                name: 'OnlineJudge',
-                url: 'https://github.com/sanyuankexie',
+                 name: 'GitHub',
+                url: 'https://github.com/sanyuankexie', 
             },
             {
-                name: 'GitHub',
+              name: 'OnlineJudge',
                 url: 'https://github.com/sanyuankexie',
             }
         ]
