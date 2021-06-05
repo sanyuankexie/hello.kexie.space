@@ -6,10 +6,11 @@ interface IProp {
     crossBorder?: boolean
     speed: number
     initialLocation?: { x: number, y: number }
+    onRef?: (self: Float) => void
 }
 
 class Float extends Component<IProp> {
-    
+
 
     state = {
         nowY: this.props.initialLocation ? this.props.initialLocation.y : 10,
@@ -30,7 +31,7 @@ class Float extends Component<IProp> {
         return (
             <div>
                 <div ref={this.menu}
-                    style={{ top: nowY + 'px', left: nowX + 'px', cursor, position: "absolute", zIndex: 100 }}
+                    style={{ top: nowY + 'px', left: nowX + 'px', cursor, position: "fixed", zIndex: 100 }}
                 >
                     {children}
                 </div>
@@ -83,9 +84,12 @@ class Float extends Component<IProp> {
         const el = this.menu.current!
         el.addEventListener("mousedown", event => { this.handleMove(event); })
         el.addEventListener("touchstart", event => { this.handleMove(event); })
+
+        if (!!this.props.onRef) this.props.onRef(this)
     }
 
     moveTo(targetX: number, targetY: number) {
+        console.log('target', targetX, targetY)
         let lastTime = Date.now();
         this.setState({ targetX, targetY })
         if (!this.state.raf) {
@@ -119,6 +123,7 @@ class Float extends Component<IProp> {
                     nowX: willX,
                     nowY: willY,
                 })
+                console.log('now', nowX, nowY, this)
             }
             const raf = requestAnimationFrame(callback)
             this.setState({ raf })
