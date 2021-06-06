@@ -1,5 +1,6 @@
 import { Button, Input } from "antd";
 import React, { useEffect, useMemo, useRef, useState } from "react"
+import { throttle } from "../../utils";
 import Ball from "../Ball/Ball";
 import Float from "../Float/Float";
 
@@ -192,20 +193,6 @@ class Client {
             this.ws?.close();
         } catch (error) {
             console.error('ws closing error', error);
-        }
-    }
-}
-
-function throttle<T extends (...arg: any[]) => void>(func: T, interval: number) {
-    let _args: any = null;
-    let _timer: any = null;
-    return (...args: Parameters<T>) => {
-        _args = args;
-        if (!_timer) {
-            _timer = setTimeout(() => {
-                func(..._args);
-                _timer = null;
-            }, interval);
         }
     }
 }

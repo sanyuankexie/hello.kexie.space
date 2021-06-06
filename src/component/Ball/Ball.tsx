@@ -9,6 +9,8 @@ import Float from '../Float/Float';
 import UserCard from '../UserCard/UserCard';
 import config from '../../static/config';
 import axios from 'axios';
+import { useMemo } from 'react';
+import { delay } from '../../utils';
 
 interface IProps {
     userName: string;
@@ -17,10 +19,9 @@ interface IProps {
 
 function Ball({ userName, avatar }: IProps, ref: React.Ref<unknown> | undefined) {
     const [cardDisplay, setCardDisplay] = useState(false);
-    const [user, setUser] = useState<{ userName: string, avatar: string }>();
     const [cardContent, setCardContent] = useState<JSX.Element>();
-
-    const inputRef = useRef<Input>(null)
+    const [user, setUser] = useState<{ userName: string, avatar: string }>();
+    const delaySetCardDisplay = useMemo<ReturnType<typeof delay>>(() => delay(setCardDisplay, 2000), [])
 
     useImperativeHandle(ref, () => ({
         handleMsgStream
@@ -33,15 +34,12 @@ function Ball({ userName, avatar }: IProps, ref: React.Ref<unknown> | undefined)
     useEffect(() => {
         if (!!cardContent) {
             setCardDisplay(true)
-            setTimeout(() => {
-                setCardDisplay(false)
-            }, 2000)
+            delaySetCardDisplay(false)
         }
     }, [cardContent]);
 
     function handleMsgStream(msg: string) {
         if (!!msg) {
-            // socket!.send(`{"action":"talk","message":"${msg}","userName":"${user!.name}"}`)
             setCardContent(
                 <div className={css.cardFont}>
                     {msg}
@@ -97,5 +95,7 @@ function Ball({ userName, avatar }: IProps, ref: React.Ref<unknown> | undefined)
         </div>
     );
 }
+
+
 
 export default forwardRef(Ball);
