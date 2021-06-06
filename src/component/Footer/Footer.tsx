@@ -96,7 +96,7 @@ const data: Array<ITable> = [
                 url: 'https://github.com/sanyuankexie', 
             },
             {
-              name: 'OnlineJudge',
+                name: 'OnlineJudge',
                 url: 'https://github.com/sanyuankexie',
             }
         ]
