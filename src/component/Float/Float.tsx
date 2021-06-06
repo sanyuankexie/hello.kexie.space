@@ -27,7 +27,6 @@ class Float extends Component<IProp> {
     private menu: React.RefObject<HTMLDivElement> = React.createRef()
 
     render() {
-        console.log(this.props.initialPosition)
         const { children } = this.props
         const { nowY, nowX, cursor } = this.state
         return (

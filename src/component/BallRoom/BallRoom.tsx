@@ -89,14 +89,16 @@ function BallRoom() {
     }
 
     const createBalls = (data: Array<{ userName: string, position: { x: number, y: number }, avatar: string }>) => {
+        let newBallsRef: IBallsRef[] = []
+        let newFloatsRef: IFloatRef[] = []
         setBalls(data.map(user => {
             const userName = user.userName
             //todo avatar position
             const floatRef = (ref: IFloatRef['ref']) => {
-                setFloatsRef([...floatsRef, { userName, ref }])
+                newFloatsRef = [...floatsRef, { userName, ref }]
             }
             const ballRef = (ref: IBallsRef['ref']) => {
-                setBallsRef([...ballsRef, { userName, ref }])
+                newBallsRef = [...newBallsRef, { userName, ref }]
             }
             const onmoving = throttle(({ x, y }: { x: number, y: number }) => {
                 if (client.userName === userName) {
@@ -112,6 +114,8 @@ function BallRoom() {
             const res = { userName, element }
             return res
         }))
+        setBallsRef(newBallsRef)
+        setFloatsRef(newFloatsRef)
     }
 
     //todo check type
