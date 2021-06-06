@@ -8,14 +8,16 @@ import logo from '../../assets/images/logo.png'
 import Float from '../Float/Float';
 import UserCard from '../UserCard/UserCard';
 import config from '../../static/config';
+import axios from 'axios';
 
 interface IProps {
-    userName: string
+    userName: string;
+    avatar: string;
 }
 
-function Ball({ userName }: IProps, ref: React.Ref<unknown> | undefined) {
+function Ball({ userName, avatar }: IProps, ref: React.Ref<unknown> | undefined) {
     const [cardDisplay, setCardDisplay] = useState(false);
-    const [user, setUser] = useState<{ name: string, avatar: string, token: string }>();
+    const [user, setUser] = useState<{ userName: string, avatar: string }>();
     const [cardContent, setCardContent] = useState<JSX.Element>();
 
     const inputRef = useRef<Input>(null)
@@ -25,13 +27,7 @@ function Ball({ userName }: IProps, ref: React.Ref<unknown> | undefined) {
     }), [])
 
     useEffect(() => {
-        //todo get user by token
-        const userString = localStorage.getItem('user')!
-        const user = JSON.parse(userString)
-        setTimeout(() => {
-            // socket.send(`{"action":"rename","userName":"${user.name}"}`)
-        }, 2000)
-        setUser(user)
+        setUser({ userName, avatar })
     }, []);
 
     useEffect(() => {
@@ -98,12 +94,6 @@ function Ball({ userName }: IProps, ref: React.Ref<unknown> | undefined) {
                     </div>
                 </div>
             </span>
-
-
-            <div className={css.inputContainer}>
-                <Input placeholder="想说的话都可以说呀啦啦啦啦啊啊啊" className={css.inputMsg} ref={inputRef} />
-                <Button type="primary" onClick={e => handleMsgStream(inputRef.current!.state.value)} className={css.btn}>发送</Button>
-            </div>
         </div>
     );
 }

@@ -2,10 +2,11 @@ import React from "react";
 import { Component } from "react";
 
 interface IProp {
-    children: React.ReactNode
-    crossBorder?: boolean
-    speed: number
-    initialPosition?: { x: number, y: number }
+    children: React.ReactNode;
+    crossBorder?: boolean;
+    speed: number;
+    initialPosition?: { x: number, y: number };
+    drag?: boolean
     onmoving?: (position: { x: number, y: number }) => void;
 }
 
@@ -26,6 +27,7 @@ class Float extends Component<IProp> {
     private menu: React.RefObject<HTMLDivElement> = React.createRef()
 
     render() {
+        console.log(this.props.initialPosition)
         const { children } = this.props
         const { nowY, nowX, cursor } = this.state
         return (
@@ -82,12 +84,17 @@ class Float extends Component<IProp> {
 
     componentDidMount() {
         const el = this.menu.current!
-        el.addEventListener("mousedown", event => { this.handleMove(event); })
-        el.addEventListener("touchstart", event => { this.handleMove(event); })
+        if (!(this.props.drag === undefined || this.props.drag === false)) {
+            el.addEventListener("mousedown", event => event.preventDefault())
+            el.addEventListener("touchstart", event => event.preventDefault())
+        } else {
+            el.addEventListener("mousedown", event => { this.handleMove(event); })
+            el.addEventListener("touchstart", event => { this.handleMove(event); })
+        }
     }
 
     moveTo(targetX: number, targetY: number) {
-        this.props.onmoving?.({x: targetX, y:targetY})
+        this.props.onmoving?.({ x: targetX, y: targetY })
 
         let lastTime = Date.now();
         this.setState({ targetX, targetY })

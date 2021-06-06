@@ -1,6 +1,9 @@
+import { Button, Input } from "antd";
 import React, { useEffect, useMemo, useRef, useState } from "react"
 import Ball from "../Ball/Ball";
 import Float from "../Float/Float";
+
+import css from './index.module.css'
 
 interface MsgAPI {
     type: string
@@ -30,6 +33,12 @@ function BallRoom() {
         console.log(msg)
         const { type, data, userName } = JSON.parse(msg) as MsgAPI
         switch (type) {
+            case "hello":
+                const userString = localStorage.getItem('user')!
+                const me = JSON.parse(userString)
+                client.send({ type: "rename", userName: client.userName, data: { avatar: me.avatar } })
+                client.send({ type: "stand up", userName: client.userName })
+                break;
             case "stand up":
                 createBalls(data)
                 break;
@@ -49,6 +58,17 @@ function BallRoom() {
         }
     }
 
+    const handleClickSendBtn = () => {
+        const input = inputRef.current.input.value
+        if (!input) return;
+        const msg: MsgAPI = {
+            type: "talk",
+            data: input,
+            userName: client.userName!
+        }
+        client.send(msg)
+    }
+
     const receiveMsg = (msg: string, userName: string) => {
         ballsRef!.forEach(x => {
             if (x.userName === userName) {
@@ -57,12 +77,10 @@ function BallRoom() {
         });
     }
 
-    const haveAUserRename = (newName: string, oldName: string) => {
-        // Not recommend rename
-    }
-
     const moveBallTo = (x: number, y: number, userName: string) => {
-        console.log(x, y, floatsRef)
+        if (userName === client.userName) {
+            return
+        }
         floatsRef?.forEach(self => {
             if (self.userName === userName) {
                 self.ref.moveTo(x, y)
@@ -70,22 +88,25 @@ function BallRoom() {
         })
     }
 
-    const createBalls = (data: Array<string>) => {
-        setBalls(data.map(userName => {
+    const createBalls = (data: Array<{ userName: string, position: { x: number, y: number }, avatar: string }>) => {
+        setBalls(data.map(user => {
+            const userName = user.userName
             //todo avatar position
             const floatRef = (ref: IFloatRef['ref']) => {
-                setFloatsRef([...floatsRef, { userName: userName, ref }])
+                setFloatsRef([...floatsRef, { userName, ref }])
             }
             const ballRef = (ref: IBallsRef['ref']) => {
-                setBallsRef([...ballsRef, { userName: userName, ref }])
+                setBallsRef([...ballsRef, { userName, ref }])
             }
             const onmoving = throttle(({ x, y }: { x: number, y: number }) => {
-                client.send(`moving ${x} ${y}`)
-            }, 100);
-            
+                if (client.userName === userName) {
+                    const res = { type: "move", data: { x, y }, userName }
+                    client.send(res)
+                }
+            }, 16);
             const element = (
-                <Float speed={256} key={userName} ref={floatRef} crossBorder={false} onmoving={onmoving}>
-                    <Ball userName={userName} ref={ballRef} />
+                <Float speed={256} key={userName} ref={floatRef} crossBorder={false} onmoving={onmoving} initialPosition={user.position}>
+                    <Ball userName={userName} avatar={user.avatar} ref={ballRef} />
                 </Float>
             )
             const res = { userName, element }
@@ -98,22 +119,17 @@ function BallRoom() {
     const [floatsRef, setFloatsRef] = useState<IFloatRef[]>([]);
     const [balls, setBalls] = useState<IBall[]>([]);
 
+    const inputRef = useRef<Input>(null!)
     const refDispatch = useRef<typeof dispatch>(null!);
     refDispatch.current = dispatch;
-
-    const handleSelfBallPositionChange = () => {
-        // todo get position from float
-        // and send to server
-    }
 
     const client = useMemo<Client>(() => new Client(), []);
     useEffect(() => {
         //todo get user by token
         client.open();
         client.onmessage = msg => refDispatch.current(msg.data)
-
         // todo get online user list
-        createBalls(["therainisme"])
+
         return () => client.close();
     }, []);
 
@@ -123,6 +139,11 @@ function BallRoom() {
                 {balls.map(x => {
                     return x.element
                 })}
+
+                <div className={css.inputContainer}>
+                    <Input placeholder="想说的话都可以说呀啦啦啦啦啊啊啊" className={css.inputMsg} ref={inputRef} />
+                    <Button type="primary" onClick={e => handleClickSendBtn()} className={css.btn}>发送</Button>
+                </div>
             </div>
         )
     } else {
@@ -131,30 +152,31 @@ function BallRoom() {
 }
 
 class Client {
+    userName?: string
     ws?: WebSocket;
     onmessage?: (ev: MessageEvent<any>) => void;
-
-    reconnectTimer? : any
+    reconnectTimer?: any
 
     open() {
         const userString = localStorage.getItem('user')!
         const user = JSON.parse(userString)
+        this.userName = user.name
         this.ws = new WebSocket("ws://10.33.39.225:4000/connect")
         this.ws.onerror = (e) => {
             console.error('ws error', e);
         };
         this.ws.onclose = (e) => {
             console.error('ws closed', e);
-            this.reconnectTimer = setTimeout(() => {
-                this.open()
-            }, 3000)
+            // this.reconnectTimer = setTimeout(() => {
+            //     this.open()
+            // }, 3000)
         };
         this.ws.onmessage = (x) => this.onmessage?.(x);
     }
 
-    send(data: string) {
+    send(data: any) {
         try {
-            this.ws!.send(data);
+            this.ws!.send(JSON.stringify(data));
         } catch (error) {
             console.error('ws send error', error);
         }
