@@ -1,4 +1,4 @@
-export function delay<T extends (...args: any[]) => void>(func: T, dalay: number) {
+export function debounce<T extends (...args: any[]) => void>(func: T, dalay: number) {
     var timer: any = null
     return (...args: Parameters<T>): void => {
         clearTimeout(timer)

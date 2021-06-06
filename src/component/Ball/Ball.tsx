@@ -10,7 +10,7 @@ import UserCard from '../UserCard/UserCard';
 import config from '../../static/config';
 import axios from 'axios';
 import { useMemo } from 'react';
-import { delay } from '../../utils';
+import { debounce } from '../../utils';
 
 interface IProps {
     userName: string;
@@ -21,7 +21,7 @@ function Ball({ userName, avatar }: IProps, ref: React.Ref<unknown> | undefined)
     const [cardDisplay, setCardDisplay] = useState(false);
     const [cardContent, setCardContent] = useState<JSX.Element>();
     const [user, setUser] = useState<{ userName: string, avatar: string }>();
-    const delaySetCardDisplay = useMemo<ReturnType<typeof delay>>(() => delay(setCardDisplay, 2000), [])
+    const delaySetCardDisplay = useMemo<ReturnType<typeof debounce>>(() => debounce(setCardDisplay, 2000), [])
 
     useImperativeHandle(ref, () => ({
         handleMsgStream
