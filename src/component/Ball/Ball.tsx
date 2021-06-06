@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, RefObject } from 'react';
+import React, { useEffect, useState, useRef, RefObject, useImperativeHandle, forwardRef } from 'react';
 import { Button, Input } from 'antd';
 import { WechatOutlined, GithubOutlined } from '@ant-design/icons';
 import { withRouter } from 'react-router'
@@ -11,16 +11,19 @@ import config from '../../static/config';
 
 interface IProps {
     userName: string
-    showMsg?: (msg: string) => void
 }
 
-function Ball({ userName, showMsg }: IProps) {
+function Ball({ userName }: IProps, ref: React.Ref<unknown> | undefined) {
     const [cardDisplay, setCardDisplay] = useState(false);
     const [user, setUser] = useState<{ name: string, avatar: string, token: string }>();
     const [socket, setSocket] = useState<WebSocket>();
     const [cardContent, setCardContent] = useState<JSX.Element>();
 
     const inputRef = useRef<Input>(null)
+
+    useImperativeHandle(ref, () => ({
+        handleMsgStream
+    }), [])
 
     useEffect(() => {
         //todo get user by token
@@ -50,7 +53,6 @@ function Ball({ userName, showMsg }: IProps) {
     function handleMsgStream(msg: string) {
         if (!!msg) {
             // socket!.send(`{"action":"talk","message":"${msg}","userName":"${user!.name}"}`)
-            setCardDisplay(true)
             setCardContent(
                 <div className={css.cardFont}>
                     {msg}
@@ -67,17 +69,17 @@ function Ball({ userName, showMsg }: IProps) {
     function handlerDoubleClick(e: React.MouseEvent) {
         if (!user) {
             // User not logged in
-            // const Login = (
-            //     <>
-            //         <Button onClick={e => handlerGithubLogin(e)} type="primary" size={'large'} icon={<GithubOutlined />} className={welcomeCss.btn} >
-            //             我们非常推荐使用Github登陆
-            //         </Button>
-            //         <Button type="primary" size={'large'} icon={<WechatOutlined />} className={welcomeCss.btn} >
-            //             因为我们的微信登陆还没写好!
-            //         </Button>
-            //     </>
-            // )
-            // setCardContent(Login)
+            const Login = (
+                <>
+                    <Button onClick={e => handlerGithubLogin(e)} type="primary" size={'large'} icon={<GithubOutlined />} className={welcomeCss.btn} >
+                        我们非常推荐使用Github登陆
+                    </Button>
+                    <Button type="primary" size={'large'} icon={<WechatOutlined />} className={welcomeCss.btn} >
+                        因为我们的微信登陆还没写好!
+                    </Button>
+                </>
+            )
+            setCardContent(Login)
         } else {
             const info = (
                 <>
@@ -113,4 +115,4 @@ function Ball({ userName, showMsg }: IProps) {
     );
 }
 
-export default Ball;
+export default forwardRef(Ball);

@@ -89,7 +89,6 @@ class Float extends Component<IProp> {
     }
 
     moveTo(targetX: number, targetY: number) {
-        console.log('target', targetX, targetY)
         let lastTime = Date.now();
         this.setState({ targetX, targetY })
         if (!this.state.raf) {
@@ -123,7 +122,6 @@ class Float extends Component<IProp> {
                     nowX: willX,
                     nowY: willY,
                 })
-                console.log('now', nowX, nowY, this)
             }
             const raf = requestAnimationFrame(callback)
             this.setState({ raf })
