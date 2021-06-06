@@ -5,16 +5,16 @@ interface IProp {
     children: React.ReactNode
     crossBorder?: boolean
     speed: number
-    initialLocation?: { x: number, y: number }
-    onRef?: (self: Float) => void
+    initialPosition?: { x: number, y: number }
+    onmoving?: (position: { x: number, y: number }) => void;
 }
 
 class Float extends Component<IProp> {
 
 
     state = {
-        nowY: this.props.initialLocation ? this.props.initialLocation.y : 10,
-        nowX: this.props.initialLocation ? this.props.initialLocation.x : 10,
+        nowY: this.props.initialPosition ? this.props.initialPosition.y : 10,
+        nowX: this.props.initialPosition ? this.props.initialPosition.x : 10,
         targetX: 100,
         targetY: 100,
         mouseX: 0,
@@ -26,7 +26,7 @@ class Float extends Component<IProp> {
     private menu: React.RefObject<HTMLDivElement> = React.createRef()
 
     render() {
-        const { children, initialLocation: initialXY } = this.props
+        const { children } = this.props
         const { nowY, nowX, cursor } = this.state
         return (
             <div>
@@ -84,11 +84,11 @@ class Float extends Component<IProp> {
         const el = this.menu.current!
         el.addEventListener("mousedown", event => { this.handleMove(event); })
         el.addEventListener("touchstart", event => { this.handleMove(event); })
-
-        if (!!this.props.onRef) this.props.onRef(this)
     }
 
     moveTo(targetX: number, targetY: number) {
+        this.props.onmoving?.({x: targetX, y:targetY})
+
         let lastTime = Date.now();
         this.setState({ targetX, targetY })
         if (!this.state.raf) {

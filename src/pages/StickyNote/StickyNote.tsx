@@ -5,7 +5,7 @@ import css from './StickyNote.module.css'
 function StickyNote() {
     return (
         <>
-            <Float speed={64} initialLocation={{ x: 0, y: 0 }}>
+            <Float speed={64} initialPosition={{ x: 0, y: 0 }}>
                 <div className={css.container}>
                     <div className={css.title}>StickyNote</div>
                     <Note></Note>

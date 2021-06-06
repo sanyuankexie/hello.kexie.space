@@ -16,7 +16,6 @@ interface IProps {
 function Ball({ userName }: IProps, ref: React.Ref<unknown> | undefined) {
     const [cardDisplay, setCardDisplay] = useState(false);
     const [user, setUser] = useState<{ name: string, avatar: string, token: string }>();
-    const [socket, setSocket] = useState<WebSocket>();
     const [cardContent, setCardContent] = useState<JSX.Element>();
 
     const inputRef = useRef<Input>(null)
@@ -29,16 +28,10 @@ function Ball({ userName }: IProps, ref: React.Ref<unknown> | undefined) {
         //todo get user by token
         const userString = localStorage.getItem('user')!
         const user = JSON.parse(userString)
-        const socket = new WebSocket("ws://10.33.39.225:4000/connect")
         setTimeout(() => {
             // socket.send(`{"action":"rename","userName":"${user.name}"}`)
         }, 2000)
-        socket.onmessage = msg => handleMsgStream(msg.data)
-        setSocket(socket)
         setUser(user)
-        return () => {
-            socket.close()
-        }
     }, []);
 
     useEffect(() => {
