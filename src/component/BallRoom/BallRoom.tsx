@@ -120,7 +120,6 @@ function BallRoom() {
                 client.send(res)
             }
         }, 16);
-        console.log(atomUser)
         const element = (
             <Float speed={256} key={userName} ref={floatRef} crossBorder={false} onmoving={onmoving} initialPosition={atomUser.position}>
                 <Ball userName={userName} avatar={atomUser.avatar} ref={ballRef} visitor={atomUser.visitor} />
@@ -131,7 +130,11 @@ function BallRoom() {
     }
 
     const inputEl = useRef<Input>(null!)
-    const handleClickSendBtn = () => {
+    const handleTriggerSendBtn = (e?: React.KeyboardEvent) => {
+        if (e) {
+            if (e.key !== 'Enter' || e.keyCode !== 13) return
+        }
+        
         const input = inputEl.current.input.value
         if (!input) return;
 
@@ -163,9 +166,9 @@ function BallRoom() {
         <div>
             {balls.map(self => self.element)}
 
-            <div className={css.inputContainer}>
+            <div className={css.inputContainer} onKeyDown={e => handleTriggerSendBtn(e)}>
                 <Input placeholder="想说的话都可以说呀啦啦啦啦啊啊啊" className={css.inputMsg} ref={inputEl} />
-                <Button type="primary" onClick={e => handleClickSendBtn()} className={css.btn}>发送</Button>
+                <Button type="primary" onClick={e => handleTriggerSendBtn()} className={css.btn}>发送</Button>
             </div>
         </div>
     ) : (<div>wdnmd</div>)
@@ -189,7 +192,6 @@ class Client {
             this.token = user.token
             this.visitor = user.visitor
         }
-        console.log(this.visitor, '???')
         if (!userString) {
             this.userName = `User-${Math.floor(100000 * Math.random()) as unknown as string}`
             this.avatar = ""
@@ -203,7 +205,6 @@ class Client {
             }
             localStorage.setItem('user', JSON.stringify(user))
         }
-        console.log(this.visitor, '???')
 
 
         this.ws = new WebSocket("ws://10.33.39.225:4000/connect")

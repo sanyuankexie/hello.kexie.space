@@ -24,28 +24,19 @@ function Ball({ userName, avatar, visitor }: IProps, ref: React.Ref<unknown> | u
         displayMsg
     }), [])
 
-    const [user, setUser] = useState<{ userName: string, avatar: string }>();
-    useEffect(() => {
-        setUser({ userName, avatar: avatar ? avatar : logo })
-    }, []);
-
     const [cardContent, setCardContent] = useState<JSX.Element>();
-    const [cardDisplay, setCardDisplay] = useState(false);
-    const delaySetCardDisplay = useMemo<ReturnType<typeof debounce>>(() => debounce(setCardDisplay, 2000), [])
-    useEffect(() => {
-        if (!!cardContent) {
-            setCardDisplay(true)
-            delaySetCardDisplay(false)
-        }
-    }, [cardContent]);
+    const [contentDisplay, setContentDisplay] = useState(false);
+    const delaySetContentDisplay = useMemo<ReturnType<typeof debounce>>(() => debounce(setContentDisplay, 5000), [])
 
     function displayMsg(msg: string) {
         if (!!msg) {
+            setContentDisplay(true)
             setCardContent(
                 <div className={css.cardFont}>
                     {msg}
                 </div>
             )
+            delaySetContentDisplay(false)
         }
     }
 
@@ -74,14 +65,16 @@ function Ball({ userName, avatar, visitor }: IProps, ref: React.Ref<unknown> | u
                 </span>
             )
         }
+        setContentDisplay(!contentDisplay)
     }
+
     return (
         <div>
             <span onDoubleClick={e => handlerDoubleClick(e)}>
                 <img className={css.logo} src={avatar ? avatar : logo} alt="" />
             </span>
 
-            <span style={{ display: !cardDisplay ? "none" : "block" }}>
+            <span style={{ display: !contentDisplay ? "none" : "block" }}>
                 <div className={css.CardContainer}>
                     <div className={css.triangle}></div>
                     <div className={css.card}>
