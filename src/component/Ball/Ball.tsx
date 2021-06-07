@@ -15,9 +15,10 @@ import { debounce } from '../../utils';
 interface IProps {
     userName: string;
     avatar?: string;
+    visitor?: boolean
 }
 
-function Ball({ userName, avatar }: IProps, ref: React.Ref<unknown> | undefined) {
+function Ball({ userName, avatar, visitor }: IProps, ref: React.Ref<unknown> | undefined) {
 
     useImperativeHandle(ref, () => ({
         displayMsg
@@ -54,7 +55,7 @@ function Ball({ userName, avatar }: IProps, ref: React.Ref<unknown> | undefined)
     }
 
     function handlerDoubleClick(e: React.MouseEvent) {
-        if (!user) {
+        if (visitor === true || visitor === undefined) {
             // User not logged in
             setCardContent(
                 <>
@@ -77,7 +78,7 @@ function Ball({ userName, avatar }: IProps, ref: React.Ref<unknown> | undefined)
     return (
         <div>
             <span onDoubleClick={e => handlerDoubleClick(e)}>
-                <img className={css.logo} src={avatar ? user?.avatar : logo} alt="" />
+                <img className={css.logo} src={avatar ? avatar : logo} alt="" />
             </span>
 
             <span style={{ display: !cardDisplay ? "none" : "block" }}>

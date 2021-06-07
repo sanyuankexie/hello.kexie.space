@@ -10,6 +10,7 @@ interface AtomUser {
     userName: string;
     position: Position;
     avatar: string;
+    visitor: boolean;
 }
 
 interface DirtyMethod {
@@ -32,7 +33,7 @@ function BallRoom() {
         const { type, data, userName } = JSON.parse(msg) as MsgAPI
         switch (type) {
             case "hello":
-                client.send({ type: "rename", userName: client.userName, data: { avatar: client.avatar } })
+                client.send({ type: "rename", userName: client.userName, data: { avatar: client.avatar, visitor: client.visitor } })
                 client.send({ type: "stand up", userName: client.userName })
                 break;
 
@@ -49,6 +50,7 @@ function BallRoom() {
                     userName,
                     position: data.position,
                     avatar: data.avatar,
+                    visitor: data.visitor
                 }
                 setBalls([...balls, createBall(atomUser)])
                 break;
@@ -118,9 +120,10 @@ function BallRoom() {
                 client.send(res)
             }
         }, 16);
+        console.log(atomUser)
         const element = (
             <Float speed={256} key={userName} ref={floatRef} crossBorder={false} onmoving={onmoving} initialPosition={atomUser.position}>
-                <Ball userName={userName} avatar={atomUser.avatar} ref={ballRef} />
+                <Ball userName={userName} avatar={atomUser.avatar} ref={ballRef} visitor={atomUser.visitor} />
             </Float>
         )
         const res: Ball = { userName, element }
@@ -186,8 +189,8 @@ class Client {
             this.token = user.token
             this.visitor = user.visitor
         }
-        console.log(this.visitor = true && !userString)
-        if (this.visitor = true && !userString) {
+        console.log(this.visitor, '???')
+        if (!userString) {
             this.userName = `User-${Math.floor(100000 * Math.random()) as unknown as string}`
             this.avatar = ""
             this.token = this.userName
@@ -200,6 +203,7 @@ class Client {
             }
             localStorage.setItem('user', JSON.stringify(user))
         }
+        console.log(this.visitor, '???')
 
 
         this.ws = new WebSocket("ws://10.33.39.225:4000/connect")
