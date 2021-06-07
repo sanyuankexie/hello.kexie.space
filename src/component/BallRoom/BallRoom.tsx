@@ -6,27 +6,22 @@ import Float from "../Float/Float";
 
 import css from './index.module.css'
 
-import logo from '../../assets/images/logo.png'
-
-interface MsgAPI {
-    type: string
-    data: any
-    userName: string
+interface AtomUser {
+    userName: string;
+    position: Position;
+    avatar: string;
 }
 
-interface IBall {
+interface DirtyMethod {
+    dispatch: (msg: string) => void
+    getBalls: () => Ball[]
+}
+
+interface Ball {
     userName: string
     element: JSX.Element
-}
-
-interface IFloatRef {
-    userName: string
-    ref: Float
-}
-
-interface IBallsRef {
-    userName: string
-    ref: {
+    floatRef?: Float
+    ballRef?: {
         handleMsgStream: (msg: string) => void
     }
 }
@@ -40,59 +35,47 @@ function BallRoom() {
                 client.send({ type: "rename", userName: client.userName, data: { avatar: client.avatar } })
                 client.send({ type: "stand up", userName: client.userName })
                 break;
+
             case "stand up":
-                createBalls(data)
+                initializeBalls(data)
                 break;
+
             case "talk":
-                receiveMsg(data, userName)
+                handleReceiveMsg(data, userName)
                 break;
+
             case "enter":
-                console.log(balls)
-                const floatRef = (ref: IFloatRef['ref']) => {
-                    setFloatsRef([...floatsRef, { userName, ref }])
+                const atomUser: AtomUser = {
+                    userName,
+                    position: data.position,
+                    avatar: data.avatar,
                 }
-                const ballRef = (ref: IBallsRef['ref']) => {
-                    setBallsRef([...ballsRef, { userName, ref }])
-                }
-                const onmoving = throttle(({ x, y }: { x: number, y: number }) => {
-                    if (client.userName === userName) {
-                        const res = { type: "move", data: { x, y }, userName }
-                        client.send(res)
-                    }
-                }, 16);
-                const element = (
-                    <Float speed={256} key={userName} ref={floatRef} crossBorder={false} onmoving={onmoving} initialPosition={data.position}>
-                        <Ball userName={userName} avatar={data.avatar} ref={ballRef} />
-                    </Float>
-                )
-                setBalls([...balls, { userName, element }])
-                console.log(balls)
+                setBalls([...balls, createBall(atomUser)])
                 break;
+
             case "leave":
                 setBalls(balls.filter(self => {
                     return self.userName != userName
                 }))
-                setBallsRef(ballsRef.filter(self => {
-                    return self.userName != userName
-                }))
-                setFloatsRef(floatsRef.filter(self => {
-                    return self.userName != userName
-                }))
                 break;
+
             case "rename":
                 break;
+
             case "move":
-                const { x, y } = data
-                moveBallTo(x, y, userName)
+                const { x, y }: Position = data
+                handleBallMoving(x, y, userName)
                 break;
+
             default:
                 break;
         }
     }
 
     const handleClickSendBtn = () => {
-        const input = inputRef.current.input.value
+        const input = inputEl.current.input.value
         if (!input) return;
+
         const msg: MsgAPI = {
             type: "talk",
             data: input,
@@ -101,67 +84,76 @@ function BallRoom() {
         client.send(msg)
     }
 
-    const receiveMsg = (msg: string, userName: string) => {
-        ballsRef!.forEach(x => {
+    const handleReceiveMsg = (msg: string, userName: string) => {
+        DirtyMethodContainer.current!.getBalls().forEach(x => {
             if (x.userName === userName) {
-                x.ref.handleMsgStream(msg)
+                x.ballRef!.handleMsgStream(msg)
             }
         });
     }
 
-    const moveBallTo = (x: number, y: number, userName: string) => {
-        if (userName === client.userName) {
-            return
-        }
-        floatsRef?.forEach(self => {
+    const handleBallMoving = (x: number, y: number, userName: string) => {
+        if (userName === client.userName) return
+
+        DirtyMethodContainer.current!.getBalls().forEach(self => {
             if (self.userName === userName) {
-                self.ref.moveTo(x, y)
+                self.floatRef!.moveTo(x, y)
             }
         })
     }
 
-    const createBalls = (data: Array<{ userName: string, position: { x: number, y: number }, avatar: string }>) => {
-        let newBallsRef: IBallsRef[] = []
-        let newFloatsRef: IFloatRef[] = []
-        setBalls(data.map(user => {
-            const userName = user.userName
-            const floatRef = (ref: IFloatRef['ref']) => {
-                newFloatsRef = [...floatsRef, { userName, ref }]
-            }
-            const ballRef = (ref: IBallsRef['ref']) => {
-                newBallsRef = [...newBallsRef, { userName, ref }]
-            }
-            const onmoving = throttle(({ x, y }: { x: number, y: number }) => {
-                if (client.userName === userName) {
-                    const res = { type: "move", data: { x, y }, userName }
-                    client.send(res)
+    const initializeBalls = (data: Array<AtomUser>) => {
+        setBalls(data.map(atomUser => createBall(atomUser)))
+    }
+
+    const createBall = (atomUser: AtomUser): Ball => {
+        const userName = atomUser.userName
+
+        const floatRef = (ref: Float) => {
+            DirtyMethodContainer.current!.getBalls().forEach(self => {
+                if (self.userName === userName) {
+                    self.floatRef = ref
                 }
-            }, 16);
-            const element = (
-                <Float speed={256} key={userName} ref={floatRef} crossBorder={false} onmoving={onmoving} initialPosition={user.position}>
-                    <Ball userName={userName} avatar={user.avatar} ref={ballRef} />
-                </Float>
-            )
-            return { userName, element }
-        }))
-        setBallsRef(newBallsRef)
-        setFloatsRef(newFloatsRef)
+            })
+        }
+        const ballRef = (ref: Ball['ballRef']) => {
+            DirtyMethodContainer.current!.getBalls().forEach(self => {
+                if (self.userName === userName) {
+                    self.ballRef = ref
+                }
+            })
+        }
+        const onmoving = throttle((position: Position) => {
+            if (client.userName === userName) {
+                const res = { type: "move", data: position, userName }
+                client.send(res)
+            }
+        }, 16);
+        const element = (
+            <Float speed={256} key={userName} ref={floatRef} crossBorder={false} onmoving={onmoving} initialPosition={atomUser.position}>
+                <Ball userName={userName} avatar={atomUser.avatar} ref={ballRef} />
+            </Float>
+        )
+        const res: Ball = { userName, element }
+        return res
     }
 
     //todo check type
-    const [ballsRef, setBallsRef] = useState<IBallsRef[]>([]);
-    const [floatsRef, setFloatsRef] = useState<IFloatRef[]>([]);
-    const [balls, setBalls] = useState<IBall[]>([]);
+    const [balls, setBalls] = useState<Ball[]>([]);
 
-    const inputRef = useRef<Input>(null!)
-    const refDispatch = useRef<typeof dispatch>(null!);
-    refDispatch.current = dispatch;
+    const inputEl = useRef<Input>(null!)
+
+    const DirtyMethodContainer = useRef<DirtyMethod>()
+    DirtyMethodContainer.current = {
+        dispatch,
+        getBalls: () => balls
+    }
 
     const client = useMemo<Client>(() => new Client(), []);
     useEffect(() => {
         //todo get user by token
         client.open();
-        client.onmessage = msg => refDispatch.current(msg.data)
+        client.onmessage = msg => DirtyMethodContainer.current?.dispatch(msg.data)
         // todo get online user list
 
         return () => client.close();
@@ -173,7 +165,7 @@ function BallRoom() {
                 {balls.map(self => self.element)}
 
                 <div className={css.inputContainer}>
-                    <Input placeholder="想说的话都可以说呀啦啦啦啦啊啊啊" className={css.inputMsg} ref={inputRef} />
+                    <Input placeholder="想说的话都可以说呀啦啦啦啦啊啊啊" className={css.inputMsg} ref={inputEl} />
                     <Button type="primary" onClick={e => handleClickSendBtn()} className={css.btn}>发送</Button>
                 </div>
             </div>
@@ -196,7 +188,7 @@ class Client {
         const userString = localStorage.getItem('user')!
         if (!!userString) {
             const user = JSON.parse(userString)
-            this.userName = user.name
+            this.userName = user.userName
             this.avatar = user.avatar
             this.token = user.token
             this.visitor = user.visitor
@@ -248,5 +240,15 @@ class Client {
     }
 }
 
+interface Position {
+    x: number;
+    y: number;
+}
+
+interface MsgAPI {
+    type: string
+    data: any
+    userName: string
+}
 
 export default BallRoom;
