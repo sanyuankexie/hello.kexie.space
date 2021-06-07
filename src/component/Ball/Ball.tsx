@@ -18,19 +18,19 @@ interface IProps {
 }
 
 function Ball({ userName, avatar }: IProps, ref: React.Ref<unknown> | undefined) {
-    const [cardDisplay, setCardDisplay] = useState(false);
-    const [cardContent, setCardContent] = useState<JSX.Element>();
-    const [user, setUser] = useState<{ userName: string, avatar: string }>();
-    const delaySetCardDisplay = useMemo<ReturnType<typeof debounce>>(() => debounce(setCardDisplay, 2000), [])
 
     useImperativeHandle(ref, () => ({
-        handleMsgStream
+        displayMsg
     }), [])
 
+    const [user, setUser] = useState<{ userName: string, avatar: string }>();
     useEffect(() => {
         setUser({ userName, avatar: avatar ? avatar : logo })
     }, []);
 
+    const [cardContent, setCardContent] = useState<JSX.Element>();
+    const [cardDisplay, setCardDisplay] = useState(false);
+    const delaySetCardDisplay = useMemo<ReturnType<typeof debounce>>(() => debounce(setCardDisplay, 2000), [])
     useEffect(() => {
         if (!!cardContent) {
             setCardDisplay(true)
@@ -38,7 +38,7 @@ function Ball({ userName, avatar }: IProps, ref: React.Ref<unknown> | undefined)
         }
     }, [cardContent]);
 
-    function handleMsgStream(msg: string) {
+    function displayMsg(msg: string) {
         if (!!msg) {
             setCardContent(
                 <div className={css.cardFont}>
@@ -56,7 +56,7 @@ function Ball({ userName, avatar }: IProps, ref: React.Ref<unknown> | undefined)
     function handlerDoubleClick(e: React.MouseEvent) {
         if (!user) {
             // User not logged in
-            const Login = (
+            setCardContent(
                 <>
                     <Button onClick={e => handlerGithubLogin(e)} type="primary" size={'large'} icon={<GithubOutlined />} className={welcomeCss.btn} >
                         我们非常推荐使用Github登陆
@@ -66,16 +66,12 @@ function Ball({ userName, avatar }: IProps, ref: React.Ref<unknown> | undefined)
                     </Button>
                 </>
             )
-            setCardContent(Login)
         } else {
-            const info = (
-                <>
-                    <span style={{ color: "white" }}>
-                        <UserCard login={userName} displayAvatar={false} />
-                    </span>
-                </>
+            setCardContent(
+                <span style={{ color: "white" }}>
+                    <UserCard login={userName} displayAvatar={false} />
+                </span>
             )
-            setCardContent(info)
         }
     }
     return (

@@ -22,7 +22,7 @@ interface Ball {
     element: JSX.Element
     floatRef?: Float
     ballRef?: {
-        handleMsgStream: (msg: string) => void
+        displayMsg: (msg: string) => void
     }
 }
 
@@ -72,22 +72,10 @@ function BallRoom() {
         }
     }
 
-    const handleClickSendBtn = () => {
-        const input = inputEl.current.input.value
-        if (!input) return;
-
-        const msg: MsgAPI = {
-            type: "talk",
-            data: input,
-            userName: client.userName!
-        }
-        client.send(msg)
-    }
-
     const handleReceiveMsg = (msg: string, userName: string) => {
         DirtyMethodContainer.current!.getBalls().forEach(x => {
             if (x.userName === userName) {
-                x.ballRef!.handleMsgStream(msg)
+                x.ballRef!.displayMsg(msg)
             }
         });
     }
@@ -102,6 +90,7 @@ function BallRoom() {
         })
     }
 
+    const [balls, setBalls] = useState<Ball[]>([]);
     const initializeBalls = (data: Array<AtomUser>) => {
         setBalls(data.map(atomUser => createBall(atomUser)))
     }
@@ -138,10 +127,18 @@ function BallRoom() {
         return res
     }
 
-    //todo check type
-    const [balls, setBalls] = useState<Ball[]>([]);
-
     const inputEl = useRef<Input>(null!)
+    const handleClickSendBtn = () => {
+        const input = inputEl.current.input.value
+        if (!input) return;
+
+        const msg: MsgAPI = {
+            type: "talk",
+            data: input,
+            userName: client.userName!
+        }
+        client.send(msg)
+    }
 
     const DirtyMethodContainer = useRef<DirtyMethod>()
     DirtyMethodContainer.current = {
@@ -159,20 +156,16 @@ function BallRoom() {
         return () => client.close();
     }, []);
 
-    if (!!balls) {
-        return (
-            <div>
-                {balls.map(self => self.element)}
+    return balls ? (
+        <div>
+            {balls.map(self => self.element)}
 
-                <div className={css.inputContainer}>
-                    <Input placeholder="想说的话都可以说呀啦啦啦啦啊啊啊" className={css.inputMsg} ref={inputEl} />
-                    <Button type="primary" onClick={e => handleClickSendBtn()} className={css.btn}>发送</Button>
-                </div>
+            <div className={css.inputContainer}>
+                <Input placeholder="想说的话都可以说呀啦啦啦啦啊啊啊" className={css.inputMsg} ref={inputEl} />
+                <Button type="primary" onClick={e => handleClickSendBtn()} className={css.btn}>发送</Button>
             </div>
-        )
-    } else {
-        return (<div>wdnmd</div>)
-    }
+        </div>
+    ) : (<div>wdnmd</div>)
 }
 
 class Client {
