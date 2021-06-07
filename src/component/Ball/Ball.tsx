@@ -14,7 +14,7 @@ import { debounce } from '../../utils';
 
 interface IProps {
     userName: string;
-    avatar: string;
+    avatar?: string;
 }
 
 function Ball({ userName, avatar }: IProps, ref: React.Ref<unknown> | undefined) {
@@ -28,7 +28,7 @@ function Ball({ userName, avatar }: IProps, ref: React.Ref<unknown> | undefined)
     }), [])
 
     useEffect(() => {
-        setUser({ userName, avatar })
+        setUser({ userName, avatar: avatar ? avatar : logo })
     }, []);
 
     useEffect(() => {
@@ -71,7 +71,7 @@ function Ball({ userName, avatar }: IProps, ref: React.Ref<unknown> | undefined)
             const info = (
                 <>
                     <span style={{ color: "white" }}>
-                        <UserCard login="therainisme" displayAvatar={false} />
+                        <UserCard login={userName} displayAvatar={false} />
                     </span>
                 </>
             )
@@ -81,7 +81,7 @@ function Ball({ userName, avatar }: IProps, ref: React.Ref<unknown> | undefined)
     return (
         <div>
             <span onDoubleClick={e => handlerDoubleClick(e)}>
-                <img className={css.logo} src={user === undefined ? logo : user.avatar} alt="" />
+                <img className={css.logo} src={avatar ? user?.avatar : logo} alt="" />
             </span>
 
             <span style={{ display: !cardDisplay ? "none" : "block" }}>

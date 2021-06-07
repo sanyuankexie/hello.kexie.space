@@ -6,6 +6,8 @@ import Float from "../Float/Float";
 
 import css from './index.module.css'
 
+import logo from '../../assets/images/logo.png'
+
 interface MsgAPI {
     type: string
     data: any
@@ -35,9 +37,7 @@ function BallRoom() {
         const { type, data, userName } = JSON.parse(msg) as MsgAPI
         switch (type) {
             case "hello":
-                const userString = localStorage.getItem('user')!
-                const me = JSON.parse(userString)
-                client.send({ type: "rename", userName: client.userName, data: { avatar: me.avatar } })
+                client.send({ type: "rename", userName: client.userName, data: { avatar: client.avatar } })
                 client.send({ type: "stand up", userName: client.userName })
                 break;
             case "stand up":
@@ -47,6 +47,37 @@ function BallRoom() {
                 receiveMsg(data, userName)
                 break;
             case "enter":
+                console.log(balls)
+                const floatRef = (ref: IFloatRef['ref']) => {
+                    setFloatsRef([...floatsRef, { userName, ref }])
+                }
+                const ballRef = (ref: IBallsRef['ref']) => {
+                    setBallsRef([...ballsRef, { userName, ref }])
+                }
+                const onmoving = throttle(({ x, y }: { x: number, y: number }) => {
+                    if (client.userName === userName) {
+                        const res = { type: "move", data: { x, y }, userName }
+                        client.send(res)
+                    }
+                }, 16);
+                const element = (
+                    <Float speed={256} key={userName} ref={floatRef} crossBorder={false} onmoving={onmoving} initialPosition={data.position}>
+                        <Ball userName={userName} avatar={data.avatar} ref={ballRef} />
+                    </Float>
+                )
+                setBalls([...balls, { userName, element }])
+                console.log(balls)
+                break;
+            case "leave":
+                setBalls(balls.filter(self => {
+                    return self.userName != userName
+                }))
+                setBallsRef(ballsRef.filter(self => {
+                    return self.userName != userName
+                }))
+                setFloatsRef(floatsRef.filter(self => {
+                    return self.userName != userName
+                }))
                 break;
             case "rename":
                 break;
@@ -94,7 +125,6 @@ function BallRoom() {
         let newFloatsRef: IFloatRef[] = []
         setBalls(data.map(user => {
             const userName = user.userName
-            //todo avatar position
             const floatRef = (ref: IFloatRef['ref']) => {
                 newFloatsRef = [...floatsRef, { userName, ref }]
             }
@@ -112,8 +142,7 @@ function BallRoom() {
                     <Ball userName={userName} avatar={user.avatar} ref={ballRef} />
                 </Float>
             )
-            const res = { userName, element }
-            return res
+            return { userName, element }
         }))
         setBallsRef(newBallsRef)
         setFloatsRef(newFloatsRef)
@@ -141,9 +170,7 @@ function BallRoom() {
     if (!!balls) {
         return (
             <div>
-                {balls.map(x => {
-                    return x.element
-                })}
+                {balls.map(self => self.element)}
 
                 <div className={css.inputContainer}>
                     <Input placeholder="想说的话都可以说呀啦啦啦啦啊啊啊" className={css.inputMsg} ref={inputRef} />
@@ -158,14 +185,38 @@ function BallRoom() {
 
 class Client {
     userName?: string
+    avatar?: string
+    token?: string
+    visitor: boolean = true
     ws?: WebSocket;
     onmessage?: (ev: MessageEvent<any>) => void;
     reconnectTimer?: any
 
     open() {
         const userString = localStorage.getItem('user')!
-        const user = JSON.parse(userString)
-        this.userName = user.name
+        if (!!userString) {
+            const user = JSON.parse(userString)
+            this.userName = user.name
+            this.avatar = user.avatar
+            this.token = user.token
+            this.visitor = user.visitor
+        }
+        console.log(this.visitor = true && !userString)
+        if (this.visitor = true && !userString) {
+            this.userName = `User-${Math.floor(100000 * Math.random()) as unknown as string}`
+            this.avatar = ""
+            this.token = this.userName
+            this.visitor = true
+            const user = {
+                userName: this.userName,
+                avatar: this.avatar,
+                token: this.token,
+                visitor: this.visitor
+            }
+            localStorage.setItem('user', JSON.stringify(user))
+        }
+
+
         this.ws = new WebSocket("ws://10.33.39.225:4000/connect")
         this.ws.onerror = (e) => {
             console.error('ws error', e);

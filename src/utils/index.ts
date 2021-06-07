@@ -1,7 +1,7 @@
 export function debounce<T extends (...args: any[]) => void>(func: T, dalay: number) {
-    var timer: any = null
+    let timer: any = null
     return (...args: Parameters<T>): void => {
-        clearTimeout(timer)
+        if (!!timer) clearTimeout(timer)
         timer = setTimeout(() => {
             func(...args)
         }, dalay)
