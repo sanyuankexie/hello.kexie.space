@@ -8,6 +8,7 @@ import { BackTop } from 'antd';
 
 import './App.css'
 import BallRoom from './component/BallRoom/BallRoom';
+import GithubAuth from './pages/GithubAuth/GithubAuth';
 
 function App() {
     return (
@@ -16,6 +17,7 @@ function App() {
                 <BallRoom/>
                 <Switch>
                     <Route path="/introduction/:target" component={Article} />
+                    <Route path="/github-auth" component={GithubAuth} />
                     <Route path="/" component={Welcome} />
                 </Switch>
                 <Footer />

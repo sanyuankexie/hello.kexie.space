@@ -134,7 +134,7 @@ function BallRoom() {
         if (e) {
             if (e.key !== 'Enter' || e.keyCode !== 13) return
         }
-        
+
         const input = inputEl.current.input.value
         if (!input) return;
 
@@ -184,15 +184,15 @@ class Client {
     reconnectTimer?: any
 
     open() {
-        const userString = localStorage.getItem('user')!
-        if (!!userString) {
+        const userString = localStorage.getItem('user')
+        if (userString) {
             const user = JSON.parse(userString)
             this.userName = user.userName
             this.avatar = user.avatar
             this.token = user.token
             this.visitor = user.visitor
         }
-        if (!userString) {
+        if (userString === null) {
             this.userName = `User-${Math.floor(100000 * Math.random()) as unknown as string}`
             this.avatar = ""
             this.token = this.userName

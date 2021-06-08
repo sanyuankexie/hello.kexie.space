@@ -42,6 +42,7 @@
     min-width: 100px;
     max-width: 290px;
     min-height: 50px;
+    overflow-wrap: break-word;
 }
 
 .cardFont{
