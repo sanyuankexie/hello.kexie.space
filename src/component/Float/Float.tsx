@@ -6,6 +6,7 @@ interface IProp {
     crossBorder?: boolean;
     speed: number;
     initialPosition?: { x: number, y: number };
+    zIndex?: number;
     drag?: boolean
     onmoving?: (position: { x: number, y: number }) => void;
 }
@@ -27,12 +28,12 @@ class Float extends Component<IProp> {
     private menu: React.RefObject<HTMLDivElement> = React.createRef()
 
     render() {
-        const { children } = this.props
+        const { children, zIndex } = this.props
         const { nowY, nowX, cursor } = this.state
         return (
             <div>
                 <div ref={this.menu}
-                    style={{ top: nowY + 'px', left: nowX + 'px', cursor, position: "fixed", zIndex: 100 }}
+                    style={{ top: nowY + 'px', left: nowX + 'px', cursor, position: "fixed", zIndex: zIndex ? zIndex : 100 }}
                 >
                     {children}
                 </div>

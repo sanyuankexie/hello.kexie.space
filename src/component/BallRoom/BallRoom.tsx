@@ -121,8 +121,21 @@ function BallRoom() {
             }
         }, 16);
         const element = (
-            <Float speed={256} key={userName} ref={floatRef} crossBorder={false} onmoving={onmoving} initialPosition={atomUser.position}>
-                <Ball userName={userName} avatar={atomUser.avatar} ref={ballRef} visitor={atomUser.visitor} />
+            <Float
+                speed={256}
+                key={userName}
+                ref={floatRef}
+                crossBorder={false}
+                onmoving={onmoving}
+                initialPosition={atomUser.position}
+                zIndex={client.userName === userName ? 200 : 100}
+            >
+                <Ball
+                    userName={userName}
+                    avatar={atomUser.avatar}
+                    ref={ballRef}
+                    visitor={atomUser.visitor}
+                />
             </Float>
         )
         const res: Ball = { userName, element }

@@ -41,8 +41,7 @@ function Ball({ userName, avatar, visitor }: IProps, ref: React.Ref<unknown> | u
     }
 
     function handlerGithubLogin(e: React.MouseEvent) {
-        //todo github oauth
-        // window.open(`https://github.yuuza.net/login/oauth/authorize?client_id=${config.GitHub.ClientId}`)
+        window.open(`https://github.yuuza.net/login/oauth/authorize?client_id=${config.GitHub.ClientId}`)
     }
 
     function handlerDoubleClick(e: React.MouseEvent) {
