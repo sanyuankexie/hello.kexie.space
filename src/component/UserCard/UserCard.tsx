@@ -6,16 +6,15 @@ import { CommentOutlined } from '@ant-design/icons'
 import { Loading } from "../Spin";
 
 
-
 interface IProps {
-    login: string
+    name: string
     displayAvatar?: boolean
 }
 
-function UserCard({ login, displayAvatar }: IProps) {
+function UserCard({ name, displayAvatar }: IProps) {
     const [user, setUser] = useState<IUser>();
     useEffect(() => {
-        axios.get(`https://api.github.com/users/${login}`)
+        axios.get(`https://api.github.com/users/${name}`)
             .then(res => {
                 const { login, name, bio, avatar_url, html_url, location, company } = res.data
                 setUser({ login, name, bio, avatar: avatar_url, htmlUrl: html_url, location, company })

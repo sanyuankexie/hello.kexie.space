@@ -60,7 +60,7 @@ function Ball({ userName, avatar, visitor }: IProps, ref: React.Ref<unknown> | u
         } else {
             setCardContent(
                 <span style={{ color: "white" }}>
-                    <UserCard login={userName} displayAvatar={false} />
+                    <UserCard name={userName} displayAvatar={false} />
                 </span>
             )
         }

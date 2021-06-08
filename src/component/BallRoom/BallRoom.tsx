@@ -1,13 +1,13 @@
-import { Button, Input } from "antd";
 import React, { useEffect, useMemo, useRef, useState } from "react"
-import { throttle } from "../../utils";
-import Ball from "../Ball/Ball";
+import { Button, Input } from "antd";
 import Float from "../Float/Float";
+import Ball from "../Ball/Ball";
+import { throttle } from "../../utils";
 
 import css from './index.module.css'
 
 interface AtomUser {
-    userName: string;
+    name: string;
     position: Position;
     avatar: string;
     visitor: boolean;
@@ -33,21 +33,30 @@ function BallRoom() {
         const { type, data, userName } = JSON.parse(msg) as MsgAPI
         switch (type) {
             case "hello":
-                client.send({ type: "rename", userName: client.userName, data: { avatar: client.avatar, visitor: client.visitor } })
-                client.send({ type: "stand up", userName: client.userName })
+                client.send({ type: "rename", userName: client.name, data: { avatar: client.avatar, visitor: client.visitor } })
+                client.send({ type: "stand up", userName: client.name })
                 break;
 
             case "stand up":
-                initializeBalls(data)
+                initializeBalls(
+                    data.map((x: any) => {
+                        return ({ ...x, name: x.userName })
+                    })
+                )
                 break;
 
             case "talk":
-                handleReceiveMsg(data, userName)
+                balls.forEach((ball: Ball) => {
+                    console.log(ball.userName, userName)
+                    if (ball.userName === userName) {
+                        ball.ballRef!.displayMsg(data)
+                    }
+                });
                 break;
 
             case "enter":
                 const atomUser: AtomUser = {
-                    userName,
+                    name: userName,
                     position: data.position,
                     avatar: data.avatar,
                     visitor: data.visitor
@@ -66,30 +75,18 @@ function BallRoom() {
 
             case "move":
                 const { x, y }: Position = data
-                handleBallMoving(x, y, userName)
+                if (userName === client.name) return
+
+                balls.forEach((ball: Ball) => {
+                    if (ball.userName === userName) {
+                        ball.floatRef!.moveTo(x, y)
+                    }
+                })
                 break;
 
             default:
                 break;
         }
-    }
-
-    const handleReceiveMsg = (msg: string, userName: string) => {
-        DirtyMethodContainer.current!.getBalls().forEach(x => {
-            if (x.userName === userName) {
-                x.ballRef!.displayMsg(msg)
-            }
-        });
-    }
-
-    const handleBallMoving = (x: number, y: number, userName: string) => {
-        if (userName === client.userName) return
-
-        DirtyMethodContainer.current!.getBalls().forEach(self => {
-            if (self.userName === userName) {
-                self.floatRef!.moveTo(x, y)
-            }
-        })
     }
 
     const [balls, setBalls] = useState<Ball[]>([]);
@@ -98,47 +95,46 @@ function BallRoom() {
     }
 
     const createBall = (atomUser: AtomUser): Ball => {
-        const userName = atomUser.userName
 
         const floatRef = (ref: Float) => {
-            DirtyMethodContainer.current!.getBalls().forEach(self => {
-                if (self.userName === userName) {
-                    self.floatRef = ref
+            DirtyMethodContainer.current!.getBalls().forEach((ball: Ball) => {
+                if (ball.userName === atomUser.name) {
+                    ball.floatRef = ref
                 }
             })
         }
         const ballRef = (ref: Ball['ballRef']) => {
-            DirtyMethodContainer.current!.getBalls().forEach(self => {
-                if (self.userName === userName) {
-                    self.ballRef = ref
+            DirtyMethodContainer.current!.getBalls().forEach((ball: Ball) => {
+                if (ball.userName === atomUser.name) {
+                    ball.ballRef = ref
                 }
             })
         }
         const onmoving = throttle((position: Position) => {
-            if (client.userName === userName) {
-                const res = { type: "move", data: position, userName }
+            if (client.name === atomUser.name) {
+                const res = { type: "move", data: position, userName: atomUser.name }
                 client.send(res)
             }
         }, 16);
         const element = (
             <Float
                 speed={256}
-                key={userName}
+                key={atomUser.name}
                 ref={floatRef}
                 crossBorder={false}
                 onmoving={onmoving}
                 initialPosition={atomUser.position}
-                zIndex={client.userName === userName ? 200 : 100}
+                zIndex={client.name === atomUser.name ? 200 : 100}
             >
                 <Ball
-                    userName={userName}
+                    userName={atomUser.name}
                     avatar={atomUser.avatar}
                     ref={ballRef}
                     visitor={atomUser.visitor}
                 />
             </Float>
         )
-        const res: Ball = { userName, element }
+        const res: Ball = { userName: atomUser.name, element }
         return res
     }
 
@@ -154,7 +150,7 @@ function BallRoom() {
         const msg: MsgAPI = {
             type: "talk",
             data: input,
-            userName: client.userName!
+            userName: client.name!
         }
         client.send(msg)
     }
@@ -188,7 +184,7 @@ function BallRoom() {
 }
 
 class Client {
-    userName?: string
+    name?: string
     avatar?: string
     token?: string
     visitor: boolean = true
@@ -200,18 +196,18 @@ class Client {
         const userString = localStorage.getItem('user')
         if (userString) {
             const user = JSON.parse(userString)
-            this.userName = user.userName
+            this.name = user.name
             this.avatar = user.avatar
             this.token = user.token
             this.visitor = user.visitor
         }
         if (userString === null) {
-            this.userName = `User-${Math.floor(100000 * Math.random()) as unknown as string}`
+            this.name = `User-${Math.floor(100000 * Math.random()) as unknown as string}`
             this.avatar = ""
-            this.token = this.userName
+            this.token = this.name
             this.visitor = true
             const user = {
-                userName: this.userName,
+                name: this.name,
                 avatar: this.avatar,
                 token: this.token,
                 visitor: this.visitor

@@ -21,7 +21,7 @@ function GithubAuth({ location, history }: Props) {
             try {
                 const res = await axios.post(`http://localhost:4000/github-auth/${code}`)
                 const user = {
-                    userName: res.data.name,
+                    name: res.data.name,
                     avatar: res.data.avatar,
                     token: res.data.token,
                     visitor: false

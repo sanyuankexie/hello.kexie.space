@@ -62,7 +62,7 @@ function CommentList() {
                             className={css.comment}
                             author={item.author}
                             avatar={
-                                <Popover content={<UserCard login={item.author} />} placement="topLeft">
+                                <Popover content={<UserCard name={item.author} />} placement="topLeft">
                                     <img src={item.avatar} alt="" />
                                 </Popover>
                             }
