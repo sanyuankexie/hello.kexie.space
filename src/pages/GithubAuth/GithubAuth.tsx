@@ -19,7 +19,7 @@ function GithubAuth({ location, history }: Props) {
         const githubAuth = async () => {
             const code = location.search.split('=')[1]
             try {
-                const res = await axios.post(`https://kexie.therainisme.com:4000/github-auth/${code}`)
+                const res = await axios.post(`https://kexie.therainisme.com:5203/github-auth/${code}`)
                 const user = {
                     name: res.data.name,
                     avatar: res.data.avatar,
