@@ -216,7 +216,7 @@ class Client {
         }
 
 
-        this.ws = new WebSocket("ws://10.33.39.225:4000/connect")
+        this.ws = new WebSocket("wss://10.33.39.225:5203/connect")
         this.ws.onerror = (e) => {
             console.error('ws error', e);
         };
