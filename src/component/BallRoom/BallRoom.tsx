@@ -115,7 +115,7 @@ function BallRoom() {
                 const res = { type: "move", data: position, userName: atomUser.name }
                 client.send(res)
             }
-        }, 16);
+        }, 100);
         const element = (
             <Float
                 speed={256}
@@ -216,7 +216,7 @@ class Client {
         }
 
 
-        this.ws = new WebSocket("ws://10.33.39.225:4000/connect")
+        this.ws = new WebSocket("wss://kexie.therainisme.com:5203/connect")
         this.ws.onerror = (e) => {
             console.error('ws error', e);
         };
