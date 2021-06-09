@@ -10,8 +10,8 @@ import CommentList from "./CommentList/CommentList";
 import ProjectList from "./ProjectList/ProjectList";
 import LearningDirectionList from "./LearningDirectionList/LearningDirectionList";
 
-import logo from "../../assets/images/logo.png"
 import { departmentShortNameMap } from '../../static/department';
+import { Logo } from '../../static/cos';
 
 const { Title } = Typography;
 
@@ -20,7 +20,7 @@ function Welcome() {
         <div>
             <section className={css.container}>
                 <div className={css.blank} style={{ height: "20vh" }} />
-                <img src={logo}
+                <img src={Logo.Kexie}
                     alt=""
                     width={200}
                     height={200} />

@@ -4,13 +4,13 @@ import { WechatOutlined, GithubOutlined } from '@ant-design/icons';
 import { withRouter } from 'react-router'
 import css from './index.module.css'
 import welcomeCss from '../../pages/Welcome/Welcome.module.css'
-import logo from '../../assets/images/logo.png'
 import Float from '../Float/Float';
 import UserCard from '../UserCard/UserCard';
 import config from '../../static/config';
 import axios from 'axios';
 import { useMemo } from 'react';
 import { debounce } from '../../utils';
+import { Logo } from '../../static/cos';
 
 interface IProps {
     userName: string;
@@ -70,7 +70,7 @@ function Ball({ userName, avatar, visitor }: IProps, ref: React.Ref<unknown> | u
     return (
         <div>
             <span onDoubleClick={e => handlerDoubleClick(e)}>
-                <img className={css.logo} src={avatar ? avatar : logo} alt="" />
+                <img className={css.logo} src={avatar ? avatar : Logo.Kexie} alt="" />
             </span>
 
             <span style={{ display: !contentDisplay ? "none" : "block" }}>
