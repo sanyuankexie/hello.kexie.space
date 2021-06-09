@@ -5,16 +5,8 @@ import { Typography } from 'antd';
 
 import welcome from "../Welcome.module.css";
 
-import react from "../../../assets/images/learning-direction/react.png";
-import unity from "../../../assets/images/learning-direction/unity.png";
-import android from "../../../assets/images/learning-direction/android.png"
-import python from "../../../assets/images/learning-direction/python.png"
-import wechat from "../../../assets/images/learning-direction/wechat.png"
-import embedded from "../../../assets/images/learning-direction/embedded.svg"
-import bilibili from "../../../assets/images/learning-direction/bilibili.png"
-import ui from "../../../assets/images/learning-direction/ui.png"
-
 import { Department } from '../../../static/department';
+import COSBaseUrl, { Logo } from './../../../static/cos';
 
 const { Title } = Typography
 
@@ -47,45 +39,45 @@ const data: Array<LDirection> = [
     {
         name: "网站开发",
         key: "web",
-        logo: react,
+        logo: Logo.Web,
         width: 170,
     }, {
         name: "游戏制作",
         key: "game",
-        logo: unity,
+        logo: Logo.Game,
         width: 270,
         style: { marginTop: "2em" }
     }, {
         name: "安卓开发",
         key: "android",
-        logo: android,
+        logo: Logo.Android,
         width: 150
     }, {
         name: "UI设计",
         key: "ui",
-        logo: ui,
+        logo: Logo.UI,
         width: 200,
         style: { marginTop: "0.5em" }
     }, {
         name: "硬件开发",
         key: "hardware",
-        logo: embedded,
+        logo: Logo.Embedded,
         width: 140,
         style: { background: "#2e2459", marginTop: "0.6em" }
     }, {
         name: "机器学习",
         key: "machine-learning",
-        logo: python,
+        logo: Logo.MachineLearning,
         width: 150,
     }, {
         name: "小程序",
         key: "applet",
-        logo: wechat,
+        logo: Logo.Applet,
         width: 140,
     }, {
         name: "视频剪辑",
         key: "video",
-        logo: bilibili,
+        logo: Logo.Video,
         width: 150,
     },
 ]
