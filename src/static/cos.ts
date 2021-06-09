@@ -17,5 +17,9 @@ export const Logo = {
     Embedded: `${BaseUrl}/images/learning-direction/embedded.svg`,
     MachineLearning: `${BaseUrl}/images/learning-direction/python.png`,
     Applet: `${BaseUrl}/images/learning-direction/wechat.png`,
-    Video: `${BaseUrl}/images/learning-direction/bilibili.png`
+    Video: `${BaseUrl}/images/learning-direction/bilibili.png`,
 } as const
+
+export const QRCode = {
+    WeChatOfficialAccount: `${BaseUrl}/images/wechat_QR_code.jpg `,
+}

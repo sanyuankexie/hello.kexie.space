@@ -1,7 +1,7 @@
 import React from 'react';
 import { Typography, Popover } from 'antd';
 import css from './Footer.module.css';
-import WeChatQRCode from '../../assets/images/wechat_QR_code.jpg';
+import { QRCode } from '../../static/cos'
 
 const { Title } = Typography;
 
@@ -28,7 +28,7 @@ function dataToItems(item: ITable) {
                         switch (self.name) {
                             case "微信公众号":
                                 return (
-                                    <Popover content={<img src={WeChatQRCode} alt="" />} trigger="click" style={{ padding: "0 !important" }} key={self.name}>
+                                    <Popover content={<img src={QRCode.WeChatOfficialAccount} alt="" />} trigger="click" style={{ padding: "0 !important" }} key={self.name}>
                                         <a key={self.name} target="_blank" href={self.url} style={{ color: "white" }} rel="noreferrer">
                                             <li className={css.item}>{self.name}</li>
                                         </a>
@@ -93,7 +93,7 @@ const data: Array<ITable> = [
         list: [
             {
                 name: 'GitHub',
-                url: 'https://github.com/sanyuankexie', 
+                url: 'https://github.com/sanyuankexie',
             },
             {
                 name: 'OnlineJudge',
