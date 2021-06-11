@@ -1,6 +1,6 @@
 import React from 'react';
 import {Typography} from 'antd';
-import css from "../Welcome.module.css";
+import style from "../index.module.css";
 import fuchuang from "../../../assets/images/contest/fuchuang.png";
 
 const {Title} = Typography
@@ -8,7 +8,7 @@ const {Title} = Typography
 function ContestList() {
     return data.map((self: IContest) => {
         return (
-            <div className={css.displayItem}>
+            <div className={style.displayItem}>
                 <Title style={{textAlign: "center"}} level={4}>{self.name}</Title>
                 <img src={self.logo} alt="" width={88}/>
                 <ul>

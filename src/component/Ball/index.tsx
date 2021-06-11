@@ -1,13 +1,10 @@
-import React, { useEffect, useState, useRef, RefObject, useImperativeHandle, forwardRef } from 'react';
-import { Button, Input } from 'antd';
+import React, { useState, useImperativeHandle, forwardRef } from 'react';
+import { Button } from 'antd';
 import { WechatOutlined, GithubOutlined } from '@ant-design/icons';
-import { withRouter } from 'react-router'
-import css from './index.module.css'
-import welcomeCss from '../../pages/Welcome/Welcome.module.css'
-import Float from '../Float/Float';
-import UserCard from '../UserCard/UserCard';
+import style from './index.module.css'
+import welcomeStyle from '../../pages/Welcome/index.module.css'
+import UserCard from '../UserCard';
 import config from '../../static/config';
-import axios from 'axios';
 import { useMemo } from 'react';
 import { debounce } from '../../utils';
 import { Logo } from '../../static/cos';
@@ -32,7 +29,7 @@ function Ball({ userName, avatar, visitor }: IProps, ref: React.Ref<unknown> | u
         if (!!msg) {
             setContentDisplay(true)
             setCardContent(
-                <div className={css.cardFont}>
+                <div className={style.cardFont}>
                     {msg}
                 </div>
             )
@@ -49,10 +46,10 @@ function Ball({ userName, avatar, visitor }: IProps, ref: React.Ref<unknown> | u
             // User not logged in
             setCardContent(
                 <>
-                    <Button onClick={e => handlerGithubLogin(e)} type="primary" size={'large'} icon={<GithubOutlined />} className={welcomeCss.btn} >
+                    <Button onClick={e => handlerGithubLogin(e)} type="primary" size={'large'} icon={<GithubOutlined />} className={welcomeStyle.btn} >
                         我们非常推荐使用Github登陆
                     </Button>
-                    <Button type="primary" size={'large'} icon={<WechatOutlined />} className={welcomeCss.btn} >
+                    <Button type="primary" size={'large'} icon={<WechatOutlined />} className={welcomeStyle.btn} >
                         因为我们的微信登陆还没写好!
                     </Button>
                 </>
@@ -70,13 +67,13 @@ function Ball({ userName, avatar, visitor }: IProps, ref: React.Ref<unknown> | u
     return (
         <div>
             <span onDoubleClick={e => handlerDoubleClick(e)}>
-                <img className={css.logo} src={avatar ? avatar : Logo.Kexie} alt="" />
+                <img className={style.logo} src={avatar ? avatar : Logo.Kexie} alt="" />
             </span>
 
             <span style={{ display: !contentDisplay ? "none" : "block" }}>
-                <div className={css.CardContainer}>
-                    <div className={css.triangle}></div>
-                    <div className={css.card}>
+                <div className={style.CardContainer}>
+                    <div className={style.triangle}></div>
+                    <div className={style.card}>
                         {cardContent}
                     </div>
                 </div>

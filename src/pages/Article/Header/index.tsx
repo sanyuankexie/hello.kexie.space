@@ -1,5 +1,5 @@
 import React from 'react';
-import css from './Header.module.css'
+import css from './index.module.css'
 
 interface IProps {
     icon: string

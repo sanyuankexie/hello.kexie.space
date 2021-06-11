@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from "axios";
 import { useEffect, useState } from "react";
-import css from './UserCard.module.css'
+import css from './index.module.css'
 import { CommentOutlined } from '@ant-design/icons'
 import { Loading } from "../Spin";
 

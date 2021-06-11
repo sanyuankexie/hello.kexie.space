@@ -1,6 +1,6 @@
 import { Steps } from "antd";
 import React from "react";
-import welcomeStyle from '../Welcome.module.css'
+import welcomeStyle from '../index.module.css'
 
 const { Step } = Steps
 

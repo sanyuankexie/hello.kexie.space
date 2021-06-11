@@ -1,10 +1,10 @@
 import React, { useEffect, useMemo, useRef, useState } from "react"
 import { Button, Input } from "antd";
-import Float from "../Float/Float";
-import Ball from "../Ball/Ball";
+import Float from "../Float";
+import Ball from "../Ball";
 import { throttle } from "../../utils";
 
-import css from './index.module.css'
+import style from './index.module.css'
 
 interface AtomUser {
     name: string;
@@ -174,9 +174,9 @@ function BallRoom() {
         <div>
             {balls.map(self => self.element)}
 
-            <div className={css.inputContainer} onKeyDown={e => handleTriggerSendBtn(e)}>
-                <Input placeholder="想说的话都可以说呀啦啦啦啦啊啊啊" className={css.inputMsg} ref={inputEl} />
-                <Button type="primary" onClick={e => handleTriggerSendBtn()} className={css.btn}>发送</Button>
+            <div className={style.inputContainer} onKeyDown={e => handleTriggerSendBtn(e)}>
+                <Input placeholder="想说的话都可以说呀啦啦啦啦啊啊啊" className={style.inputMsg} ref={inputEl} />
+                <Button type="primary" onClick={e => handleTriggerSendBtn()} className={style.btn}>发送</Button>
             </div>
         </div>
     ) : (<div>wdnmd</div>)

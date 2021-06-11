@@ -3,12 +3,12 @@ import { Button } from 'antd';
 import { GithubOutlined, CodeFilled } from '@ant-design/icons';
 import { NavLink } from 'react-router-dom'
 import { Typography } from 'antd';
-import css from './Welcome.module.css'
+import css from './index.module.css'
 
-import Section from "../../component/Section/Section";
-import CommentList from "./CommentList/CommentList";
-import ProjectList from "./ProjectList/ProjectList";
-import LearningDirectionList from "./LearningDirectionList/LearningDirectionList";
+import Section from "../../component/Section";
+import CommentList from "./CommentList";
+import ProjectList from "./ProjectList";
+import LearningDirectionList from "./LearningDirectionList";
 import Timeline from './Timeline';
 
 import { departmentShortNameMap } from '../../static/department';

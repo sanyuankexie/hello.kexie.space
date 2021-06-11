@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react"
 import { match } from "react-router-dom"
 import { History } from 'history'
 import axios from 'axios';
-import { Button, Result, Spin } from 'antd';
+import { Button, Result } from 'antd';
 import { ResultStatusType } from "antd/lib/result";
-import welcomeCss from '../Welcome/Welcome.module.css'
+import welcomeStyle from '../Welcome/index.module.css'
 
 
 interface Props {
@@ -69,10 +69,10 @@ function GithubAuth({ location, history }: Props) {
                         }
                         subTitle={<p style={{ color: "#FBF9F8" }}>{process.subTitle}</p>}
                         extra={[
-                            <Button type="primary" key="contact" className={welcomeCss.btnFilled}>
+                            <Button type="primary" key="contact" className={welcomeStyle.btnFilled}>
                                 联系管理员
                             </Button>,
-                            <Button key="return" className={welcomeCss.btnDefault}>
+                            <Button key="return" className={welcomeStyle.btnDefault}>
                                 返回主页
                             </Button>,
                         ]}

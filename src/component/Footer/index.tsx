@@ -1,15 +1,15 @@
 import React from 'react';
 import { Typography, Popover } from 'antd';
-import css from './Footer.module.css';
+import style from './index.module.css';
 import { QRCode } from '../../static/cos'
 
 const { Title } = Typography;
 
 function Footer() {
     return (
-        <footer className={css.container}>
-            <div className={css.blank} />
-            <div className={css.itemsContainer}>
+        <footer className={style.container}>
+            <div className={style.blank} />
+            <div className={style.itemsContainer}>
                 {data.map((self: ITable) => {
                     return dataToItems(self)
                 })}
@@ -21,8 +21,8 @@ function Footer() {
 function dataToItems(item: ITable) {
     return (
         <div key={item.title}>
-            <Title level={3} className={css.title}>{item.title}</Title>
-            <ul className={css.items}>
+            <Title level={3} className={style.title}>{item.title}</Title>
+            <ul className={style.items}>
                 {
                     item.list.map((self: IItem) => {
                         switch (self.name) {
@@ -30,14 +30,14 @@ function dataToItems(item: ITable) {
                                 return (
                                     <Popover content={<img src={QRCode.WeChatOfficialAccount} alt="" />} trigger="hover" style={{ padding: "0 !important" }} key={self.name}>
                                         <a key={self.name} target="_blank" href={self.url} style={{ color: "white" }} rel="noreferrer">
-                                            <li className={css.item}>{self.name}</li>
+                                            <li className={style.item}>{self.name}</li>
                                         </a>
                                     </Popover>
                                 )
                             default:
                                 return (
                                     <a key={self.name} target="_blank" href={self.url} style={{ color: "white" }} rel="noreferrer">
-                                        <li className={css.item}>{self.name}</li>
+                                        <li className={style.item}>{self.name}</li>
                                     </a>
                                 )
                         }
