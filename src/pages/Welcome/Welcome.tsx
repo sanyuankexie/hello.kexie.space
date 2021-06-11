@@ -9,6 +9,7 @@ import Section from "../../component/Section/Section";
 import CommentList from "./CommentList/CommentList";
 import ProjectList from "./ProjectList/ProjectList";
 import LearningDirectionList from "./LearningDirectionList/LearningDirectionList";
+import Timeline from './Timeline';
 
 import { departmentShortNameMap } from '../../static/department';
 import { Logo } from '../../static/cos';
@@ -63,12 +64,18 @@ function Welcome() {
                 </div>
             </Section>
 
+            <Section title="招新时间线">
+                <div className={css.sectionContainer}>
+                    <Timeline/>
+                </div>
+            </Section>
+
             <Section title="心灵之声">
                 <div className={css.sectionContainer} style={{ marginBottom: "10vh" }}>
-                    <div className={css.comment}>
+                    <div className={css.subSectionContainer}>
                         <CommentList />
                     </div>
-                    <div className={css.comment}>
+                    <div className={css.subSectionContainer}>
                         <ProjectList />
                     </div>
                 </div>

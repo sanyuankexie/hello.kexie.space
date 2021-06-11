@@ -80,7 +80,7 @@
     width: 21%;
 }
 
-.comment {
+.subSectionContainer {
     flex: 1;
     margin-left: 10px;
     margin-right: 10px;
@@ -96,7 +96,7 @@
     .department, .displayItem{
         width: 100%;
     }
-    .comment {
+    .subSectionContainer {
         flex: 0 1 auto;
         margin-left: 0;
         margin-right: 0;
