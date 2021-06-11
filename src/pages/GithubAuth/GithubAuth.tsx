@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react"
 import { match } from "react-router-dom"
 import { History } from 'history'
 import axios from 'axios';
-import { Spin } from 'antd';
-import { Loading } from "../../component/Spin";
+import { Button, Result, Spin } from 'antd';
+import { ResultStatusType } from "antd/lib/result";
+import welcomeCss from '../Welcome/Welcome.module.css'
 
 
 interface Props {
@@ -13,7 +14,14 @@ interface Props {
 }
 
 function GithubAuth({ location, history }: Props) {
-    const [msg, setMsg] = useState<string>("正在请求授权");
+    const [process, setProcess] = useState({
+        title: "正在请求授权",
+        status: "info",
+        subTitle: "请保持网络畅通，不要关闭此页面"
+    });
+
+    const [msg, setMsg] = useState<string>(`正在请求授权`);
+    const [resultStatusType, setResultStatusType] = useState<ResultStatusType>('info');
 
     useEffect(() => {
         const githubAuth = async () => {
@@ -27,11 +35,22 @@ function GithubAuth({ location, history }: Props) {
                     visitor: false
                 }
                 localStorage.setItem('user', JSON.stringify(user))
-                history.push('/')
-                window.location.reload()
+                setProcess({
+                    title: "授权成功，登陆态已保存",
+                    status: "success",
+                    subTitle: "5S之后将自动返回主页。"
+                })
+                setTimeout(() => {
+                    history.push('/')
+                    window.location.reload()
+                }, 5000)
             } catch (error) {
                 console.error('github auth error', error)
-                setMsg("请求授权失败")
+                setProcess({
+                    title: "请求授权失败",
+                    status: "error",
+                    subTitle: "请确认网络是否通畅，相比于流量，校园网稳定性较差，麻烦切换移动网络后重试。"
+                })
             } finally {
             }
         }
@@ -41,9 +60,23 @@ function GithubAuth({ location, history }: Props) {
     return (
         <>
             <div style={{ position: "fixed", width: "100vw", height: "100vh", background: "black", textAlign: "center" }}>
-                <div style={{ left: "50%", top: "50%", width: "200px", position: "absolute", transform: "translate(-50%,-50%)" }}>
-                    <h1 style={{ color: "#FBF9F8" }}>{msg}</h1>
-                    <Loading size={200} />
+                <div style={{ left: "50%", top: "45%", width: "100vw", position: "absolute", transform: "translate(-50%,-50%)" }}>
+                    <Result
+                        status={process.status as ResultStatusType}
+                        title={
+                            <h2 style={{ color: "#FBF9F8" }}>{process.title}
+                            </h2>
+                        }
+                        subTitle={<p style={{ color: "#FBF9F8" }}>{process.subTitle}</p>}
+                        extra={[
+                            <Button type="primary" key="contact" className={welcomeCss.btnFilled}>
+                                联系管理员
+                            </Button>,
+                            <Button key="return" className={welcomeCss.btnDefault}>
+                                返回主页
+                            </Button>,
+                        ]}
+                    />
                 </div>
             </div>
         </>

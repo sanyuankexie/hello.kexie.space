@@ -21,7 +21,6 @@ function App() {
                     <Route path="/" component={Welcome} />
                 </Switch>
                 <Footer />
-                <BackTop />
             </div>
         </div>
     );

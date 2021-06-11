@@ -14,9 +14,10 @@ interface IProps {
 function UserCard({ name, displayAvatar }: IProps) {
     const [user, setUser] = useState<IUser>();
     useEffect(() => {
-        axios.get(`https://api.github.com/users/${name}`)
+        axios.get(`https://api.github.yuuza.net/users/${name}`)
             .then(res => {
                 const { login, name, bio, avatar_url, html_url, location, company } = res.data
+                console.log(avatar_url)
                 setUser({ login, name, bio, avatar: avatar_url, htmlUrl: html_url, location, company })
             })
     }, []);
@@ -34,7 +35,6 @@ function UserCard({ name, displayAvatar }: IProps) {
                         <span className={css.name}>{user.login}</span>
                         <span className={css.bio}>{user.bio}</span>
                         <span className={css.location}>
-                            {console.log(!user.company && !user.location)}
                             {!user.company && !user.location ? '' : <CommentOutlined style={{ marginRight: "5px" }} />}
                             {user.company ? user.company : user.location}
                         </span>

@@ -47,7 +47,6 @@ function BallRoom() {
 
             case "talk":
                 balls.forEach((ball: Ball) => {
-                    console.log(ball.userName, userName)
                     if (ball.userName === userName) {
                         ball.ballRef!.displayMsg(data)
                     }
