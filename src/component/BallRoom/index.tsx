@@ -114,7 +114,7 @@ function BallRoom() {
                 const res = { type: "move", data: position, userName: atomUser.name }
                 client.send(res)
             }
-        }, 100);
+        }, 16);
         const element = (
             <Float
                 speed={256}
