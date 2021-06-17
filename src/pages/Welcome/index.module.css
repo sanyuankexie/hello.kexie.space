@@ -41,6 +41,22 @@
     border-color: #13c2c2 !important;
 }
 
+.btnFilled {
+    background: #13c2c2 !important;
+    border-color: #13c2c2 !important;
+}
+
+.btnFilled:hover {
+    background: #11c2c2 !important;
+    border-color: #13c2c2 !important;
+}
+
+.btnDefault:hover, .btnDefault:focus{
+    color: #13c2c2 !important;
+    background: #fff;
+    border-color: #13c2c2 !important;
+}
+
 .blank {
     height: 10em;
 }
@@ -64,10 +80,14 @@
     width: 21%;
 }
 
-.comment {
+.subSectionContainer {
     flex: 1;
     margin-left: 10px;
     margin-right: 10px;
+}
+
+.mobile{
+    display: none !important;
 }
 
 @media screen and (max-width: 1080px) {
@@ -80,12 +100,16 @@
     .department, .displayItem{
         width: 100%;
     }
-    .comment {
+    .subSectionContainer {
         flex: 0 1 auto;
         margin-left: 0;
         margin-right: 0;
     }
     .container {
         height: 120vh;
+    }
+
+    .mobile{
+        display: block !important;
     }
 }

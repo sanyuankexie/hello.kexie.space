@@ -1,9 +1,7 @@
-import MD from "../assets/images/department/multimedia-department.png"
-import SD from "../assets/images/department/software-depertment.png"
-import HD from "../assets/images/department/hardware-department.png"
-import OD from "../assets/images/department/organization-department.png"
+import BaseUrl, { Logo } from "./cos";
 
 interface Department {
+    shortName: string
     fullName: string
     logo: string
     learningDirection: Array<string>
@@ -13,7 +11,7 @@ const departmentsMap = {
     Multimedia: {
         shortName: 'MD',
         fullName: "multimedia-department",
-        logo: MD,
+        logo: Logo.Multimedia,
         learningDirection: [
             "网站开发", "UI设计", "视频剪辑", "小程序"
         ]
@@ -22,7 +20,7 @@ const departmentsMap = {
     Software: {
         shortName: 'SD',
         fullName: "software-depertment",
-        logo: SD,
+        logo: Logo.Software,
         learningDirection: [
             "游戏制作", "安卓开发", "机器学习"
         ]
@@ -31,7 +29,7 @@ const departmentsMap = {
     Hardware: {
         shortName: 'HD',
         fullName: "hardware-department",
-        logo: HD,
+        logo: Logo.Hardware,
         learningDirection: [
             "硬件开发"
         ]
@@ -40,7 +38,7 @@ const departmentsMap = {
     Organization: {
         shortName: 'OD',
         fullName: "organization-department",
-        logo: OD,
+        logo: Logo.Organization,
         learningDirection: [
         ]
     }

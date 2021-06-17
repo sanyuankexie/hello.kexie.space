@@ -3,15 +3,17 @@ import { Button } from 'antd';
 import { GithubOutlined, CodeFilled } from '@ant-design/icons';
 import { NavLink } from 'react-router-dom'
 import { Typography } from 'antd';
-import css from './Welcome.module.css'
+import css from './index.module.css'
 
-import Section from "../../component/Section/Section";
-import CommentList from "./CommentList/CommentList";
-import ProjectList from "./ProjectList/ProjectList";
-import LearningDirectionList from "./LearningDirectionList/LearningDirectionList";
+import Section from "../../component/Section";
+import CommentList from "./CommentList";
+import ProjectList from "./ProjectList";
+import LearningDirectionList from "./LearningDirectionList";
+import Timeline from './Timeline';
 
-import logo from "../../assets/images/logo.png"
 import { departmentShortNameMap } from '../../static/department';
+import { Logo } from '../../static/cos';
+import ContestList from './ContestList';
 
 const { Title } = Typography;
 
@@ -20,7 +22,7 @@ function Welcome() {
         <div>
             <section className={css.container}>
                 <div className={css.blank} style={{ height: "20vh" }} />
-                <img src={logo}
+                <img src={Logo.Kexie}
                     alt=""
                     width={200}
                     height={200} />
@@ -58,17 +60,24 @@ function Welcome() {
                 </div>
             </Section>
 
-            <Section title="近年参赛获奖" description="很多，还在整理当中......">
+            <Section title="招新时间线">
                 <div className={css.sectionContainer}>
+                    <Timeline/>
+                </div>
+            </Section>
+
+            <Section title="近年参赛获奖" description="很多，还在整理当中，下面展示是2020年国家级、省部级获奖的一部分......">
+                <div className={css.sectionContainer}>
+                    <ContestList/>
                 </div>
             </Section>
 
             <Section title="心灵之声">
                 <div className={css.sectionContainer} style={{ marginBottom: "10vh" }}>
-                    <div className={css.comment}>
+                    <div className={css.subSectionContainer}>
                         <CommentList />
                     </div>
-                    <div className={css.comment}>
+                    <div className={css.subSectionContainer}>
                         <ProjectList />
                     </div>
                 </div>

@@ -2,7 +2,7 @@ import React from 'react';
 import { FC } from 'react';
 import { List, Typography } from 'antd';
 
-import css from './Project.module.css'
+import style from './index.module.css'
 
 const { Title } = Typography
 
@@ -38,20 +38,20 @@ interface IProject {
 
 const Project: FC<IProject> = ({ name, description, language, avatar, url, languageColor }) => {
     return (
-        <div className={css.project}>
+        <div className={style.project}>
             <span>
-                <span className={css.name}>
+                <span className={style.name}>
                     <a href={url} target="_blank" rel="noreferrer">
-                        <img className={css.avatar} src={`${avatar}&s=20`} alt="" />
+                        <img className={style.avatar} src={`${avatar}&s=20`} alt="" />
                         {name}
                     </a>
-                    <span className={css.tags}>
+                    <span className={style.tags}>
                         {language}
-                        <span className={css.languageColor} style={{ background: languageColor }} />
+                        <span className={style.languageColor} style={{ background: languageColor }} />
                     </span>
                 </span>
             </span>
-            <span className={css.description}>{description}</span>
+            <span className={style.description}>{description}</span>
         </div>
     )
 }

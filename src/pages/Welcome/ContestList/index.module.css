@@ -1,0 +1,20 @@
+.nameCol{
+    max-width: 350px;
+}
+
+@media screen and (max-width: 1080px) {
+    .tagsCol{
+        max-width: 250px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .tagsCol{
+        max-width: 250px;
+    }
+}
+
+:global(.contest-container .ant-table-thead > tr > th){
+    background: #252630 !important;
+    color: white !important;
+}

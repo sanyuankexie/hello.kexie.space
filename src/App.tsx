@@ -1,20 +1,23 @@
 import { Route, Switch } from 'react-router-dom'
-
-import FloatMenu from "./component/FloatMenu/FloatMenu";
-import Welcome from "./pages/Welcome/Welcome";
-import Footer from "./component/Footer/Footer";
-import './App.css'
-import Article from "./pages/Article/Article";
 import React from 'react';
+import Ball from "./component/Ball";
+import Welcome from "./pages/Welcome";
+import Footer from "./component/Footer";
+import Article from "./pages/Article";
+import { BackTop } from 'antd';
 
+import './App.css'
+import BallRoom from './component/BallRoom';
+import GithubAuth from './pages/GithubAuth';
 
 function App() {
     return (
         <div>
             <div>
-                <FloatMenu />
+                <BallRoom/>
                 <Switch>
                     <Route path="/introduction/:target" component={Article} />
+                    <Route path="/github-auth" component={GithubAuth} />
                     <Route path="/" component={Welcome} />
                 </Switch>
                 <Footer />

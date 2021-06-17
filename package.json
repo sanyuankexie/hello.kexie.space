@@ -2,7 +2,7 @@
   "name": "kexie-web",
   "version": "0.0.0",
   "scripts": {
-    "start": "vite",
+    "start": "vite --host",
     "build": "tsc && vite build",
     "serve": "vite preview"
   },

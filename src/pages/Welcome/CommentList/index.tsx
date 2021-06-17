@@ -1,14 +1,13 @@
 import React from 'react';
 import { Comment, List, Typography, Popover, ListProps, } from 'antd';
-import { LoadingOutlined } from '@ant-design/icons'
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import moment from 'moment';
-import MarkdownParser from './../../../utils/markdown';
+import MarkdownParser from '../../../utils/markdown';
 import { CommentAPI } from '../../../api';
-import './Comment.css'
-import css from './Comment.module.css'
-import UserCard from './../../../component/UserCard/UserCard';
+import './index.css'
+import style from './index.module.css'
+import UserCard from '../../../component/UserCard';
 
 const { Title } = Typography
 
@@ -45,7 +44,7 @@ function CommentList() {
             setLoading(false)
         }
         else {
-            setLoading({ indicator: <LoadingOutlined style={{ fontSize: 50 }} spin /> })
+            setLoading(true)
         }
     }, [commentList]);
 
@@ -59,10 +58,10 @@ function CommentList() {
                 renderItem={(item: IComment) => (
                     <li>
                         <Comment
-                            className={css.comment}
+                            className={style.comment}
                             author={item.author}
                             avatar={
-                                <Popover content={<UserCard login={item.author} />} placement="topLeft">
+                                <Popover content={<UserCard name={item.author} />} placement="topLeft">
                                     <img src={item.avatar} alt="" />
                                 </Popover>
                             }

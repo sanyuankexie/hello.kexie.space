@@ -3,11 +3,11 @@ import { useEffect, useRef, useState } from 'react';
 
 import './code.css'
 
-import css from './Article.module.css'
-import Header from "./Header/Header";
+import css from './index.module.css'
+import Header from "./Header";
 
 import { Department } from "../../static/department"
-import MarkdownParser from './../../utils/markdown';
+import MarkdownParser from '../../utils/markdown';
 import axios from 'axios';
 
 interface IProps {
