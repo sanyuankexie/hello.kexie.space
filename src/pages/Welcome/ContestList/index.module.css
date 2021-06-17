@@ -14,7 +14,7 @@
     }
 }
 
-:global(.contest-container .ant-table-thead > tr > th){
+/* :global(.contest-container .ant-table-thead > tr > th){
     background: #252630 !important;
     color: white !important;
-}
+} */

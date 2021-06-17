@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, Tag, Space } from 'antd';
+import { Table, Tag, Space, Divider } from 'antd';
 import style from "./index.module.css";
 
 function ContestList() {
@@ -7,7 +7,7 @@ function ContestList() {
         <>
             <Table
                 className={"contest-container"}
-                style={{ width: "100%" }}
+                style={{ width: "100%", border: "1px solid #efefef" }}
                 columns={columns as any}
                 dataSource={data}
                 pagination={false}
