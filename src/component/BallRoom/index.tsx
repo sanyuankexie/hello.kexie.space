@@ -29,7 +29,6 @@ interface Ball {
 
 function BallRoom() {
     const dispatch = (msg: string) => {
-        console.log(msg)
         const { type, data, userName } = JSON.parse(msg) as MsgAPI
         switch (type) {
             case "hello":
@@ -174,7 +173,7 @@ function BallRoom() {
         <div>
             {balls.map(self => self.element)}
 
-            <div className={style.inputContainer} onKeyDown={e => handleTriggerSendBtn(e)}>
+            <div className={style.inputContainer} onKeyDown={e => handleTriggerSendBtn(e)} style={{display: client.visitor ? "none": "block"}}>
                 <Input placeholder="想说的话都可以说呀啦啦啦啦啊啊啊" className={style.inputMsg} ref={inputEl} />
                 <Button type="primary" onClick={e => handleTriggerSendBtn()} className={style.btn}>发送</Button>
             </div>
