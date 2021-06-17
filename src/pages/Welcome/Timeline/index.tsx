@@ -1,40 +1,41 @@
-import { Steps } from "antd";
+import { Steps, Divider } from "antd";
+import { LoadingOutlined } from '@ant-design/icons';
 import React from "react";
 import welcomeStyle from '../index.module.css'
+import MarkdownParser from "../../../utils/markdown";
 
 const { Step } = Steps
 
 function Timeline() {
     return (
         <>
+            <Divider />
             <div className={welcomeStyle.subSectionContainer}>
                 <Steps direction="vertical" current={1}>
-                    <Step title="报名阶段" description="This is a description." />
-                    <Step title="科技交流会" description="This is a description." />
-                    <Step title="笔试" description="This is a description." />
-                    <Step title="面试" description="This is a description." />
-                    <Step title="绘蓝杯科技竞赛" description="This is a description." />
+                    <Step title="报名阶段" description="报名时间截止到笔试前" />
+                    <Step title="入门学习" description="学会使用Online Judge实现问题求解" icon={<LoadingOutlined />} />
+                    <Step title="科技交流会" description="集结三院各大科技类社团的科技活动" />
+                    <Step title="笔试 & 面试" description="期待脱颖而出的你！" />
+                    <Step title="绘蓝杯科技竞赛" description="绽放你们的光芒！" />
                 </Steps>
             </div>
+            <Divider className={welcomeStyle.mobile} />
             <div className={welcomeStyle.subSectionContainer}>
-                <h1>科技交流会</h1>
-                <p style={{ textIndent: "2em" }}>
-                    科协大合照通知：
-                    匆匆一年，转眼又到了科协一年一度的大合照时刻，为给只属于更'卷'科协人的2021年留下镜头记录，决定拍摄合照。
-                    拍摄时间：5月20日（周四今天）12：30-13：30；
-                    拍摄地点：科技广场升旗台（下雨：图书馆侧门）；
-                    人员：17、18、19、20级科协全体成员；
-                    准备：12：30之前在5108，5109集合，人员到齐后再去拍摄场地；
-                </p>
-                <p style={{ textIndent: "2em" }}>
-                    庆幸在最好的时光里，有最美的你们
-                    用镜头记录象牙塔中最后的欢声笑语
-                    让光与影将科协的美好永远留存
-                    愿金色年华里，留下在科协最美的定格。
+                <p
+                    style={{ textIndent: "2em" }}
+                    dangerouslySetInnerHTML={{ __html: MarkdownParser.render(content) }}>
                 </p>
             </div>
         </>
     );
 }
+
+const content = `
+三院科协是依托于计算机与信息安全学院，面向全校的校级技术社团。我们的活动包括技术学习，承办和策划各类科技赛事和颁奖仪式，组织创新创业训练等。科协设有软件部、硬件部、多媒体部、组织部共四个部门，致力于对成员技术能力及创新能力的培养。
+
+在科协，你不仅能提高自身的技术，结交志同道合的伙伴，还能收获前辈的悉心指导，共享优质的资源服务。
+
+科协的大门将为你们敞开，我们期待你们的到来，欢迎与我们一起畅游在技术的海洋！
+`
 
 export default Timeline;

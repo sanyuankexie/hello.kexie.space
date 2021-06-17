@@ -17,7 +17,6 @@ function UserCard({ name, displayAvatar }: IProps) {
         axios.get(`https://api.github.yuuza.net/users/${name}`)
             .then(res => {
                 const { login, name, bio, avatar_url, html_url, location, company } = res.data
-                console.log(avatar_url)
                 setUser({ login, name, bio, avatar: avatar_url, htmlUrl: html_url, location, company })
             })
     }, []);

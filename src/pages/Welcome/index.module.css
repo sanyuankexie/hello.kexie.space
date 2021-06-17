@@ -86,6 +86,10 @@
     margin-right: 10px;
 }
 
+.mobile{
+    display: none !important;
+}
+
 @media screen and (max-width: 1080px) {
     .department, .displayItem{
         width: 45%;
@@ -103,5 +107,9 @@
     }
     .container {
         height: 120vh;
+    }
+
+    .mobile{
+        display: block !important;
     }
 }
