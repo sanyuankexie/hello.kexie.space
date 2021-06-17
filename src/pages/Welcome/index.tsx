@@ -13,6 +13,7 @@ import Timeline from './Timeline';
 
 import { departmentShortNameMap } from '../../static/department';
 import { Logo } from '../../static/cos';
+import ContestList from './ContestList';
 
 const { Title } = Typography;
 
@@ -59,14 +60,15 @@ function Welcome() {
                 </div>
             </Section>
 
-            <Section title="近年参赛获奖" description="很多，还在整理当中......">
-                <div className={css.sectionContainer}>
-                </div>
-            </Section>
-
             <Section title="招新时间线">
                 <div className={css.sectionContainer}>
                     <Timeline/>
+                </div>
+            </Section>
+
+            <Section title="近年参赛获奖" description="很多，还在整理当中，下面展示是2020年国家级、省部级获奖的一部分......">
+                <div className={css.sectionContainer}>
+                    <ContestList/>
                 </div>
             </Section>
 
