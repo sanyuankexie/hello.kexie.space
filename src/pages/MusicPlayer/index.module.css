@@ -1,0 +1,111 @@
+.container{
+    background: url('../../assets/images/music/dahai.png');
+    position: fixed;
+    display: flex;
+    background-size: cover;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+}
+
+.sidebar{
+    width: 300px;
+    height: 100vh;
+    background: #252630;
+}
+
+.item{
+    padding: 5px;
+    cursor: pointer;
+    transition: all .15s;
+    line-height: 30px;
+    transform: scale(1);
+}
+
+.active{
+    background: #383a49;
+}
+
+.item:hover{
+    background: #383a49;
+}
+
+
+.panel{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 80px;
+    background: #1b1c24;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.progress{
+    position: absolute;
+    height: 4px;
+    width: 100%;
+    left: 0;
+    top: -4px;
+    background: black;
+    cursor: pointer;
+}
+
+.progress .pass{
+    height: 4px;
+    width: 50%;
+    background: #108397;
+}
+
+.progress .circle{
+    position: absolute;
+    top: -2px;
+    left: 50%;
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+    background: #13c2c2;
+}
+
+.info{
+    display: flex;
+    width: 250px;
+}
+
+.poster{
+    width: 60px;
+    height: 60px;
+}
+
+.detail{
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.control{
+    width: 300px;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.mode, .previous, .play, .next, .replay, .volume{
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.mode, .previous, .play, .next, .replay, .volume, .sidebar, .detail{
+    color: #e2e2e2
+}
+
+.volume{
+    margin-right: 10px;
+    width: 250px;
+    text-align: right;
+}
