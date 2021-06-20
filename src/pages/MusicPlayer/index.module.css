@@ -14,20 +14,25 @@
     background: #252630;
 }
 
-.item{
+.sidebar .item{
     padding: 5px;
     cursor: pointer;
     transition: all .15s;
     line-height: 30px;
     transform: scale(1);
+    transition: all 0.07s;
 }
 
-.active{
+.sidebar .active{
     background: #383a49;
 }
 
-.item:hover{
+.sidebar .item:hover{
     background: #383a49;
+}
+
+.sidebar .item:active{
+    transform: scale(0.95);
 }
 
 
@@ -58,6 +63,7 @@
     height: 4px;
     width: 50%;
     background: #108397;
+    transition: all 0.15s;
 }
 
 .progress .circle{
@@ -68,6 +74,7 @@
     width: 8px;
     border-radius: 50%;
     background: #13c2c2;
+    transition: all 0.15s;
 }
 
 .info{
@@ -95,17 +102,25 @@
     align-items: center;
 }
 
-.mode, .previous, .play, .next, .replay, .volume{
-    font-size: 25px;
+.panel .item{
+    font-size: 24px;
     cursor: pointer;
+    transition: all 0.25s;
 }
 
-.mode, .previous, .play, .next, .replay, .volume, .sidebar, .detail{
-    color: #e2e2e2
+.panel .item:hover{
+    color: #13c2c2;
+    fill: #13c2c2;
+}
+
+.panel .item, .sidebar, .detail{
+    color: #e2e2e2;
+    fill: #e2e2e2;
 }
 
 .volume{
     margin-right: 10px;
     width: 250px;
     text-align: right;
+    cursor: default;
 }
