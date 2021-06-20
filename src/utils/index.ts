@@ -21,3 +21,7 @@ export function throttle<T extends (...arg: any[]) => void>(func: T, interval: n
         }
     }
 }
+
+export function getCliendIp(): string {
+    return (window as any).returnCitySN.cip;
+}
