@@ -53,9 +53,17 @@
 .lyric{
     width: 100%;
     text-align: center;
-    color: #e2e2e2;
     text-shadow: 0 0 10px black;
-    transform: translateY(10px);
+    overflow: hidden;
+}
+
+.lyric .scroller{
+    transition: all 0.5s;
+}
+
+.lyric .item{
+    color: #e2e2e2;
+    transition: all 0.5s;
 }
 
 .lyric .active{
