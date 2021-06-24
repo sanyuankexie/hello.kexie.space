@@ -21,6 +21,9 @@ function MusicPlayer() {
     const [select, setSelect] = useState(RecommendMusics[0]);
     const audioRef = useRef<HTMLAudioElement>(null!);
     useEffect(() => {
+        !audioRef.current.paused && audioRef.current.pause();
+        setLyric([{ time: 0, line: '正在加载中......' }]);
+
         let interval: any = undefined;
         const loadingMusic = async () => {
             const res = await MusicAPI.getMusicAudioAndLyric(select.id);
