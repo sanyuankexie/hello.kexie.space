@@ -11,14 +11,21 @@ import BallRoom from './component/BallRoom';
 import GithubAuth from './pages/GithubAuth';
 import MusicPlayer from './pages/MusicPlayer';
 
+import { createStore } from "redux";
+import reducer from './pages/MusicPlayer/store';
+import { Provider } from 'react-redux';
+const store = createStore(reducer);
+
 function App() {
     return (
         <div>
             <div>
-                <BallRoom/>
+                <BallRoom />
                 <Switch>
                     <Route path="/introduction/:target" component={Article} />
-                    <Route path="/music" component={MusicPlayer} />
+                    <Provider store={store}>
+                        <Route path="/music" component={MusicPlayer} />
+                    </Provider>
                     <Route path="/github-auth" component={GithubAuth} />
                     <Route path="/" component={Welcome} />
                 </Switch>

@@ -1,15 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
-import {
-    SyncOutlined,
-    StepBackwardFilled,
-    PlayCircleFilled,
-    PauseCircleFilled,
-    StepForwardFilled,
-    RedoOutlined,
-} from '@ant-design/icons';
+import React, { Dispatch, useEffect, useRef, useState } from "react";
+
 import style from "./index.module.css";
 import Remixicon from '../../component/Remixicon/index';
 import { MusicAPI } from "../../api";
+import Progress from "./PlayerProgress";
+import PlayingMusicInfo from './PlayingMusicInfo';
+import PlayerVolume from "./PlayerVolume";
+import PlayerPanel from "./PlayerPanel";
+
 
 function MusicPlayer() {
     const [isPlay, setIsPlay] = useState<boolean>(true);
@@ -33,10 +31,10 @@ function MusicPlayer() {
             interval = setInterval(() => {
                 const { currentTime, duration } = audioRef.current;
                 setCurrentTime(currentTime);
-                setPass(Math.floor(currentTime / duration * 100 * 100) / 100);
+                // setPass(Math.floor(currentTime / duration * 100 * 100) / 100);
             }, 100);
         }
-        loadingMusic();
+        // loadingMusic();
 
         return () => {
             clearInterval(interval);
@@ -48,40 +46,7 @@ function MusicPlayer() {
         setSelect(music);
     }
 
-    const [pass, setPass] = useState(0);
-    function handleOnProgress(e: React.MouseEvent) {
-        const newPass = (e.clientX / window.innerWidth) * 100;
-        const { duration } = audioRef.current;
-        audioRef.current.currentTime = Number.isNaN(duration) ? 0 : newPass / 100 * duration
-        setPass(newPass);
-    }
 
-    function handleOnMode() {
-
-    }
-
-    function handleOnPrevious() {
-
-    }
-
-    function handleOnPlay() {
-        const { paused } = audioRef.current;
-        if (!paused) {
-            setIsPlay(false);
-            audioRef.current.pause();
-        } else {
-            setIsPlay(true);
-            audioRef.current.play();
-        }
-    }
-
-    function handleOnNext() {
-
-    }
-
-    function handleOnReplay() {
-
-    }
 
     return (
         <section className={style.container}>
@@ -127,44 +92,7 @@ function MusicPlayer() {
                     </div>
                 </div>
             </div>
-            <div className={style.panel}>
-                <div className={style.progress} onClick={e => handleOnProgress(e)}>
-                    <div className={style.pass} style={{ width: `${pass}%` }}></div>
-                    <div className={style.circle} style={{ left: `${pass}%` }}></div>
-                </div>
-
-                <div className={style.info}>
-                    <img className={style.poster} src={select.poster}></img>
-                    <div className={style.detail}>
-                        <div className={style.musicName}>{select.name}</div>
-                        <div className={style.singer}>{select.singer}</div>
-                    </div>
-                </div>
-
-                <div className={style.control}>
-                    <div className={style.item} onClick={e => handleOnMode()}>
-                        <SyncOutlined />
-                    </div>
-                    <div className={style.item} onClick={e => handleOnPrevious()}>
-                        <StepBackwardFilled />
-                    </div>
-                    <div className={style.item} onClick={e => handleOnPlay()}>
-                        {isPlay ? < PauseCircleFilled /> : <PlayCircleFilled />}
-                    </div>
-                    <div className={style.item} onClick={e => handleOnNext()}>
-                        <StepForwardFilled />
-                    </div>
-                    <div className={style.item} onClick={e => handleOnReplay()}>
-                        <RedoOutlined />
-                    </div>
-                </div>
-
-                <div className={style.volume}>
-                    <span className={style.item}>
-                        <Remixicon.VolumeUpFill className={style.item} />
-                    </span>
-                </div>
-            </div>
+            <PlayerPanel></PlayerPanel>
         </section >
     );
 }
@@ -191,6 +119,13 @@ const tempLyric = "[00:00.000] 作词 : 温莨/瞿子千/刘涛\n[00:01.000] 作
 interface Lyric {
     time: number;
     line: string;
+}
+
+export interface RecommendMusic {
+    id: string;
+    name: string;
+    singer: string;
+    poster: string;
 }
 
 function parseLyric(original: string): Lyric[] {

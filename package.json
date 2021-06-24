@@ -7,11 +7,10 @@
     "serve": "vite preview"
   },
   "dependencies": {
-    "react": "^17.0.0",
-    "react-dom": "^17.0.0",
     "@types/node": "^12.0.0",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
+    "@types/react-redux": "^7.1.16",
     "@types/react-router-dom": "^5.1.7",
     "antd": "^4.15.5",
     "axios": "^0.21.1",
@@ -20,6 +19,9 @@
     "is-svg": "4.2.2",
     "markdown-it": "^12.0.6",
     "postcss": "8.2.10",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
+    "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",
     "typescript": "^4.1.2",
     "web-vitals": "^1.0.1"
