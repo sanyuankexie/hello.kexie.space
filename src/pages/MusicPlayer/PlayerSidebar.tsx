@@ -1,6 +1,6 @@
 import React, { Dispatch, ReactHTMLElement, useEffect, useRef, useState } from "react";
 import style from './index.module.css'
-import welcomeStyle from '../Welcome/index.module.css'
+import welcomeStyle from '../Welcome/index.module.scss'
 import { useDispatch, useSelector } from 'react-redux';
 import { action, MusicPlayerState, parseLyric, RecommendMusics } from "./store";
 import { MusicAPI } from "../../api";

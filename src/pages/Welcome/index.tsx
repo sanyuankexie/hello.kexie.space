@@ -3,7 +3,7 @@ import { Button } from 'antd';
 import { GithubOutlined, CodeFilled } from '@ant-design/icons';
 import { NavLink } from 'react-router-dom'
 import { Typography } from 'antd';
-import css from './index.module.css'
+import style from './index.module.scss'
 
 import Section from "../../component/Section";
 import CommentList from "./CommentList";
@@ -20,22 +20,22 @@ const { Title } = Typography;
 function Welcome() {
     return (
         <div>
-            <section className={css.container}>
-                <div className={css.blank} style={{ height: "20vh" }} />
+            <section className={style.container}>
+                <div className={style.blank} style={{ height: "20vh" }} />
                 <img src={Logo.Kexie}
                     alt=""
                     width={200}
                     height={200} />
-                <Title className={css.title} level={1}>桂电三院科协</Title>
+                <Title className={style.title} level={1}>桂电三院科协</Title>
 
-                <p className={css.description}>啦啦啦啦啦啊啦啦啊啦啦啦啦啦</p>
+                <p className={style.description}>啦啦啦啦啦啊啦啦啊啦啦啦啦啦</p>
 
-                <div className={css.btnGroup}>
-                    <Button className={css.btn} type="primary" shape="round" icon={<GithubOutlined />}
+                <div className={style.btnGroup}>
+                    <Button className={style.btn} type="primary" shape="round" icon={<GithubOutlined />}
                         size={"large"}>
                         加入我们
                     </Button>
-                    <Button className={css.btn} type="primary" shape="round" icon={<CodeFilled />}
+                    <Button className={style.btn} type="primary" shape="round" icon={<CodeFilled />}
                         size={"large"}>
                         练习编程
                     </Button>
@@ -43,11 +43,11 @@ function Welcome() {
             </section>
 
             <Section title="四大部门" description="科协有四大部门，不同的部门下有不同的学习方向">
-                <div className={css.sectionContainer}>
+                <div className={style.sectionContainer}>
                     {Object.values(departmentShortNameMap).map(x => (
-                        <div className={css.department} key={x.fullName}>
+                        <div className={style.department} key={x.fullName}>
                             <NavLink to={{ pathname: `/introduction/${x.fullName}`, state: { icon: x.logo } }}>
-                                <img src={x.logo} className={css.imgScale} width={250} alt="" />
+                                <img src={x.logo} className={style.imgScale} width={250} alt="" />
                             </NavLink>
                         </div>
                     ))}
@@ -55,29 +55,29 @@ function Welcome() {
             </Section>
 
             <Section title="学习方向">
-                <div className={css.sectionContainer}>
+                <div className={style.sectionContainer}>
                     <LearningDirectionList />
                 </div>
             </Section>
 
             <Section title="招新时间线">
-                <div className={css.sectionContainer}>
+                <div className={style.sectionContainer}>
                     <Timeline/>
                 </div>
             </Section>
 
             <Section title="近年参赛获奖" description="很多，还在整理当中，下面展示是2020年国家级、省部级获奖的一部分......">
-                <div className={css.sectionContainer}>
+                <div className={style.sectionContainer}>
                     <ContestList/>
                 </div>
             </Section>
 
             <Section title="心灵之声">
-                <div className={css.sectionContainer} style={{ marginBottom: "10vh" }}>
-                    <div className={css.subSectionContainer}>
+                <div className={style.sectionContainer} style={{ marginBottom: "10vh" }}>
+                    <div className={style.subSectionContainer}>
                         <CommentList />
                     </div>
-                    <div className={css.subSectionContainer}>
+                    <div className={style.subSectionContainer}>
                         <ProjectList />
                     </div>
                 </div>

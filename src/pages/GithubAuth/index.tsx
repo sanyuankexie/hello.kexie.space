@@ -4,7 +4,7 @@ import { History } from 'history'
 import axios from 'axios';
 import { Button, Result } from 'antd';
 import { ResultStatusType } from "antd/lib/result";
-import welcomeStyle from '../Welcome/index.module.css'
+import welcomeStyle from '../Welcome/index.module.scss'
 
 
 interface Props {
