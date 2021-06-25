@@ -1,10 +1,10 @@
 import React from 'react';
-import { Table, Tag, Space, Divider } from 'antd';
-import style from "./index.module.css";
+import { Table, Tag } from 'antd';
+import style from "./index.module.scss";
 
 function ContestList() {
     return (
-        <>
+        <div className={style.contestList}>
             <Table
                 className={"contest-container"}
                 style={{ width: "100%", border: "1px solid #efefef" }}
@@ -12,7 +12,7 @@ function ContestList() {
                 dataSource={data}
                 pagination={false}
             />
-        </>
+        </div>
     );
 }
 

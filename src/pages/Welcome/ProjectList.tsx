@@ -2,28 +2,30 @@ import React from 'react';
 import { FC } from 'react';
 import { List, Typography } from 'antd';
 
-import style from './index.module.css'
+import style from './index.module.scss'
 
 const { Title } = Typography
 
 function ProjectList() {
     return (
-        <List
-            header={<Title level={3}>开源项目</Title>}
-            dataSource={data}
-            renderItem={item => (
-                <li style={{ borderBottom: '1px solid #f0f0f0' }}>
-                    <Project
-                        name={item.name}
-                        description={item.description}
-                        language={item.language}
-                        avatar={item.avatar}
-                        url={item.url}
-                        languageColor={item.languageColor}
-                    />
-                </li>
-            )}
-        />
+        <div className={style.projectList}>
+            <List
+                header={<Title level={3}>开源项目</Title>}
+                dataSource={data}
+                renderItem={item => (
+                    <li style={{ borderBottom: '1px solid #f0f0f0' }}>
+                        <Project
+                            name={item.name}
+                            description={item.description}
+                            language={item.language}
+                            avatar={item.avatar}
+                            url={item.url}
+                            languageColor={item.languageColor}
+                        />
+                    </li>
+                )}
+            />
+        </div>
     );
 }
 

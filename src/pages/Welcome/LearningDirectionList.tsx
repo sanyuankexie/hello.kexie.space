@@ -3,10 +3,10 @@ import { Component, CSSProperties } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Typography } from 'antd';
 
-import welcomeStyle from "../index.module.scss";
+import style from "./index.module.scss";
 
-import { Department } from '../../../static/department';
-import { Logo } from '../../../static/cos';
+import { Department } from '../../static/department';
+import { Logo } from '../../static/cos';
 
 const { Title } = Typography
 
@@ -22,10 +22,10 @@ class LearningDirectionList extends Component {
     render() {
         return data.map((self: LDirection) => {
             return (
-                <div key={self.key} className={welcomeStyle.displayItem}>
+                <div key={self.key} className={style.displayItem}>
                     <Title style={{ textAlign: "center" }} level={2}>{self.name}</Title>
                     <NavLink to={{ pathname: `introduction/${Department.getByLearningDirection(self.name).fullName}#${self.key}` }}>
-                        <img src={self.logo} alt="" width={self.width} style={self.style || {}} className={welcomeStyle.imgScale} />
+                        <img src={self.logo} alt="" width={self.width} style={self.style || {}} className={style.imgScale} />
                     </NavLink>
                 </div>
             )

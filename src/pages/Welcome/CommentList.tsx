@@ -3,11 +3,11 @@ import { Comment, List, Typography, Popover, ListProps, } from 'antd';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import moment from 'moment';
-import MarkdownParser from '../../../utils/markdown';
-import { CommentAPI } from '../../../api';
-import './index.css'
-import style from './index.module.css'
-import UserCard from '../../../component/UserCard';
+import MarkdownParser from '../../utils/markdown';
+import { CommentAPI } from '../../api';
+import './index.scss'
+import style from './index.module.scss'
+import UserCard from '../../component/UserCard';
 
 const { Title } = Typography
 
@@ -49,7 +49,7 @@ function CommentList() {
     }, [commentList]);
 
     return (
-        <div>
+        <div className={style.commentList}>
             <List
                 header={<Title level={3}>畅心所言</Title>}
                 loading={loading}

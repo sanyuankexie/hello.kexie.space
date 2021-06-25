@@ -1,8 +1,8 @@
 import { Steps, Divider } from "antd";
 import { LoadingOutlined } from '@ant-design/icons';
 import React from "react";
-import welcomeStyle from '../index.module.scss'
-import MarkdownParser from "../../../utils/markdown";
+import style from './index.module.scss'
+import MarkdownParser from "../../utils/markdown";
 
 const { Step } = Steps
 
@@ -10,7 +10,7 @@ function Timeline() {
     return (
         <>
             <Divider />
-            <div className={welcomeStyle.subSectionContainer}>
+            <div className={style.subSectionContainer}>
                 <Steps direction="vertical" current={1}>
                     <Step title="报名阶段" description="报名时间截止到笔试前" />
                     <Step title="入门学习" description="学会使用Online Judge实现问题求解" icon={<LoadingOutlined />} />
@@ -19,8 +19,8 @@ function Timeline() {
                     <Step title="绘蓝杯科技竞赛" description="绽放你们的光芒！" />
                 </Steps>
             </div>
-            <Divider className={welcomeStyle.mobile} />
-            <div className={welcomeStyle.subSectionContainer}>
+            <Divider className={style.mobile} />
+            <div className={style.subSectionContainer}>
                 <p
                     style={{ textIndent: "2em" }}
                     dangerouslySetInnerHTML={{ __html: MarkdownParser.render(content) }}>
