@@ -1,6 +1,6 @@
 import React from "react";
 
-import style from "./index.module.css";
+import style from "./index.module.scss";
 import PlayerPanel from "./PlayerPanel";
 import PlayingSideBar from "./PlayerSidebar";
 import PlayerMain from "./PlayerMain";

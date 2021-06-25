@@ -1,20 +1,16 @@
-$pure-white: #ffffff;
-$pure-black: #000000;
-$gray-black: #252630;
-$cyan: #13c2c2;
-$light-cyan: #11c2c2;
+@use '../../global.scss';
 
 .container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: $gray-black;
+    background: global.$gray-black;
     height: 105vh;
 }
 
 .title,
 .description {
-    color: $pure-white !important;
+    color: global.$pure-white !important;
     margin-top: 1em;
 }
 .description {
@@ -38,31 +34,31 @@ $light-cyan: #11c2c2;
 }
 
 .btn {
-    background: $pure-black !important;
-    border-color: $pure-black !important;
+    background: global.$pure-black !important;
+    border-color: global.$pure-black !important;
 
     &:hover {
-        background: $cyan !important;
-        border-color: $cyan !important;
+        background: global.$cyan !important;
+        border-color: global.$cyan !important;
     }
 }
 
 .btnFilled {
-    background: $cyan !important;
-    border-color: $cyan !important;
+    background: global.$cyan !important;
+    border-color: global.$cyan !important;
 
     &:hover {
-        background: $light-cyan !important;
-        border-color: $cyan !important;
+        background: global.$light-cyan !important;
+        border-color: global.$cyan !important;
     }
 }
 
 .btnDefault {
     &:hover,
     &:focus {
-        color: $cyan !important;
-        background: $pure-white;
-        border-color: $cyan !important;
+        color: global.$cyan !important;
+        background: global.$pure-white;
+        border-color: global.$cyan !important;
     }
 }
 

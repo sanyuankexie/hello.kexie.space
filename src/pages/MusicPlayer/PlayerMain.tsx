@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import style from './index.module.css'
+import style from './index.module.scss'
 import { useSelector } from 'react-redux';
 import { MusicPlayerState } from "./store";
 

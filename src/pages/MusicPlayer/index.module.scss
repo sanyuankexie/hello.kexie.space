@@ -1,0 +1,202 @@
+@use '../../global.scss';
+
+.container {
+    background: url("../../assets/images/music/dahai.png");
+    position: fixed;
+    display: flex;
+    background-size: cover;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+}
+
+.main {
+    width: 100%;
+    backdrop-filter: blur(20px);
+}
+
+.sidebar {
+    position: fixed;
+    width: 300px;
+    height: 100vh;
+    background: #252630;
+    z-index: 2;
+    transform: translateX(0%);
+    transition: all 0.25s;
+}
+
+.siderbarHidden {
+    transform: translateX(-100%);
+}
+
+.sidebar {
+    .item {
+        padding: 5px;
+        cursor: pointer;
+        line-height: 30px;
+        transform: scale(1);
+        transition: all 0.15s;
+
+        &:hover {
+            background: global.$light-black;
+        }
+
+        &:active {
+            transition: all 0.07s;
+            transform: scale(0.95);
+        }
+    }
+
+    .header {
+        line-height: 40px;
+    }
+
+    .user {
+        margin-left: 50px;
+    }
+
+    .active {
+        background: global.$light-black;
+    }
+}
+
+.btn {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    display: block;
+    text-align: center;
+    transition: all 0.25s;
+    cursor: pointer;
+    transform: scale(1);
+    position: absolute;
+    z-index: 3;
+    color: global.$light-white;
+}
+
+.btn:active {
+    transform: scale(0.9);
+    transition: all 0.07s;
+}
+
+.bigName {
+    font-size: 50px;
+    color: global.$light-white;
+    text-shadow: 0 0 10px black;
+    line-height: 120px;
+    text-align: center;
+}
+
+.lyric {
+    width: 100%;
+    text-align: center;
+    text-shadow: 0 0 10px black;
+    overflow: hidden;
+
+    .scroller {
+        transition: all 0.5s;
+    }
+
+    .item {
+        color: global.$light-white;
+        transition: all 0.5s;
+    }
+
+    .active {
+        font-size: 24px;
+        color: global.$pure-white;
+    }
+}
+
+.panel {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 80px;
+    background: #1b1c24;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 3;
+
+    .item {
+        font-size: 24px;
+        cursor: pointer;
+        transition: all 0.25s;
+
+        &:hover {
+            color: global.$cyan;
+            fill: global.$cyan;
+        }
+    }
+
+    .info {
+        display: flex;
+        width: 250px;
+    }
+
+    .poster {
+        width: 60px;
+        height: 60px;
+    }
+
+    .detail {
+        margin-left: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .control {
+        width: 300px;
+        height: 100%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .progress {
+        position: absolute;
+        height: 4px;
+        width: 100%;
+        left: 0;
+        top: -4px;
+        background: black;
+        cursor: pointer;
+
+        .pass {
+            height: 4px;
+            width: 50%;
+            background: global.$deep-cyan;
+            transition: all 0.15s;
+        }
+
+        .circle {
+            position: absolute;
+            top: -2px;
+            left: 50%;
+            height: 8px;
+            width: 8px;
+            border-radius: 50%;
+            background: global.$cyan;
+            transition: all 0.15s;
+        }
+    }
+
+    .volume {
+        margin-right: 10px;
+        width: 250px;
+        text-align: right;
+        cursor: default;
+    }    
+}
+
+.panel .item,
+.sidebar,
+.detail {
+    color: global.$light-white;
+    fill: global.$light-white;
+}
+

@@ -7,7 +7,7 @@ import {
     StepForwardFilled,
     RedoOutlined,
 } from '@ant-design/icons';
-import style from './index.module.css'
+import style from './index.module.scss'
 import { useSelector } from 'react-redux';
 import { action, MusicPlayerState } from "./store";
 import { useDispatch } from 'react-redux';

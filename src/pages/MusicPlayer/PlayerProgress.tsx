@@ -1,7 +1,7 @@
 import React, { Dispatch } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import style from './index.module.css'
+import style from './index.module.scss'
 import { action, MusicPlayerState } from "./store";
 
 function PlayerProgress() {

@@ -1,5 +1,5 @@
 import React from "react";
-import style from './index.module.css'
+import style from './index.module.scss'
 import PlayerProgress from "./PlayerProgress";
 import PlayingMusicInfo from "./PlayingMusicInfo";
 import PlayerVolume from "./PlayerVolume";

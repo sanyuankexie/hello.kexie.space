@@ -1,5 +1,5 @@
 import React from "react";
-import style from './index.module.css'
+import style from './index.module.scss'
 import Remixicon from "../../component/Remixicon";
 
 function PlayingVolume() {
