@@ -1,0 +1,33 @@
+.container {
+    display: flex;
+    height: 30em;
+    background: #252630;
+    color: white !important;
+
+    flex-direction: column;
+    align-items: center;
+
+    .itemsContainer {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 80vw;
+        flex-wrap: wrap;
+
+        .title {
+            color: white !important;
+        }
+
+        .items {
+            padding: 0;
+        }
+
+        .item {
+            list-style-type: none;
+        }
+    }
+
+    .blank {
+        height: 5em;
+    }
+}

@@ -1,0 +1,22 @@
+.container{
+    display: flex;
+
+    .avatar{
+        margin-right: 10px;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        cursor: pointer;
+    }
+    
+    .right{
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .name{
+        font-size: 16px;
+        font-weight: bolder;
+    }
+}
+

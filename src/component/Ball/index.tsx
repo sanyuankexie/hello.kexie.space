@@ -1,7 +1,7 @@
 import React, { useState, useImperativeHandle, forwardRef } from 'react';
 import { Button } from 'antd';
 import { WechatOutlined, GithubOutlined } from '@ant-design/icons';
-import style from './index.module.css'
+import style from './index.module.scss'
 import welcomeStyle from '../../pages/Welcome/index.module.scss'
 import UserCard from '../UserCard';
 import config from '../../static/config';

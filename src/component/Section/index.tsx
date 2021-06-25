@@ -1,6 +1,6 @@
 import React from 'react';
 import { Typography } from 'antd';
-import section from './index.module.css'
+import section from './index.module.scss'
 
 const { Title } = Typography;
 

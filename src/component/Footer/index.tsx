@@ -1,6 +1,6 @@
 import React from 'react';
 import { Typography, Popover } from 'antd';
-import style from './index.module.css';
+import style from './index.module.scss';
 import { QRCode } from '../../static/cos'
 
 const { Title } = Typography;

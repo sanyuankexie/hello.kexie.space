@@ -4,7 +4,7 @@ import Float from "../Float";
 import Ball from "../Ball";
 import { throttle } from "../../utils";
 
-import style from './index.module.css'
+import style from './index.module.scss'
 
 interface AtomUser {
     name: string;
