@@ -1,10 +1,10 @@
 import React from "react";
 import style from './index.module.css'
 import { useSelector } from 'react-redux';
-import { MusicPlayerStore } from "./store";
+import { MusicPlayerState } from "./store";
 
 function PlayingMusicInfo() {
-    const selected = useSelector((state: MusicPlayerStore) => state.selected);
+    const selected = useSelector((state: MusicPlayerState) => state.selected);
 
     return (
         <div className={style.info}>
