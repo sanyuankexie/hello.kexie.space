@@ -5,7 +5,6 @@ import axios from 'axios';
 import moment from 'moment';
 import MarkdownParser from '../../utils/markdown';
 import { CommentAPI } from '../../api';
-import './index.scss'
 import style from './index.module.scss'
 import UserCard from '../../component/UserCard';
 

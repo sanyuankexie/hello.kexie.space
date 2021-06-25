@@ -1,5 +1,5 @@
 import React from 'react';
-import css from './index.module.css'
+import css from './index.module.scss'
 
 interface IProps {
     icon: string
@@ -10,7 +10,7 @@ interface IProps {
 
 function Header({ title: content, author, published, icon }: IProps) {
     return (
-        <div className={css.container}>
+        <div className={css.headerContainer}>
             <h1 className={css.h1}>
                 <img src={icon} alt="" className={css.icon} />
                 {content}

@@ -2,8 +2,8 @@
   display: block;
   overflow-x: auto;
   padding: 1em;
-  background: #2B2B2D;
-  color: #CDD3D8;
+  background: #2b2b2d;
+  color: #cdd3d8;
   font-family: "Fira Mono", monospace;
   font-size: 1em;
 }
@@ -17,16 +17,18 @@
 }
 
 .hljs-selector-tag {
-  color: #C792EA;
+  color: #c792ea;
 }
 
 .hljs-meta-keyword,
 .hljs-literal,
-.hljs-keyword{
+.hljs-keyword {
   color: #cc99cd;
 }
 
-.hljs-string, .hljs-subst,   .hljs-meta-string {
+.hljs-string,
+.hljs-subst,
+.hljs-meta-string {
   color: #7ec699;
 }
 
@@ -48,7 +50,7 @@
 }
 
 .hljs-attribute {
-  color: #80CBBF;
+  color: #80cbbf;
 }
 
 .hljs-symbol,
@@ -63,7 +65,7 @@
 }
 
 .hljs-params {
-  color: #EEFFF7;
+  color: #eefff7;
 }
 
 .hljs-section {
@@ -89,7 +91,7 @@
 }
 
 .hljs-selector-id {
-  color: #F77669;
+  color: #f77669;
 }
 
 .hljs-emphasis {

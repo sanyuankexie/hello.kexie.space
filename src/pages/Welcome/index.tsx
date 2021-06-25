@@ -20,7 +20,7 @@ const { Title } = Typography;
 function Welcome() {
     return (
         <div>
-            <section className={style.container}>
+            <section className={style.helloContainer}>
                 <div className={style.blank} style={{ height: "20vh" }} />
                 <img src={Logo.Kexie}
                     alt=""

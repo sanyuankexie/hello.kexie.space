@@ -1,9 +1,9 @@
 import React from 'react';
 import { useEffect, useRef, useState } from 'react';
 
-import './code.css'
+import './code.scss'
 
-import css from './index.module.css'
+import css from './index.module.scss'
 import Header from "./Header";
 
 import { Department } from "../../static/department"
@@ -45,7 +45,7 @@ function Article({ location, match }: IProps) {
     }, [content]);
 
     return (
-        <article className={`${css.article} ${css.container}`}>
+        <article className={`${css.article} ${css.articleContainer}`}>
             <Header
                 icon={icon}
                 title={title}
