@@ -72,11 +72,19 @@
     position: absolute;
     z-index: 3;
     color: global.$light-white;
-}
 
-.btn:active {
-    transform: scale(0.9);
-    transition: all 0.07s;
+    background: global.$pure-black !important;
+    border-color: global.$pure-black !important;
+
+    &:hover {
+        background: global.$cyan !important;
+        border-color: global.$cyan !important;
+    }
+
+    &:active {
+        transform: scale(0.9);
+        transition: all 0.07s;
+    }
 }
 
 .bigName {

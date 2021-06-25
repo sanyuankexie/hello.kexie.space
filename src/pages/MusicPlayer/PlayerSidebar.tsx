@@ -36,7 +36,7 @@ function PlayingSideBar() {
             }, 100);
         }
 
-        // loadingMusic();
+        loadingMusic();
 
         return () => {
             clearInterval(interval);
