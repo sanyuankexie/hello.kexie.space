@@ -19,15 +19,53 @@
     height: 100vh;
     background: #252630;
     z-index: 2;
+    transform: translateX(0%);
+    transition: all 0.25s;
+}
+
+.siderbarHidden{
+    transform: translateX(-100%);
 }
 
 .sidebar .item{
     padding: 5px;
     cursor: pointer;
-    transition: all .15s;
     line-height: 30px;
     transform: scale(1);
+    transition: all 0.15s;
+}
+
+.btn{
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    display: block;
+    text-align: center;
+    transition: all 0.25s;
+    cursor: pointer;
+    transform: scale(1);
+    position: absolute;
+    z-index: 3;
+    color: #e2e2e2;
+}
+
+.btn:active{
+    transform: scale(0.9);
     transition: all 0.07s;
+}
+
+.sidebar .btn:hover{
+    background: #383a49 !important;
+}
+
+
+
+.sidebar .header{
+    line-height: 40px;
+}
+
+.sidebar .user{
+    margin-left: 50px;
 }
 
 .sidebar .active{
@@ -39,6 +77,7 @@
 }
 
 .sidebar .item:active{
+    transition: all 0.07s;
     transform: scale(0.95);
 }
 

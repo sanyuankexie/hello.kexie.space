@@ -1,5 +1,6 @@
-import React, { Dispatch, ReactHTMLElement, useEffect, useRef } from "react";
+import React, { Dispatch, ReactHTMLElement, useEffect, useRef, useState } from "react";
 import style from './index.module.css'
+import welcomeStyle from '../Welcome/index.module.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { action, MusicPlayerState, parseLyric, RecommendMusics } from "./store";
 import { MusicAPI } from "../../api";
@@ -19,7 +20,7 @@ function PlayingSideBar() {
     useEffect(() => {
         !audioRef.current.paused && audioRef.current.pause();
         dispatch({ type: "setLyrics", lyrics: [{ time: 0, line: '正在加载中......' }] });
-        dispatch({type: "setCurrentTime", currentTime: 0});
+        dispatch({ type: "setCurrentTime", currentTime: 0 });
 
         let interval: any = undefined;
         const loadingMusic = async () => {
@@ -35,7 +36,7 @@ function PlayingSideBar() {
             }, 100);
         }
 
-        // loadingMusic();
+        loadingMusic();
 
         return () => {
             clearInterval(interval);
@@ -47,24 +48,39 @@ function PlayingSideBar() {
         dispatch({ type: "setSelected", selected: music });
     }
 
+    const [isHidden, setIsHidden] = useState(false);
+    function handleOnClickH() {
+        setIsHidden(!isHidden);
+    }
+
     return (
-        <div className={style.sidebar}>
-            <div className={`${style.item} ${style.user}`}>Therainisme</div>
+        <>
+            <span className={`${welcomeStyle.btn} ${style.btn}`} onClick={e => handleOnClickH()}>
+                H
+            </span>
 
-            {musics.map(music => {
-                return (
-                    <div
-                        className={`${style.item} ${selected.name === music.name ? style.active : ''}`}
-                        onClick={e => handleOnClickMusicItem(music)}
-                        key={music.name}>
-                        {music.name}
-                    </div>
-                );
-            })}
+            <div className={isHidden ? `${style.sidebar} ${style.siderbarHidden}` : style.sidebar}>
+                <div className={style.header}>
+                    <span className={style.user}>
+                        Therainisme
+                    </span>
+                </div>
 
-            <audio ref={audioRef}></audio>
+                {musics.map(music => {
+                    return (
+                        <div
+                            className={`${style.item} ${selected.name === music.name ? style.active : ''}`}
+                            onClick={e => handleOnClickMusicItem(music)}
+                            key={music.name}>
+                            {music.name}
+                        </div>
+                    );
+                })}
 
-        </div>
+                <audio ref={audioRef}></audio>
+
+            </div>
+        </>
     )
 }
 
