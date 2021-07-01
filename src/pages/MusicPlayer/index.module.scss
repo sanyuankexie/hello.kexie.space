@@ -1,18 +1,29 @@
 @use '../../global.scss';
 
 .container {
-    background: url("../../assets/images/music/dahai.png");
+    // background: url("../../assets/images/music/dahai.png");
     position: fixed;
     display: flex;
-    background-size: cover;
+    background-size: contain;
     width: 100vw;
     height: 100vh;
     z-index: 1;
+
+    .background{
+        content: '';
+        position: absolute;
+        top:0;right:0;bottom:0;left:0;
+        filter: blur(100px);
+        background: url("../../assets/images/music/dahai.png");
+        background-size: contain;
+        transform: scale(2);
+        transition: all 1s;
+    }
 }
 
 .main {
     width: 100%;
-    backdrop-filter: blur(20px);
+    filter: blur(0px);
 }
 
 .sidebar {

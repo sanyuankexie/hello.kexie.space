@@ -1,4 +1,4 @@
-import React, { Dispatch } from "react";
+import React, { Dispatch, useEffect } from "react";
 import {
     SyncOutlined,
     StepBackwardFilled,
@@ -15,7 +15,12 @@ import { useDispatch } from 'react-redux';
 function PlayerControl() {
     const playerStatus = useSelector((state: MusicPlayerState) => state.playerStatus);
     const audioRef = useSelector((state: MusicPlayerState) => state.audioRef);
+    const selected = useSelector((state: MusicPlayerState) => state.selected);
     const dispatch = useDispatch<Dispatch<action>>();
+
+    useEffect(() => {
+        dispatch({type: "setPlayerStatus", playerStatus: "playing"});
+    }, [selected]);
 
     function handleOnMode() {
 

@@ -1,24 +1,16 @@
 import React from "react";
-
-import style from "./index.module.scss";
-import PlayerPanel from "./PlayerPanel";
-import PlayingSideBar from "./PlayerSidebar";
-import PlayerMain from "./PlayerMain";
-
-import { Provider } from "react-redux";
+import { Provider, useSelector } from "react-redux";
 import { createStore } from "redux";
-import reducer from './store'
+import reducer, { MusicPlayerState } from './store'
+import PlayerContainer from './PlyerContainer';
 const store = createStore(reducer as any);
 
 function MusicPlayer() {
 
+
     return (
         <Provider store={store}>
-            <section className={style.container}>
-                <PlayingSideBar></PlayingSideBar>
-                <PlayerMain></PlayerMain>
-                <PlayerPanel></PlayerPanel>
-            </section >
+            <PlayerContainer></PlayerContainer>
         </Provider>
     );
 }

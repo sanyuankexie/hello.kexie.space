@@ -8,6 +8,12 @@ export const RecommendMusics = [
         poster: "https://p2.music.126.net/eRSdB2vIoBHJV7-0Ga3i6g==/109951165641911293.jpg",
     },
     {
+        id: "35625821",
+        name: "记念",
+        singer: "雷雨心",
+        poster: "http://p2.music.126.net/W_srVOtG_DKS1-txPLqNQQ==/3273246117001205.jpg",
+    },
+    {
         id: "1849953578",
         name: "Fluorite Eye's Song",
         singer: "八木海莉",
@@ -50,7 +56,8 @@ export type action =
     { type: "setPlayerStatus", playerStatus: "playing" | "pausing" } |
     { type: "setAudioRef", audioRef: React.MutableRefObject<HTMLAudioElement> } |
     { type: "setLyrics", lyrics: Lyric[] } |
-    { type: "setCurrentTime", currentTime: number };
+    { type: "setCurrentTime", currentTime: number } |
+    { type: "setWaiting", waiting: number};
 
 export function reducer(state: MusicPlayerState = init, action: action) {
     const newState = { ...state } as any;
@@ -69,5 +76,6 @@ const init = {
     audioRef: Object.create(new Object()) as React.MutableRefObject<HTMLAudioElement>,
     lyrics: parseLyric(tempLyric) as Lyric[],
     currentTime: 0,
+    waiting: (new Date()).getTime(),
 }
 
