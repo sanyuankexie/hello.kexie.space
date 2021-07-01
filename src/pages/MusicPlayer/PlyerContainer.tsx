@@ -20,7 +20,9 @@ function PlayerContainer() {
 
     return (
         <section className={style.container}>
-            <div className={style.background} style={{background: `url("${poster}")`}}></div>
+            <div className={style.background}
+                style={{ background: "url(" + poster + ")" }}
+            ></div>
             <PlayingSideBar></PlayingSideBar>
             <PlayerMain></PlayerMain>
             <PlayerPanel></PlayerPanel>

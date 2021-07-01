@@ -1,10 +1,8 @@
 @use '../../global.scss';
 
 .container {
-    // background: url("../../assets/images/music/dahai.png");
     position: fixed;
     display: flex;
-    background-size: contain;
     width: 100vw;
     height: 100vh;
     z-index: 1;
@@ -12,12 +10,29 @@
     .background{
         content: '';
         position: absolute;
-        top:0;right:0;bottom:0;left:0;
         filter: blur(100px);
         background: url("../../assets/images/music/dahai.png");
-        background-size: contain;
-        transform: scale(2);
-        transition: all 1s;
+        background-size: cover !important;
+        background-position-x: center !important;
+        transform: translate(-50%, -50%);
+        transition: background 1s;
+        z-index: 0;
+        width: 150vw;
+        height: 150vh;
+        left: 50%;
+        top: 50%;
+    }
+
+    @media screen and (max-width: 1080px) {
+        .background{
+            filter: blur(50px);
+        }
+    }
+
+    @media screen and (max-width: 767px) {
+        .background{
+            filter: blur(40px);
+        }
     }
 }
 
@@ -167,6 +182,12 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
+    }
+
+    @media screen and (max-width: 767px) {
+        .detail {
+            display: none;
+        }
     }
 
     .control {

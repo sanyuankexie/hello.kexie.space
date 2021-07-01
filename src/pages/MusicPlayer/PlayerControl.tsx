@@ -51,7 +51,7 @@ function PlayerControl() {
     return (
         <div className={style.control}>
             <div className={style.item} onClick={e => handleOnMode()}>
-                <SyncOutlined />
+                {/* <SyncOutlined /> */}
             </div>
             <div className={style.item} onClick={e => handleOnPrevious()}>
                 <StepBackwardFilled />
@@ -63,7 +63,7 @@ function PlayerControl() {
                 <StepForwardFilled />
             </div>
             <div className={style.item} onClick={e => handleOnReplay()}>
-                <RedoOutlined />
+                {/* <RedoOutlined /> */}
             </div>
         </div>
     )
