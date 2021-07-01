@@ -26,16 +26,6 @@
         margin-top: 3em;
     }
 
-    .btn {
-        background: global.$pure-black !important;
-        border-color: global.$pure-black !important;
-
-        &:hover {
-            background: global.$cyan !important;
-            border-color: global.$cyan !important;
-        }
-    }
-
     .btnFilled {
         background: global.$cyan !important;
         border-color: global.$cyan !important;
@@ -53,6 +43,16 @@
             background: global.$pure-white;
             border-color: global.$cyan !important;
         }
+    }
+}
+
+.btn {
+    background: global.$pure-black !important;
+    border-color: global.$pure-black !important;
+
+    &:hover {
+        background: global.$cyan !important;
+        border-color: global.$cyan !important;
     }
 }
 

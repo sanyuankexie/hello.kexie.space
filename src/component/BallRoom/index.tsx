@@ -164,7 +164,6 @@ function BallRoom() {
         //todo get user by token
         client.open();
         client.onmessage = msg => DirtyMethodContainer.current?.dispatch(msg.data)
-        // todo get online user list
 
         return () => client.close();
     }, []);
@@ -214,15 +213,15 @@ class Client {
         }
 
 
-        this.ws = new WebSocket("wss://kexie.therainisme.com:5203/connect")
+        this.ws = new WebSocket("wss://kexie.therainisme.com/connect")
         this.ws.onerror = (e) => {
             console.error('ws error', e);
         };
         this.ws.onclose = (e) => {
             console.error('ws closed', e);
-            // this.reconnectTimer = setTimeout(() => {
-            //     this.open()
-            // }, 3000)
+            this.reconnectTimer = setTimeout(() => {
+                this.open()
+            }, 3000)
         };
         this.ws.onmessage = (x) => this.onmessage?.(x);
     }

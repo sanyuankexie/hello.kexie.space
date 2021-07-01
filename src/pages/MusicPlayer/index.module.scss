@@ -72,6 +72,7 @@
     position: absolute;
     z-index: 3;
     color: global.$light-white;
+    user-select: none;
 
     background: global.$pure-black !important;
     border-color: global.$pure-black !important;

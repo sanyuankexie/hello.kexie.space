@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import style from './index.module.scss'
 import { useSelector } from 'react-redux';
 import { MusicPlayerState } from "./store";
