@@ -29,7 +29,7 @@
     h5,
     h6 {
         font-size: 1.35rem;
-        margin-top: -3.1rem;
+        margin-top: -1.75rem;
         padding-top: 1.6rem;
     }
 
@@ -95,6 +95,8 @@
 
     img {
         max-width: 100%;
+        margin: auto;
+        display: table-cell;
     }
 }
 
@@ -175,6 +177,10 @@
 
     .captionHeading {
         opacity: 0.6;
+    }
+
+    img{
+        display: initial;
     }
 
     @media screen and (max-width: 767px) {
