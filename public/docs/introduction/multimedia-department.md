@@ -97,7 +97,7 @@
 
 ![](/docs/introduction/image/md/enter.gif)
 
-什么也不用管了，在第十行输入 `<h1>HelloWorld</h1>`后，记得按下 `CTRL + S` 进行保存。接着按着左手上的`ALT`键不要放开，再依次按下 `L` 和 `O`，Visual Studio Code 就会自动打开一个网页。
+什么也不用管了，在第10行输入 `<h1>HelloWorld</h1>`后，记得按下 `CTRL + S` 进行保存。接着按着左手上的`ALT`键不要放开，再依次按下 `L` 和 `O`，Visual Studio Code 就会自动打开一个网页。
 
 这个网页便是我们刚刚编写的HelloWorld！
 
