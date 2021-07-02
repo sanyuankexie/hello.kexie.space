@@ -219,9 +219,9 @@ class Client {
         };
         this.ws.onclose = (e) => {
             console.error('ws closed', e);
-            this.reconnectTimer = setTimeout(() => {
-                this.open()
-            }, 3000)
+            // this.reconnectTimer = setTimeout(() => {
+            //     this.open()
+            // }, 3000)
         };
         this.ws.onmessage = (x) => this.onmessage?.(x);
     }
