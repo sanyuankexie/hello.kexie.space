@@ -5,7 +5,6 @@ import { Typography } from 'antd';
 
 import style from "./index.module.scss";
 
-import { Department } from '../../static/department';
 import { Logo } from '../../static/cos';
 
 const { Title } = Typography

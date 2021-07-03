@@ -9,10 +9,15 @@ interface IProps {
 }
 
 function Header({ title: content, author, published, icon }: IProps) {
+    console.log(content);
     return (
         <div className={css.headerContainer}>
             <h1 className={css.h1}>
-                <img src={icon} alt="" className={css.icon} />
+                <img
+                    src={icon}
+                    alt=""
+                    className={css.icon}
+                    style={content === "硬件开发" ? { background: "rgb(46, 36, 89)" } : {}} />
                 {content}
             </h1>
             <span className={css.author}>

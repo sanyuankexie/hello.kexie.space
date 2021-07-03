@@ -10,7 +10,7 @@ interface Department {
 const departmentsMap = {
     Multimedia: {
         shortName: 'MD',
-        fullName: "multimedia-department",
+        fullName: "MultimediaDepartment",
         logo: Logo.Multimedia,
         learningDirection: [
             "网站开发", "UI设计", "视频剪辑", "小程序"
@@ -19,7 +19,7 @@ const departmentsMap = {
 
     Software: {
         shortName: 'SD',
-        fullName: "software-depertment",
+        fullName: "SoftwareDepertment",
         logo: Logo.Software,
         learningDirection: [
             "游戏制作", "安卓开发", "机器学习"
@@ -28,7 +28,7 @@ const departmentsMap = {
 
     Hardware: {
         shortName: 'HD',
-        fullName: "hardware-department",
+        fullName: "HardwareDepartment",
         logo: Logo.Hardware,
         learningDirection: [
             "硬件开发"
@@ -37,7 +37,7 @@ const departmentsMap = {
 
     Organization: {
         shortName: 'OD',
-        fullName: "organization-department",
+        fullName: "OrganizationDepartment",
         logo: Logo.Organization,
         learningDirection: [
         ]
