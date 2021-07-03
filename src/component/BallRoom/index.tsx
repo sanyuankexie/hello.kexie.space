@@ -14,8 +14,8 @@ interface AtomUser {
 }
 
 interface DirtyMethod {
-    dispatch: (msg: string) => void
-    getBalls: () => Ball[]
+    dispatch: (msg: string) => void;
+    getBalls: () => Ball[];
 }
 
 interface Ball {
@@ -138,9 +138,7 @@ function BallRoom() {
 
     const inputEl = useRef<Input>(null!)
     const handleTriggerSendBtn = (e?: React.KeyboardEvent) => {
-        if (e) {
-            if (e.key !== 'Enter' || e.keyCode !== 13) return
-        }
+        if (!e || e.key !== 'Enter' || e.keyCode !== 13) return;
 
         const input = inputEl.current.input.value
         if (!input) return;
@@ -153,6 +151,8 @@ function BallRoom() {
         client.send(msg)
     }
 
+
+
     const DirtyMethodContainer = useRef<DirtyMethod>()
     DirtyMethodContainer.current = {
         dispatch,
@@ -160,19 +160,36 @@ function BallRoom() {
     }
 
     const client = useMemo<Client>(() => new Client(), []);
+    const [inputHidden, setInputHidden] = useState(true);
+
     useEffect(() => {
         //todo get user by token
         client.open();
-        client.onmessage = msg => DirtyMethodContainer.current?.dispatch(msg.data)
+        client.onmessage = msg => DirtyMethodContainer.current?.dispatch(msg.data);
 
-        return () => client.close();
+        let callTimes = 0;
+        const callInputShortCut = (e: KeyboardEvent) => {
+            if (!e || e.key !== 'm' || !(e.ctrlKey)) return;
+            setInputHidden((callTimes++) % 2 !== 0);
+        }
+
+        document.documentElement.addEventListener('keydown', callInputShortCut);
+
+        return () => {
+            client.close()
+            document.documentElement.removeEventListener('keydown', callInputShortCut);
+        };
     }, []);
 
     return balls ? (
         <div>
             {balls.map(self => self.element)}
 
-            <div className={style.inputContainer} onKeyDown={e => handleTriggerSendBtn(e)} style={{display: client.visitor ? "none": "block"}}>
+            <div
+                className={inputHidden ? `${style.inputContainer} ${style.inputContainerHidden}` : style.inputContainer}
+                onKeyDown={e => handleTriggerSendBtn(e)}
+                style={{ display: client.visitor ? "none" : "block" }}
+            >
                 <Input placeholder="想说的话都可以说呀啦啦啦啦啊啊啊" className={style.inputMsg} ref={inputEl} />
                 <Button type="primary" onClick={e => handleTriggerSendBtn()} className={style.btn}>发送</Button>
             </div>

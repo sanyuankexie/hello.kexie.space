@@ -11,6 +11,8 @@
     bottom: 0;
     transform: translate(-50%, -50%);
     padding: 9px;
+    transition: all 0.5s;
+    visibility: visible;
 
     .inputMsg {
         width: 250px !important;
@@ -30,4 +32,8 @@
             border-color: global.$light-cyan !important;
         }
     }
+}
+
+.inputContainerHidden {
+    transform: translate(-50%, 100%);
 }
