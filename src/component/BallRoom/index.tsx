@@ -151,8 +151,6 @@ function BallRoom() {
         client.send(msg)
     }
 
-
-
     const DirtyMethodContainer = useRef<DirtyMethod>()
     DirtyMethodContainer.current = {
         dispatch,

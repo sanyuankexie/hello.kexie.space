@@ -9,6 +9,7 @@ import Header from "./Header";
 import { Department } from "../../static/department"
 import MarkdownParser from '../../utils/markdown';
 import axios from 'axios';
+import { Logo } from '../../static/cos';
 
 interface IProps {
     location: any
@@ -20,13 +21,13 @@ function Article({ location, match }: IProps) {
     const [title, setTitle] = useState<string>("");
     const markdownElementsContainer = useRef<HTMLDivElement>(null);
 
-    const { params } = match
-    const department = params.target.split('#')[0]
-    const icon = Department.getByFullName(department).logo
+    const { params } = match;
+    const filename = params.target.split('#')[0];
+    let icon = Department.getByFullName(filename)?.logo;
+    !icon && (icon = Logo[filename as (keyof typeof Logo)] as any)
 
-    
     useEffect(() => {
-        axios.get(`/docs/introduction/${department}.md`)
+        axios.get(`/docs/introduction/${filename}.md`)
             .then((res) => {
                 let content = MarkdownParser.render(res.data)
                 const title = content.match(/<h1>(\S*)<\/h1>/)![1]
