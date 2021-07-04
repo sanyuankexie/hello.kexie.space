@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react"
 import { match } from "react-router-dom"
 import { History } from 'history'
 import axios from 'axios';
-import { Button, Result } from 'antd';
+import { Button, Result, Card } from 'antd';
 import { ResultStatusType } from "antd/lib/result";
 import welcomeStyle from '../Welcome/index.module.scss'
+import style from './index.module.scss';
 
 
 interface Props {
@@ -19,9 +20,6 @@ function GithubAuth({ location, history }: Props) {
         status: "info",
         subTitle: "请保持网络畅通，不要关闭此页面"
     });
-
-    const [msg, setMsg] = useState<string>(`正在请求授权`);
-    const [resultStatusType, setResultStatusType] = useState<ResultStatusType>('info');
 
     useEffect(() => {
         const githubAuth = async () => {
@@ -59,25 +57,32 @@ function GithubAuth({ location, history }: Props) {
 
     return (
         <>
-            <div style={{ position: "fixed", width: "100vw", height: "100vh", background: "black", textAlign: "center" }}>
-                <div style={{ left: "50%", top: "45%", width: "100vw", position: "absolute", transform: "translate(-50%,-50%)" }}>
+            <div className={style.container}>
+                <Card className={style.card}>
                     <Result
                         status={process.status as ResultStatusType}
                         title={
-                            <h2 style={{ color: "#FBF9F8" }}>{process.title}
+                            <h2>{process.title}
                             </h2>
                         }
-                        subTitle={<p style={{ color: "#FBF9F8" }}>{process.subTitle}</p>}
+                        subTitle={<p>{process.subTitle}</p>}
                         extra={[
-                            <Button type="primary" key="contact" className={welcomeStyle.btnFilled}>
+                            <Button
+                                type="primary"
+                                key="contact"
+                                className={welcomeStyle.btnFilled}
+                                loading={process.status === "info" ? true : false}>
                                 联系管理员
                             </Button>,
-                            <Button key="return" className={welcomeStyle.btnDefault}>
+                            <Button
+                                key="return"
+                                className={welcomeStyle.btnDefault}
+                                loading={process.status === "info" ? true : false}>
                                 返回主页
                             </Button>,
                         ]}
                     />
-                </div>
+                </Card>
             </div>
         </>
     )

@@ -1,0 +1,27 @@
+.container {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background: #fbf9f8;
+}
+
+.card {
+    left: 50%;
+    top: 45%;
+    width: 600px;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 100px 5px #eeeeee;
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        background: white !important;
+    }
+
+    .card {
+        box-shadow: 0 0 100px 5px white;
+        border: hidden !important;
+        width: 100%;
+    }
+}
