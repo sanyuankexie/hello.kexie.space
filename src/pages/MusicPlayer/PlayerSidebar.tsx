@@ -28,8 +28,10 @@ function PlayingSideBar() {
         const loadingMusic = async () => {
             const res = await MusicAPI.getMusicAudioAndLyric(selected.id);
             audioRef.current.src = res.audio;
-            // audioRef.current.play();
+
             dispatch({ type: "setLyrics", lyrics: parseLyric(res.lyric) })
+
+            // keep changing the progress bar(pass) and currentTime
             interval = setInterval(() => {
                 const { currentTime, duration } = audioRef.current;
                 dispatch({ type: "setCurrentTime", currentTime });
@@ -43,11 +45,6 @@ function PlayingSideBar() {
             clearInterval(interval);
         }
     }, [selected]);
-
-    function handleOnClickMusicItem(music: any) {
-        if (selected.name === music.name) return;
-        client.send({ type: "switch music", data: { musicId: music.id }, userName: client.name });
-    }
 
     const client = useSelector(({ clientReducer }: AppReducer) => clientReducer.client);
 
@@ -63,12 +60,16 @@ function PlayingSideBar() {
             const { data, userName } = JSON.parse(msg) as MsgAPI;
             const { musicId, playTimestamp } = data;
 
+            // initializate data
             musicPlayTime = playTimestamp;
             totalDiffServerTime = 0;
             averageDiffServerTime = 0;
             syncTimes = 0;
+
+            // notify the component to load th song information
             dispatch({ type: "setSelected", selected: RecommendMusics.find(x => x.id === musicId)! });
 
+            // let the music load but not play
             audioRef.current?.play();
             setTimeout(()=>{
                 !audioRef.current.paused && audioRef.current.pause();
@@ -76,15 +77,18 @@ function PlayingSideBar() {
 
         })
 
+        // when a user switch later
+        // keep calling this function
         client.addFuncListener('sync server time', (msg) => {
             const { data } = (JSON.parse(msg) as MsgAPI);
             const nowServerTimestamp = data.serverTimestamp;
             const clientTimestamp = new Date().getTime();
+
+            // calculate the latency with server
             totalDiffServerTime = totalDiffServerTime + clientTimestamp - nowServerTimestamp;
             syncTimes++;
             averageDiffServerTime = totalDiffServerTime / (1.0 * syncTimes);
             
-
             if (listeningTimer === undefined && audioRef.current.paused) {
                 listeningTimer = setInterval(() => {
                     const clientTimestamp = new Date().getTime();
@@ -105,6 +109,11 @@ function PlayingSideBar() {
     const [isHidden, setIsHidden] = useState(false);
     function handleOnClickH() {
         setIsHidden(!isHidden);
+    }
+
+    function handleOnClickMusicItem(music: any) {
+        if (selected.name === music.name) return;
+        client.send({ type: "switch music", data: { musicId: music.id }, userName: client.name });
     }
 
     return (
