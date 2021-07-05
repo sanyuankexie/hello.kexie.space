@@ -11,7 +11,7 @@ import style from './index.module.scss'
 import { useSelector } from 'react-redux';
 import { action, MusicPlayerState } from "../../store/MusicPlayerReducer";
 import { useDispatch } from 'react-redux';
-import { AppReducer } from "../../store/appReducer";
+import { AppReducer } from "../../store/AppReducer";
 
 function PlayerControl() {
     const playerStatus = useSelector(({ musicPlayerReducer }: AppReducer) => musicPlayerReducer.playerStatus);

@@ -5,7 +5,7 @@ import PlayingSideBar from "./PlayerSidebar";
 import style from "./index.module.scss";
 import { useSelector } from "react-redux";
 import defaultBackground from '../../assets/images/music/dahai.png';
-import { AppReducer } from "../../store/appReducer";
+import { AppReducer } from "../../store/AppReducer";
 
 function PlayerContainer() {
     const selected = useSelector(({ musicPlayerReducer }: AppReducer) => musicPlayerReducer.selected);

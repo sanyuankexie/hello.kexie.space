@@ -10,7 +10,7 @@ import GithubAuth from './pages/GithubAuth';
 import MusicPlayer from './pages/MusicPlayer';
 import { Provider } from 'react-redux';
 import { createStore } from "redux";
-import appReducer from './store/appReducer';
+import appReducer from './store/AppReducer';
 
 const store = createStore(appReducer);
 
