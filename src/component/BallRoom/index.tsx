@@ -47,14 +47,14 @@ function BallRoom() {
         const nowBalls = DirtyMethodContainer.current?.getBalls()!;
         switch (type) {
             case "hello":
-                client.send({ type: "rename", userName: client.name, data: { avatar: client.avatar, visitor: client.visitor } })
-                client.send({ type: "stand up", userName: client.name })
+                client.send({ type: "rename", userName: client.name, data: { avatar: client.avatar, visitor: client.visitor } });
+                client.send({ type: "stand up", userName: client.name });
                 break;
 
             case "stand up":
                 initializeBalls(
                     data.map((x: any) => {
-                        return ({ ...x, name: x.userName })
+                        return ({ ...x, name: x.userName });
                     })
                 )
                 break;
@@ -62,7 +62,7 @@ function BallRoom() {
             case "talk":
                 nowBalls.forEach((ball: Ball) => {
                     if (ball.userName === userName) {
-                        ball.ballRef!.displayMsg(data)
+                        ball.ballRef!.displayMsg(data);
                     }
                 });
                 break;
@@ -74,12 +74,12 @@ function BallRoom() {
                     avatar: data.avatar,
                     visitor: data.visitor
                 }
-                setBalls([...nowBalls, createBall(atomUser)])
+                setBalls([...nowBalls, createBall(atomUser)]);
                 break;
 
             case "leave":
                 setBalls(nowBalls.filter(self => {
-                    return self.userName != userName
+                    return self.userName != userName;
                 }))
                 break;
 
@@ -87,12 +87,11 @@ function BallRoom() {
                 break;
 
             case "move":
-                const { x, y }: Position = data
-                if (userName === client.name) return
-
+                const { x, y }: Position = data;
+                if (userName === client.name) return;
                 nowBalls.forEach((ball: Ball) => {
                     if (ball.userName === userName) {
-                        ball.floatRef!.moveTo(x, y)
+                        ball.floatRef!.moveTo(x, y);
                     }
                 })
                 break;
@@ -104,7 +103,7 @@ function BallRoom() {
 
     const [balls, setBalls] = useState<Ball[]>([]);
     const initializeBalls = (data: Array<AtomUser>) => {
-        setBalls(data.map(atomUser => createBall(atomUser)))
+        setBalls(data.map(atomUser => createBall(atomUser)));
     }
 
     const createBall = (atomUser: AtomUser): Ball => {
@@ -112,21 +111,21 @@ function BallRoom() {
         const floatRef = (ref: Float) => {
             DirtyMethodContainer.current!.getBalls().forEach((ball: Ball) => {
                 if (ball.userName === atomUser.name) {
-                    ball.floatRef = ref
+                    ball.floatRef = ref;
                 }
             })
         }
         const ballRef = (ref: Ball['ballRef']) => {
             DirtyMethodContainer.current!.getBalls().forEach((ball: Ball) => {
                 if (ball.userName === atomUser.name) {
-                    ball.ballRef = ref
+                    ball.ballRef = ref;
                 }
             })
         }
         const onmoving = throttle((position: Position) => {
             if (client.name === atomUser.name) {
-                const res = { type: "move", data: position, userName: atomUser.name }
-                client.send(res)
+                const res = { type: "move", data: position, userName: atomUser.name };
+                client.send(res);
             }
         }, 16);
         const element = (
@@ -147,15 +146,15 @@ function BallRoom() {
                 />
             </Float>
         )
-        const res: Ball = { userName: atomUser.name, element }
-        return res
+        const res: Ball = { userName: atomUser.name, element };
+        return res;
     }
 
-    const inputEl = useRef<Input>(null!)
+    const inputEl = useRef<Input>(null!);
     const handleTriggerSendBtn = (e?: React.KeyboardEvent) => {
         if (!e || e.key !== 'Enter' || e.keyCode !== 13) return;
 
-        const input = inputEl.current.input.value
+        const input = inputEl.current.input.value;
         if (!input) return;
 
         const msg: MsgAPI = {
@@ -163,10 +162,10 @@ function BallRoom() {
             data: input,
             userName: client.name!
         }
-        client.send(msg)
+        client.send(msg);
     }
 
-    const DirtyMethodContainer = useRef<DirtyMethod>()
+    const DirtyMethodContainer = useRef<DirtyMethod>();
     DirtyMethodContainer.current = {
         handleServerResponse: handleServerResponse,
         getBalls: () => balls

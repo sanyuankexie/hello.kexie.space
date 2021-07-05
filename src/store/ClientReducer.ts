@@ -82,22 +82,26 @@ export class Client {
         }
     }
 
-    funcListener: FuncListener[] = [];
+    funcListeners: FuncListener[] = [];
     addFuncListener(name: string, func: ((msg: string) => void)) {
-        this.funcListener.filter(x => name !== x.name);
-        this.funcListener.push({ name, func: (func as any) });
+        this.funcListeners.filter(x => name !== x.name);
+        this.funcListeners.push({ name, func: (func as any) });
+    }
+
+    removeFuncListener(name: string) {
+        this.funcListeners.filter(x => x.name !== name);
     }
 
     handleMessage({ data: msg }: MessageEvent<any>) {
         const { type, data, userName } = JSON.parse(msg) as MsgAPI;
         if (MsgType.BallRoom.find((x) => x === type)) {
-            this.funcListener.forEach(x => {
+            this.funcListeners.forEach(x => {
                 if (x.name === "ball room") {
                     x.func(msg);
                 }
             })
         } else {
-            this.funcListener.forEach(x => {
+            this.funcListeners.forEach(x => {
                 if (x.name === type) x.func(msg);
             })
         }
