@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { action, MusicPlayerState, parseLyric, RecommendMusics } from "../../store/MusicPlayerReducer";
 import { MusicAPI } from "../../api";
 import { AppReducer } from "../../store/AppReducer";
+import { MsgAPI } from "../../store/ClientReducer";
 
 const musics = RecommendMusics;
 
@@ -27,8 +28,7 @@ function PlayingSideBar() {
         const loadingMusic = async () => {
             const res = await MusicAPI.getMusicAudioAndLyric(selected.id);
             audioRef.current.src = res.audio;
-            audioRef.current.play();
-
+            // audioRef.current.play();
             dispatch({ type: "setLyrics", lyrics: parseLyric(res.lyric) })
             interval = setInterval(() => {
                 const { currentTime, duration } = audioRef.current;
@@ -46,8 +46,61 @@ function PlayingSideBar() {
 
     function handleOnClickMusicItem(music: any) {
         if (selected.name === music.name) return;
-        dispatch({ type: "setSelected", selected: music });
+        client.send({ type: "switch music", data: { musicId: music.id }, userName: client.name });
     }
+
+    const client = useSelector(({ clientReducer }: AppReducer) => clientReducer.client);
+
+    useEffect(() => {
+        let totalDiffServerTime = 0;
+        let averageDiffServerTime = 0;
+        let syncTimes = 0;
+        let musicPlayTime = 0;
+        let listeningTimer: any = undefined;
+
+        client.addFuncListener('switch music', (msg) => {
+            console.log(msg);
+            const { data, userName } = JSON.parse(msg) as MsgAPI;
+            const { musicId, playTimestamp } = data;
+
+            musicPlayTime = playTimestamp;
+            totalDiffServerTime = 0;
+            averageDiffServerTime = 0;
+            syncTimes = 0;
+            dispatch({ type: "setSelected", selected: RecommendMusics.find(x => x.id === musicId)! });
+
+            audioRef.current?.play();
+            setTimeout(()=>{
+                !audioRef.current.paused && audioRef.current.pause();
+            }, 10);
+
+        })
+
+        client.addFuncListener('sync server time', (msg) => {
+            const { data } = (JSON.parse(msg) as MsgAPI);
+            const nowServerTimestamp = data.serverTimestamp;
+            const clientTimestamp = new Date().getTime();
+            totalDiffServerTime = totalDiffServerTime + clientTimestamp - nowServerTimestamp;
+            syncTimes++;
+            averageDiffServerTime = totalDiffServerTime / (1.0 * syncTimes);
+            
+
+            if (listeningTimer === undefined && audioRef.current.paused) {
+                listeningTimer = setInterval(() => {
+                    const clientTimestamp = new Date().getTime();
+                    if (Math.abs(clientTimestamp - averageDiffServerTime - musicPlayTime) <= 10) {
+                        if (audioRef.current.paused) {
+                            console.log('start')
+                            audioRef.current.play();
+                            clearInterval(listeningTimer);
+                            listeningTimer = undefined;
+                        }
+                    }
+                    console.log(averageDiffServerTime), 'test.........';
+                }, 1);
+            }
+        })
+    }, []);
 
     const [isHidden, setIsHidden] = useState(false);
     function handleOnClickH() {
@@ -78,7 +131,7 @@ function PlayingSideBar() {
                     );
                 })}
 
-                <audio ref={audioRef}></audio>
+                <audio ref={audioRef} autoPlay={false}></audio>
 
             </div>
         </>

@@ -7,12 +7,12 @@ export const RecommendMusics = [
         singer: "黄霄雲",
         poster: "https://p2.music.126.net/eRSdB2vIoBHJV7-0Ga3i6g==/109951165641911293.jpg",
     },
-    // {
-    //     id: "35625821",
-    //     name: "记念",
-    //     singer: "雷雨心",
-    //     poster: "http://p2.music.126.net/W_srVOtG_DKS1-txPLqNQQ==/3273246117001205.jpg",
-    // },
+    {
+        id: "65847",
+        name: "单车(Live)",
+        singer: "陈奕迅",
+        poster: "http://p2.music.126.net/W_srVOtG_DKS1-txPLqNQQ==/3273246117001205.jpg",
+    },
     {
         id: "1849953578",
         name: "Fluorite Eye's Song",

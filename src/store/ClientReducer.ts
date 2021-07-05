@@ -52,7 +52,7 @@ export class Client {
 
 
         // this.ws = new WebSocket("wss://kexie.therainisme.com/connect")
-        this.ws = new WebSocket("ws://localhost:5201/connect")
+        this.ws = new WebSocket("ws://10.33.39.225:5201/connect")
         this.ws.onerror = (e) => {
             console.error('ws error', e);
         };
@@ -90,7 +90,6 @@ export class Client {
 
     handleMessage({ data: msg }: MessageEvent<any>) {
         const { type, data, userName } = JSON.parse(msg) as MsgAPI;
-
         if (MsgType.BallRoom.find((x) => x === type)) {
             this.funcListener.forEach(x => {
                 if (x.name === "ball room") {

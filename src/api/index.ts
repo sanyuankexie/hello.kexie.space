@@ -28,7 +28,7 @@ export class MusicAPI {
     }
 
     static async getMusicAudioAndLyric(id: string) {
-        const clientIp = getCliendIp();
+        // const clientIp = getCliendIp();
         // const res1 = await axios.get(`${this.BaseUrl}/song/url?id=${id}&realIP=${clientIp}`);
         const audio = `https://music.163.com/song/media/outer/url?id=${id}.mp3`;
         const res2 = await axios.get(`${this.BaseUrl}/lyric?id=${id}`);
