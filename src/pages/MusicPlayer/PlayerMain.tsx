@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import style from './index.module.scss'
 import { useSelector } from 'react-redux';
-import { ReduxState } from "../../store/appReducer";
+import { AppReducer } from "../../store/appReducer";
 
 function PlayingMain() {
-    const currentTime = useSelector(({ musicPlayerReducer }: ReduxState) => musicPlayerReducer.currentTime);
-    const selected = useSelector(({ musicPlayerReducer }: ReduxState) => musicPlayerReducer.selected);
-    const lyrics: any[] = useSelector(({ musicPlayerReducer }: ReduxState) => musicPlayerReducer.lyrics);
+    const currentTime = useSelector(({ musicPlayerReducer }: AppReducer) => musicPlayerReducer.currentTime);
+    const selected = useSelector(({ musicPlayerReducer }: AppReducer) => musicPlayerReducer.selected);
+    const lyrics: any[] = useSelector(({ musicPlayerReducer }: AppReducer) => musicPlayerReducer.lyrics);
 
     let [scrollTop, setScrollTop] = useState(250);
 

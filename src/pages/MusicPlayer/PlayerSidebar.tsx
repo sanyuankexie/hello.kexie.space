@@ -4,12 +4,12 @@ import welcomeStyle from '../Welcome/index.module.scss'
 import { useDispatch, useSelector } from 'react-redux';
 import { action, MusicPlayerState, parseLyric, RecommendMusics } from "../../store/MusicPlayerReducer";
 import { MusicAPI } from "../../api";
-import { ReduxState } from "../../store/appReducer";
+import { AppReducer } from "../../store/appReducer";
 
 const musics = RecommendMusics;
 
 function PlayingSideBar() {
-    const selected = useSelector(({ musicPlayerReducer }: ReduxState) => musicPlayerReducer.selected);
+    const selected = useSelector(({ musicPlayerReducer }: AppReducer) => musicPlayerReducer.selected);
     const audioRef = useRef<HTMLAudioElement>(null!);
 
     const dispatch = useDispatch<Dispatch<action>>();

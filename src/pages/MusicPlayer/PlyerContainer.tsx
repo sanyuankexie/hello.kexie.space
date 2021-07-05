@@ -5,11 +5,11 @@ import PlayingSideBar from "./PlayerSidebar";
 import style from "./index.module.scss";
 import { useSelector } from "react-redux";
 import defaultBackground from '../../assets/images/music/dahai.png';
-import { ReduxState } from "../../store/appReducer";
+import { AppReducer } from "../../store/appReducer";
 
 function PlayerContainer() {
-    const selected = useSelector(({ musicPlayerReducer }: ReduxState) => musicPlayerReducer.selected);
-    const waiting = useSelector(({ musicPlayerReducer }: ReduxState) => musicPlayerReducer.waiting);
+    const selected = useSelector(({ musicPlayerReducer }: AppReducer) => musicPlayerReducer.selected);
+    const waiting = useSelector(({ musicPlayerReducer }: AppReducer) => musicPlayerReducer.waiting);
 
     const [poster, setPoster] = useState(defaultBackground);
 
