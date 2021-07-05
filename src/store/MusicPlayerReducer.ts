@@ -59,15 +59,15 @@ export type action =
     { type: "setCurrentTime", currentTime: number } |
     { type: "setWaiting", waiting: number};
 
-export function reducer(state: MusicPlayerState = init, action: action) {
+export function musicPlayerReducer(state: MusicPlayerState = init, action: action) {
     const newState = { ...state } as any;
     let key = action.type.substring(3);
     key = key.charAt(0).toLowerCase() + key.slice(1);
     newState[key] = (action as any)[key];
-    return newState;
+    return newState as MusicPlayerState;
 }
 
-export default reducer;
+export default musicPlayerReducer;
 
 const init = {
     pass: 0,

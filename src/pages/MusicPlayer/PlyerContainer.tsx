@@ -4,12 +4,12 @@ import PlayerPanel from "./PlayerPanel";
 import PlayingSideBar from "./PlayerSidebar";
 import style from "./index.module.scss";
 import { useSelector } from "react-redux";
-import { MusicPlayerState } from "./store";
 import defaultBackground from '../../assets/images/music/dahai.png';
+import { ReduxState } from "../../store/appReducer";
 
 function PlayerContainer() {
-    const selected = useSelector((state: MusicPlayerState) => state.selected);
-    const waiting = useSelector((state: MusicPlayerState) => state.waiting);
+    const selected = useSelector(({ musicPlayerReducer }: ReduxState) => musicPlayerReducer.selected);
+    const waiting = useSelector(({ musicPlayerReducer }: ReduxState) => musicPlayerReducer.waiting);
 
     const [poster, setPoster] = useState(defaultBackground);
 

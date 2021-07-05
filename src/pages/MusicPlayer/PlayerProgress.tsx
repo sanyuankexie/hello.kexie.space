@@ -2,11 +2,12 @@ import React, { Dispatch } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import style from './index.module.scss'
-import { action, MusicPlayerState } from "./store";
+import { action } from "../../store/MusicPlayerReducer";
+import { ReduxState } from "../../store/appReducer";
 
 function PlayerProgress() {
-    const pass = useSelector((state: MusicPlayerState) => state.pass);
-    const audioRef = useSelector((state: MusicPlayerState) => state.audioRef);
+    const pass = useSelector(({ musicPlayerReducer }: ReduxState) => musicPlayerReducer.pass);
+    const audioRef = useSelector(({ musicPlayerReducer }: ReduxState) => musicPlayerReducer.audioRef);
     const dispatch = useDispatch<Dispatch<action>>();
 
     function handleOnProgress(e: React.MouseEvent) {

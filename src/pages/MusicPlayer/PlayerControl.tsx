@@ -9,17 +9,18 @@ import {
 } from '@ant-design/icons';
 import style from './index.module.scss'
 import { useSelector } from 'react-redux';
-import { action, MusicPlayerState } from "./store";
+import { action, MusicPlayerState } from "../../store/MusicPlayerReducer";
 import { useDispatch } from 'react-redux';
+import { AppReducer } from "../../store/appReducer";
 
 function PlayerControl() {
-    const playerStatus = useSelector((state: MusicPlayerState) => state.playerStatus);
-    const audioRef = useSelector((state: MusicPlayerState) => state.audioRef);
-    const selected = useSelector((state: MusicPlayerState) => state.selected);
+    const playerStatus = useSelector(({ musicPlayerReducer }: AppReducer) => musicPlayerReducer.playerStatus);
+    const audioRef = useSelector(({ musicPlayerReducer }: AppReducer) => musicPlayerReducer.audioRef);
+    const selected = useSelector(({ musicPlayerReducer }: AppReducer) => musicPlayerReducer.selected);
     const dispatch = useDispatch<Dispatch<action>>();
 
     useEffect(() => {
-        dispatch({type: "setPlayerStatus", playerStatus: "playing"});
+        dispatch({ type: "setPlayerStatus", playerStatus: "playing" });
     }, [selected]);
 
     function handleOnMode() {

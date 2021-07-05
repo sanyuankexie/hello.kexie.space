@@ -1,11 +1,12 @@
 import React, { Dispatch, useEffect } from "react";
 import style from './index.module.scss'
 import { useSelector } from 'react-redux';
-import { action, MusicPlayerState } from "./store";
+import { action, MusicPlayerState } from "../../store/MusicPlayerReducer";
 import { useDispatch } from 'react-redux';
+import { ReduxState } from "../../store/appReducer";
 
 function PlayingMusicInfo() {
-    const selected = useSelector((state: MusicPlayerState) => state.selected);
+    const selected = useSelector(({ musicPlayerReducer }: ReduxState) => musicPlayerReducer.selected);
     const dispatch = useDispatch<Dispatch<action>>();
 
 
