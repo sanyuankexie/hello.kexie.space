@@ -3,7 +3,7 @@ import style from './index.module.scss'
 import { useSelector } from 'react-redux';
 import { action, MusicPlayerState } from "../../store/MusicPlayerReducer";
 import { useDispatch } from 'react-redux';
-import { AppReducer } from "../../store/AppReducer";
+import { AppReducer } from "../../store/AReducer";
 
 function PlayingMusicInfo() {
     const selected = useSelector(({ musicPlayerReducer }: AppReducer) => musicPlayerReducer.selected);

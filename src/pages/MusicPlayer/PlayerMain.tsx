@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import style from './index.module.scss'
 import { useSelector } from 'react-redux';
-import { AppReducer } from "../../store/AppReducer";
+import { AppReducer } from "../../store/AReducer";
 
 function PlayingMain() {
     const currentTime = useSelector(({ musicPlayerReducer }: AppReducer) => musicPlayerReducer.currentTime);

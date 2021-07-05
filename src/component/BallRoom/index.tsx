@@ -6,8 +6,8 @@ import { throttle } from "../../utils";
 
 import style from './index.module.scss'
 import { useSelector } from 'react-redux';
-import { AppReducer } from './../../store/AppReducer';
 import { Client } from "../../store/ClientReducer";
+import { AppReducer } from "../../store/AReducer";
 
 interface AtomUser {
     name: string;

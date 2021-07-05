@@ -11,7 +11,7 @@ import style from './index.module.scss'
 import { useSelector } from 'react-redux';
 import { action, MusicPlayerState, RecommendMusics } from "../../store/MusicPlayerReducer";
 import { useDispatch } from 'react-redux';
-import { AppReducer } from './../../store/AppReducer';
+import { AppReducer } from '../../store/AReducer';
 import { MsgAPI } from "../../store/ClientReducer";
 
 function PlayerControl() {

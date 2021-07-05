@@ -4,7 +4,7 @@ import welcomeStyle from '../Welcome/index.module.scss'
 import { useDispatch, useSelector } from 'react-redux';
 import { action, MusicPlayerState, parseLyric, RecommendMusics } from "../../store/MusicPlayerReducer";
 import { MusicAPI } from "../../api";
-import { AppReducer } from "../../store/AppReducer";
+import { AppReducer } from "../../store/AReducer";
 import { MsgAPI } from "../../store/ClientReducer";
 
 const musics = RecommendMusics;

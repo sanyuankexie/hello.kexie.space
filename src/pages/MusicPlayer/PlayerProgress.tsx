@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import style from './index.module.scss'
 import { action } from "../../store/MusicPlayerReducer";
-import { AppReducer } from "../../store/AppReducer";
+import { AppReducer } from "../../store/AReducer";
 
 function PlayerProgress() {
     const pass = useSelector(({ musicPlayerReducer }: AppReducer) => musicPlayerReducer.pass);
