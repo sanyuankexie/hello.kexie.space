@@ -1,3 +1,5 @@
+import { DirtyMethod } from "../component/BallRoom";
+
 export type action =
     { type: "setClient", pass: number };
 
@@ -10,6 +12,11 @@ export function clientReducer(state = init, action: action) {
 }
 
 export default clientReducer;
+
+const MsgType = {
+    BallRoom: ["hello", "stand up", "talk", "enter", "leave", "rename", "move"],
+    MusicPlayer: ["switch music"]
+}
 
 export class Client {
     name?: string
@@ -44,7 +51,8 @@ export class Client {
         }
 
 
-        this.ws = new WebSocket("wss://kexie.therainisme.com/connect")
+        // this.ws = new WebSocket("wss://kexie.therainisme.com/connect")
+        this.ws = new WebSocket("ws://localhost:5201/connect")
         this.ws.onerror = (e) => {
             console.error('ws error', e);
         };
@@ -54,7 +62,7 @@ export class Client {
             //     this.open()
             // }, 3000)
         };
-        this.ws.onmessage = (x) => this.onmessage?.(x);
+        this.ws.onmessage = (x) => this.handleMessage(x);
     }
 
     send(data: any) {
@@ -73,6 +81,36 @@ export class Client {
             console.error('ws closing error', error);
         }
     }
+
+    funcListener: FuncListener[] = [];
+    addFuncListener(name: string, func: ((msg: string) => void)) {
+        this.funcListener.filter(x => name !== x.name);
+        this.funcListener.push({ name, func: (func as any) });
+    }
+
+    handleMessage({ data: msg }: MessageEvent<any>) {
+        const { type, data, userName } = JSON.parse(msg) as MsgAPI;
+
+        if (MsgType.BallRoom.find((x) => x === type)) {
+            this.funcListener.forEach(x => {
+                if (x.name === "ball room") {
+                    x.func(msg);
+                }
+            })
+        } else {
+            this.funcListener.forEach(x => {
+                if (x.name === type) x.func(msg);
+            })
+        }
+    }
+}
+
+export type FuncListener = { name: string, func: (msg: string) => void };
+
+export interface MsgAPI {
+    type: string
+    data: any
+    userName: string
 }
 
 export type ClientState = typeof init;

@@ -27,8 +27,8 @@ interface MsgAPI {
     userName: string
 }
 
-interface DirtyMethod {
-    dispatch: (msg: string) => void;
+export interface DirtyMethod {
+    handleServerResponse: (msg: string) => void;
     getBalls: () => Ball[];
 }
 
@@ -42,8 +42,9 @@ interface Ball {
 }
 
 function BallRoom() {
-    const dispatch = (msg: string) => {
-        const { type, data, userName } = JSON.parse(msg) as MsgAPI
+    const handleServerResponse = (msg: string) => {
+        const { type, data, userName } = JSON.parse(msg) as MsgAPI;
+        const nowBalls = DirtyMethodContainer.current?.getBalls()!;
         switch (type) {
             case "hello":
                 client.send({ type: "rename", userName: client.name, data: { avatar: client.avatar, visitor: client.visitor } })
@@ -59,7 +60,7 @@ function BallRoom() {
                 break;
 
             case "talk":
-                balls.forEach((ball: Ball) => {
+                nowBalls.forEach((ball: Ball) => {
                     if (ball.userName === userName) {
                         ball.ballRef!.displayMsg(data)
                     }
@@ -73,11 +74,11 @@ function BallRoom() {
                     avatar: data.avatar,
                     visitor: data.visitor
                 }
-                setBalls([...balls, createBall(atomUser)])
+                setBalls([...nowBalls, createBall(atomUser)])
                 break;
 
             case "leave":
-                setBalls(balls.filter(self => {
+                setBalls(nowBalls.filter(self => {
                     return self.userName != userName
                 }))
                 break;
@@ -89,7 +90,7 @@ function BallRoom() {
                 const { x, y }: Position = data
                 if (userName === client.name) return
 
-                balls.forEach((ball: Ball) => {
+                nowBalls.forEach((ball: Ball) => {
                     if (ball.userName === userName) {
                         ball.floatRef!.moveTo(x, y)
                     }
@@ -167,7 +168,7 @@ function BallRoom() {
 
     const DirtyMethodContainer = useRef<DirtyMethod>()
     DirtyMethodContainer.current = {
-        dispatch,
+        handleServerResponse: handleServerResponse,
         getBalls: () => balls
     }
 
@@ -178,7 +179,7 @@ function BallRoom() {
     useEffect(() => {
         //todo get user by token
         client.open();
-        client.onmessage = msg => DirtyMethodContainer.current?.dispatch(msg.data);
+        client.addFuncListener('ball room', DirtyMethodContainer.current?.handleServerResponse!);
 
         let callTimes = 0;
         const callInputShortCut = (e: KeyboardEvent) => {

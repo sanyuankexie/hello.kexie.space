@@ -11,16 +11,20 @@ import style from './index.module.scss'
 import { useSelector } from 'react-redux';
 import { action, MusicPlayerState } from "../../store/MusicPlayerReducer";
 import { useDispatch } from 'react-redux';
-import { AppReducer } from "../../store/AppReducer";
+import { AppReducer } from './../../store/AppReducer';
 
 function PlayerControl() {
     const playerStatus = useSelector(({ musicPlayerReducer }: AppReducer) => musicPlayerReducer.playerStatus);
     const audioRef = useSelector(({ musicPlayerReducer }: AppReducer) => musicPlayerReducer.audioRef);
     const selected = useSelector(({ musicPlayerReducer }: AppReducer) => musicPlayerReducer.selected);
+
+    const client = useSelector(({ clientReducer }: AppReducer) => clientReducer.client);
+
     const dispatch = useDispatch<Dispatch<action>>();
 
     useEffect(() => {
         dispatch({ type: "setPlayerStatus", playerStatus: "playing" });
+
     }, [selected]);
 
     function handleOnMode() {
