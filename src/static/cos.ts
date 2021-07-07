@@ -1,4 +1,4 @@
-const BaseUrl = 'https://corona-images2.obs.cn-north-4.myhuaweicloud.com'
+const BaseUrl = 'https://hello-kexie.obs.ap-southeast-1.myhuaweicloud.com'
 
 export default BaseUrl
 
