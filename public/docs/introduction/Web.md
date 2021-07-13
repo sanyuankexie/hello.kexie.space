@@ -95,28 +95,28 @@
 
 恭喜你，你已经入门Web开发了！
 
-### 学习线路
+## 学习线路
 
 ![](https://hello-kexie.obs.ap-southeast-1.myhuaweicloud.com/docs/introduction/image/md/web/frontend-roadmap.png)
 
-### 相关赛事
+## 相关赛事
 
-你可以参加的较为知名的比赛有（排名不分先后）：
+你可以参加的较为知名的比赛有（排名不分先后）
 
-* 中国高校计算机大赛-人工智能创意赛（aicontest.baidu.com）
-* 中国高校计算机大赛-网络技术挑战赛（net.c4best.cn）
-* 全国大学生服务外包创新创业大赛（fwwb.org.cn）
-* 中国软件杯大学生软件设计大赛（www.cnsoftbei.com）
-* 互联网+大学生创新创业大赛（cy.ncss.cn）
-* 挑战杯全国大学生课外学术科技作品竞赛和创业计划大赛（tiaozhanbei.net）
-* 全国大学生嵌入式芯片与系统设计大赛（www.socchina.net）
-* 全国大学生物联网设计竞赛（iot.sjtu.edu.cn）
-* 蓝桥杯全国软件和信息技术专业人才大赛（dasai.lanqiao.cn）
+* [中国高校计算机大赛-人工智能创意赛](http://aicontest.baidu.com)
+* [中国高校计算机大赛-网络技术挑战赛](http://net.c4best.cn)
+* [全国大学生服务外包创新创业大赛](http://fwwb.org.cn)
+* [中国软件杯大学生软件设计大赛](http://www.cnsoftbei.com)
+* [互联网+大学生创新创业大赛](http://cy.ncss.cn)
+* [挑战杯全国大学生课外学术科技作品竞赛和创业计划大赛](http://tiaozhanbei.net)
+* [全国大学生嵌入式芯片与系统设计大赛](http://www.socchina.net)
+* [全国大学生物联网设计竞赛](http://iot.sjtu.edu.cn)
+* [蓝桥杯全国软件和信息技术专业人才大赛](http://dasai.lanqiao.cn)
 
-### 推荐资料
+## 推荐资料
 
-* 黑马程序员pink老师前端入门教程（ www.bilibili.com/video/BV14J4114768 ）
-* 零基础入门学习Web开发——小甲鱼（ www.bilibili.com/video/BV1QW411N762 ）
-* JavaScript高级程序设计（ product.dangdang.com/29120617.html ）
-* 通过JavaScript学会种菜（ vf.therainisme.com ）
-* 学习Web垫书脚（ cp.therainisme.com ）
+* [黑马程序员pink老师前端入门教程](http://www.bilibili.com/video/BV14J4114768 )
+* [零基础入门学习Web开发——小甲鱼](http://www.bilibili.com/video/BV1QW411N762 )
+* [JavaScript高级程序设计](http://product.dangdang.com/29120617.html )
+* [通过JavaScript学会种菜](http://vf.therainisme.com )
+* [学习Web垫书脚](http://cp.therainisme.com )
