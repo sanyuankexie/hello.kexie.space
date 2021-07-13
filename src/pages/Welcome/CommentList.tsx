@@ -5,7 +5,7 @@ import axios from 'axios';
 import moment from 'moment';
 import MarkdownParser from '../../utils/markdown';
 import { CommentAPI } from '../../api';
-import style from './index.module.scss'
+import style from './css/index.module.scss'
 import UserCard from '../../component/UserCard';
 
 const { Title } = Typography

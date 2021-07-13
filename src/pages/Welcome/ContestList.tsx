@@ -1,6 +1,6 @@
 import React from 'react';
 import { Table, Tag } from 'antd';
-import style from "./index.module.scss";
+import style from "./css/index.module.scss";
 
 function ContestList() {
     return (

@@ -3,7 +3,7 @@ import { Button } from 'antd';
 import { GithubOutlined, CodeFilled } from '@ant-design/icons';
 import { NavLink } from 'react-router-dom'
 import { Typography } from 'antd';
-import style from './index.module.scss'
+import style from './css/index.module.scss'
 
 import Section from "../../component/Section";
 import CommentList from "./CommentList";
@@ -11,9 +11,10 @@ import ProjectList from "./ProjectList";
 import LearningDirectionList from "./LearningDirectionList";
 import Timeline from './Timeline';
 
-import { departmentShortNameMap } from '../../static/department';
+import { Department, departmentShortNameMap } from '../../static/department';
 import { Logo } from '../../static/cos';
 import ContestList from './ContestList';
+import Departments from './Departments';
 
 const { Title } = Typography;
 
@@ -44,13 +45,14 @@ function Welcome() {
 
             <Section title="四大部门" description="科协有四大部门，不同的部门下有不同的学习方向">
                 <div className={style.sectionContainer}>
-                    {Object.values(departmentShortNameMap).map(x => (
+                    {/* {Object.values(departmentShortNameMap).map(x => (
                         <div className={style.department} key={x.fullName}>
                             <NavLink to={{ pathname: `/introduction/${x.fullName}`, state: { icon: x.logo } }}>
                                 <img src={x.logo} className={style.imgScale} width={250} alt="" />
                             </NavLink>
                         </div>
-                    ))}
+                    ))} */}
+                    <Departments/>
                 </div>
             </Section>
 
@@ -62,13 +64,13 @@ function Welcome() {
 
             <Section title="招新时间线">
                 <div className={style.sectionContainer}>
-                    <Timeline/>
+                    <Timeline />
                 </div>
             </Section>
 
             <Section title="近年参赛获奖" description="很多，还在整理当中，下面展示是2020年国家级、省部级获奖的一部分......">
                 <div className={style.sectionContainer}>
-                    <ContestList/>
+                    <ContestList />
                 </div>
             </Section>
 

@@ -3,7 +3,7 @@ import { Component, CSSProperties } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Typography } from 'antd';
 
-import style from "./index.module.scss";
+import style from "./css/index.module.scss";
 
 import { Logo } from '../../static/cos';
 

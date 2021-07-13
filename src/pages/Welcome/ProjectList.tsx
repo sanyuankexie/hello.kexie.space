@@ -2,7 +2,7 @@ import React from 'react';
 import { FC } from 'react';
 import { List, Typography } from 'antd';
 
-import style from './index.module.scss'
+import style from './css/index.module.scss'
 
 const { Title } = Typography
 

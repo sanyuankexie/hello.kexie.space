@@ -1,7 +1,7 @@
 import { Steps, Divider } from "antd";
 import { LoadingOutlined } from '@ant-design/icons';
 import React from "react";
-import style from './index.module.scss'
+import style from './css/index.module.scss'
 import MarkdownParser from "../../utils/markdown";
 
 const { Step } = Steps
