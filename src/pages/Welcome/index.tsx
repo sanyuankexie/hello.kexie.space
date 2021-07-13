@@ -3,7 +3,8 @@ import { Button } from 'antd';
 import { GithubOutlined, CodeFilled } from '@ant-design/icons';
 import { NavLink } from 'react-router-dom'
 import { Typography } from 'antd';
-import style from './css/index.module.scss'
+import style from './css/index.module.scss';
+import './css/dirty.scss';
 
 import Section from "../../component/Section";
 import CommentList from "./CommentList";
