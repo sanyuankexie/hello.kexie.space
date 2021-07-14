@@ -2,9 +2,9 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { AppReducer } from "../store/AReducer";
 
-type useScrollDisplayElementRefsReturnType = [scrollDisplayElementRefs: any[], addScrollDisplayElementRefs: (instance: HTMLAnchorElement | null) => void];
+type useScrollDisplayElementRefsReturnType = [scrollDisplayElementRefs: any[], addScrollDisplayElementRefs: (instance: HTMLElement | null) => void];
 
-export function useScrollDisplayElementRefs() : useScrollDisplayElementRefsReturnType{
+export function useScrollDisplayElementRefs(): useScrollDisplayElementRefsReturnType {
     const scrollDisplayElementRefs = useSelector(({ clientReducer }: AppReducer) => clientReducer.scrollDisplayElementRefs);
 
     function addScrollDisplayElementRefs(element: HTMLElement) {

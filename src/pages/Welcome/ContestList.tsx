@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Table, Tag } from 'antd';
 import style from "./css/index.module.scss";
 import { useScrollDisplayElementRefs } from '../../hooks';
@@ -6,8 +6,21 @@ import { useScrollDisplayElementRefs } from '../../hooks';
 function ContestList() {
     const [scrollDisplayElementRefs, addScrollDisplayElementRefs] = useScrollDisplayElementRefs();
 
+    const tableRef = useRef(null!);
+    useEffect(() => {
+        const table = tableRef.current as HTMLDivElement;
+        const itemList = table.getElementsByClassName("ant-table-row ant-table-row-level-0") as unknown as HTMLElement[];
+        if (itemList.length > 0) {
+            Array.of(...itemList).forEach(x => {
+                const elementRef = React.createRef() as any;
+                elementRef.current = x;
+                scrollDisplayElementRefs.push(elementRef);
+            })
+        }
+    }, []);
+
     return (
-        <div className={`${style.contestList}`} ref={addScrollDisplayElementRefs as any}>
+        <div className={`${style.contestList}`} ref={tableRef}>
             <Table
                 className={"contest-container"}
                 style={{ width: "100%", border: "1px solid #efefef" }}

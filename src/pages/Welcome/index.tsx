@@ -36,16 +36,18 @@ function Welcome() {
     function handlerScorll(e: any) {
         const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
         scrollDisplayElementRefs.forEach(x => {
-            x.current.style.transition = "all 1.25s";
-            // old scrollTop + window.innerHeight - (window.innerHeight / 4) > x.current.offsetTop
-            if (window.innerHeight - (window.innerHeight / 5) > x.current.getBoundingClientRect().top) {
-                x.current.style.visibility = "visible";
-                x.current.style.opacity = "1";
-                x.current.style.transform = "translateY(0px)";
-            } else {
-                x.current.style.visibility = "hidden";
-                x.current.style.opacity = "0";
-                x.current.style.transform = "translateY(10px)";
+            if (x.current.style) {
+                x.current.style.transition = "all 1.25s";
+                // old scrollTop + window.innerHeight - (window.innerHeight / 4) > x.current.offsetTop
+                if (window.innerHeight - (window.innerHeight / 5) > x.current.getBoundingClientRect().top) {
+                    x.current.style.visibility = "visible";
+                    x.current.style.opacity = "1";
+                    x.current.style.transform = "translateY(0px)";
+                } else {
+                    x.current.style.visibility = "hidden";
+                    x.current.style.opacity = "0";
+                    x.current.style.transform = "translateY(10px)";
+                }
             }
         })
     }
@@ -93,7 +95,7 @@ function Welcome() {
                     frameBorder="0"
                     scrolling="0"
                     style={{ boxShadow: "0 3px 6px -4px #0000001f, 0 6px 16px #00000014, 0 9px 28px 8px #0000000d" }}
-                    ref={addScrollDisplayElementRefs as any}
+                    ref={addScrollDisplayElementRefs}
                 ></iframe>
             </Section>
 

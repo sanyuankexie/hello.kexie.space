@@ -57,7 +57,7 @@ function CommentList() {
                 itemLayout="horizontal"
                 dataSource={commentList}
                 renderItem={(item: IComment) => (
-                    <li ref={addScrollDisplayElementRefs as any}>
+                    <li ref={addScrollDisplayElementRefs}>
                         <Comment
                             className={style.comment}
                             author={item.author}

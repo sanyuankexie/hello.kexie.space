@@ -13,7 +13,7 @@ function Timeline() {
     return (
         <>
             <Divider />
-            <div className={style.subSectionContainer} ref={addScrollDisplayElementRefs as any}>
+            <div className={style.subSectionContainer} ref={addScrollDisplayElementRefs }>
                 <Steps direction="vertical" current={1}>
                     <Step title="报名阶段" description="报名时间截止到笔试前" />
                     <Step title="入门学习" description="学会使用Online Judge实现问题求解" icon={<LoadingOutlined />} />
@@ -23,7 +23,7 @@ function Timeline() {
                 </Steps>
             </div>
             <Divider className={style.mobile} />
-            <div className={style.subSectionContainer} ref={addScrollDisplayElementRefs as any}>
+            <div className={style.subSectionContainer} ref={addScrollDisplayElementRefs}>
                 <p
                     style={{ textIndent: "2em" }}
                     dangerouslySetInnerHTML={{ __html: MarkdownParser.render(content) }}>

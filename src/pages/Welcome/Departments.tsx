@@ -24,7 +24,7 @@ function Departments() {
                             <div
                                 className="col-md-12 col-lg-12 col-xl-5 item"
                                 key={x.name}
-                                ref={addScrollDisplayElementRefs as any}
+                                ref={addScrollDisplayElementRefs}
                             >
                                 <div className="row">
                                     <div className="col-md-12 col-lg-12" style={{ textAlign: "center" }}>

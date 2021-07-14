@@ -45,7 +45,7 @@ const Project: FC<IProject> = ({ name, description, language, avatar, url, langu
     const [scrollDisplayElementRefs, addScrollDisplayElementRefs] = useScrollDisplayElementRefs();
 
     return (
-        <div className={style.project} ref={addScrollDisplayElementRefs as any}>
+        <div className={style.project} ref={addScrollDisplayElementRefs}>
             <span >
                 <span className={style.name}>
                     <a href={url} target="_blank" rel="noreferrer">
