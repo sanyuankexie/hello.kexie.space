@@ -1,10 +1,18 @@
-p, li {
+p,
+li {
     font-size: 16px;
 }
 
+html{
+    height:100%;
+    overflow-x: hidden;
+}
+
 body {
-    font-family: -apple-system,BlinkMacSystemFont,Noto Sans CJK SC,Arial,Helvetica Neue !important;
-    background: #FBF9F8 !important;
+    font-family: -apple-system, BlinkMacSystemFont, Noto Sans CJK SC, Arial, Helvetica Neue !important;
+    background: #fbf9f8 !important;
+    overflow-x: hidden;
+    position: fixed;
 }
 
 img {

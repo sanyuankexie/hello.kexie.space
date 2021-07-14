@@ -23,11 +23,21 @@ function Welcome() {
     return (
         <div>
             <section className={style.helloContainer}>
+                <div className={`${style.star} ${style.star1}`}/>
+                <div className={`${style.star} ${style.star2}`}/>
+                <div className={`${style.star} ${style.star3}`}/>
+                <div className={`${style.star} ${style.star4}`}/>
+                <div className={`${style.star} ${style.star5}`}/>
+                <div className={`${style.star} ${style.star6}`}/>
+                <div className={`${style.star} ${style.star7}`}/>
+                <div className={`${style.star} ${style.star8}`}/>
+
                 <div className={style.blank} style={{ height: "20vh" }} />
                 <img src={Logo.Kexie}
                     alt=""
                     width={200}
-                    height={200} />
+                    height={200}
+                    style={{zIndex: 1}} />
                 <Title className={style.title} level={1}>桂电三院科协</Title>
 
                 <p className={style.description}>啦啦啦啦啦啊啦啦啊啦啦啦啦啦</p>
@@ -46,13 +56,6 @@ function Welcome() {
 
             <Section title="四大部门" description="科协有四大部门，不同的部门下有不同的学习方向">
                 <div className={style.sectionContainer}>
-                    {/* {Object.values(departmentShortNameMap).map(x => (
-                        <div className={style.department} key={x.fullName}>
-                            <NavLink to={{ pathname: `/introduction/${x.fullName}`, state: { icon: x.logo } }}>
-                                <img src={x.logo} className={style.imgScale} width={250} alt="" />
-                            </NavLink>
-                        </div>
-                    ))} */}
                     <Departments/>
                 </div>
             </Section>

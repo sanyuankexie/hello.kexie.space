@@ -30,6 +30,8 @@
 
 .projects-horizontal .projects {
 	padding-bottom: 40px;
+	justify-content: center;
+	column-gap: 7em;
 }
 
 .projects-horizontal .item {
