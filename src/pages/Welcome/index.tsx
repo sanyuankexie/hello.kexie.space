@@ -23,21 +23,21 @@ function Welcome() {
     return (
         <div>
             <section className={style.helloContainer}>
-                <div className={`${style.star} ${style.star1}`}/>
-                <div className={`${style.star} ${style.star2}`}/>
-                <div className={`${style.star} ${style.star3}`}/>
-                <div className={`${style.star} ${style.star4}`}/>
-                <div className={`${style.star} ${style.star5}`}/>
-                <div className={`${style.star} ${style.star6}`}/>
-                <div className={`${style.star} ${style.star7}`}/>
-                <div className={`${style.star} ${style.star8}`}/>
+                <div className={`${style.star} ${style.star1}`} />
+                <div className={`${style.star} ${style.star2}`} />
+                <div className={`${style.star} ${style.star3}`} />
+                <div className={`${style.star} ${style.star4}`} />
+                <div className={`${style.star} ${style.star5}`} />
+                <div className={`${style.star} ${style.star6}`} />
+                <div className={`${style.star} ${style.star7}`} />
+                <div className={`${style.star} ${style.star8}`} />
 
                 <div className={style.blank} style={{ height: "20vh" }} />
                 <img src={Logo.Kexie}
                     alt=""
                     width={200}
                     height={200}
-                    style={{zIndex: 1}} />
+                    style={{ zIndex: 1 }} />
                 <Title className={style.title} level={1}>桂电三院科协</Title>
 
                 <p className={style.description}>啦啦啦啦啦啊啦啦啊啦啦啦啦啦</p>
@@ -54,9 +54,18 @@ function Welcome() {
                 </div>
             </section>
 
+            <Section title="Mikutap" bannerStyle={{width: "80%", height: "80vh", boxShadow: "0 3px 6px -4px #0000001f, 0 6px 16px #00000014, 0 9px 28px 8px #0000000d"}}>
+                <iframe src="https://mikutap.therainisme.com"
+                    height="100%"
+                    width="100%"
+                    frameBorder="0"
+                    scrolling="0"
+                ></iframe>
+            </Section>
+
             <Section title="四大部门" description="科协有四大部门，不同的部门下有不同的学习方向">
                 <div className={style.sectionContainer}>
-                    <Departments/>
+                    <Departments />
                 </div>
             </Section>
 

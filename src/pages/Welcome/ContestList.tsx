@@ -4,7 +4,7 @@ import style from "./css/index.module.scss";
 
 function ContestList() {
     return (
-        <div className={style.contestList}>
+        <div className={`${style.contestList} default-box-shadow`}>
             <Table
                 className={"contest-container"}
                 style={{ width: "100%", border: "1px solid #efefef" }}
