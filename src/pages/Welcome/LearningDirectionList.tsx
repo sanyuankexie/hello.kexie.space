@@ -6,6 +6,7 @@ import { Typography } from 'antd';
 import style from "./css/index.module.scss";
 
 import { Logo } from '../../static/cos';
+import { useScrollDisplayElementRefs } from '../../hooks';
 
 const { Title } = Typography
 
@@ -17,19 +18,24 @@ interface LDirection {
     style?: CSSProperties
 }
 
-class LearningDirectionList extends Component {
-    render() {
-        return data.map((self: LDirection) => {
-            return (
-                <div key={self.key} className={style.displayItem}>
-                    <Title style={{ textAlign: "center" }} level={2}>{self.name}</Title>
-                    <NavLink to={{ pathname: `introduction/${self.key}` }}>
-                        <img src={self.logo} alt="" width={self.width} style={self.style || {}} className={style.imgScale} />
-                    </NavLink>
-                </div>
-            )
-        });
-    }
+
+function LearningDirectionList() {
+    const [scrollDisplayElementRefs, addScrollDisplayElementRefs] = useScrollDisplayElementRefs();
+
+    return (
+        <>
+            {data.map((self: LDirection) => {
+                return (
+                    <div key={self.key} className={style.displayItem}>
+                        <Title style={{ textAlign: "center" }} level={2}>{self.name}</Title>
+                        <NavLink to={{ pathname: `introduction/${self.key}` }} ref={addScrollDisplayElementRefs}>
+                            <img src={self.logo} alt="" width={self.width} style={self.style || {}} className={style.imgScale} />
+                        </NavLink>
+                    </div>
+                )
+            })}
+        </>
+    );
 }
 
 export default LearningDirectionList;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button } from 'antd';
 import { GithubOutlined, CodeFilled } from '@ant-design/icons';
 import { NavLink } from 'react-router-dom'
@@ -16,10 +16,40 @@ import { Department, departmentShortNameMap } from '../../static/department';
 import { Logo } from '../../static/cos';
 import ContestList from './ContestList';
 import Departments from './Departments';
+import { useSelector } from 'react-redux';
+import { AppReducer } from '../../store/AReducer';
+import { useScrollDisplayElementRefs } from '../../hooks';
 
 const { Title } = Typography;
 
 function Welcome() {
+    const [scrollDisplayElementRefs, addScrollDisplayElementRefs] = useScrollDisplayElementRefs();
+
+    useEffect(() => {
+        document.addEventListener("scroll", handlerScorll, true);
+
+        return () => {
+            document.removeEventListener("scroll", handlerScorll, true);
+        }
+    }, []);
+
+    function handlerScorll(e: any) {
+        const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        scrollDisplayElementRefs.forEach(x => {
+            x.current.style.transition = "all 1.25s";
+            // old scrollTop + window.innerHeight - (window.innerHeight / 4) > x.current.offsetTop
+            if (window.innerHeight - (window.innerHeight / 5) > x.current.getBoundingClientRect().top) {
+                x.current.style.visibility = "visible";
+                x.current.style.opacity = "1";
+                x.current.style.transform = "translateY(0px)";
+            } else {
+                x.current.style.visibility = "hidden";
+                x.current.style.opacity = "0";
+                x.current.style.transform = "translateY(10px)";
+            }
+        })
+    }
+
     return (
         <div>
             <section className={style.helloContainer}>
@@ -54,12 +84,16 @@ function Welcome() {
                 </div>
             </section>
 
-            <Section title="Mikutap" bannerStyle={{width: "80%", height: "80vh", boxShadow: "0 3px 6px -4px #0000001f, 0 6px 16px #00000014, 0 9px 28px 8px #0000000d"}}>
+            <Section
+                title="Mikutap"
+                bannerStyle={{ width: "80%", height: "80vh" }}>
                 <iframe src="https://mikutap.therainisme.com"
                     height="100%"
                     width="100%"
                     frameBorder="0"
                     scrolling="0"
+                    style={{ boxShadow: "0 3px 6px -4px #0000001f, 0 6px 16px #00000014, 0 9px 28px 8px #0000000d" }}
+                    ref={addScrollDisplayElementRefs as any}
                 ></iframe>
             </Section>
 

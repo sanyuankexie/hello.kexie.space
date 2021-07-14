@@ -1,21 +1,31 @@
-import React from "react";
+import React, { Dispatch, useEffect, useRef } from "react";
 import { Logo } from './../../static/cos';
 
 import style from './css/department.module.scss';
 
 
 import { Typography } from 'antd';
+import { AppReducer } from "../../store/AReducer";
+import { useDispatch, useSelector } from "react-redux";
+import clientReducer, { action } from './../../store/ClientReducer';
+import { useScrollDisplayElementRefs } from "../../hooks";
 const { Title } = Typography
 
 
 function Departments() {
+    const [scrollDisplayElementRefs, addScrollDisplayElementRefs] = useScrollDisplayElementRefs();
+
     return (
         <section className={`projects-horizontal ${style.section}`}>
             <div >
                 <div className="row projects">
                     {departmentIntroductionData.map(x => {
                         return (
-                            <div className="col-md-12 col-lg-12 col-xl-5 item">
+                            <div
+                                className="col-md-12 col-lg-12 col-xl-5 item"
+                                key={x.name}
+                                ref={addScrollDisplayElementRefs as any}
+                            >
                                 <div className="row">
                                     <div className="col-md-12 col-lg-12" style={{ textAlign: "center" }}>
                                         <img className="img-fluid" src={x.logo} width={250} />

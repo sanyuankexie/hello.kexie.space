@@ -9,7 +9,6 @@ interface IProps {
 }
 
 function Header({ title: content, author, published, icon }: IProps) {
-    console.log(content);
     return (
         <div className={css.headerContainer}>
             <h1 className={css.h1}>

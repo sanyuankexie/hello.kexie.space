@@ -3,10 +3,13 @@ import { FC } from 'react';
 import { List, Typography } from 'antd';
 
 import style from './css/index.module.scss'
+import { useScrollDisplayElementRefs } from '../../hooks';
 
 const { Title } = Typography
 
 function ProjectList() {
+    
+
     return (
         <div className={style.projectList}>
             <List
@@ -39,9 +42,11 @@ interface IProject {
 }
 
 const Project: FC<IProject> = ({ name, description, language, avatar, url, languageColor }) => {
+    const [scrollDisplayElementRefs, addScrollDisplayElementRefs] = useScrollDisplayElementRefs();
+
     return (
-        <div className={style.project}>
-            <span>
+        <div className={style.project} ref={addScrollDisplayElementRefs as any}>
+            <span >
                 <span className={style.name}>
                     <a href={url} target="_blank" rel="noreferrer">
                         <img className={style.avatar} src={`${avatar}&s=20`} alt="" />

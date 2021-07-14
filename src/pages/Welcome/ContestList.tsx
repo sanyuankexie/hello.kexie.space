@@ -1,10 +1,13 @@
 import React from 'react';
 import { Table, Tag } from 'antd';
 import style from "./css/index.module.scss";
+import { useScrollDisplayElementRefs } from '../../hooks';
 
 function ContestList() {
+    const [scrollDisplayElementRefs, addScrollDisplayElementRefs] = useScrollDisplayElementRefs();
+
     return (
-        <div className={`${style.contestList} default-box-shadow`}>
+        <div className={`${style.contestList}`} ref={addScrollDisplayElementRefs as any}>
             <Table
                 className={"contest-container"}
                 style={{ width: "100%", border: "1px solid #efefef" }}
