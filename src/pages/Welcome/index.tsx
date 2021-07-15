@@ -54,7 +54,7 @@ function Welcome() {
 
     return (
         <div>
-            <section className={style.helloContainer}>
+            <section className={`${style.helloContainer} default-box-shadow`}>
                 <div className={`${style.star} ${style.star1}`} />
                 <div className={`${style.star} ${style.star2}`} />
                 <div className={`${style.star} ${style.star3}`} />

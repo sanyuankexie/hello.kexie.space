@@ -24,12 +24,19 @@ function LearningDirectionList() {
 
     return (
         <>
-            {data.map((self: LDirection) => {
+            {data.map((self: LDirection, index: number) => {
                 return (
-                    <div key={self.key} className={style.displayItem}>
+                    <div key={self.key} className={`${style.displayItem}`} >
                         <Title style={{ textAlign: "center" }} level={2}>{self.name}</Title>
                         <NavLink to={{ pathname: `introduction/${self.key}` }} ref={addScrollDisplayElementRefs}>
-                            <img src={self.logo} alt="" width={self.width} style={self.style || {}} className={style.imgScale} />
+                            <div className={`float-uad-item delay-${index}`}>
+                                <img
+                                    src={self.logo}
+                                    alt=""
+                                    width={self.width}
+                                    style={self.style || {}}
+                                    className={`${style.imgScale}`} />
+                            </div>
                         </NavLink>
                     </div>
                 )
