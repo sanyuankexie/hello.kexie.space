@@ -23,3 +23,10 @@ export const Logo = {
 export const QRCode = {
     WeChatOfficialAccount: `${BaseUrl}/images/wechat_QR_code.jpg `,
 }
+
+export const Video = {
+    MachineLearning: {
+        poster: "http://therainisme.com:1225/Therainisme/img/welcome-3.jpg",
+        url: "https://corona-images2.obs.cn-north-4.myhuaweicloud.com/pit.mp4",
+    }
+}

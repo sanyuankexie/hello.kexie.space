@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Button } from 'antd';
 import { GithubOutlined, CodeFilled } from '@ant-design/icons';
-import { NavLink } from 'react-router-dom'
 import { Typography } from 'antd';
 import style from './css/index.module.scss';
 import './css/dirty.scss';
@@ -11,13 +10,9 @@ import CommentList from "./CommentList";
 import ProjectList from "./ProjectList";
 import LearningDirectionList from "./LearningDirectionList";
 import Timeline from './Timeline';
-
-import { Department, departmentShortNameMap } from '../../static/department';
-import { Logo } from '../../static/cos';
+import { Logo, Video } from '../../static/cos';
 import ContestList from './ContestList';
 import Departments from './Departments';
-import { useSelector } from 'react-redux';
-import { AppReducer } from '../../store/AReducer';
 import { useScrollDisplayElementRefs } from '../../hooks';
 
 const { Title } = Typography;
@@ -33,12 +28,30 @@ function Welcome() {
         }
     }, []);
 
+    const vantaRef = useRef<HTMLDivElement>(null!);
+    useEffect(() => {
+        // @ts-ignore
+        const effect = VANTA.HALO({
+            el: "#wdnmd",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            size: 1,
+            yOffset: 0.19,
+            backgroundColor: "#252630"
+        });
+
+        return () => {
+            effect.destroy();
+        }
+    }, []);
+
     function handlerScorll(e: any) {
-        const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
         scrollDisplayElementRefs.forEach(x => {
             if (x.current.style) {
                 x.current.style.transition = "all 1.25s";
-                // old scrollTop + window.innerHeight - (window.innerHeight / 4) > x.current.offsetTop
                 if (window.innerHeight - (window.innerHeight / 5) > x.current.getBoundingClientRect().top) {
                     x.current.style.visibility = "visible";
                     x.current.style.opacity = "1";
@@ -54,15 +67,8 @@ function Welcome() {
 
     return (
         <div>
-            <section className={`${style.helloContainer} default-box-shadow`}>
-                <div className={`${style.star} ${style.star1}`} />
-                <div className={`${style.star} ${style.star2}`} />
-                <div className={`${style.star} ${style.star3}`} />
-                <div className={`${style.star} ${style.star4}`} />
-                <div className={`${style.star} ${style.star5}`} />
-                <div className={`${style.star} ${style.star6}`} />
-                <div className={`${style.star} ${style.star7}`} />
-                <div className={`${style.star} ${style.star8}`} />
+            <section id="wdnmd" className={`${style.helloContainer} default-box-shadow`}>
+                <div ref={vantaRef} className={style.background}></div>
 
                 <div className={style.blank} style={{ height: "20vh" }} />
                 <img src={Logo.Kexie}
@@ -70,9 +76,9 @@ function Welcome() {
                     width={200}
                     height={200}
                     style={{ zIndex: 1 }} />
-                <Title className={style.title} level={1}>桂电三院科协</Title>
+                <Title className={`${style.title} default-font-shadow`} level={1} >桂电三院科协</Title>
 
-                <p className={style.description}>啦啦啦啦啦啊啦啦啊啦啦啦啦啦</p>
+                <p className={`${style.description} default-font-shadow`}>科技融入梦想，创新点缀人生</p>
 
                 <div className={style.btnGroup}>
                     <Button className={style.btn} type="primary" shape="round" icon={<GithubOutlined />}
@@ -97,6 +103,22 @@ function Welcome() {
                     style={{ boxShadow: "0 3px 6px -4px #0000001f, 0 6px 16px #00000014, 0 9px 28px 8px #0000000d" }}
                     ref={addScrollDisplayElementRefs}
                 ></iframe>
+            </Section>
+
+            <Section
+                title="Video"
+                bannerStyle={{ width: "80%" }}
+                bannerClassName={`aspect-ratio`}
+            >
+                <video
+                    controls
+                    style={{ boxShadow: "0 3px 6px -4px #0000001f, 0 6px 16px #00000014, 0 9px 28px 8px #0000000d" }}
+                    ref={addScrollDisplayElementRefs}
+                >
+                    <source src={Video.MachineLearning.url} type="video/mp4"></source>
+                </video>
+
+
             </Section>
 
             <Section title="四大部门" description="科协有四大部门，不同的部门下有不同的学习方向">

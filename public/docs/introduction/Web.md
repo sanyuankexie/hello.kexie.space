@@ -6,9 +6,9 @@
 
 现在我们经常浏览的，bilibili、优酷、LOL官网、知乎还有填报高考志愿的网站，它们都是众多前端后端开发工程师不断努力的结果。有些比较老旧，有些比较新潮。界面是网站中一个最重要的组成部分。一个好的界面能给使用者极大地提高舒适度。
 
-![](https://hello-kexie.obs.ap-southeast-1.myhuaweicloud.com/docs/introduction/image/md/web/zhihu.png)
+![](https://hellokexie.obs.cn-north-4.myhuaweicloud.com/docs/introduction/image/md/web/zhihu.png)
 
-![](https://hello-kexie.obs.ap-southeast-1.myhuaweicloud.com/docs/introduction/image/md/web/bilibili.png)
+![](https://hellokexie.obs.cn-north-4.myhuaweicloud.com/docs/introduction/image/md/web/bilibili.png)
 
 ## 前端开发
 
@@ -16,7 +16,7 @@
 
 我们在打开一个网页后，浏览器要做的首先是从服务器获取我们网页的“长相”，然后把它渲染出来。可以尝试着，把你家的网线掐掉，只要不刷新或关闭浏览器，那么还能随便滚动鼠标滚轮，浏览现在的这个网页。
 
-![](https://hello-kexie.obs.ap-southeast-1.myhuaweicloud.com/docs/introduction/image/md/web/frontend.png)
+![](https://hellokexie.obs.cn-north-4.myhuaweicloud.com/docs/introduction/image/md/web/frontend.png)
 
 可惜的是，设计到数据交互的部分，例如登陆注册，这部分是需要与远程的服务器进行交互的。掐掉了网线，登陆注册就无法继续下去了。
 
@@ -31,7 +31,7 @@
 3. 校验合法后进行数据库操作（登陆记录）
 4. 最后告诉前端：请求成功！
 
-![](https://hello-kexie.obs.ap-southeast-1.myhuaweicloud.com/docs/introduction/image/md/web/server.png)
+![](https://hellokexie.obs.cn-north-4.myhuaweicloud.com/docs/introduction/image/md/web/server.png)
 
 ## 它们的未来
 
@@ -41,7 +41,7 @@
 
 感兴趣的同学可以了解一下“大前端”，某种角度来说，有浏览器的地方，就有Web前端。
 
-![](https://hello-kexie.obs.ap-southeast-1.myhuaweicloud.com/docs/introduction/image/md/web/afraid.png)
+![](https://hellokexie.obs.cn-north-4.myhuaweicloud.com/docs/introduction/image/md/web/afraid.png)
 
 后端近几年的兴起是标志着互联网进入了一个高新的时代。它的学习难度比较高，但是因为它的薪资，许多计算机本科毕业生前仆后继的选择了这个方向。它职责是让服务器做数据处理的事。交互请求可以从Web前端来，可以从Android、iOS或游戏应用中来，后端只管处理。
 
@@ -49,7 +49,7 @@
 
 只要有能力，网站开发在本科毕业就能得到一份比较不错的薪资，下面是职友集提供的前端开发和后端开发在毕业时得到的薪资数据。
 
-![](https://hello-kexie.obs.ap-southeast-1.myhuaweicloud.com/docs/introduction/image/md/web/websalary.png)
+![](https://hellokexie.obs.cn-north-4.myhuaweicloud.com/docs/introduction/image/md/web/websalary.png)
 
 如果你想前端和后端都学的话，就属于全栈工程师啦！意思是什么都做的开发人员。
 
@@ -59,7 +59,7 @@
 
 * [Visual Studio Code](https://code.visualstudio.com/)
 
-![](https://hello-kexie.obs.ap-southeast-1.myhuaweicloud.com/docs/introduction/image/md/web/vscode.png)
+![](https://hellokexie.obs.cn-north-4.myhuaweicloud.com/docs/introduction/image/md/web/vscode.png)
 
 首先是推荐使用的代码编辑器 [Visual Studio Code](https://code.visualstudio.com/)。当然你也可以使用其他的文本编辑器来编写代码，但我们学习这么久以来，最舒适的代码编辑器非它莫属！
 
@@ -69,35 +69,35 @@
 
 你可能刚刚打开页面的时候是张这个样子，全是英文。不要慌张，英文是伴随着程序员终身的工具，记得大一第一个学期就赶紧把四级过了！
 
-![](https://hello-kexie.obs.ap-southeast-1.myhuaweicloud.com/docs/introduction/image/md/web/helloworld.png)
+![](https://hellokexie.obs.cn-north-4.myhuaweicloud.com/docs/introduction/image/md/web/helloworld.png)
 
 点击那个长得像“插件”按钮的东西，进入到插件商店。
 
-![](https://hello-kexie.obs.ap-southeast-1.myhuaweicloud.com/docs/introduction/image/md/web/extensions.png)
+![](https://hellokexie.obs.cn-north-4.myhuaweicloud.com/docs/introduction/image/md/web/extensions.png)
 
 在输入框中输入Live Server后，Visual Studio Code会自动搜索，选择第一个结果。如果点击install后长这个样子，证明你已经成功安装了它！（如果你想让你的Visual Studio Code变成中文，可以搜索Chinese安装简体中文的语言包）
 
-![](https://hello-kexie.obs.ap-southeast-1.myhuaweicloud.com/docs/introduction/image/md/web/liveserver.png)
+![](https://hellokexie.obs.cn-north-4.myhuaweicloud.com/docs/introduction/image/md/web/liveserver.png)
 
 切换回刚刚的资源管理器，选择一个心仪的文件夹，因为之后我们的HTML文件会存放在这。此时新建一个名为 `index.html` 的文件。
 
-![](https://hello-kexie.obs.ap-southeast-1.myhuaweicloud.com/docs/introduction/image/md/web/new.png)
+![](https://hellokexie.obs.cn-north-4.myhuaweicloud.com/docs/introduction/image/md/web/new.png)
 
 输入一个感叹号之后毫不犹豫的直接按下回车，它会帮我们自动补全HTML必要的代码块。
 
-![](https://hello-kexie.obs.ap-southeast-1.myhuaweicloud.com/docs/introduction/image/md/web/enter.gif)
+![](https://hellokexie.obs.cn-north-4.myhuaweicloud.com/docs/introduction/image/md/web/enter.gif)
 
 什么也不用管了，在第10行输入 `<h1>HelloWorld</h1>`后，记得按下 `CTRL + S` 进行保存。接着按着左手上的`ALT`键不要放开，再依次按下 `L` 和 `O`，Visual Studio Code 就会自动打开一个网页。
 
 这个网页便是我们刚刚编写的HelloWorld！
 
-![](https://hello-kexie.obs.ap-southeast-1.myhuaweicloud.com/docs/introduction/image/md/web/final.gif)
+![](https://hellokexie.obs.cn-north-4.myhuaweicloud.com/docs/introduction/image/md/web/final.gif)
 
 恭喜你，你已经入门Web开发了！
 
 ## 学习线路
 
-![](https://hello-kexie.obs.ap-southeast-1.myhuaweicloud.com/docs/introduction/image/md/web/frontend-roadmap.png)
+![](https://hellokexie.obs.cn-north-4.myhuaweicloud.com/docs/introduction/image/md/web/frontend-roadmap.png)
 
 ## 相关赛事
 

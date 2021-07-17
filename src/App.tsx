@@ -22,7 +22,7 @@ function App() {
                     <BallRoom />
                     <Switch>
                         <Route path="/introduction/:target" component={Article} />
-                        <Route path="/music" component={MusicPlayer} />
+                        {/* <Route path="/music" component={MusicPlayer} /> */}
                         <Route path="/github-auth" component={GithubAuth} />
                         <Route path="/" component={Welcome} />
                     </Switch>

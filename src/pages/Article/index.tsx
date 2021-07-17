@@ -29,19 +29,19 @@ function Article({ location, match }: IProps) {
     useEffect(() => {
         axios.get(`/docs/introduction/${filename}.md`)
             .then((res) => {
-                let content = MarkdownParser.render(res.data)
-                const title = content.match(/<h1>(\S*)<\/h1>/)![1]
-                content = content.replace(content.match(/<h1>(\S*)<\/h1>/)![0], "")
-                setContent(content)
-                setTitle(title)
-            })
+                let content = MarkdownParser.render(res.data);
+                const title = content.match(/<h1>(\S*)<\/h1>/)![1];
+                content = content.replace(content.match(/<h1>(\S*)<\/h1>/)![0], "");
+                setContent(content);
+                setTitle(title);
+            });
     }, []);
 
     useEffect(() => {
         const h2List: HTMLCollection = markdownElementsContainer.current!.getElementsByTagName('h2')
         const scroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
         const { hash } = location;
-        document.documentElement.scrollTop = 110
+        // document.documentElement.scrollTop = 110
         // todo modified scroll height
     }, [content]);
 
