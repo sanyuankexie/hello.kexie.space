@@ -1,6 +1,7 @@
 import MarkdownIt from 'markdown-it';
 import hljs from 'highlight.js';
 const md = new MarkdownIt({
+    html: true,
     highlight: function (str: string, lang: string) {
         try {
             return '<pre class="code-block"><code>' +
