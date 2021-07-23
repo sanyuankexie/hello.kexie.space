@@ -46,16 +46,18 @@ function Article({ location, match }: IProps) {
     }, [content]);
 
     return (
-        <article className={`${css.article} ${css.articleContainer}`}>
-            <Header
-                icon={icon}
-                title={title}
-                author="Therainisme"
-                published="March 22, 2021"
-            />
-            <span dangerouslySetInnerHTML={{ __html: content }} ref={markdownElementsContainer}>
-            </span>
-        </article>
+        <div style={{background: "white", paddingBottom: "200px"}}>
+            <article className={`${css.article} ${css.articleContainer}`}>
+                <Header
+                    icon={icon}
+                    title={title}
+                    author="Therainisme"
+                    published="March 22, 2021"
+                />
+                <span dangerouslySetInnerHTML={{ __html: content }} ref={markdownElementsContainer}>
+                </span>
+            </article>
+        </div>
     );
 }
 
