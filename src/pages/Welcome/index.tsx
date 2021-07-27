@@ -81,19 +81,51 @@ function Welcome() {
                 <p className={`${style.description} default-font-shadow`}>科技融入梦想，创新点缀人生</p>
 
                 <div className={style.btnGroup}>
-                    <Button className={style.btn} type="primary" shape="round" icon={<GithubOutlined />}
-                        size={"large"}>
+
+                    <Button
+                        className={style.btn}
+                        type="primary"
+                        shape="round"
+                        icon={<GithubOutlined />}
+                        size={"large"}
+                        href="https://jq.qq.com/?_wv=1027&k=n7WP5LTH"
+                        target="__blank"
+                    >
                         加入我们
                     </Button>
-                    <Button className={style.btn} type="primary" shape="round" icon={<CodeFilled />}
-                        size={"large"}>
+
+                    <Button
+                        className={style.btn}
+                        type="primary"
+                        shape="round"
+                        icon={<CodeFilled />}
+                        size={"large"}
+                        href="https://oj.kexie.space"
+                        target="__blank"
+                    >
                         练习编程
                     </Button>
                 </div>
             </section>
 
             <Section
+                title="宣传视频"
+                description="可以稍微期待一下呢........"
+                bannerStyle={{ width: "80%" }}
+                bannerClassName={`aspect-ratio`}>
+                <video
+                    controls
+                    style={{ boxShadow: "0 3px 6px -4px #0000001f, 0 6px 16px #00000014, 0 9px 28px 8px #0000000d" }}
+                    ref={addScrollDisplayElementRefs}
+                    poster={Video.MachineLearning.poster}
+                >
+                    {/* <source src={Video.MachineLearning.url} type="video/mp4"></source> */}
+                </video>
+            </Section>
+
+            <Section
                 title="Mikutap"
+                description="一个有趣的音乐互动网站"
                 bannerStyle={{ width: "80%", height: "80vh" }}>
                 <iframe src="https://mikutap.therainisme.com"
                     height="100%"
@@ -106,7 +138,8 @@ function Welcome() {
             </Section>
 
             <Section
-                title="Video"
+                title="深度学习"
+                description="趣味视频 “当逮虾户遇上目标检测”"
                 bannerStyle={{ width: "80%" }}
                 bannerClassName={`aspect-ratio`}
             >

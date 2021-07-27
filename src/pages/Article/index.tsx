@@ -9,7 +9,7 @@ import Header from "./Header";
 import { Department } from "../../static/department"
 import MarkdownParser from '../../utils/markdown';
 import axios from 'axios';
-import { Logo } from '../../static/cos';
+import BaseUrl, { Docs, Logo } from '../../static/cos';
 
 interface IProps {
     location: any
@@ -27,7 +27,7 @@ function Article({ location, match }: IProps) {
     !icon && (icon = Logo[filename as (keyof typeof Logo)] as any)
 
     useEffect(() => {
-        axios.get(`/docs/introduction/${filename}.md`)
+        axios.get(`${Docs.PrefixUrl}/${filename}.md`)
             .then((res) => {
                 let content = MarkdownParser.render(res.data);
                 const title = content.match(/<h1>(\S*)<\/h1>/)![1];

@@ -65,6 +65,11 @@
         background: global.$cyan !important;
         border-color: global.$cyan !important;
     }
+    .anchor {
+        margin-left: 5px;
+        text-decoration: none;
+        color: white;
+    }
 }
 
 .sectionContainer {

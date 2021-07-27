@@ -29,7 +29,7 @@ function dataToItems(item: ITable) {
                             case "微信公众号":
                                 return (
                                     <Popover content={<img src={QRCode.WeChatOfficialAccount} alt="" />} trigger="hover" style={{ padding: "0 !important" }} key={self.name}>
-                                        <a key={self.name} target="_blank" href={self.url} style={{ color: "white" }} rel="noreferrer">
+                                        <a key={self.name} href={self.url} style={{ color: "white" }} rel="noreferrer">
                                             <li className={style.item}>{self.name}</li>
                                         </a>
                                     </Popover>
@@ -65,26 +65,24 @@ const data: Array<ITable> = [
         title: '学习文档',
         list: [
             {
-                name: 'CottonPaper',
-                url: 'https://cp.therainisme.com',
-            }, {
                 name: '工具箱的深度學習記事簿',
                 url: 'https://ml.akasaki.space'
-            }
+            },
+            {
+                name: 'CottonPaper',
+                url: 'https://cp.therainisme.com',
+            },
         ]
     },
     {
         title: '与我相聚',
         list: [
             {
-                name: '微信公众号',
-                url: 'https://github.com/sanyuankexie',
-            }, {
                 name: '招新QQ群',
-                url: 'https://github.com/sanyuankexie'
+                url: 'https://jq.qq.com/?_wv=1027&k=n7WP5LTH'
             }, {
                 name: '招新报名表',
-                url: 'https://github.com/sanyuankexie'
+                url: '#'
             }
         ]
     },
@@ -97,7 +95,15 @@ const data: Array<ITable> = [
             },
             {
                 name: 'OnlineJudge',
-                url: 'https://github.com/sanyuankexie',
+                url: 'https://oj.kexie.space',
+            },
+            {
+                name: '微信公众号',
+                url: '#',
+            },
+            {
+                name: "科协官方bilibili账号",
+                url: "https://space.bilibili.com/673693349",
             }
         ]
     },

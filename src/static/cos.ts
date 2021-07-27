@@ -26,7 +26,11 @@ export const QRCode = {
 
 export const Video = {
     MachineLearning: {
-        poster: "http://therainisme.com:1225/Therainisme/img/welcome-3.jpg",
+        poster: "https://hellokexie.obs.cn-north-4.myhuaweicloud.com/images/poster.png",
         url: "https://corona-images2.obs.cn-north-4.myhuaweicloud.com/pit.mp4",
     }
+}
+
+export const Docs = {
+    PrefixUrl: `${BaseUrl}/docs/introduction`
 }
