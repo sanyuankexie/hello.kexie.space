@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Component, CSSProperties } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Typography } from 'antd';
@@ -22,13 +22,29 @@ interface LDirection {
 function LearningDirectionList() {
     const [scrollDisplayElementRefs, addScrollDisplayElementRefs] = useScrollDisplayElementRefs();
 
+    useEffect(() => {
+        const scrollTop = localStorage.getItem("scrollTop");
+        if (scrollTop) {
+            localStorage.removeItem("scrollTop");
+            document.body.scrollTop = ~~scrollTop;
+        }
+    }, []);
+
+    function rememberScrollTop() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
+        localStorage.setItem("scrollTop", JSON.stringify(scrollTop));
+    }
+
     return (
         <>
             {data.map((self: LDirection, index: number) => {
                 return (
                     <div key={self.key} className={`${style.displayItem}`} >
                         <Title style={{ textAlign: "center" }} level={2}>{self.name}</Title>
-                        <NavLink to={{ pathname: `introduction/${self.key}` }} ref={addScrollDisplayElementRefs}>
+                        <NavLink
+                            onClick={e => rememberScrollTop()}
+                            to={{ pathname: `introduction/${self.key}` }}
+                            ref={addScrollDisplayElementRefs}>
                             <div className={`float-uad-item delay-${index}`}>
                                 <img
                                     src={self.logo}
