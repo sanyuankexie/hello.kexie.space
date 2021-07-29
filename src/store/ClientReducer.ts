@@ -2,7 +2,7 @@ import React from "react";
 
 export type action =
     { type: "setClient", pass: number } |
-    { type: "setScrollDisplayElementRefs", elementRefs: React.MutableRefObject<HTMLElement>};
+    { type: "setScrollAnimationRefs", elementRefs: React.MutableRefObject<HTMLElement>};
 
 export function clientReducer(state = init, action: action) {
     const newState = { ...state } as any;
@@ -121,5 +121,5 @@ export type ClientState = typeof init;
 
 const init = {
     client: new Client(),
-    scrollDisplayElementRefs: [] = [] as any[],
+    ScrollAnimationRefs: [] = [] as any[],
 }

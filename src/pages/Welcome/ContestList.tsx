@@ -1,10 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 import { Table, Tag } from 'antd';
 import style from "./css/index.module.scss";
-import { useScrollDisplayElementRefs } from '../../hooks';
+import { useScrollAnimationRefs } from '../../hooks';
 
 function ContestList() {
-    const [scrollDisplayElementRefs, addScrollDisplayElementRefs] = useScrollDisplayElementRefs();
+    const [ScrollAnimationRefs, addScrollAnimationRefs] = useScrollAnimationRefs();
 
     const tableRef = useRef(null!);
     useEffect(() => {
@@ -14,7 +14,7 @@ function ContestList() {
             Array.of(...itemList).forEach(x => {
                 const elementRef = React.createRef() as any;
                 elementRef.current = x;
-                scrollDisplayElementRefs.push(elementRef);
+                ScrollAnimationRefs.push(elementRef);
             })
         }
     }, []);

@@ -3,7 +3,7 @@ import { FC } from 'react';
 import { List, Typography } from 'antd';
 
 import style from './css/index.module.scss'
-import { useScrollDisplayElementRefs } from '../../hooks';
+import { useScrollAnimationRefs } from '../../hooks';
 
 const { Title } = Typography
 
@@ -42,10 +42,10 @@ interface IProject {
 }
 
 const Project: FC<IProject> = ({ name, description, language, avatar, url, languageColor }) => {
-    const [scrollDisplayElementRefs, addScrollDisplayElementRefs] = useScrollDisplayElementRefs();
+    const [ScrollAnimationRefs, addScrollAnimationRefs] = useScrollAnimationRefs();
 
     return (
-        <div className={style.project} ref={addScrollDisplayElementRefs}>
+        <div className={style.project} ref={addScrollAnimationRefs}>
             <span >
                 <span className={style.name}>
                     <a href={url} target="_blank" rel="noreferrer">

@@ -3,17 +3,17 @@ import { LoadingOutlined } from '@ant-design/icons';
 import React from "react";
 import style from './css/index.module.scss'
 import MarkdownParser from "../../utils/markdown";
-import { useScrollDisplayElementRefs } from "../../hooks";
+import { useScrollAnimationRefs } from "../../hooks";
 
 const { Step } = Steps
 
 function Timeline() {
-    const [scrollDisplayElementRefs, addScrollDisplayElementRefs] = useScrollDisplayElementRefs();
+    const [ScrollAnimationRefs, addScrollAnimationRefs] = useScrollAnimationRefs();
 
     return (
         <>
             <Divider />
-            <div className={style.subSectionContainer} ref={addScrollDisplayElementRefs }>
+            <div className={style.subSectionContainer} ref={addScrollAnimationRefs }>
                 <Steps direction="vertical" current={1}>
                     <Step title="报名阶段" description="报名时间截止到笔试前" />
                     <Step title="入门学习" description="学会使用Online Judge实现问题求解" icon={<LoadingOutlined />} />
@@ -23,7 +23,7 @@ function Timeline() {
                 </Steps>
             </div>
             <Divider className={style.mobile} />
-            <div className={style.subSectionContainer} ref={addScrollDisplayElementRefs}>
+            <div className={style.subSectionContainer} ref={addScrollAnimationRefs}>
                 <p
                     style={{ textIndent: "2em" }}
                     dangerouslySetInnerHTML={{ __html: MarkdownParser.render(content) }}>

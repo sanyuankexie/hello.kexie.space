@@ -7,7 +7,7 @@ import MarkdownParser from '../../utils/markdown';
 import { CommentAPI } from '../../api';
 import style from './css/index.module.scss'
 import UserCard from '../../component/UserCard';
-import { useScrollDisplayElementRefs } from '../../hooks';
+import { useScrollAnimationRefs } from '../../hooks';
 
 const { Title } = Typography
 
@@ -20,7 +20,7 @@ interface IComment {
 
 function CommentList() {
     const [commentList, setCommentList] = useState<Array<IComment>>();
-    const [scrollDisplayElementRefs, addScrollDisplayElementRefs] = useScrollDisplayElementRefs();
+    const [ScrollAnimationRefs, addScrollAnimationRefs] = useScrollAnimationRefs();
 
     useEffect(() => {
         axios.get(CommentAPI.GithubIssueUrl)
@@ -57,7 +57,7 @@ function CommentList() {
                 itemLayout="horizontal"
                 dataSource={commentList}
                 renderItem={(item: IComment) => (
-                    <li ref={addScrollDisplayElementRefs}>
+                    <li ref={addScrollAnimationRefs}>
                         <Comment
                             className={style.comment}
                             author={item.author}

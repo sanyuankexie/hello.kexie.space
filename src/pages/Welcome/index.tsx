@@ -13,20 +13,12 @@ import Timeline from './Timeline';
 import { Logo, Video } from '../../static/cos';
 import ContestList from './ContestList';
 import Departments from './Departments';
-import { useScrollDisplayElementRefs } from '../../hooks';
+import { useScrollAnimationRefs, useScrollHandler } from '../../hooks';
 
 const { Title } = Typography;
 
 function Welcome() {
-    const [scrollDisplayElementRefs, addScrollDisplayElementRefs] = useScrollDisplayElementRefs();
-
-    useEffect(() => {
-        document.addEventListener("scroll", handlerScorll, true);
-
-        return () => {
-            document.removeEventListener("scroll", handlerScorll, true);
-        }
-    }, []);
+    const [ScrollAnimationRefs, addScrollAnimationRefs] = useScrollHandler();
 
     const vantaRef = useRef<HTMLDivElement>(null!);
     useEffect(() => {
@@ -47,23 +39,7 @@ function Welcome() {
             effect.destroy();
         }
     }, []);
-
-    function handlerScorll(e: any) {
-        scrollDisplayElementRefs.forEach(x => {
-            if (x.current.style) {
-                x.current.style.transition = "all 1.25s";
-                if (window.innerHeight - (window.innerHeight / 5) > x.current.getBoundingClientRect().top) {
-                    x.current.style.visibility = "visible";
-                    x.current.style.opacity = "1";
-                    x.current.style.transform = "translateY(0px)";
-                } else {
-                    x.current.style.visibility = "hidden";
-                    x.current.style.opacity = "0";
-                    x.current.style.transform = "translateY(10px)";
-                }
-            }
-        })
-    }
+    
 
     return (
         <div>
@@ -116,7 +92,7 @@ function Welcome() {
                 <video
                     controls
                     style={{ boxShadow: "0 3px 6px -4px #0000001f, 0 6px 16px #00000014, 0 9px 28px 8px #0000000d" }}
-                    ref={addScrollDisplayElementRefs}
+                    ref={addScrollAnimationRefs}
                     poster={Video.MachineLearning.poster}
                 >
                     {/* <source src={Video.MachineLearning.url} type="video/mp4"></source> */}
@@ -133,7 +109,7 @@ function Welcome() {
                     frameBorder="0"
                     scrolling="0"
                     style={{ boxShadow: "0 3px 6px -4px #0000001f, 0 6px 16px #00000014, 0 9px 28px 8px #0000000d" }}
-                    ref={addScrollDisplayElementRefs}
+                    ref={addScrollAnimationRefs}
                 ></iframe>
             </Section>
 
@@ -146,7 +122,7 @@ function Welcome() {
                 <video
                     controls
                     style={{ boxShadow: "0 3px 6px -4px #0000001f, 0 6px 16px #00000014, 0 9px 28px 8px #0000000d" }}
-                    ref={addScrollDisplayElementRefs}
+                    ref={addScrollAnimationRefs}
                 >
                     <source src={Video.MachineLearning.url} type="video/mp4"></source>
                 </video>

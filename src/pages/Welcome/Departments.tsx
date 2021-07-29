@@ -8,12 +8,12 @@ import { Typography } from 'antd';
 import { AppReducer } from "../../store/AReducer";
 import { useDispatch, useSelector } from "react-redux";
 import clientReducer, { action } from './../../store/ClientReducer';
-import { useScrollDisplayElementRefs } from "../../hooks";
+import { useScrollAnimationRefs } from "../../hooks";
 const { Title } = Typography
 
 
 function Departments() {
-    const [scrollDisplayElementRefs, addScrollDisplayElementRefs] = useScrollDisplayElementRefs();
+    const [ScrollAnimationRefs, addScrollAnimationRefs] = useScrollAnimationRefs();
 
     return (
         <section className={`projects-horizontal ${style.section}`}>
@@ -24,7 +24,7 @@ function Departments() {
                             <div
                                 className="col-md-12 col-lg-12 col-xl-5 item"
                                 key={x.name}
-                                ref={addScrollDisplayElementRefs}
+                                ref={addScrollAnimationRefs}
                             >
                                 <div className="row">
                                     <div className="col-md-12 col-lg-12" style={{ textAlign: "center" }}>

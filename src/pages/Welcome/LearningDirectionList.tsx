@@ -6,7 +6,7 @@ import { Typography } from 'antd';
 import style from "./css/index.module.scss";
 
 import { Logo } from '../../static/cos';
-import { useScrollDisplayElementRefs } from '../../hooks';
+import { useScrollAnimationRefs } from '../../hooks';
 
 const { Title } = Typography
 
@@ -20,7 +20,7 @@ interface LDirection {
 
 
 function LearningDirectionList() {
-    const [scrollDisplayElementRefs, addScrollDisplayElementRefs] = useScrollDisplayElementRefs();
+    const [ScrollAnimationRefs, addScrollAnimationRefs] = useScrollAnimationRefs();
 
     useEffect(() => {
         const scrollTop = localStorage.getItem("scrollTop");
@@ -44,7 +44,7 @@ function LearningDirectionList() {
                         <NavLink
                             onClick={e => rememberScrollTop()}
                             to={{ pathname: `introduction/${self.key}` }}
-                            ref={addScrollDisplayElementRefs}>
+                            ref={addScrollAnimationRefs}>
                             <div className={`float-uad-item delay-${index}`}>
                                 <img
                                     src={self.logo}
