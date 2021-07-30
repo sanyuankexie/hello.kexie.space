@@ -1,5 +1,4 @@
 @use '../../global.scss';
-
 .logo {
     position: fixed;
     width: 50px;
@@ -24,11 +23,22 @@
     }
 }
 
+@keyframes selfshine {
+    0% {
+        box-shadow: 0 0 10px 2px global.$purple;
+    }
+    50% {
+        box-shadow: 0 0 20px 2px global.$purple;
+    }
+    100% {
+        box-shadow: 0 0 10px 2px global.$purple;
+    }
+}
+
 .CardContainer {
     position: fixed !important;
     margin-left: 60px;
     display: flex;
-
     .triangle {
         width: 0px;
         height: 0px;
@@ -45,7 +55,6 @@
         min-height: 50px;
         overflow-wrap: break-word;
     }
-
     .cardFont {
         font-family: Inter;
         font-size: 16px;

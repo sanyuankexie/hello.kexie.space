@@ -5,6 +5,7 @@ import Ball from "../Ball";
 import { throttle } from "../../utils";
 
 import style from './index.module.scss'
+import ballStyle from '../Ball/index.module.scss';
 import { useSelector } from 'react-redux';
 import { Client } from "../../store/ClientReducer";
 import { AppReducer } from "../../store/AReducer";
@@ -143,6 +144,7 @@ function BallRoom() {
                     avatar={atomUser.avatar}
                     ref={ballRef}
                     visitor={atomUser.visitor}
+                    styles={atomUser.name === client.name ? {animation: `${ballStyle.selfshine} 2s infinite`} : {}}
                 />
             </Float>
         )
@@ -171,7 +173,7 @@ function BallRoom() {
         getBalls: () => balls
     }
 
-    const rest = useSelector(({clientReducer} : AppReducer) => clientReducer.client);
+    const rest = useSelector(({ clientReducer }: AppReducer) => clientReducer.client);
     const client = useMemo<Client>(() => (rest), []);
     const [inputHidden, setInputHidden] = useState(true);
 

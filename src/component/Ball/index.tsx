@@ -5,7 +5,7 @@ import style from './index.module.scss'
 import welcomeStyle from '../../pages/Welcome/css/index.module.scss'
 import UserCard from '../UserCard';
 import config from '../../static/config';
-import { useMemo } from 'react';
+import { useMemo, CSSProperties } from 'react';
 import { debounce } from '../../utils';
 import { Logo } from '../../static/cos';
 
@@ -13,9 +13,10 @@ interface IProps {
     userName: string;
     avatar?: string;
     visitor?: boolean
+    styles?: CSSProperties
 }
 
-function Ball({ userName, avatar, visitor }: IProps, ref: React.Ref<unknown> | undefined) {
+function Ball({ userName, avatar, visitor, styles }: IProps, ref: React.Ref<unknown> | undefined) {
 
     useImperativeHandle(ref, () => ({
         displayMsg
@@ -67,7 +68,7 @@ function Ball({ userName, avatar, visitor }: IProps, ref: React.Ref<unknown> | u
     return (
         <div>
             <span onDoubleClick={e => handlerDoubleClick(e)}>
-                <img className={style.logo} src={avatar ? avatar : Logo.Kexie} alt="" />
+                <img className={style.logo} src={avatar ? avatar : Logo.Kexie} alt="" style={styles}/>
             </span>
 
             <span style={{ display: !contentDisplay ? "none" : "block" }}>
