@@ -52,7 +52,7 @@ type AnyDepartment = (typeof departmentsMap)[DepartmentKey];
 
 type DepartmentShortName = AnyDepartment['shortName']
 
-type DepartmentFullName = AnyDepartment['fullName']
+export type DepartmentFullName = AnyDepartment['fullName']
 
 export const departmentShortNameMap = Object.fromEntries(
     departments.map(x => [x.shortName, x])

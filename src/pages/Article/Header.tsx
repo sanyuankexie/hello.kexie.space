@@ -8,7 +8,7 @@ interface IProps {
     published: string
 }
 
-function Header({ title: content, author, published, icon }: IProps) {
+function Header({ title, author, published, icon }: IProps) {
     return (
         <div className={css.headerContainer}>
             <h1 className={css.h1}>
@@ -16,8 +16,8 @@ function Header({ title: content, author, published, icon }: IProps) {
                     src={icon}
                     alt=""
                     className={css.icon}
-                    style={content === "硬件开发" ? { background: "rgb(46, 36, 89)" } : {}} />
-                {content}
+                    style={title === "嵌入式开发" ? { background: "rgb(46, 36, 89)" } : {}} />
+                {title}
             </h1>
             <span className={css.author}>
                 <span className={css.caption}>

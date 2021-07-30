@@ -19,6 +19,9 @@ const MsgType = {
     MusicPlayer: ["switch music"]
 }
 
+/**
+ * 一个WebSocket客户端类
+ */
 export class Client {
     name?: string
     avatar?: string
@@ -59,6 +62,7 @@ export class Client {
         };
         this.ws.onclose = (e) => {
             console.error('ws closed', e);
+            // 断线重连
             // this.reconnectTimer = setTimeout(() => {
             //     this.open()
             // }, 3000)
@@ -83,6 +87,11 @@ export class Client {
         }
     }
 
+    /**
+     * 实现不同的事件的转发
+     * 比如说收到移动球的消息，会转发到BallRoom
+     * 而收到切歌的消息，会转发到MusicPlayer
+     */
     funcListeners: FuncListener[] = [];
     addFuncListener(name: string, func: ((msg: string) => void)) {
         this.funcListeners.filter(x => name !== x.name);
@@ -107,6 +116,7 @@ export class Client {
             })
         }
     }
+    // 事件分发的末尾
 }
 
 export type FuncListener = { name: string, func: (msg: string) => void };

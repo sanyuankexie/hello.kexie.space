@@ -6,7 +6,7 @@ import { Typography } from 'antd';
 import style from "./css/index.module.scss";
 
 import { Logo } from '../../static/cos';
-import { useScrollAnimationRefs } from '../../hooks';
+import { usePageJumpSaveScrollTop, useScrollAnimationRefs } from '../../hooks';
 
 const { Title } = Typography
 
@@ -22,18 +22,7 @@ interface LDirection {
 function LearningDirectionList() {
     const [ScrollAnimationRefs, addScrollAnimationRefs] = useScrollAnimationRefs();
 
-    useEffect(() => {
-        const scrollTop = localStorage.getItem("scrollTop");
-        if (scrollTop) {
-            localStorage.removeItem("scrollTop");
-            document.body.scrollTop = ~~scrollTop;
-        }
-    }, []);
-
-    function rememberScrollTop() {
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
-        localStorage.setItem("scrollTop", JSON.stringify(scrollTop));
-    }
+    const saveScrollTop = usePageJumpSaveScrollTop()
 
     return (
         <>
@@ -42,7 +31,7 @@ function LearningDirectionList() {
                     <div key={self.key} className={`${style.displayItem}`} >
                         <Title style={{ textAlign: "center" }} level={2}>{self.name}</Title>
                         <NavLink
-                            onClick={e => rememberScrollTop()}
+                            onClick={e => saveScrollTop()}
                             to={{ pathname: `introduction/${self.key}` }}
                             ref={addScrollAnimationRefs}>
                             <div className={`float-uad-item delay-${index}`}>
