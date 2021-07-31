@@ -145,6 +145,7 @@ function BallRoom() {
                     ref={ballRef}
                     visitor={atomUser.visitor}
                     styles={atomUser.name === client.name ? {animation: `${ballStyle.selfshine} 2s infinite`} : {}}
+                    onDoubleClick={atomUser.name === client.name ? ((e : React.MouseEvent) => client.send({type: "talk", data:"你好呀！", userName: client.name})): undefined}
                 />
             </Float>
         )
@@ -184,6 +185,7 @@ function BallRoom() {
 
         let callTimes = 0;
         const callInputShortCut = (e: KeyboardEvent) => {
+            return;
             if (!e || e.key !== 'm' || !(e.ctrlKey)) return;
             setInputHidden((callTimes++) % 2 !== 0);
         }

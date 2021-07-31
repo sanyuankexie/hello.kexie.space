@@ -12,11 +12,12 @@ import { Logo } from '../../static/cos';
 interface IProps {
     userName: string;
     avatar?: string;
-    visitor?: boolean
-    styles?: CSSProperties
+    visitor?: boolean;
+    styles?: CSSProperties;
+    onDoubleClick?: (e: React.MouseEvent) => void;
 }
 
-function Ball({ userName, avatar, visitor, styles }: IProps, ref: React.Ref<unknown> | undefined) {
+function Ball({ userName, avatar, visitor, styles, onDoubleClick }: IProps, ref: React.Ref<unknown> | undefined) {
 
     useImperativeHandle(ref, () => ({
         displayMsg
@@ -38,37 +39,10 @@ function Ball({ userName, avatar, visitor, styles }: IProps, ref: React.Ref<unkn
         }
     }
 
-    function handlerGithubLogin(e: React.MouseEvent) {
-        window.open(`https://github.yuuza.net/login/oauth/authorize?client_id=${config.GitHub.ClientId}`)
-    }
-
-    function handlerDoubleClick(e: React.MouseEvent) {
-        if (visitor === true || visitor === undefined) {
-            // User not logged in
-            setCardContent(
-                <>
-                    <Button onClick={e => handlerGithubLogin(e)} type="primary" size={'large'} icon={<GithubOutlined />} className={welcomeStyle.btn} >
-                        我们非常推荐使用Github登陆
-                    </Button>
-                    <Button type="primary" size={'large'} icon={<WechatOutlined />} className={welcomeStyle.btn} >
-                        因为我们的微信登陆还没写好!
-                    </Button>
-                </>
-            )
-        } else {
-            setCardContent(
-                <span style={{ color: "white" }}>
-                    <UserCard name={userName} displayAvatar={false} />
-                </span>
-            )
-        }
-        setContentDisplay(!contentDisplay)
-    }
-
     return (
         <div>
-            <span onDoubleClick={e => handlerDoubleClick(e)}>
-                <img className={style.logo} src={avatar ? avatar : Logo.Kexie} alt="" style={styles}/>
+            <span onDoubleClick={e => onDoubleClick && onDoubleClick(e as any)}>
+                <img className={style.logo} src={avatar ? avatar : Logo.Kexie} alt="" style={styles} />
             </span>
 
             <span style={{ display: !contentDisplay ? "none" : "block" }}>
