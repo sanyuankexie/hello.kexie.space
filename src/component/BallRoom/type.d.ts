@@ -17,7 +17,7 @@ interface BallItem {
     element: JSX.Element
     floatRef?: Float
     ballRef?: {
-        displayMsg: (msg: string) => void
+        displayTalkMsg: (msg: string) => void
     }
 }
 

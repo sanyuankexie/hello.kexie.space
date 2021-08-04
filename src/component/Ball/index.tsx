@@ -1,44 +1,50 @@
 import React, { useState, useImperativeHandle, forwardRef } from 'react';
-import { Button } from 'antd';
-import { WechatOutlined, GithubOutlined } from '@ant-design/icons';
+
 import style from './index.module.scss'
-import welcomeStyle from '../../pages/Welcome/css/index.module.scss'
-import config from '../../static/config';
-import { useMemo, CSSProperties } from 'react';
+import { CSSProperties } from 'react';
 import { debounce } from '../../utils';
 import { Logo } from '../../static/cos';
 
 interface Props {
-    userName: string;
+    unique: boolean;
     avatar?: string;
-    visitor?: boolean;
     styles?: CSSProperties;
-    onDoubleClick?: (e: React.MouseEvent) => void;
+    onDoubleClick: (e?: React.MouseEvent) => void;
 }
 
-function Ball({ userName, avatar, visitor, styles, onDoubleClick }: Props, ref: React.Ref<unknown> | undefined) {
+function Ball({ unique, avatar, styles, onDoubleClick }: Props, ref: React.Ref<any>) {
 
     useImperativeHandle(ref, () => ({
-        displayMsg
+        displayTalkMsg
     }), [])
 
     const [content, setContent] = useState<string | null>(null);
-    const delaySetContent = useMemo(() => debounce(setContent, 5000), [])
+    const delaySetContent = debounce(setContent, 5000);
 
-    function displayMsg(msg: string) {
-        if (!!msg) {
-            setContent(msg)
-            delaySetContent(null);
-        }
+    function displayTalkMsg(msg: string) {
+        if (!msg) return;
+
+        setContent(msg)
+        delaySetContent(null);
     }
 
+    function handleOnDoubleClick() {
+        unique && onDoubleClick();
+    }
+
+    const halo = { animation: `${unique ? style.uniqueshine : style.shine} 2s infinite` };
+    const display = content ? "block" : "none";
+    const img = avatar ? avatar : Logo.Kexie;
     return (
         <div>
-            <span onDoubleClick={e => onDoubleClick && onDoubleClick(e as any)}>
-                <img className={style.logo} src={avatar ? avatar : Logo.Kexie} alt="" style={styles} />
+            <span onDoubleClick={handleOnDoubleClick}>
+                <img
+                    className={style.logo}
+                    src={img}
+                    style={{ ...styles, ...halo }} />
             </span>
 
-            <span style={{ display: content ? "block" : "none" }}>
+            <span style={{ display }}>
                 <div className={style.container}>
                     <div className={style.triangle}></div>
                     <div className={style.content}>

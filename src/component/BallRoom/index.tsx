@@ -2,8 +2,6 @@ import React, { useEffect, useRef, useState } from "react"
 import Float from "../Float";
 import Ball from "../Ball";
 import { throttle } from "../../utils";
-
-import ballStyle from '../Ball/index.module.scss';
 import useClient from "../../hooks/useClient";
 import { AtomUser, BallItem, DirtyMethod, Position } from "./type";
 
@@ -47,7 +45,7 @@ function BallRoom() {
 
         nowBalls.forEach((ball) => {
             if (ball.userName === userName) {
-                ball.ballRef!.displayMsg(data);
+                ball.ballRef!.displayTalkMsg(data);
             }
         });
     }
@@ -104,7 +102,9 @@ function BallRoom() {
             }
         }, 16);
         const unique = client.name === atomUser.name;
-        const halo = { animation: `${unique ? ballStyle.uniqueshine : ballStyle.shine} 2s infinite` };
+        const onDoubelClick = () => {
+            client.send({ type: "talk", data: "你好呀！", userName: client.name })
+        }
         const element = (
             <Float
                 key={atomUser.name}
@@ -116,12 +116,10 @@ function BallRoom() {
                 ref={floatRef}
             >
                 <Ball
-                    userName={atomUser.name}
+                    unique={unique}
                     avatar={atomUser.avatar}
-                    visitor={atomUser.visitor}
-                    styles={halo}
                     ref={ballRef}
-                    onDoubleClick={unique ? ((e: React.MouseEvent) => client.send({ type: "talk", data: "你好呀！", userName: client.name })) : undefined}
+                    onDoubleClick={onDoubelClick}
                 />
             </Float>
         )
