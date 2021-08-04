@@ -1,6 +1,6 @@
 import React from 'react';
 import { Layout, Menu } from 'antd';
-import style from './index.module.css'
+import style from './index.module.scss'
 
 const { Header } = Layout;
 

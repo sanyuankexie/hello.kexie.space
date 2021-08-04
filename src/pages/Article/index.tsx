@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useLayoutEffect } from 'react';
 import { useEffect, useRef, useState } from 'react';
 
 import './code.scss'
@@ -20,7 +20,6 @@ interface Props {
 function Article({ location, match }: Props) {
     const [content, setContent] = useState<string>("");
     const [title, setTitle] = useState<string>("");
-    const markdownElementsContainer = useRef<HTMLDivElement>(null);
 
     const { params } = match;
     const filename = params.target.split('#')[0] as DepartmentFullName;
@@ -38,6 +37,10 @@ function Article({ location, match }: Props) {
         })();
     }, []);
 
+    useLayoutEffect(()=>{
+        document.body.scrollTop = 0;
+    }, []);
+
     return (
         <div style={{ background: "white", paddingBottom: "200px" }}>
             <article className={`${css.article} ${css.articleContainer}`}>
@@ -47,7 +50,7 @@ function Article({ location, match }: Props) {
                     author="Therainisme"
                     published="March 22, 2021"
                 />
-                <span dangerouslySetInnerHTML={{ __html: content }} ref={markdownElementsContainer}>
+                <span dangerouslySetInnerHTML={{ __html: content }}>
                 </span>
             </article>
         </div>

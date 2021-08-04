@@ -8,7 +8,6 @@
     box-shadow: 0 0 6px 2px global.$cyan;
     background: black;
     transition: box-shadow 1s linear;
-    animation: shine 2s infinite;
 }
 
 @keyframes shine {
@@ -23,7 +22,7 @@
     }
 }
 
-@keyframes selfshine {
+@keyframes uniqueshine {
     0% {
         box-shadow: 0 0 10px 2px global.$purple;
     }
@@ -35,7 +34,7 @@
     }
 }
 
-.CardContainer {
+.container {
     position: fixed !important;
     margin-left: 60px;
     display: flex;
@@ -46,7 +45,7 @@
         margin-top: 15px;
         border-color: transparent black transparent transparent;
     }
-    .card {
+    .content {
         background: black;
         border: 0;
         padding: 10px;
@@ -55,7 +54,7 @@
         min-height: 50px;
         overflow-wrap: break-word;
     }
-    .cardFont {
+    .font {
         font-family: Inter;
         font-size: 16px;
         font-style: normal;

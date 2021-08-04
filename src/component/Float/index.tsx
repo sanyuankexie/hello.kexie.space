@@ -13,7 +13,6 @@ interface IProp {
 
 class Float extends Component<IProp> {
 
-
     state = {
         nowY: this.props.initialPosition ? this.props.initialPosition.y : 10,
         nowX: this.props.initialPosition ? this.props.initialPosition.x : 10,

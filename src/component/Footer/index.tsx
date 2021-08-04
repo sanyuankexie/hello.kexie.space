@@ -3,64 +3,71 @@ import { Typography, Popover } from 'antd';
 import style from './index.module.scss';
 import { QRCode } from '../../static/cos'
 
-const { Title } = Typography;
-
 function Footer() {
     return (
         <footer className={style.container}>
             <div className={style.blank} />
             <div className={style.itemsContainer}>
-                {data.map((self: ITable) => {
-                    return dataToItems(self)
+                {data.map((self: Table) => {
+                    return List(self)
                 })}
             </div>
         </footer>
     );
 }
 
-function dataToItems(item: ITable) {
+function List(item: Table) {
     return (
         <div key={item.title}>
-            <Title level={3} className={style.title}>{item.title}</Title>
+            <Typography.Title
+                level={3}
+                className={style.title}>
+                {item.title}
+            </Typography.Title>
             <ul className={style.items}>
-                {
-                    item.list.map((self: IItem) => {
-                        switch (self.name) {
-                            case "微信公众号":
-                                return (
-                                    <Popover content={<img src={QRCode.WeChatOfficialAccount} alt="" />} trigger="hover" style={{ padding: "0 !important" }} key={self.name}>
-                                        <a key={self.name} href={self.url} style={{ color: "white" }} rel="noreferrer">
-                                            <li className={style.item}>{self.name}</li>
-                                        </a>
-                                    </Popover>
-                                )
-                            default:
-                                return (
-                                    <a key={self.name} target="_blank" href={self.url} style={{ color: "white" }} rel="noreferrer">
-                                        <li className={style.item}>{self.name}</li>
-                                    </a>
-                                )
-                        }
-                    })
-                }
+                {item.list.map((self: Item) => {
+                    if (self.content) {
+                        return (<Popover
+                            content={<img src={QRCode.WeChatOfficialAccount} alt="" />}
+                            trigger="hover"
+                            style={{ padding: "0 !important" }}
+                            key={self.name}>
+                            <span>
+                                <Item
+                                    name={self.name}
+                                    url={self.url}
+                                />
+                            </span>
+                        </Popover>);
+                    } else {
+                        return (<Item
+                            key={self.name}
+                            name={self.name}
+                            url={self.url}
+                            target="_blank"
+                        />);
+                    }
+                })}
             </ul>
         </div>
     );
 }
 
-interface ITable {
-    title: string
-    list: Array<IItem>
-}
-
-interface IItem {
-    name: string
-    url: string
+function Item({ name, url, target = "_self" }: Item) {
+    return (
+        <a
+            target={target}
+            key={name}
+            href={url}
+        >
+            <li className={style.item}>{name}</li>
+        </a>
+    );
 }
 
 export default Footer;
 
-const data: Array<ITable> = [
+const data: Array<Table> = [
     {
         title: '学习文档',
         list: [
@@ -100,6 +107,7 @@ const data: Array<ITable> = [
             {
                 name: '微信公众号',
                 url: '#',
+                content: <img src={QRCode.WeChatOfficialAccount} alt="" />,
             },
             {
                 name: "科协官方bilibili账号",

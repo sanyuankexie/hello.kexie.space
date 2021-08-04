@@ -5,15 +5,20 @@
     padding: 0 !important;
 }
 
-.menu, .header, .item {
+.menu,
+.header,
+.item {
     height: 64px !important;
 }
+
 .menu {
     line-height: 64px !important;
 }
 
 @media screen and (max-width: 992px) {
-    .menu, .header, .item {
+    .menu,
+    .header,
+    .item {
         height: 54px !important;
     }
     .menu {
@@ -22,7 +27,9 @@
 }
 
 @media screen and (max-width: 768px) {
-    .menu, .header, .item {
+    .menu,
+    .header,
+    .item {
         height: 48px !important;
     }
     .menu {

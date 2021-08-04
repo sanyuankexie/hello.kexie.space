@@ -25,7 +25,6 @@
     h5,
     h6 {
         font-size: 1.35rem;
-        margin-top: -1.75rem;
         padding-top: 1.6rem;
     }
     p {
@@ -40,6 +39,12 @@
     p,
     ul {
         line-height: 1.7;
+    }
+    ol,
+    ul,
+    dl {
+        margin-top: 1em;
+        margin-bottom: 1em;
     }
     table {
         margin: 1rem auto;

@@ -1,8 +1,7 @@
 import React from "react";
 
 export type action =
-    { type: "setClient", pass: number } |
-    { type: "setScrollAnimationRefs", elementRefs: React.MutableRefObject<HTMLElement>};
+    { type: "setClient", pass: number }
 
 export function clientReducer(state = init, action: action) {
     const newState = { ...state } as any;

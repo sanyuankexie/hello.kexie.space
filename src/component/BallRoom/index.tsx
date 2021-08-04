@@ -1,51 +1,26 @@
 import React, { useEffect, useMemo, useRef, useState } from "react"
-import { Button, Input } from "antd";
 import Float from "../Float";
 import Ball from "../Ball";
 import { throttle } from "../../utils";
 
-import style from './index.module.scss'
 import ballStyle from '../Ball/index.module.scss';
 import { useSelector } from 'react-redux';
 import { Client } from "../../store/ClientReducer";
 import { AppReducer } from "../../store/AReducer";
-
-interface AtomUser {
-    name: string;
-    position: Position;
-    avatar: string;
-    visitor: boolean;
-}
-
-interface Position {
-    x: number;
-    y: number;
-}
-
-interface MsgAPI {
-    type: string
-    data: any
-    userName: string
-}
-
-export interface DirtyMethod {
-    handleServerResponse: (msg: string) => void;
-    getBalls: () => Ball[];
-}
-
-interface Ball {
-    userName: string
-    element: JSX.Element
-    floatRef?: Float
-    ballRef?: {
-        displayMsg: (msg: string) => void
-    }
-}
+import { AtomUser, BallItem, DirtyMethod, HandleServerResponseFunc, MsgAPI, Position } from "./BallRoom";
 
 function BallRoom() {
-    const handleServerResponse = (msg: string) => {
+    const [balls, setBalls] = useState<BallItem[]>([]);
+    const DirtyMethods = useRef<DirtyMethod>();
+    DirtyMethods.current = {
+        handleServerResponse,
+        getBalls: () => balls
+    }
+    const client = useClient(DirtyMethods.current?.handleServerResponse!);
+
+    function handleServerResponse(msg: string) {
         const { type, data, userName } = JSON.parse(msg) as MsgAPI;
-        const nowBalls = DirtyMethodContainer.current?.getBalls()!;
+        const nowBalls = DirtyMethods.current?.getBalls()!;
         switch (type) {
             case "hello":
                 client.send({ type: "rename", userName: client.name, data: { avatar: client.avatar, visitor: client.visitor } });
@@ -61,7 +36,7 @@ function BallRoom() {
                 break;
 
             case "talk":
-                nowBalls.forEach((ball: Ball) => {
+                nowBalls.forEach((ball) => {
                     if (ball.userName === userName) {
                         ball.ballRef!.displayMsg(data);
                     }
@@ -90,7 +65,7 @@ function BallRoom() {
             case "move":
                 const { x, y }: Position = data;
                 if (userName === client.name) return;
-                nowBalls.forEach((ball: Ball) => {
+                nowBalls.forEach((ball) => {
                     if (ball.userName === userName) {
                         ball.floatRef!.moveTo(x, y);
                     }
@@ -102,22 +77,19 @@ function BallRoom() {
         }
     }
 
-    const [balls, setBalls] = useState<Ball[]>([]);
-    const initializeBalls = (data: Array<AtomUser>) => {
+    function initializeBalls(data: Array<AtomUser>) {
         setBalls(data.map(atomUser => createBall(atomUser)));
     }
-
-    const createBall = (atomUser: AtomUser): Ball => {
-
-        const floatRef = (ref: Float) => {
-            DirtyMethodContainer.current!.getBalls().forEach((ball: Ball) => {
+    function createBall(atomUser: AtomUser): BallItem {
+        function floatRef(ref: Float) {
+            DirtyMethods.current!.getBalls().forEach(ball => {
                 if (ball.userName === atomUser.name) {
                     ball.floatRef = ref;
                 }
             })
         }
-        const ballRef = (ref: Ball['ballRef']) => {
-            DirtyMethodContainer.current!.getBalls().forEach((ball: Ball) => {
+        function ballRef(ref: BallItem['ballRef']) {
+            DirtyMethods.current!.getBalls().forEach(ball => {
                 if (ball.userName === atomUser.name) {
                     ball.ballRef = ref;
                 }
@@ -129,91 +101,49 @@ function BallRoom() {
                 client.send(res);
             }
         }, 16);
+        const unique = client.name === atomUser.name;
+        const halo = { animation: `${unique ? ballStyle.uniqueshine : ballStyle.shine} 2s infinite` };
         const element = (
             <Float
-                speed={256}
                 key={atomUser.name}
-                ref={floatRef}
+                speed={256}
                 crossBorder={false}
-                onmoving={onmoving}
                 initialPosition={atomUser.position}
-                zIndex={client.name === atomUser.name ? 200 : 100}
+                zIndex={unique ? 200 : 100}
+                onmoving={onmoving}
+                ref={floatRef}
             >
                 <Ball
                     userName={atomUser.name}
                     avatar={atomUser.avatar}
-                    ref={ballRef}
                     visitor={atomUser.visitor}
-                    styles={atomUser.name === client.name ? {animation: `${ballStyle.selfshine} 2s infinite`} : {}}
-                    onDoubleClick={atomUser.name === client.name ? ((e : React.MouseEvent) => client.send({type: "talk", data:"你好呀！", userName: client.name})): undefined}
+                    styles={halo}
+                    ref={ballRef}
+                    onDoubleClick={unique ? ((e: React.MouseEvent) => client.send({ type: "talk", data: "你好呀！", userName: client.name })) : undefined}
                 />
             </Float>
         )
-        const res: Ball = { userName: atomUser.name, element };
-        return res;
+        return { userName: atomUser.name, element };
     }
 
-    const inputEl = useRef<Input>(null!);
-    const handleTriggerSendBtn = (e?: React.KeyboardEvent) => {
-        if (!e || e.key !== 'Enter' || e.keyCode !== 13) return;
+    return <>{balls ? balls.map(self => self.element) : ''}</>;
+}
 
-        const input = inputEl.current.input.value;
-        if (!input) return;
-
-        const msg: MsgAPI = {
-            type: "talk",
-            data: input,
-            userName: client.name!
-        }
-        client.send(msg);
-    }
-
-    const DirtyMethodContainer = useRef<DirtyMethod>();
-    DirtyMethodContainer.current = {
-        handleServerResponse: handleServerResponse,
-        getBalls: () => balls
-    }
-
+function useClient(handlerFunc: HandleServerResponseFunc) {
     const rest = useSelector(({ clientReducer }: AppReducer) => clientReducer.client);
     const client = useMemo<Client>(() => (rest), []);
-    const [inputHidden, setInputHidden] = useState(true);
 
     useEffect(() => {
-        //todo get user by token
         client.open();
-        client.addFuncListener('ball room', DirtyMethodContainer.current?.handleServerResponse!);
-
-        let callTimes = 0;
-        const callInputShortCut = (e: KeyboardEvent) => {
-            return;
-            if (!e || e.key !== 'm' || !(e.ctrlKey)) return;
-            setInputHidden((callTimes++) % 2 !== 0);
-        }
-
-        document.documentElement.addEventListener('keydown', callInputShortCut);
+        client.addFuncListener('ball room', handlerFunc);
 
         return () => {
-            client.close()
-            document.documentElement.removeEventListener('keydown', callInputShortCut);
+            client.removeFuncListener('ball room');
+            client.close();
         };
     }, []);
 
-    return balls ? (
-        <div>
-            {balls.map(self => self.element)}
-
-            <div
-                className={inputHidden ? `${style.inputContainer} ${style.inputContainerHidden}` : style.inputContainer}
-                onKeyDown={e => handleTriggerSendBtn(e)}
-                style={{ display: client.visitor ? "none" : "block" }}
-            >
-                <Input placeholder="想说的话都可以说呀啦啦啦啦啊啊啊" className={style.inputMsg} ref={inputEl} />
-                <Button type="primary" onClick={e => handleTriggerSendBtn()} className={style.btn}>发送</Button>
-            </div>
-        </div>
-    ) : (<div>wdnmd</div>)
+    return client;
 }
-
-
 
 export default BallRoom;
