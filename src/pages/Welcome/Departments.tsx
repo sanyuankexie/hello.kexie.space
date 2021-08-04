@@ -1,24 +1,19 @@
-import React, { Dispatch, useEffect, useRef } from "react";
+import React from "react";
 import { Logo } from './../../static/cos';
-
-import style from './css/department.module.scss';
-
-
+import style from './css/index.module.scss';
 import { Typography } from 'antd';
-import { AppReducer } from "../../store/AReducer";
-import { useDispatch, useSelector } from "react-redux";
-import clientReducer, { action } from './../../store/ClientReducer';
 import { useScrollAnimationRefs } from "../../hooks";
+import Section from "../../component/Section";
 const { Title } = Typography
 
-
+// 在这里开始使用bootstrap真是一大败笔
 function Departments() {
     const [ScrollAnimationRefs, addScrollAnimationRefs] = useScrollAnimationRefs();
 
     return (
-        <section className={`projects-horizontal ${style.section}`}>
-            <div >
-                <div className="row projects">
+        <Section title="四大部门" description="科协有四大部门，不同的部门下有不同的学习方向">
+            <section className={`projects-horizontal ${style.section}`}>
+                <div className="row projects" >
                     {departmentIntroductionData.map(x => {
                         return (
                             <div
@@ -39,8 +34,8 @@ function Departments() {
                         )
                     })}
                 </div>
-            </div>
-        </section>
+            </section>
+        </Section>
     )
 }
 

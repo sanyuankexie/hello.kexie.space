@@ -27,18 +27,19 @@ function UserCard({ name }: IProps) {
     }, []);
 
     return (
-        !user ? <Loading size={30} /> :
+        user ?
             <div className={css.container}>
                 <img className={css.avatar} src={`${user.avatar}&s=60`} alt="" />
                 <span className={css.right}>
                     <span className={css.name}>{user.name}</span>
                     <span className={css.bio}>{user.bio}</span>
                     <span className={css.location}>
-                        {!user.company && !user.location ? '' : <CommentOutlined style={{ marginRight: "5px" }} />}
+                        {!user.company && !user.location ? '' : <CommentOutlined style={{ marginRight: "5px", marginTop: "5px" }} />}
                         {user.company ? user.company : user.location}
                     </span>
                 </span>
             </div>
+            : <Loading size={30} />
     );
 }
 

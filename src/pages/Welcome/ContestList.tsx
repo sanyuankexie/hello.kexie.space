@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { Table, Tag } from 'antd';
 import style from "./css/index.module.scss";
 import { useScrollAnimationRefs } from '../../hooks';
+import Section from '../../component/Section';
 
 function ContestList() {
     const [ScrollAnimationRefs, addScrollAnimationRefs] = useScrollAnimationRefs();
@@ -20,15 +21,19 @@ function ContestList() {
     }, []);
 
     return (
-        <div className={`${style.contestList}`} ref={tableRef}>
-            <Table
-                className={"contest-container"}
-                style={{ width: "100%", border: "1px solid #efefef" }}
-                columns={columns as any}
-                dataSource={data}
-                pagination={false}
-            />
-        </div>
+        <Section title="近年参赛获奖" description="很多，还在整理当中，下面展示是2020年国家级、省部级获奖的一部分......">
+            <div className={style.sectionContainer}>
+                <div className={`${style.contestList}`} ref={tableRef}>
+                    <Table
+                        className={"contest-container"}
+                        style={{ width: "100%", border: "1px solid #efefef" }}
+                        columns={columns as any}
+                        dataSource={data}
+                        pagination={false}
+                    />
+                </div>
+            </div>
+        </Section>
     );
 }
 

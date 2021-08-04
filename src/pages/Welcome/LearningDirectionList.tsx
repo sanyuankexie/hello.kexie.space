@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { Component, CSSProperties } from 'react';
+import React from 'react';
+import { CSSProperties } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Typography } from 'antd';
 
@@ -7,6 +7,7 @@ import style from "./css/index.module.scss";
 
 import { Logo } from '../../static/cos';
 import { usePageJumpSaveScrollTop, useScrollAnimationRefs } from '../../hooks';
+import Section from '../../component/Section';
 
 const { Title } = Typography
 
@@ -18,35 +19,36 @@ interface LDirection {
     style?: CSSProperties
 }
 
-
 function LearningDirectionList() {
     const [ScrollAnimationRefs, addScrollAnimationRefs] = useScrollAnimationRefs();
 
     const saveScrollTop = usePageJumpSaveScrollTop()
 
     return (
-        <>
-            {data.map((self: LDirection, index: number) => {
-                return (
-                    <div key={self.key} className={`${style.displayItem}`} >
-                        <Title style={{ textAlign: "center" }} level={2}>{self.name}</Title>
-                        <NavLink
-                            onClick={e => saveScrollTop()}
-                            to={{ pathname: `introduction/${self.key}` }}
-                            ref={addScrollAnimationRefs}>
-                            <div className={`float-uad-item delay-${index}`}>
-                                <img
-                                    src={self.logo}
-                                    alt=""
-                                    width={self.width}
-                                    style={self.style || {}}
-                                    className={`${style.imgScale}`} />
-                            </div>
-                        </NavLink>
-                    </div>
-                )
-            })}
-        </>
+        <Section title="学习方向">
+            <div className={style.sectionContainer}>
+                {data.map((self: LDirection, index: number) => {
+                    return (
+                        <div key={self.key} className={`${style.displayItem}`} >
+                            <Title style={{ textAlign: "center" }} level={2}>{self.name}</Title>
+                            <NavLink
+                                onClick={e => saveScrollTop()}
+                                to={{ pathname: `introduction/${self.key}` }}
+                                ref={addScrollAnimationRefs}>
+                                <div className={`float-uad-item delay-${index}`}>
+                                    <img
+                                        src={self.logo}
+                                        alt=""
+                                        width={self.width}
+                                        style={self.style || {}}
+                                        className={`${style.imgScale}`} />
+                                </div>
+                            </NavLink>
+                        </div>
+                    )
+                })}
+            </div>
+        </Section>
     );
 }
 

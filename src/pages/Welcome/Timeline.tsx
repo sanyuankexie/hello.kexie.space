@@ -4,6 +4,7 @@ import React from "react";
 import style from './css/index.module.scss'
 import MarkdownParser from "../../utils/markdown";
 import { useScrollAnimationRefs } from "../../hooks";
+import Section from "../../component/Section";
 
 const { Step } = Steps
 
@@ -11,25 +12,27 @@ function Timeline() {
     const [ScrollAnimationRefs, addScrollAnimationRefs] = useScrollAnimationRefs();
 
     return (
-        <>
-            <Divider />
-            <div className={style.subSectionContainer} ref={addScrollAnimationRefs }>
-                <Steps direction="vertical" current={1}>
-                    <Step title="报名阶段" description="报名时间截止到笔试前" />
-                    <Step title="入门学习" description="学会使用Online Judge实现问题求解" icon={<LoadingOutlined />} />
-                    <Step title="科技交流会" description="集结三院各大科技类社团的科技活动" />
-                    <Step title="笔试 & 面试" description="期待脱颖而出的你！" />
-                    <Step title="绘蓝杯科技竞赛" description="绽放你们的光芒！" />
-                </Steps>
+        <Section title="招新时间线">
+            <div className={style.sectionContainer}>
+                <Divider />
+                <div className={style.subSectionContainer} ref={addScrollAnimationRefs}>
+                    <Steps direction="vertical" current={1}>
+                        <Step title="报名阶段" description="报名时间截止到笔试前" />
+                        <Step title="入门学习" description="学会使用Online Judge实现问题求解" icon={<LoadingOutlined />} />
+                        <Step title="科技交流会" description="集结三院各大科技类社团的科技活动" />
+                        <Step title="笔试 & 面试" description="期待脱颖而出的你！" />
+                        <Step title="绘蓝杯科技竞赛" description="绽放你们的光芒！" />
+                    </Steps>
+                </div>
+                <Divider className={style.mobile} />
+                <div className={style.subSectionContainer} ref={addScrollAnimationRefs}>
+                    <p
+                        style={{ textIndent: "2em" }}
+                        dangerouslySetInnerHTML={{ __html: MarkdownParser.render(content) }}>
+                    </p>
+                </div>
             </div>
-            <Divider className={style.mobile} />
-            <div className={style.subSectionContainer} ref={addScrollAnimationRefs}>
-                <p
-                    style={{ textIndent: "2em" }}
-                    dangerouslySetInnerHTML={{ __html: MarkdownParser.render(content) }}>
-                </p>
-            </div>
-        </>
+        </Section>
     );
 }
 
