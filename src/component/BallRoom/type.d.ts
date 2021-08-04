@@ -1,24 +1,18 @@
 import Float from "../Float";
 
-export interface AtomUser {
+interface AtomUser {
     name: string;
     position: Position;
     avatar: string;
     visitor: boolean;
 }
 
-export interface Position {
+interface Position {
     x: number;
     y: number;
 }
 
-export interface MsgAPI {
-    type: string
-    data: any
-    userName: string
-}
-
-export interface BallItem {
+interface BallItem {
     userName: string
     element: JSX.Element
     floatRef?: Float
@@ -27,9 +21,6 @@ export interface BallItem {
     }
 }
 
-export type HandleServerResponseFunc = (msg: string) => void;
-
-export interface DirtyMethod {
-    handleServerResponse: HandleServerResponseFunc
+interface DirtyMethod {
     getBalls: () => BallItem[];
 }

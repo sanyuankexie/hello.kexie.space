@@ -1,80 +1,82 @@
-import React, { useEffect, useMemo, useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import Float from "../Float";
 import Ball from "../Ball";
 import { throttle } from "../../utils";
 
 import ballStyle from '../Ball/index.module.scss';
-import { useSelector } from 'react-redux';
-import { Client } from "../../store/ClientReducer";
-import { AppReducer } from "../../store/AReducer";
-import { AtomUser, BallItem, DirtyMethod, HandleServerResponseFunc, MsgAPI, Position } from "./BallRoom";
+import useClient from "../../hooks/useClient";
+import { AtomUser, BallItem, DirtyMethod, Position } from "./type";
+
 
 function BallRoom() {
     const [balls, setBalls] = useState<BallItem[]>([]);
     const DirtyMethods = useRef<DirtyMethod>();
     DirtyMethods.current = {
-        handleServerResponse,
         getBalls: () => balls
     }
-    const client = useClient(DirtyMethods.current?.handleServerResponse!);
+    const [client, setDeliverier] = useClient();
 
-    function handleServerResponse(msg: string) {
-        const { type, data, userName } = JSON.parse(msg) as MsgAPI;
+    useEffect(() => {
+        setDeliverier({ "hello": handleHelloAction });
+        setDeliverier({ "enter": handleEnterAction });
+        setDeliverier({ "talk": handleTalkAction });
+        setDeliverier({ "move": handleMoveAction });
+        setDeliverier({ "stand up": handleStandUpAction });
+        setDeliverier({ "leave": handleLeaveAction });
+    }, []);
+
+    function handleHelloAction() {
+        client.send({ type: "rename", userName: client.name, data: { avatar: client.avatar, visitor: client.visitor } });
+        client.send({ type: "stand up", userName: client.name });
+    }
+
+    function handleEnterAction({ data, userName }: ServerResponse) {
         const nowBalls = DirtyMethods.current?.getBalls()!;
-        switch (type) {
-            case "hello":
-                client.send({ type: "rename", userName: client.name, data: { avatar: client.avatar, visitor: client.visitor } });
-                client.send({ type: "stand up", userName: client.name });
-                break;
 
-            case "stand up":
-                initializeBalls(
-                    data.map((x: any) => {
-                        return ({ ...x, name: x.userName });
-                    })
-                )
-                break;
-
-            case "talk":
-                nowBalls.forEach((ball) => {
-                    if (ball.userName === userName) {
-                        ball.ballRef!.displayMsg(data);
-                    }
-                });
-                break;
-
-            case "enter":
-                const atomUser: AtomUser = {
-                    name: userName,
-                    position: data.position,
-                    avatar: data.avatar,
-                    visitor: data.visitor
-                }
-                setBalls([...nowBalls, createBall(atomUser)]);
-                break;
-
-            case "leave":
-                setBalls(nowBalls.filter(self => {
-                    return self.userName != userName;
-                }))
-                break;
-
-            case "rename":
-                break;
-
-            case "move":
-                const { x, y }: Position = data;
-                if (userName === client.name) return;
-                nowBalls.forEach((ball) => {
-                    if (ball.userName === userName) {
-                        ball.floatRef!.moveTo(x, y);
-                    }
-                })
-                break;
-
-            default:
-                break;
+        const atomUser: AtomUser = {
+            name: userName,
+            position: data.position,
+            avatar: data.avatar,
+            visitor: data.visitor
         }
+        setBalls([...nowBalls, createBall(atomUser)]);
+    }
+
+    function handleTalkAction({ data, userName }: ServerResponse) {
+        const nowBalls = DirtyMethods.current?.getBalls()!;
+
+        nowBalls.forEach((ball) => {
+            if (ball.userName === userName) {
+                ball.ballRef!.displayMsg(data);
+            }
+        });
+    }
+
+    function handleMoveAction({ data, userName }: ServerResponse) {
+        const nowBalls = DirtyMethods.current?.getBalls()!;
+
+        const { x, y }: Position = data;
+        if (userName === client.name) return;
+        nowBalls.forEach((ball) => {
+            if (ball.userName === userName) {
+                ball.floatRef!.moveTo(x, y);
+            }
+        })
+    }
+
+    function handleStandUpAction({ data, userName }: ServerResponse) {
+        initializeBalls(
+            data.map((x: any) => {
+                return ({ ...x, name: x.userName });
+            })
+        )
+    }
+
+    function handleLeaveAction({ data, userName }: ServerResponse) {
+        const nowBalls = DirtyMethods.current?.getBalls()!;
+        setBalls(nowBalls.filter(self => {
+            return self.userName != userName;
+        }))
     }
 
     function initializeBalls(data: Array<AtomUser>) {
@@ -127,23 +129,6 @@ function BallRoom() {
     }
 
     return <>{balls ? balls.map(self => self.element) : ''}</>;
-}
-
-function useClient(handlerFunc: HandleServerResponseFunc) {
-    const rest = useSelector(({ clientReducer }: AppReducer) => clientReducer.client);
-    const client = useMemo<Client>(() => (rest), []);
-
-    useEffect(() => {
-        client.open();
-        client.addFuncListener('ball room', handlerFunc);
-
-        return () => {
-            client.removeFuncListener('ball room');
-            client.close();
-        };
-    }, []);
-
-    return client;
 }
 
 export default BallRoom;
