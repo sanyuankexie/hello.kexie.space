@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { CodeFilled, GithubOutlined } from "@ant-design/icons";
 import { Button, Typography } from "antd";
 import { Logo } from "../../static/cos";
-import style from "./css/index.module.scss";
+import style from "./css/Jumbotron.module.scss";
 
 function Jumbotron() {
     const vantaRef = useRef<HTMLDivElement>(null!);
@@ -27,7 +27,7 @@ function Jumbotron() {
 
 
     return (
-        <section id="wdnmd" className={`${style.helloContainer} default-box-shadow`}>
+        <section id="wdnmd" className={`${style.container} default-box-shadow`}>
             <div ref={vantaRef} className={style.background}></div>
 
             <div className={style.blank} style={{ height: "20vh" }} />

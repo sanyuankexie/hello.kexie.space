@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Table, Tag } from 'antd';
-import style from "./css/index.module.scss";
+import style from "./css/ContestList.module.scss";
 import { useScrollAnimationRefs } from '../../hooks';
 import Section from '../../component/Section';
 

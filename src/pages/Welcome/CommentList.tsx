@@ -5,11 +5,9 @@ import axios from 'axios';
 import moment from 'moment';
 import MarkdownParser from '../../utils/markdown';
 import { CommentAPI } from '../../api';
-import style from './css/index.module.scss'
+import style from './css/CommentList.module.scss'
 import UserCard from '../../component/UserCard';
 import { useScrollAnimationRefs } from '../../hooks';
-
-const { Title } = Typography
 
 interface IComment {
     author: string
@@ -50,9 +48,9 @@ function CommentList() {
     }, [commentList]);
 
     return (
-        <div className={style.commentList}>
+        <div className={style.container}>
             <List
-                header={<Title level={3}>畅心所言</Title>}
+                header={<Typography.Title level={3}>畅心所言</Typography.Title>}
                 loading={loading}
                 itemLayout="horizontal"
                 dataSource={commentList}

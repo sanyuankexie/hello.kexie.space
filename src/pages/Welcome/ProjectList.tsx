@@ -2,18 +2,15 @@ import React from 'react';
 import { FC } from 'react';
 import { List, Typography } from 'antd';
 
-import style from './css/index.module.scss'
+import style from './css/projectlist.module.scss'
 import { useScrollAnimationRefs } from '../../hooks';
 
-const { Title } = Typography
-
 function ProjectList() {
-    
 
     return (
-        <div className={style.projectList}>
+        <div className={style.container}>
             <List
-                header={<Title level={3}>开源项目</Title>}
+                header={<Typography.Title level={3}>开源项目</Typography.Title>}
                 dataSource={data}
                 renderItem={item => (
                     <li style={{ borderBottom: '1px solid #f0f0f0' }}>
@@ -54,7 +51,7 @@ const Project: FC<IProject> = ({ name, description, language, avatar, url, langu
                     </a>
                     <span className={style.tags}>
                         {language}
-                        <span className={style.languageColor} style={{ background: languageColor }} />
+                        <span className={style.language} style={{ background: languageColor }} />
                     </span>
                 </span>
             </span>

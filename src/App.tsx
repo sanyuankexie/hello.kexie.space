@@ -2,7 +2,7 @@ import { Route, Switch } from 'react-router-dom'
 import React from 'react';
 import Welcome from "./pages/Welcome";
 import Footer from "./component/Footer";
-import Article from "./pages/Article";
+import Article from "./pages/Article/Article";
 
 import './App.css'
 import BallRoom from './component/BallRoom';

@@ -1,0 +1,36 @@
+.container {
+    .project {
+        display: flex;
+        flex-direction: column;
+        padding: 1em;
+    }
+    .avatar {
+        margin-right: 10px;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+    }
+    .name {
+        color: rgba(0, 0, 0, 0.85) !important;
+        display: flex;
+        justify-content: space-between;
+        font-size: 18px;
+    }
+    .description {
+        margin-top: 5px;
+        margin-bottom: 5px;
+        color: rgba(0, 0, 0, 0.85) !important;
+        text-align: left !important;
+    }
+    .language {
+        position: relative;
+        top: 1px;
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+        border: 1px solid rgba(27, 31, 35, 0.1);
+        border-radius: 50%;
+        background-color: #f1e05a;
+        margin-left: 8px;
+    }
+}

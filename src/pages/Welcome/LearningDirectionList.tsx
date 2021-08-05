@@ -9,8 +9,6 @@ import { Logo } from '../../static/cos';
 import { usePageJumpSaveScrollTop, useScrollAnimationRefs } from '../../hooks';
 import Section from '../../component/Section';
 
-const { Title } = Typography
-
 interface LDirection {
     name: string
     key: string
@@ -30,7 +28,7 @@ function LearningDirectionList() {
                 {data.map((self: LDirection, index: number) => {
                     return (
                         <div key={self.key} className={`${style.displayItem}`} >
-                            <Title style={{ textAlign: "center" }} level={2}>{self.name}</Title>
+                            <Typography.Title style={{ textAlign: "center" }} level={2}>{self.name}</Typography.Title>
                             <NavLink
                                 onClick={e => saveScrollTop()}
                                 to={{ pathname: `introduction/${self.key}` }}

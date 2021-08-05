@@ -1,0 +1,66 @@
+@use '../../../global.scss';
+@import "./index.module.scss";
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #0a0a0a;
+    width: 100vw;
+    height: 105vh;
+    z-index: 0;
+    overflow: hidden;
+    .blank {
+        height: 10em;
+    }
+    .title,
+    .description {
+        color: global.$pure-white !important;
+        margin-top: 1em;
+    }
+    .description {
+        text-align: center;
+    }
+    .btnGroup {
+        display: flex;
+        width: 350px;
+        justify-content: space-between;
+        margin-top: 3em;
+    }
+    .btnFilled {
+        background: global.$cyan !important;
+        border-color: global.$cyan !important;
+        &:hover {
+            background: global.$light-cyan !important;
+            border-color: global.$cyan !important;
+        }
+    }
+    .btnDefault {
+        &:hover,
+        &:focus {
+            color: global.$cyan !important;
+            background: global.$pure-white;
+            border-color: global.$cyan !important;
+        }
+    }
+    .background {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+    }
+    @keyframes backgroundmove {
+        0% {
+            transform: scale(1);
+        }
+        100% {
+            transform: scale(1.5);
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        height: 120vh;
+    }
+}

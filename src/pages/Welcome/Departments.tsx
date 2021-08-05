@@ -4,7 +4,6 @@ import style from './css/index.module.scss';
 import { Typography } from 'antd';
 import { useScrollAnimationRefs } from "../../hooks";
 import Section from "../../component/Section";
-const { Title } = Typography
 
 // 在这里开始使用bootstrap真是一大败笔
 function Departments() {
@@ -26,7 +25,7 @@ function Departments() {
                                         <img className="img-fluid" src={x.logo} width={250} />
                                     </div>
                                     <div className="col col-xl-10 col-md-8" style={{ margin: "auto" }}>
-                                        <Title level={3}>{x.name}</Title>
+                                        <Typography.Title level={3}>{x.name}</Typography.Title>
                                         {x.descriptions}
                                     </div>
                                 </div>

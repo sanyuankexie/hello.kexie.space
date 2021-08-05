@@ -1,7 +1,6 @@
 import React from "react";
 import Section from "../../component/Section";
 import { useScrollHandler } from "../../hooks";
-import style from "./css/index.module.scss";
 
 function PromotionalVideo() {
     const [ScrollAnimationRefs, addScrollAnimationRefs] = useScrollHandler();
