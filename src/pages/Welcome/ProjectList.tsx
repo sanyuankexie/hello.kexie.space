@@ -2,7 +2,7 @@ import React from 'react';
 import { FC } from 'react';
 import { List, Typography } from 'antd';
 
-import style from './css/projectlist.module.scss'
+import style from './css/ProjectList.module.scss'
 import { useScrollAnimationRefs } from '../../hooks';
 
 function ProjectList() {
