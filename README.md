@@ -1,10 +1,25 @@
-# 一个不像是README的文档
+<h1>一个不像是README的文档</h1>
 
 它更像是踩坑日记。
 
-[TOC]
+- [已经遇到过的问题](#已经遇到过的问题)
+  - [使用vercel部署，react-router跳转的页面会404](#使用vercel部署react-router跳转的页面会404)
+  - [小球刷新率设置](#小球刷新率设置)
+  - [Markdown文档解析](#markdown文档解析)
+  - [主页评论](#主页评论)
+  - [WebScoket](#webscoket)
+  - [函数式组件里的回调函数里无法获取最新的state](#函数式组件里的回调函数里无法获取最新的state)
+  - [悬浮球的移动（父组件调用子组件内部的方法）](#悬浮球的移动父组件调用子组件内部的方法)
+  - [关于音乐播放器](#关于音乐播放器)
+  - [渐显和渐隐](#渐显和渐隐)
+  - [嵌入等比缩放的视频](#嵌入等比缩放的视频)
+  - [antd design修改主题色](#antd-design修改主题色)
+- [可能想问的问题](#可能想问的问题)
+  - [如何更换头像？](#如何更换头像)
+- [一些过程](#一些过程)
+  - [小球的移动](#小球的移动)
 
-## 已经遇到的问题
+## 已经遇到过的问题
 
 ### 使用vercel部署，react-router跳转的页面会404
 
@@ -123,3 +138,49 @@ function BallRoom(){
 修改 local storage 中的 `user` 的 `avatar` 字段，用其它图片的链接替代。
 
 ![image](https://user-images.githubusercontent.com/41776735/129332006-8e376f7f-d491-4eff-b979-67a37780c0cb.png)
+
+## 一些过程
+
+### 小球的移动
+
+其实单独抽离了一个 `Float` 组件出来，这个组件里所有子元素都能像小球一样移动。
+
+> Float是用类组件的形式写的，写得非常的丑，有空可以重构一下。
+
+可以注意到，小球不随着滚动条的滚动二变化位置，是因为它 `position:absolute;`。位置的移动本质上就是 `left` 和 `top` 的变化。
+
+浏览器自带有 `mousedown` `mousemove` `mouseup` 这三个事件，抽象流程图如下。
+
+![image](https://user-images.githubusercontent.com/41776735/129386201-e610b9ff-24b2-4b02-bf1b-abb51a2dd047.png)
+
+怕以后没空了没人读得懂，所以将Float组件的内部函数的作用都写了一下。（未来会用hook重写，大概吧）
+
+1. `handleMove()`
+
+拥有内部方法`moving(e)`和`endMoving(e)`。（写在里面可以防止小球防止的目标位置偏移）
+
+`componentDidMount()`后会通过原生的方法向DOM添加`mousedown`事件，回调为`handleMove()`。（用原生的方法是因为React封装的onTouchMove会导致移动端页面touch"穿透"，找了许多很多仍方案无法解决）
+
+所以它作为一个启动器，当被触发时，通过原生的方法向DOM添加`mousemove`事件，回调为`moving(e)`。
+
+最后通过原生的方法向DOM添加`mouseup`事件，回调为`endMoving(e)`，作为结束。
+
+2. `endMoving(e)`
+
+解除DOM对`mousemove`和`mouseup`的监听。
+
+3. `moving(e)`
+
+不断地获取新的`targetX`、`targetY`，并将获取到的位置信息通过调用的方式传递给`moveTo(targetX,targetY)`。
+
+4. `moveTo(targetX,targetY)`
+
+将`targetX`,`targetY`保存到 state 中。
+
+里面有一个回调`callback()`，该函数通过 state 的 `raf` 保证其唯一，且使用`requestAnimationFrame()`不断递归地调用自己，保证显示器刷新一次仅会执行一次。
+
+通过计算`now`与`target`的长度确定一次调用`callback()`移动的距离。
+
+如果距离大就移动。
+
+如果距离很小则直接无视计算的增量，直接将小球移动到`target`，同时 state 的`raf`设为`null`，取消`requestAnimationFrame()`的递归调用。
