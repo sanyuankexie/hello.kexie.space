@@ -15,11 +15,22 @@ function BallRoom() {
     const [client, setDeliverier] = useClient();
 
     useEffect(() => {
+        // 连接上服务器，服务器会主动回传。
         setDeliverier({ "hello": handleHelloAction });
+
+        // 当有人连接上服务器，服务器会向其它用户发送这个消息。
         setDeliverier({ "enter": handleEnterAction });
+
+        // 当有人发送消息至服务器，服务器会向所有用户广播这个的消息。
         setDeliverier({ "talk": handleTalkAction });
+
+        // 当有人移动的行为发送至服务器，服务器会向其他用户广播这个消息。
         setDeliverier({ "move": handleMoveAction });
+
+        // 客户端可以向服务器请求当前在线用户的信息。
         setDeliverier({ "stand up": handleStandUpAction });
+
+        // 用户下线，服务器会向其他用户广播这个消息。
         setDeliverier({ "leave": handleLeaveAction });
     }, []);
 
