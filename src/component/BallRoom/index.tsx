@@ -64,8 +64,8 @@ function BallRoom() {
     }
 
     function handleTalkAction({ data, userName }: ServerResponse) {
-        const ref = ballRefs.current.get(userName);
-        ref?.displayTalkMsg(data);
+        const el = ballRefs.current.get(userName);
+        el?.displayTalkMsg(data);
     }
 
     function handleMoveAction({ data, userName }: ServerResponse) {
@@ -79,7 +79,7 @@ function BallRoom() {
     function handleStandUpAction({ data, userName }: ServerResponse) {
         setUserList(data.map((serverUser: any) => {
             return {
-                name: userName,
+                name: serverUser.userName,
                 position: serverUser.position,
                 avatar: serverUser.avatar,
                 visitor: serverUser.visitor
@@ -95,7 +95,7 @@ function BallRoom() {
 
     return <>
         {userList.map(user => {
-            const unique = client.name === user.name;
+            const unique: boolean = client.name === user.name;
 
             /**
              * 双击一个小球（不论是否是自己的），（随机）发送消息
@@ -124,7 +124,7 @@ function BallRoom() {
                     ref={floatRef(user)}
                 >
                     <Ball
-                        unique={true}
+                        unique={unique}
                         avatar={user.avatar}
                         ref={ballRef(user)}
                         onDoubleClick={onDoubelClick}
