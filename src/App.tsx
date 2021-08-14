@@ -7,7 +7,6 @@ import Article from "./pages/Article/Article";
 import './App.css'
 import BallRoom from './component/BallRoom';
 import GithubAuth from './pages/GithubAuth';
-import MusicPlayer from './pages/MusicPlayer';
 import { Provider } from 'react-redux';
 import { createStore } from "redux";
 import appReducer from './store/AReducer';
@@ -22,7 +21,6 @@ function App() {
                     <BallRoom />
                     <Switch>
                         <Route path="/introduction/:target" component={Article} />
-                        {/* <Route path="/music" component={MusicPlayer} /> */}
                         <Route path="/github-auth" component={GithubAuth} />
                         <Route path="/" component={Welcome} />
                     </Switch>

@@ -35,3 +35,20 @@ export function toHump(target: string, separator?: string): string {
     }
     return strs.join('');
 }
+
+/**
+ * @description 获取点击事件或者触摸事件的clientX和clientY
+ */
+export function getEventClientPosition(e: MouseEvent | TouchEvent) {
+    if ((e as MouseEvent).clientX) {
+        return {
+            clientX: (e as MouseEvent).clientX,
+            clientY: (e as MouseEvent).clientY
+        };
+    } else {
+        return {
+            clientX: (e as TouchEvent).changedTouches[0].clientX,
+            clientY: (e as TouchEvent).changedTouches[0].clientY
+        };
+    }
+}

@@ -68,7 +68,7 @@ function BallRoom() {
         if (userName === client.name) return;
         nowBalls.forEach((ball) => {
             if (ball.userName === userName) {
-                ball.floatRef!.moveTo(x, y);
+                ball.floatRef!.letItMoveTo({ x, y });
             }
         })
     }
@@ -92,7 +92,7 @@ function BallRoom() {
         setBalls(data.map(atomUser => createBall(atomUser)));
     }
     function createBall(atomUser: AtomUser): BallItem {
-        function floatRef(ref: Float) {
+        function floatRef(ref: any) {
             DirtyMethods.current!.getBalls().forEach(ball => {
                 if (ball.userName === atomUser.name) {
                     ball.floatRef = ref;
@@ -121,9 +121,9 @@ function BallRoom() {
                 key={atomUser.name}
                 speed={256}
                 crossBorder={false}
-                initialPosition={atomUser.position}
+                initPosition={atomUser.position}
                 zIndex={unique ? 200 : 100}
-                onmoving={onmoving}
+                onMoving={onmoving}
                 ref={floatRef}
             >
                 <Ball

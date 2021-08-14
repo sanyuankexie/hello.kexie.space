@@ -1,26 +1,26 @@
 import Float from "../Float";
 
-interface AtomUser {
+export interface AtomUser {
     name: string;
     position: Position;
     avatar: string;
     visitor: boolean;
 }
 
-interface Position {
+export interface Position {
     x: number;
     y: number;
 }
 
-interface BallItem {
-    userName: string
-    element: JSX.Element
-    floatRef?: Float
+export interface BallItem {
+    userName: string;
+    element: JSX.Element;
+    floatRef?: any;
     ballRef?: {
         displayTalkMsg: (msg: string) => void
     }
 }
 
-interface DirtyMethod {
+export interface DirtyMethod {
     getBalls: () => BallItem[];
 }
