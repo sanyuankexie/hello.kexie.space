@@ -87,16 +87,18 @@ useEffect(() => {
 
 ### 函数式组件里的回调函数里无法获取最新的state
 
-在`/src/component/BallRoom`里以各种`handle`开头的函数都有这个问题。结果就是回调执行时，都获取不到最新的`balls`。这个问题产生的原因是闭包。
+在`/src/component/BallRoom`里以各种`handle`开头的函数都有这个问题。这些回调被执行时，都获取不到最新的`userList`。这个问题产生的原因是闭包。
 
-那么可以将获取的`balls`的方法放在ref里，这样每次这个方法都是最新的，获取到的`balls`也是最新的了。
+那么可以将获取的`userList`的方法放在ref里，这样每次这个方法都是最新的，获取到的`userList`也是最新的了。
 
 ```js
 function BallRoom(){
     ......
-    const getBallsRef = useRef();
-    getBallsRef.current = () => balls;
+    const userListRef = useRef();
+    userListRef.current = () => userList;
     ......
+    // 获取的方式
+    const data = userListRef.current();
 }
 ```
 
@@ -112,7 +114,7 @@ function BallRoom(){
 
 用简单的话来说：
 
-1. 将需要增加这个特效的组件想方设法加入到redux里，可以使用`useScrollAnimationRefs` （一个自定义的hook）的第一个参数，用法与ref一样。如果该组件无法ref，那只能手动添加。`/src/pages/Welcome/ContestList.tsx`里只能这样。
+1. 将需要增加这个特效的组件想方设法加入到 redux 里，可以使用`useScrollAnimationRefs` （一个自定义的hook）的第一个参数，用法与 ref 一样。如果该组件无法 ref ，那只能手动添加。`/src/pages/Welcome/ContestList.tsx`里只能这样。
 2. 选择一个容器组件，使用`useScrollHandler`（一个自定义的hook）作为监视器。
 
 ### 嵌入等比缩放的视频
