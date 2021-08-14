@@ -3,16 +3,30 @@ import Float from "../Float";
 import Ball from "../Ball";
 import { throttle } from "../../utils";
 import useClient from "../../hooks/useClient";
-import { AtomUser, BallItem, DirtyMethod, Position } from "./type";
-
+import { AtomUser, Position } from "./type";
+import { Handles as FloatHandles } from "../Float/type";
+import { Handles as BallHandles } from "../Ball/type";
 
 function BallRoom() {
-    const [balls, setBalls] = useState<BallItem[]>([]);
-    const DirtyMethods = useRef<DirtyMethod>();
-    DirtyMethods.current = {
-        getBalls: () => balls
-    }
     const [client, setDeliverier] = useClient();
+    const [userList, setUserList] = useState<Array<AtomUser>>([]);
+
+    const userListRef = useRef<() => Array<AtomUser>>();
+    userListRef.current = () => userList;
+
+    const floatRefs = useRef(new Map<string, FloatHandles>());
+    function floatRef(user: AtomUser) {
+        return (el: FloatHandles) => {
+            floatRefs.current.set(user.name, el);
+        }
+    }
+
+    const ballRefs = useRef(new Map<string, BallHandles>());
+    function ballRef(user: AtomUser) {
+        return (el: BallHandles) => {
+            ballRefs.current.set(user.name, el);
+        }
+    }
 
     useEffect(() => {
         // 连接上服务器，服务器会主动回传。
@@ -40,104 +54,85 @@ function BallRoom() {
     }
 
     function handleEnterAction({ data, userName }: ServerResponse) {
-        const nowBalls = DirtyMethods.current?.getBalls()!;
-
-        const atomUser: AtomUser = {
+        const newUser: AtomUser = {
             name: userName,
             position: data.position,
             avatar: data.avatar,
             visitor: data.visitor
         }
-        setBalls([...nowBalls, createBall(atomUser)]);
+        setUserList([...userListRef.current!(), newUser]);
     }
 
     function handleTalkAction({ data, userName }: ServerResponse) {
-        const nowBalls = DirtyMethods.current?.getBalls()!;
-
-        nowBalls.forEach((ball) => {
-            if (ball.userName === userName) {
-                ball.ballRef!.displayTalkMsg(data);
-            }
-        });
+        const ref = ballRefs.current.get(userName);
+        ref?.displayTalkMsg(data);
     }
 
     function handleMoveAction({ data, userName }: ServerResponse) {
-        const nowBalls = DirtyMethods.current?.getBalls()!;
+        if (userName === client.name) return;
 
         const { x, y }: Position = data;
-        if (userName === client.name) return;
-        nowBalls.forEach((ball) => {
-            if (ball.userName === userName) {
-                ball.floatRef!.letItMoveTo({ x, y });
-            }
-        })
+        const el = floatRefs.current.get(userName);
+        el?.letItMoveTo({ x, y })
     }
 
     function handleStandUpAction({ data, userName }: ServerResponse) {
-        initializeBalls(
-            data.map((x: any) => {
-                return ({ ...x, name: x.userName });
-            })
-        )
+        setUserList(data.map((serverUser: any) => {
+            return {
+                name: userName,
+                position: serverUser.position,
+                avatar: serverUser.avatar,
+                visitor: serverUser.visitor
+            }
+        }));
     }
 
     function handleLeaveAction({ data, userName }: ServerResponse) {
-        const nowBalls = DirtyMethods.current?.getBalls()!;
-        setBalls(nowBalls.filter(self => {
-            return self.userName != userName;
-        }))
+        setUserList(userListRef.current!().filter(self => {
+            return self.name !== userName;
+        }));
     }
 
-    function initializeBalls(data: Array<AtomUser>) {
-        setBalls(data.map(atomUser => createBall(atomUser)));
-    }
-    function createBall(atomUser: AtomUser): BallItem {
-        function floatRef(ref: any) {
-            DirtyMethods.current!.getBalls().forEach(ball => {
-                if (ball.userName === atomUser.name) {
-                    ball.floatRef = ref;
-                }
-            })
-        }
-        function ballRef(ref: BallItem['ballRef']) {
-            DirtyMethods.current!.getBalls().forEach(ball => {
-                if (ball.userName === atomUser.name) {
-                    ball.ballRef = ref;
-                }
-            })
-        }
-        const onmoving = throttle((position: Position) => {
-            if (client.name === atomUser.name) {
-                const res = { type: "move", data: position, userName: atomUser.name };
-                client.send(res);
+    return <>
+        {userList.map(user => {
+            const unique = client.name === user.name;
+
+            /**
+             * 双击一个小球（不论是否是自己的），（随机）发送消息
+             */
+            const onDoubelClick = () => {
+                client.send({ type: "talk", data: "你好呀！", userName: client.name });
             }
-        }, 16);
-        const unique = client.name === atomUser.name;
-        const onDoubelClick = () => {
-            client.send({ type: "talk", data: "你好呀！", userName: client.name })
-        }
-        const element = (
-            <Float
-                key={atomUser.name}
-                speed={256}
-                crossBorder={false}
-                initPosition={atomUser.position}
-                zIndex={unique ? 200 : 100}
-                onMoving={onmoving}
-                ref={floatRef}
-            >
-                <Ball
-                    unique={unique}
-                    avatar={atomUser.avatar}
-                    ref={ballRef}
-                    onDoubleClick={onDoubelClick}
-                />
-            </Float>
-        )
-        return { userName: atomUser.name, element };
-    }
 
-    return <>{balls ? balls.map(self => self.element) : ''}</>;
+            /**
+             * 拖动自己的小球，将位置信息发送至服务器
+             */
+            const onMoving = throttle((position: Position) => {
+                if (!unique) return;
+                const res = { type: "move", data: position, userName: user.name };
+                client.send(res);
+            }, 16);
+
+            return (
+                <Float
+                    key={user.name}
+                    speed={256}
+                    crossBorder={false}
+                    initPosition={user.position}
+                    zIndex={unique ? 200 : 100}
+                    onMoving={onMoving}
+                    ref={floatRef(user)}
+                >
+                    <Ball
+                        unique={true}
+                        avatar={user.avatar}
+                        ref={ballRef(user)}
+                        onDoubleClick={onDoubelClick}
+                    />
+                </Float>
+            );
+        })}
+    </>;
 }
 
 export default BallRoom;

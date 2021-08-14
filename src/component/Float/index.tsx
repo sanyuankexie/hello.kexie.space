@@ -1,20 +1,7 @@
 import React, { forwardRef, ForwardRefRenderFunction, useEffect, useImperativeHandle, useRef, useState } from "react";
 import { getEventClientPosition } from "../../utils";
 import { Position } from "../BallRoom/type";
-
-interface Prop {
-    children: React.ReactNode;
-    crossBorder?: boolean;
-    speed?: number;
-    initPosition?: Position;
-    zIndex?: number;
-    drag?: boolean
-    onMoving?: (position: { x: number, y: number }) => void;
-}
-
-interface Handles {
-    letItMoveTo: (target: Position) => void;
-}
+import { Handles, Prop } from "./type";
 
 const initData = { x: 0, y: 0 };
 
@@ -128,8 +115,8 @@ const Float: ForwardRefRenderFunction<Handles, Prop> = ({ speed = 256, initPosit
         ref.current.addEventListener("touchstart", startDrag);
 
         return () => {
-            ref.current.removeEventListener("mousedown", startDrag);
-            ref.current.removeEventListener("touchstart", startDrag);
+            ref.current?.removeEventListener("mousedown", startDrag);
+            ref.current?.removeEventListener("touchstart", startDrag);
         }
     }, []);
 

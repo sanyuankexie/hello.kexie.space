@@ -1,18 +1,11 @@
-import React, { useState, useImperativeHandle, forwardRef } from 'react';
+import React, { useState, useImperativeHandle, forwardRef, ForwardRefRenderFunction } from 'react';
 
 import style from './index.module.scss'
-import { CSSProperties } from 'react';
 import { debounce } from '../../utils';
 import { Logo } from '../../static/cos';
+import { Handles, Prop } from './type';
 
-interface Props {
-    unique: boolean;
-    avatar?: string;
-    styles?: CSSProperties;
-    onDoubleClick: (e?: React.MouseEvent) => void;
-}
-
-function Ball({ unique, avatar, styles, onDoubleClick }: Props, ref: React.Ref<any>) {
+const Ball: ForwardRefRenderFunction<Handles, Prop> = ({ unique, avatar, styles, onDoubleClick }, ref) => {
 
     useImperativeHandle(ref, () => ({
         displayTalkMsg
@@ -24,7 +17,7 @@ function Ball({ unique, avatar, styles, onDoubleClick }: Props, ref: React.Ref<a
     function displayTalkMsg(msg: string) {
         if (!msg) return;
 
-        setContent(msg)
+        setContent(msg);
         delaySetContent(null);
     }
 
