@@ -9,7 +9,7 @@
   - [主页评论](#主页评论)
   - [WebScoket](#webscoket)
   - [函数式组件里的回调函数里无法获取最新的state](#函数式组件里的回调函数里无法获取最新的state)
-  - [悬浮球的移动（父组件调用子组件内部的方法）](#悬浮球的移动父组件调用子组件内部的方法)
+  - [小球的移动（父组件调用子组件内部的方法）](#小球的移动父组件调用子组件内部的方法)
   - [关于音乐播放器](#关于音乐播放器)
   - [渐显和渐隐](#渐显和渐隐)
   - [嵌入等比缩放的视频](#嵌入等比缩放的视频)
@@ -17,7 +17,12 @@
 - [可能想问的问题](#可能想问的问题)
   - [如何更换头像？](#如何更换头像)
 - [一些过程](#一些过程)
-  - [小球的移动](#小球的移动)
+  - [小球相关](#小球相关)
+    - [移动](#移动)
+    - [消息显示](#消息显示)
+    - [位置信息的发送](#位置信息的发送)
+  - [挂载列表的ref](#挂载列表的ref)
+  - [跳转页面后，返回保留之前的滚动条高度](#跳转页面后返回保留之前的滚动条高度)
 
 ## 已经遇到过的问题
 
@@ -61,7 +66,7 @@ stack overflow上有相关的解决方案：[Why does react-router not works at 
 
 ![image](https://user-images.githubusercontent.com/41776735/129320125-8e1358c0-a23c-4049-88be-d3fbb826dfa5.png)
 
-`/src/hooks/useClient`这个hook采用了消息订阅的方法，负责将消息转发给的不同回调。如果服务端传来的消息没有被订阅，那么这个消息将会被忽略。
+`/src/hooks/useClient`这个hook采用了消息订阅的方法，负责将消息转发给的不同回调。如果服务端传来的消息没有被订阅，那么这个消息将会被忽略。（这个消息订阅实现的时，只允许一个消息对应一个订阅者）
 
 ```js
 useEffect(() => {
@@ -102,7 +107,7 @@ function BallRoom(){
 }
 ```
 
-### 悬浮球的移动（父组件调用子组件内部的方法）
+### 小球的移动（父组件调用子组件内部的方法）
 
 `Ball`组件是一个函数式组件，只能用hook的方法。[useImperativeHandle与forwardRef](https://zh-hans.reactjs.org/docs/hooks-reference.html#useimperativehandle)
 
@@ -133,6 +138,8 @@ function BallRoom(){
 
 需要配置这两个文件。`/vite.config.ts`，`/src/theme.less`。[antd design配置主题](https://ant.design/docs/react/customize-theme-cn#%E5%AE%9A%E5%88%B6%E6%96%B9%E5%BC%8F)
 
+
+
 ## 可能想问的问题
 
 ### 如何更换头像？
@@ -143,7 +150,9 @@ function BallRoom(){
 
 ## 一些过程
 
-### 小球的移动
+### 小球相关
+
+#### 移动
 
 其实单独抽离了一个 `Float` 组件出来，这个组件里所有子元素都能像小球一样移动。
 
@@ -154,3 +163,102 @@ function BallRoom(){
 浏览器自带有 `mousedown` `mousemove` `mouseup` 这三个事件（触摸事件同理），抽象流程图如下。
 
 ![image](https://user-images.githubusercontent.com/41776735/129386201-e610b9ff-24b2-4b02-bf1b-abb51a2dd047.png)
+
+#### 消息显示
+
+当有新消息到来，直接显示消息框。在5s后消息框会消失，若5s内又收到新消息，则推迟5s后再消失（防抖）。
+
+```tsx
+export function debounce<T extends (...args: any[]) => void>(func: T, dalay: number) {
+    let timer: any = null
+    return (...args: Parameters<T>): void => {
+        if (!!timer) clearTimeout(timer)
+        timer = setTimeout(() => {
+            func(...args)
+        }, dalay)
+    }
+}
+```
+
+```tsx
+const delaySetContent = debounce(setContent, 5000);
+```
+
+#### 位置信息的发送
+
+如果是显示器刷新一次就向服务器发送一次的话也太夸张了，这个发送位置信息的函数在16ms内只会被执行一次（节流）。
+
+16ms如果人少的话应该是不会卡的......~~卡了再往上调~~
+
+```tsx
+export function throttle<T extends (...arg: any[]) => void>(func: T, interval: number) {
+    let _args: any = null;
+    let _timer: any = null;
+    return (...args: Parameters<T>) => {
+        _args = args;
+        if (!_timer) {
+            _timer = setTimeout(() => {
+                func(..._args);
+                _timer = null;
+            }, interval);
+        }
+    }
+}
+```
+
+```tsx
+/**
+ * 拖动自己的小球，将位置信息发送至服务器
+ */
+const onMoving = throttle((position: Position) => {
+    if (!unique) return;
+    const res = { type: "move", data: position, userName: user.name };
+    client.send(res);
+}, 16);
+```
+
+### 挂载列表的ref
+
+在 `/src/component/BallRoom` 有用到类似的。
+
+```jsx
+const floatRefs = useRef(new Map());
+function floatRef(user: AtomUser) {
+    return (el) => {
+        floatRefs.current.set(user.name, el);
+    }
+}
+```
+
+使用的时候，通过 current 取 Map 即可得到对应元素。
+
+```jsx
+floatRefs.current.get(user.name);
+```
+
+### 跳转页面后，返回保留之前的滚动条高度
+
+在学习方向的介绍这，点击跳转页面回来仍然是现在的高度。
+
+![image](https://user-images.githubusercontent.com/41776735/129468527-142c4ab0-3a10-4122-820a-0994594e159f.png)
+
+没有把`saveScrollTop`写在`useEffect`销毁的回调中，为了更方便的自定义。
+
+```jsx
+export function usePageJumpSaveScrollTop() {
+    useEffect(() => {
+        const scrollTop = localStorage.getItem("scrollTop");
+        if (scrollTop) {
+            localStorage.removeItem("scrollTop");
+            document.body.scrollTop = ~~scrollTop;
+        }
+    }, []);
+
+    function saveScrollTop() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
+        localStorage.setItem("scrollTop", JSON.stringify(scrollTop));
+    }
+
+    return saveScrollTop;
+}
+```
