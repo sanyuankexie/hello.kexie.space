@@ -28,6 +28,9 @@ export const Video = {
     MachineLearning: {
         poster: "https://hellokexie.obs.cn-north-4.myhuaweicloud.com/images/poster.png",
         url: "https://corona-images2.obs.cn-north-4.myhuaweicloud.com/pit.mp4",
+    },
+    PromotionalVideo: {
+        url: "https://corona-images2.obs.cn-north-4.myhuaweicloud.com/showxi.mp4"
     }
 }
 

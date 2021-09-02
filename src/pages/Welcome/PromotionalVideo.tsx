@@ -18,7 +18,7 @@ function PromotionalVideo() {
                 ref={addScrollAnimationRefs}
                 poster={Video.MachineLearning.poster}
             >
-                {/* <source src={Video.MachineLearning.url} type="video/mp4"></source> */}
+                <source src={Video.PromotionalVideo.url} type="video/mp4"></source>
             </video>
         </Section>
     );
