@@ -23,7 +23,10 @@ function LearningDirectionList() {
     const saveScrollTop = usePageJumpSaveScrollTop()
 
     return (
-        <Section title="学习方向">
+        <Section
+            title="学习方向"
+            description="点击图标查看方向介绍"
+        >
             <div className={style.sectionContainer}>
                 {data.map((self: LDirection, index: number) => {
                     return (
