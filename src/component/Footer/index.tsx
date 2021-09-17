@@ -121,6 +121,10 @@ const data: Array<Table> = [
             {
                 name: '七院创新基地',
                 url: 'https://七院创新基地.cn/',
+            },
+            {
+                name: '校基地软件部',
+                url: 'https://csd.guet.ltd/',
             }
         ]
     },
