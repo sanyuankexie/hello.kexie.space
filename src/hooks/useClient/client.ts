@@ -48,6 +48,7 @@ export default class Client {
 
     send(data: any) {
         try {
+            // console.log("客户端发送了", JSON.stringify(data))
             this.ws!.send(JSON.stringify(data));
         } catch (error) {
             console.error('ws send error', error);

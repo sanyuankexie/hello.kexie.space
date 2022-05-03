@@ -9,6 +9,7 @@ export function useClient(): [Client, typeof setDeliverier] {
 
     function dispatch({ data }: any) {
         const serverResponse = JSON.parse(data) as ServerResponse;
+        // console.log("收到了服务器的",serverResponse)
         deliverier[serverResponse.type](serverResponse);
     }
 

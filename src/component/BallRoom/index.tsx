@@ -49,13 +49,13 @@ function BallRoom() {
     }, []);
 
     function handleHelloAction() {
-        client.send({ type: "rename", userName: client.name, data: { avatar: client.avatar, visitor: client.visitor } });
-        client.send({ type: "stand up", userName: client.name });
+        client.send({ type: "rename", data: { avatar: client.avatar, visitor: client.visitor, name: client.name } });
+        client.send({ type: "stand up" });
     }
 
-    function handleEnterAction({ data, userName }: ServerResponse) {
+    function handleEnterAction({ data }: ServerResponse) {
         const newUser: AtomUser = {
-            name: userName,
+            name: data.name,
             position: data.position,
             avatar: data.avatar,
             visitor: data.visitor
@@ -63,23 +63,24 @@ function BallRoom() {
         setUserList([...userListRef.current!(), newUser]);
     }
 
-    function handleTalkAction({ data, userName }: ServerResponse) {
-        const el = ballRefs.current.get(userName);
-        el?.displayTalkMsg(data);
+    function handleTalkAction({ data }: ServerResponse) {
+        const el = ballRefs.current.get(data.name);
+        el?.displayTalkMsg(data.content);
     }
 
-    function handleMoveAction({ data, userName }: ServerResponse) {
-        if (userName === client.name) return;
+    function handleMoveAction({ data }: ServerResponse) {
+        if (data.name === client.name) return;
 
-        const { x, y }: Position = data;
-        const el = floatRefs.current.get(userName);
+        const { x, y }: Position = data.position;
+        const el = floatRefs.current.get(data.name);
         el?.letItMoveTo({ x, y })
     }
 
     function handleStandUpAction({ data, userName }: ServerResponse) {
-        setUserList(data.map((serverUser: any) => {
+        // console.log(data)
+        setUserList(data.onlineUser.map((serverUser: any) => {
             return {
-                name: serverUser.userName,
+                name: serverUser.name,
                 position: serverUser.position,
                 avatar: serverUser.avatar,
                 visitor: serverUser.visitor
@@ -87,21 +88,22 @@ function BallRoom() {
         }));
     }
 
-    function handleLeaveAction({ data, userName }: ServerResponse) {
+    function handleLeaveAction({ data}: ServerResponse) {
         setUserList(userListRef.current!().filter(self => {
-            return self.name !== userName;
+            return self.name !== data.name;
         }));
     }
 
     return <>
         {userList.map(user => {
             const unique: boolean = client.name === user.name;
+            console.log(client.name, user.name)
 
             /**
              * 双击一个小球（不论是否是自己的），（随机）发送消息
              */
             const onDoubelClick = () => {
-                client.send({ type: "talk", data: "你好呀！", userName: client.name });
+                client.send({ type: "talk", data: { content: "你好呀！", name: client.name }});
             }
 
             /**
@@ -109,7 +111,7 @@ function BallRoom() {
              */
             const onMoving = throttle((position: Position) => {
                 if (!unique) return;
-                const res = { type: "move", data: position, userName: user.name };
+                const res = { type: "move", data: {position, name: client.name}};
                 client.send(res);
             }, 16);
 

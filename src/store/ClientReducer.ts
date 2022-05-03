@@ -19,7 +19,7 @@ const MsgType = {
 }
 
 /**
- * 一个WebSocket客户端类
+ * 一个WebSocket客户端类（现在没用到这个）
  */
 export class Client {
     name?: string
@@ -54,8 +54,8 @@ export class Client {
         }
 
 
-        this.ws = new WebSocket("wss://kexie.therainisme.com/connect")
-        // this.ws = new WebSocket("ws://10.33.39.225:5201/connect")
+        // this.ws = new WebSocket("wss://kexie.therainisme.com/connect")
+        this.ws = new WebSocket("ws://10.1.1.77:5201/connect")
         this.ws.onerror = (e) => {
             console.error('ws error', e);
         };
