@@ -48,7 +48,7 @@ function Jumbotron() {
                     shape="round"
                     icon={<GithubOutlined />}
                     size={"large"}
-                    href="https://jq.qq.com/?_wv=1027&k=n7WP5LTH"
+                    href="https://jq.qq.com/?_wv=1027&k=2WAcOviY"
                     target="__blank"
                 >
                     加入我们
