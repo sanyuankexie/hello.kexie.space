@@ -86,7 +86,8 @@ const data: Array<Table> = [
         list: [
             {
                 name: '招新QQ群',
-                url: 'https://jq.qq.com/?_wv=1027&k=n7WP5LTH'
+                url:'https://jq.qq.com/?_wv=1027&k=tDyBXUv0'
+                // url: 'https://jq.qq.com/?_wv=1027&k=n7WP5LTH'
             }, {
                 name: '招新报名表',
                 url: '#'
