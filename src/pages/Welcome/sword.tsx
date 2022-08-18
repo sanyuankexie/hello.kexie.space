@@ -12,7 +12,7 @@ function PromotionalVideo() {
             description="科协游戏开发方向李一奔的作品"
             url="全屏体验"
             bannerStyle={{ width: "80%", height: "80vh" }}>
-                <iframe src="http://game.kexie.space/"
+                <iframe src="https://game.kexie.space/"
                 height="100%"
                 width="100%"
                 frameBorder="0"
