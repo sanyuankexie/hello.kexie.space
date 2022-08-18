@@ -9,16 +9,18 @@ import PromotionalVideo from './PromotionalVideo';
 import Mikutap from './Mikutap';
 import DeepLearningVideo from './DeepLearningVideo';
 import SoulVoice from './SoulVoice';
+import Sword from './sword';
 
 function Welcome() {
     return (
         <>
             <Jumbotron />
             <PromotionalVideo />
-            <Mikutap />
-            <DeepLearningVideo />
             <Departments />
             <LearningDirectionList />
+            <Mikutap />
+            <DeepLearningVideo />
+            <Sword />
             <Timeline />
             <ContestList />
             <SoulVoice/>

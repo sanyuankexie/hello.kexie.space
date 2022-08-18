@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { CodeFilled, GithubOutlined } from "@ant-design/icons";
+import { CodeFilled, QqCircleFilled } from "@ant-design/icons";
 import { Button, Typography } from "antd";
 import { Logo } from "../../static/cos";
 import style from "./css/Jumbotron.module.scss";
@@ -46,7 +46,7 @@ function Jumbotron() {
                     className={style.btn}
                     type="primary"
                     shape="round"
-                    icon={<GithubOutlined />}
+                    icon={<QqCircleFilled />}
                     size={"large"}
                     href="https://jq.qq.com/?_wv=1027&k=2WAcOviY"
                     target="__blank"
