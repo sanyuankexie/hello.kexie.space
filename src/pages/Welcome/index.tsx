@@ -17,7 +17,7 @@ function Welcome() {
     return (
         <>
             <Jumbotron />
-            <MachineTrain />
+            {/* <MachineTrain /> */}
             <PromotionalVideo />
             <Departments />
             <LearningDirectionList />
