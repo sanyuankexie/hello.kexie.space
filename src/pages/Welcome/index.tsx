@@ -10,11 +10,14 @@ import Mikutap from './Mikutap';
 import DeepLearningVideo from './DeepLearningVideo';
 import SoulVoice from './SoulVoice';
 import Sword from './sword';
+import MachineTrain from './MachineTrain'
+import Essay from './Essay';
 
 function Welcome() {
     return (
         <>
             <Jumbotron />
+            <MachineTrain />
             <PromotionalVideo />
             <Departments />
             <LearningDirectionList />
@@ -22,6 +25,7 @@ function Welcome() {
             <DeepLearningVideo />
             <Sword />
             <Timeline />
+            {/* <Essay /> */}
             <ContestList />
             <SoulVoice/>
         </>

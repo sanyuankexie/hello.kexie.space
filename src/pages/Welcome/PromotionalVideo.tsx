@@ -9,7 +9,7 @@ function PromotionalVideo() {
     return (
         <Section
             title="宣传视频"
-            description="可以稍微期待一下呢........"
+            description="2022科协招新电影正在热播中"
             bannerStyle={{ width: "80%" }}
             bannerClassName={`aspect-ratio`}>
             <video

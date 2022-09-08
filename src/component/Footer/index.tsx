@@ -126,6 +126,10 @@ const data: Array<Table> = [
             {
                 name: '校基地软件部',
                 url: 'https://csd.guet.ltd/',
+            },
+            {
+                name: '信安小组靶场',
+                url: 'http://121.40.203.219:8000/',
             }
         ]
     },
