@@ -1,0 +1,85 @@
+.essayContainer{
+  width: 80%;
+  // background:url("https://p1-hera.byteimg.com/tos-cn-i-jbbdkfciu3/13d98cd830714335a0d8cf2a0082f73a~tplv-jbbdkfciu3-png:0:0.png");
+  .header {
+    flex: 2;
+      .side {
+        z-index: 0;
+        flex: 3;
+        padding: 0px 10px;
+        .tab {
+          height: 100%;
+          overflow: auto;
+          // background-color: rgba(233, 142, 24, 0.644);
+          flex-direction: column;
+          justify-content: space-between;
+          .imgTab {
+            position: relative;
+            width: 120px;
+            height:60px;
+            overflow: hidden;
+            left: 0;
+            transition:.5s;
+            box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+            margin-bottom: 10px;
+            img {
+            width: 100%;
+            position: absolute;
+            left: 0;
+            transition:.5s;
+            transform: translate(0,-30px);
+            }
+          }
+          .imgTabCurrent {
+            background: rgba(0, 0, 0, 0.485);
+            img {
+              opacity: 0.6;
+
+            }
+          }
+          
+        }
+        
+      }
+    .visual {
+      transition: .4s;
+      flex:8;
+      height: 80vh;
+      img {
+       height: 100%;
+
+        display: inline-block;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
+      }
+    }
+    .unVisual {
+      opacity: 0;
+    }
+  }
+  .inner {
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+    .title {
+      text-align: center;
+      margin: 10px;
+      font-size: 30px;
+    }
+    ul {
+      flex-direction: column;
+      justify-content: center;
+    }
+    // align-items: center;
+    
+  }
+  
+}
+.essayContainer,
+.header,
+.inner,
+.inner ul,
+.tab {
+  display: flex;
+}
