@@ -125,7 +125,7 @@ const data: Array<Table> = [
             },
             {
                 name: '校基地软件部',
-                url: 'https://csd.guet.ltd/',
+                url: 'https://csd.moe/',
             },
             {
                 name: '信安小组靶场',
