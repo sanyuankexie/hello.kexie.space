@@ -7,12 +7,12 @@ function PromotionalVideo() {
 
   return (
     <Section
-      title="Mikutap"
-      description="一个有趣的音乐互动网站"
+      title="Synths"
+      description="Ableton 出品的在线合成器"
       bannerStyle={{ width: "80%", height: "80vh" }}
     >
       <iframe
-        src="https://mikutap.msqt.fun"
+        src="https://learningsynths.ableton.com/en/playground"
         height="100%"
         width="100%"
         frameBorder="0"
