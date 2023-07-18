@@ -10,7 +10,6 @@ import Mikutap from "./Mikutap";
 import DeepLearningVideo from "./DeepLearningVideo";
 import SoulVoice from "./SoulVoice";
 import Sword from "./sword";
-import Synths from "./synths";
 import StealKun from "./stealKun";
 
 import MachineTrain from "./MachineTrain";
@@ -25,7 +24,6 @@ function Welcome() {
       <Departments />
       <LearningDirectionList />
       <Mikutap />
-      <Synths />
       <DeepLearningVideo />
       <Sword />
       <StealKun />
@@ -38,4 +36,3 @@ function Welcome() {
 }
 
 export default Welcome;
-

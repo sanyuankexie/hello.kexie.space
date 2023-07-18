@@ -4,18 +4,20 @@ import { useScrollHandler } from "../../hooks";
 
 function PromotionalVideo() {
   const [ScrollAnimationRefs, addScrollAnimationRefs] = useScrollHandler();
-
+  const url = "https://sword.kexie.space";
   return (
     <Section
       title="Sword"
       description="科协游戏开发方向李一奔的作品"
-      url="全屏体验"
+      url_title="全屏体验"
+      url={url}
       bannerStyle={{ width: "80%", height: "80vh" }}
     >
       <iframe
-        src="https://sword.kexie.space/"
+        src={url}
         height="100%"
         width="100%"
+        allowFullScreen={true}
         frameBorder="0"
         scrolling="no"
         style={{
@@ -30,4 +32,3 @@ function PromotionalVideo() {
 }
 
 export default PromotionalVideo;
-

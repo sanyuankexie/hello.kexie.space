@@ -1,21 +1,25 @@
 import React from "react";
+import { transform } from "typescript";
 import Section from "../../component/Section";
 import { useScrollHandler } from "../../hooks";
 
 function PromotionalVideo() {
   const [ScrollAnimationRefs, addScrollAnimationRefs] = useScrollHandler();
+  const url = "https://steal-kun.kexie.space";
 
   return (
     <Section
       title="StealKun"
       description="科协游戏开发方向蒲一帆的作品"
-      url="全屏体验"
+      url={url}
+      url_title="全屏体验"
       bannerStyle={{ width: "80%", height: "80vh" }}
     >
       <iframe
-        src="https://steal-kun.kexie.space/"
+        src={url}
         height="100%"
         width="100%"
+        allowFullScreen={true}
         frameBorder="0"
         scrolling="no"
         style={{
