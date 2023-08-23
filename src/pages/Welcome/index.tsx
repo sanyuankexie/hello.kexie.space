@@ -11,7 +11,7 @@ import Mikutap from "./Mikutap";
 import DeepLearningVideo from "./DeepLearningVideo";
 import SoulVoice from "./SoulVoice";
 import Sword from "./sword";
-import StealKun from "./stealKun";
+import StealKun from "./StealKun";
 
 import MachineTrain from "./MachineTrain";
 import Essay from "./Essay";
@@ -20,13 +20,13 @@ function Welcome() {
   return (
     <>
       <Jumbotron />
-      {/* <MachineTrain /> */}
       <PromotionalVideo />
       <Departments />
       <LearningDirectionList />
       <Movie />
       <Mikutap />
-      <DeepLearningVideo />
+      <MachineTrain />
+      {/* <DeepLearningVideo /> */}
       <Sword />
       <StealKun />
       <Timeline />

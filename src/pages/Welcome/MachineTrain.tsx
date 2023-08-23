@@ -8,11 +8,12 @@ function MachineTrain() {
   return (
     <Section
       title="人工智能炫技现场"
-      description="一个好玩的AI手势训练模型"
+      description="一个好玩的AI手势训练模型(需要允许浏览器获取摄像头权限)"
       bannerStyle={{ width: "80%", height: "80vh" }}
     >
       <iframe
-        src="http://127.0.0.1:5500/gestureRecognition/index.html"
+        src="https://ml-gr.kexie.space/"
+        // src="http://localhost:5500/"
         height="100%"
         width="100%"
         frameBorder="0"
@@ -21,7 +22,6 @@ function MachineTrain() {
         style={{
           boxShadow:
             "0 3px 6px -4px #0000001f, 0 6px 16px #00000014, 0 9px 28px 8px #0000000d",
-          background: "black",
         }}
         ref={addScrollAnimationRefs}
       ></iframe>
@@ -30,4 +30,3 @@ function MachineTrain() {
 }
 
 export default MachineTrain;
-
