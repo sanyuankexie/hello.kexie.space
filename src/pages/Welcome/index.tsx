@@ -6,6 +6,7 @@ import ContestList from "./ContestList";
 import Departments from "./Departments";
 import Jumbotron from "./Jumbotron";
 import PromotionalVideo from "./PromotionalVideo";
+import Movie from "./Movie";
 import Mikutap from "./Mikutap";
 import DeepLearningVideo from "./DeepLearningVideo";
 import SoulVoice from "./SoulVoice";
@@ -23,6 +24,7 @@ function Welcome() {
       <PromotionalVideo />
       <Departments />
       <LearningDirectionList />
+      <Movie />
       <Mikutap />
       <DeepLearningVideo />
       <Sword />

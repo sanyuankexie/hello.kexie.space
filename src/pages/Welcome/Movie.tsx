@@ -3,13 +3,13 @@ import Section from "../../component/Section";
 import { useScrollHandler } from "../../hooks";
 import { Video } from "../../static/cos";
 
-function PromotionalVideo() {
+function Movie() {
   const [ScrollAnimationRefs, addScrollAnimationRefs] = useScrollHandler();
 
   return (
     <Section
-      title="宣传视频"
-      description="2023科协招新介绍视频"
+      title="2023科协招新大电影"
+      description="由覃永鹏导演制作的科协大电影«重生4年，我要进科协»正在热播中！"
       bannerStyle={{ width: "80%" }}
       bannerClassName={`aspect-ratio`}
     >
@@ -23,12 +23,11 @@ function PromotionalVideo() {
           ref={addScrollAnimationRefs}
           poster={Video.MachineLearning.poster}
         >
-          <source src={Video.PromotionalVideo.url} type="video/mp4"></source>
+          <source src={Video.MovieVideo.url} type="video/mp4"></source>
         </video>
       </div>
     </Section>
   );
 }
 
-export default PromotionalVideo;
-
+export default Movie;

@@ -2,7 +2,7 @@ import React from "react";
 import Section from "../../component/Section";
 import { useScrollHandler } from "../../hooks";
 
-function PromotionalVideo() {
+function Mikutap() {
   const [ScrollAnimationRefs, addScrollAnimationRefs] = useScrollHandler();
 
   return (
@@ -27,4 +27,4 @@ function PromotionalVideo() {
   );
 }
 
-export default PromotionalVideo;
+export default Mikutap;

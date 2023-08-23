@@ -30,7 +30,10 @@ export const Video = {
     url: `${BaseUrl}/videos/pit.mp4`,
   },
   PromotionalVideo: {
-    url: `${BaseUrl}/videos/showxi.mp4`,
+    url: `${BaseUrl}/videos/2023-zxmg.mp4`,
+  },
+  MovieVideo: {
+    url: `${BaseUrl}/videos/2023-zxmv.mp4`,
   },
 };
 
