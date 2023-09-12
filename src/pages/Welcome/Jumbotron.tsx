@@ -55,7 +55,7 @@ function Jumbotron() {
           shape="round"
           icon={<QqCircleFilled />}
           size={"large"}
-          href="https://jq.qq.com/?_wv=1027&k=2WAcOviY"
+          href="http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=nc320UE30piTwGDeCxf11NCcwkZmUl9L"
           target="__blank"
         >
           加入我们

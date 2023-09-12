@@ -87,7 +87,7 @@ const data: Array<Table> = [
       },
       {
         name: "招新报名表",
-        url: "",
+        url: "https://docs.qq.com/form/page/DSllqZXlzemlhb3pW",
       },
     ],
   },
