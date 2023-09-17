@@ -10,10 +10,9 @@ import Movie from "./Movie";
 import Mikutap from "./Mikutap";
 import DeepLearningVideo from "./DeepLearningVideo";
 import SoulVoice from "./SoulVoice";
-import Sword from "./sword";
-import StealKun from "./StealKun";
 
 import MachineTrain from "./MachineTrain";
+import GameCollection from "./GameCollection";
 import Essay from "./Essay";
 
 function Welcome() {
@@ -26,13 +25,13 @@ function Welcome() {
       <Movie />
       <Mikutap />
       <MachineTrain />
+      <GameCollection />
       {/* <DeepLearningVideo /> */}
-      <Sword />
-      <StealKun />
+
       <Timeline />
       {/* <Essay /> */}
       <ContestList />
-      <SoulVoice />
+			<SoulVoice />
     </>
   );
 }
