@@ -12,7 +12,7 @@ function Mikutap() {
       bannerStyle={{ width: "80%", height: "80vh" }}
     >
       <iframe
-        src="https://mikutap.msqt.fun"
+        src="https://miku.kexie.space"
         height="100%"
         width="100%"
         frameBorder="0"
