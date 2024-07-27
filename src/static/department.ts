@@ -22,7 +22,7 @@ const departmentsMap = {
         fullName: "SoftwareDepertment",
         logo: Logo.Software,
         learningDirection: [
-            "游戏制作", "安卓开发", "机器学习"
+            "游戏制作", "APP开发", "深度学习"
         ]
     },
 

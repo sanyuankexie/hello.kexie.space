@@ -8,7 +8,7 @@ function DeepLearningVideo() {
 
     return (
         <Section
-            title="机器学习"
+            title="深度学习"
             description="趣味视频 “当逮虾户遇上目标检测”"
             bannerStyle={{ width: "80%" }}
             bannerClassName={`aspect-ratio`}

@@ -24,7 +24,7 @@ function Welcome() {
       <LearningDirectionList />
       <Movie />
       <Mikutap />
-      <MachineTrain />
+      {/*<MachineTrain />*/}
       <GameCollection />
       {/* <DeepLearningVideo /> */}
 

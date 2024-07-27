@@ -9,7 +9,7 @@ function ProjectList() {
   return (
     <div className={style.container}>
       <List
-        header={<Typography.Title level={3}>开源项目</Typography.Title>}
+        header={<Typography.Title level={3}>科协优秀项目</Typography.Title>}
         dataSource={data}
         renderItem={(item) => (
           <li style={{ borderBottom: "1px solid #f0f0f0" }}>
@@ -105,5 +105,13 @@ const data: Array<IProject> = [
     avatar: "https://avatars.githubusercontent.com/u/94043894?v=4",
     url: "https://github.com/orzation/bobibo",
     languageColor: "#00add8",
+  },
+  {
+    name: "GUET校园圈APP",
+    description: "可以查看课表等教务信息，支持安卓和IOS",
+    language: "Dart(Flutter)",
+    avatar: "https://avatars.githubusercontent.com/u/59408438?v=4&size=64",
+    url: "https://www.guethub.com",
+    languageColor: "#00B4AB",
   },
 ];

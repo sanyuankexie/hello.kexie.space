@@ -55,7 +55,7 @@ function Jumbotron() {
           shape="round"
           icon={<QqCircleFilled />}
           size={"large"}
-          href="https://qm.qq.com/q/4STVRUwlRS"
+          href="https://api.kexie.space/recruitment-qq-group"
           target="__blank"
         >
           加入我们

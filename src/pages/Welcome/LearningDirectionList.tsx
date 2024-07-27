@@ -68,7 +68,7 @@ const data: Array<LDirection> = [
         width: 270,
         style: { marginTop: "2em" }
     }, {
-        name: "安卓开发",
+        name: "APP开发",
         key: "Android",
         logo: Logo.Android,
         width: 150
@@ -85,7 +85,7 @@ const data: Array<LDirection> = [
         width: 140,
         style: { background: "#2e2459", marginTop: "0.6em" }
     }, {
-        name: "机器学习",
+        name: "深度学习",
         key: "MachineLearning",
         logo: Logo.MachineLearning,
         width: 150,

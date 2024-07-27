@@ -82,7 +82,7 @@ const data: Array<Table> = [
     list: [
       {
         name: "招新QQ群",
-        url: "http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=TLksMcIoe1uqTh-tQTK1tU5Ff1OLYflL",
+        url: "https://api.kexie.space/recruitment-qq-group",
         // url: 'https://jq.qq.com/?_wv=1027&k=n7WP5LTH'
       },
       {
@@ -95,15 +95,23 @@ const data: Array<Table> = [
     title: "科协相关",
     list: [
       {
-        name: "GitHub",
+        name: "科协GitHub",
         url: "https://github.com/sanyuankexie",
       },
       {
-        name: "OnlineJudge",
+        name: "科协OJ",
         url: "https://oj.kexie.space",
       },
       {
-        name: "微信公众号",
+        name: "科协GIT",
+        url: "https://git.kexie.space",
+      },
+      {
+        name: "科协Dockerhub",
+        url: "https://docker.kexie.space",
+      },
+      {
+        name: "科协微信公众号",
         url: "#",
         content: <img src={QRCode.WeChatOfficialAccount} alt="" />,
       },
