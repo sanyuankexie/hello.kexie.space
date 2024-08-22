@@ -74,6 +74,14 @@ export default ProjectList;
 
 const data: Array<IProject> = [
   {
+    name: "GUET校园圈APP",
+    description: "可以查看课表等教务信息，支持安卓和IOS",
+    language: "Dart(Flutter)",
+    avatar: "https://avatars.githubusercontent.com/u/59408438?v=4&size=64",
+    url: "https://www.guethub.net",
+    languageColor: "#00B4AB",
+  },
+  {
     name: "Flexml",
     description: "🚀基于Litho的Android高性能动态业务容器。",
     language: "Kotlin",
@@ -105,13 +113,5 @@ const data: Array<IProject> = [
     avatar: "https://avatars.githubusercontent.com/u/94043894?v=4",
     url: "https://github.com/orzation/bobibo",
     languageColor: "#00add8",
-  },
-  {
-    name: "GUET校园圈APP",
-    description: "可以查看课表等教务信息，支持安卓和IOS",
-    language: "Dart(Flutter)",
-    avatar: "https://avatars.githubusercontent.com/u/59408438?v=4&size=64",
-    url: "https://www.guethub.com",
-    languageColor: "#00B4AB",
   },
 ];
