@@ -16,14 +16,17 @@ function GuethubApp() {
             1. 可以查看课表和成绩以及评教等教务功能，2.校内论坛功能。
 
             内测QQ群：482024244"
-            bannerStyle={{width: "80%", height: "100vh"}}
+            bannerStyle={{width: "75%", height: "80vh"}}
         >
             <img height="100%"
                  width="100%"
                  style={{
                      boxShadow:
                          "0 3px 6px -4px #0000001f, 0 6px 16px #00000014, 0 9px 28px 8px #0000000d",
-                     borderRadius: 16
+                     borderRadius: 16,
+                     paddingLeft: 150,
+                     paddingRight: 150,
+                     marginTop: 16
                  }}
                  ref={addScrollAnimationRefs}
                  src="https://api.kexie.space/data/resource/hello/docs/introduction/appdev-assets/guethub-app.png"
