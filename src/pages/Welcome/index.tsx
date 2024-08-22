@@ -14,6 +14,7 @@ import SoulVoice from "./SoulVoice";
 import MachineTrain from "./MachineTrain";
 import GameCollection from "./GameCollection";
 import Essay from "./Essay";
+import GuethubApp from "./GuethubApp";
 
 function Welcome() {
   return (
@@ -23,6 +24,7 @@ function Welcome() {
       <Departments />
       <LearningDirectionList />
       <Movie />
+      <GuethubApp/>
       <Mikutap />
       {/*<MachineTrain />*/}
       <GameCollection />
