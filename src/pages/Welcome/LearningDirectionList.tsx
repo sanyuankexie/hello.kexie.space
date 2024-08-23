@@ -71,7 +71,7 @@ const data: Array<LDirection> = [
         name: "APP开发",
         key: "AppDev",
         logo: Logo.AppDev,
-        width: 150
+        width: 200
     }, {
         name: "UI设计",
         key: "UI",
@@ -91,8 +91,8 @@ const data: Array<LDirection> = [
         width: 150,
     }, {
         name: "小程序",
-        key: "Applet",
-        logo: Logo.Applet,
+        key: "MiniProgram",
+        logo: Logo.MiniProgram,
         width: 140,
     }, {
         name: "视频剪辑",
