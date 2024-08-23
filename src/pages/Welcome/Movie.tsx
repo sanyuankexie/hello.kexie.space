@@ -22,7 +22,7 @@ function Movie() {
             borderRadius: 16
           }}
           ref={addScrollAnimationRefs}
-          poster={Video.MachineLearning.poster}
+          poster={Video.DeepLearning.poster}
         >
           <source src={Video.MovieVideo.url} type="video/mp4"></source>
         </video>

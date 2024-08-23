@@ -18,7 +18,7 @@ function DeepLearningVideo() {
                 style={{ boxShadow: "0 3px 6px -4px #0000001f, 0 6px 16px #00000014, 0 9px 28px 8px #0000000d" }}
                 ref={addScrollAnimationRefs}
             >
-                <source src={Video.MachineLearning.url} type="video/mp4"></source>
+                <source src={Video.DeepLearning.url} type="video/mp4"></source>
             </video>
         </Section>
     );

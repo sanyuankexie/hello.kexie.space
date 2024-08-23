@@ -86,8 +86,8 @@ const data: Array<LDirection> = [
         style: { background: "#2e2459", marginTop: "0.6em" }
     }, {
         name: "深度学习",
-        key: "MachineLearning",
-        logo: Logo.MachineLearning,
+        key: "DeepLearning",
+        logo: Logo.DeepLearning,
         width: 150,
     }, {
         name: "小程序",

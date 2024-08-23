@@ -15,7 +15,7 @@ export const Logo = {
   Android: `${BaseUrl}/images/learning-direction/android.png`,
   UI: `${BaseUrl}/images/learning-direction/ui.png`,
   Embedded: `${BaseUrl}/images/learning-direction/embedded.svg`,
-  MachineLearning: `${BaseUrl}/images/learning-direction/python.png`,
+  DeepLearning: `${BaseUrl}/images/learning-direction/python.png`,
   Applet: `${BaseUrl}/images/learning-direction/wechat.png`,
   Video: `${BaseUrl}/images/learning-direction/bilibili.png`,
 } as const;
@@ -25,7 +25,7 @@ export const QRCode = {
 };
 
 export const Video = {
-  MachineLearning: {
+  DeepLearning: {
     poster: `${BaseUrl}/images/poster.png`,
     url: `${BaseUrl}/videos/pit.mp4`,
   },

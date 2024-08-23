@@ -22,7 +22,7 @@ function Movie() {
 			>
 				<a href="/game">
 					<img
-						src={Video.MachineLearning.poster}
+						src={Video.DeepLearning.poster}
 						width={"100%"}
 						height={"100%"}
 						style={{borderRadius: 16}}
