@@ -12,7 +12,7 @@ export const Logo = {
   Kexie: `${BaseUrl}/images/logo.png`,
   Web: `${BaseUrl}/images/learning-direction/react.png`,
   Game: `${BaseUrl}/images/learning-direction/unity.png`,
-  Android: `${BaseUrl}/images/learning-direction/android.png`,
+  AppDev: `${BaseUrl}/images/learning-direction/appdevlogo.png`,
   UI: `${BaseUrl}/images/learning-direction/ui.png`,
   Embedded: `${BaseUrl}/images/learning-direction/embedded.svg`,
   DeepLearning: `${BaseUrl}/images/learning-direction/python.png`,

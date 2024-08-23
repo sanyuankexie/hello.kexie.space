@@ -69,8 +69,8 @@ const data: Array<LDirection> = [
         style: { marginTop: "2em" }
     }, {
         name: "APP开发",
-        key: "Android",
-        logo: Logo.Android,
+        key: "AppDev",
+        logo: Logo.AppDev,
         width: 150
     }, {
         name: "UI设计",
