@@ -1,23 +1,26 @@
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-    .blank{
-        height: 10em;
-    }
-    
-    .banner{
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-    }
-    
-    @media screen and (max-width: 768px) {
-        .description{
-            width: 80%;
-        }
-    }
+  .blank {
+    height: 10em;
+  }
+
+  .banner {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+
+  .description {
+    width: 80%;
+  }
+
+  .url {
+       margin-left: 8px;
+  }
 }
 
