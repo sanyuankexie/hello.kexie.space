@@ -16,7 +16,7 @@ export const Logo = {
   UI: `${BaseUrl}/images/learning-direction/ui.png`,
   Embedded: `${BaseUrl}/images/learning-direction/embedded.svg`,
   DeepLearning: `${BaseUrl}/images/learning-direction/python.png`,
-  Applet: `${BaseUrl}/images/learning-direction/wechat.png`,
+  MiniProgram: `${BaseUrl}/images/learning-direction/mini-program.png`,
   Video: `${BaseUrl}/images/learning-direction/bilibili.png`,
 } as const;
 
