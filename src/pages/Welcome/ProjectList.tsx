@@ -90,9 +90,18 @@ const data: Array<IProject> = [
     languageColor: "#F18E33",
   },
   {
+    name: "neetbox",
+    description:
+      "A naive dashboard for local/remote/distributed deep learning project monitoring.",
+    language: "Python",
+    avatar: "https://avatars.githubusercontent.com/u/33346934?v=4",
+    url: "https://github.com/visualDust/neetbox",
+    languageColor: "#3572A5",
+  },
+  {
     name: "ml.akasaki.space",
     description:
-      "请跳转到仓库网页查看： https://ml.akasaki.space 。带有代码的深度学习方法从入门到放弃。talk is cheap, show me the code。如果有用请施舍一个star。",
+      "帮助入门基于深度学习的计算机视觉，访问 https://ml.akasaki.space 查看。",
     language: "Python",
     avatar: "https://avatars.githubusercontent.com/u/33346934?v=4",
     url: "https://ml.akasaki.space",
