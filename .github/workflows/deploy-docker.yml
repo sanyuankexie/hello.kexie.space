@@ -30,14 +30,12 @@ jobs:
         id: git_tag
         run: |
           git_tag=$(git describe --tags --exact-match 2>/dev/null || echo "none")
-          echo "::set-output name=tag::$git_tag"
+          echo "tag=$git_tag" >> $GITHUB_ENV
 
       - name: Build and Push Docker image
         run: |
-            docker buildx build --platform linux/amd64 \
-              -f ./deploy/Dockerfile \ 
-              -t docker.kexie.space/kexie/kexie-hello-web:${{ steps.git_tag.outputs.tag }} \
-              -t docker.kexie.space/kexie/kexie-hello-web:latest \
-              --push .
-       
-
+          docker buildx build --platform linux/amd64 \
+            -f ./deploy/Dockerfile \
+            -t docker.kexie.space/kexie/kexie-hello-web:${{ env.tag }} \
+            -t docker.kexie.space/kexie/kexie-hello-web:latest \
+            --push .
