@@ -1,5 +1,8 @@
 name: Docker Build and Push
 
+# DOCKER_USERNAME
+# DOCKER_PASSWORD
+
 on:
   push:
     tags:
