@@ -85,10 +85,10 @@ const data: Array<Table> = [
         url: "https://api.kexie.space/recruitment-qq-group",
         // url: 'https://jq.qq.com/?_wv=1027&k=n7WP5LTH'
       },
-      {
-        name: "招新报名表",
-        url: "https://docs.qq.com/form/page/DSllqZXlzemlhb3pW",
-      },
+ //     {
+ //       name: "招新报名表",
+ //       url: "https://docs.qq.com/form/page/DSllqZXlzemlhb3pW",
+ //     },
     ],
   },
   {
@@ -128,10 +128,10 @@ const data: Array<Table> = [
         name: "七院创新基地",
         url: "https://七院创新基地.cn/",
       },
-      {
-        name: "校基地软件部",
-        url: "https://csd.moe/",
-      },
+ //     {
+ //       name: "校基地软件部",
+ //       url: "https://csd.moe/",
+ //     },
       {
         name: "信安小组靶场",
         url: "http://121.40.203.219:8000/",
