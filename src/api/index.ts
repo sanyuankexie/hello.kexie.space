@@ -8,7 +8,7 @@ export class DocumentAPI {
 }
 
 export class CommentAPI {
-    static GithubIssueUrl: string = "https://api.github.yuuza.net/repos/sanyuankexie/hellokexie/issues/6/comments"
+    static GithubIssueUrl: string = "https://api.github.com/repos/sanyuankexie/hellokexie/issues/6/comments"
 }
 
 export class MusicAPI {
