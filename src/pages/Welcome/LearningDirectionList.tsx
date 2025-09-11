@@ -57,11 +57,18 @@ export default LearningDirectionList;
 
 const data: Array<LDirection> = [
     {
-        name: "网站开发",
-        key: "Web",
-        logo: Logo.Web,
+        name: "前端开发",
+        key: "WebFront",
+        logo: Logo.WebFront,
         width: 170,
-    }, {
+    },
+    {
+        name: "后端开发",
+        key: "WebServer",
+        logo: Logo.WebServer,
+        width: 170,
+    },
+    {
         name: "游戏制作",
         key: "Game",
         logo: Logo.Game,
