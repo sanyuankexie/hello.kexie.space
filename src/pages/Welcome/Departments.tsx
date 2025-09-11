@@ -10,7 +10,7 @@ function Departments() {
     const [ScrollAnimationRefs, addScrollAnimationRefs] = useScrollAnimationRefs();
 
     return (
-        <Section title="四大部门" description="科协有四大部门，不同的部门下有不同的学习方向">
+        <Section title="五大部门" description="科协有五大部门，不同的部门下有不同的学习方向">
             <section className={`projects-horizontal ${style.section}`}>
                 <div className="row projects" >
                     {departmentIntroductionData.map(x => {
@@ -82,5 +82,14 @@ const departmentIntroductionData = [
                 <p>组织部是一个协调科协主席团和其他三大技术部门的综合性管理兼学术部门，主管组织、人事工作、素质拓展和团队建设。负责协调科协的组织建设，管理科协的日常事务，策划和组织科协的各类活动，管理科协成员和内部的各种设施，同时，协调和处理学校、学院领导的指示要求，代表三院科协与学校、学院的各个社团进行沟通交流。</p>
             </>
         )
-    }
+    },
+    {
+        name: "安全部",
+        logo: Logo.Safe,
+        descriptions: (
+            <>
+                <p>安全部聚焦网络安全技术，以 CTF 竞赛为实践入口，将竞赛里的解题思路、攻防技巧，转化为真实场景中漏洞挖掘的能力。从代码逻辑排查到程序底层分析，覆盖覆盖 WEB（代码审计、漏洞攻防 ）与二进制（漏洞利用、逆向分析 ）方向，通过 “以赛促战”，让成员掌握从发现风险到实战防御的全流程技能，筑牢安全防线。</p>
+            </>
+        )
+    },
 ] as const;
