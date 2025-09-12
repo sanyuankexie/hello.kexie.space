@@ -38,4 +38,7 @@ jobs:
             -f ./deploy/Dockerfile \
             -t docker.kexie.space/kexie/kexie-hello-web:${{ env.tag }} \
             -t docker.kexie.space/kexie/kexie-hello-web:latest \
+            --provenance=false \
+            --sbom=false \
+            --progress=plain \
             --push .
