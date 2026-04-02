@@ -23,8 +23,10 @@
     .btnGroup {
         display: flex;
         width: 350px;
-        justify-content: space-between;
+        flex-wrap: wrap;
+        justify-content: center;
         margin-top: 3em;
+        gap: 1em;
     }
     .btnFilled {
         background: global.$cyan !important;
