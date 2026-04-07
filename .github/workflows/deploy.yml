@@ -29,10 +29,10 @@ jobs:
           path: node_modules
           key: ${{ runner.os }}-${{ hashFiles('package-lock.json') }}
 
-      - name: Use Node.js 12.x
+      - name: Use Node.js 20.x
         uses: actions/setup-node@v3
         with:
-          node-version: 12.x
+          node-version: 20.x
 
       - name: Install dependencies
         if: steps.cache_node_modules.outputs.cache-hit != 'true'
