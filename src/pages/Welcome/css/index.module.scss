@@ -1,4 +1,5 @@
 @use '../../../global.scss';
+@forward '../../../global.scss';
 .btn {
     background: global.$pure-black !important;
     border-color: global.$pure-black !important;

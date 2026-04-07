@@ -1,4 +1,5 @@
-@use '../../../global.scss';
+@use "./index.module.scss" as global;
+
 .container {
     display: flex;
     flex-direction: column;
