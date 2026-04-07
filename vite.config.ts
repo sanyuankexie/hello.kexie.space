@@ -12,7 +12,15 @@ export default defineConfig({
           hack: `true; @import (reference) "${resolve('src/theme.less')}";`,
         },
         javascriptEnabled: true,
-      }
+      },
+      scss: {
+        api: 'modern',
+        silenceDeprecations: ['legacy-js-api'],
+      },
+      sass: {
+        api: 'modern',
+        silenceDeprecations: ['legacy-js-api'],
+      },
     }
   },
 })
