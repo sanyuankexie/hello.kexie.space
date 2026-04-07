@@ -1,14 +1,20 @@
 # 使用 Node.js 镜像进行前端编译
-FROM node:15 AS build
+FROM node:20-alpine AS build
 
 # 设置工作目录
 WORKDIR /app
+
+# 先复制 package.json 和 package-lock.json，利用 Docker 层缓存
+COPY package*.json ./
+
+# 安装依赖
+RUN npm install
 
 # 复制所有源文件
 COPY .. .
 
 # 运行构建命令
-RUN npm install && npm run build
+RUN npm run build
 
 # 使用 Caddy 镜像作为最终的运行环境
 FROM caddy:latest
