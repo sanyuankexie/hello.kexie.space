@@ -1,0 +1,13 @@
+version: 2
+updates:
+  # 监控 GitHub Actions 工作流中的 Action 版本
+  - package-ecosystem: "github-actions"
+    directory: "/"                # 工作流文件所在目录，通常为根目录下的 .github/workflows/
+    schedule:
+      interval: "monthly"          # 每周检查一次更新
+    # 可选：指定 PR 的标签和分配人
+    labels:
+      - "dependencies"
+      - "github_actions"
+    # 可选：限制同时打开的 PR 数量
+    open-pull-requests-limit: 5
