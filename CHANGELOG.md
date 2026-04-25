@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.2](https://github.com/sanyuankexie/hello.kexie.space/compare/kexie-web-v1.4.1...kexie-web-v1.4.2) (2026-04-25)
+
+
+### 🤖 CI
+
+* **workflow:** 更新 Docker 登录 action 版本至 v3 ([c4ba169](https://github.com/sanyuankexie/hello.kexie.space/commit/c4ba169c29ea292bd0741916b78ccfa35900ae9f))
+
 ## [1.4.1](https://github.com/sanyuankexie/hello.kexie.space/compare/kexie-web-v1.4.0...kexie-web-v1.4.1) (2026-04-25)
 
 
