@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.4.1](https://github.com/sanyuankexie/hello.kexie.space/compare/kexie-web-v1.4.0...kexie-web-v1.4.1) (2026-04-25)
+
+
+### 🤖 CI
+
+* **workflow:** 在 release-please 工作流后面添加 docker push ([f2894a2](https://github.com/sanyuankexie/hello.kexie.space/commit/f2894a2e77bf3fc30c4747dcdf101e7516865c9e))
+* 添加手动触发 Docker 镜像构建推送的 GitHub Actions 工作流 ([be83891](https://github.com/sanyuankexie/hello.kexie.space/commit/be83891be071bcdebb9a3102d047d226eafd1f68))
+
 ## [1.4.0](https://github.com/sanyuankexie/hello.kexie.space/compare/kexie-web-v1.3.2...kexie-web-v1.4.0) (2026-04-25)
 
 
