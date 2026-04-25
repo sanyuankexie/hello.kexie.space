@@ -6,7 +6,7 @@ name: Docker Build and Push
 on:
   push:
     tags:
-      - '*'  
+      - 'v*'
 
 jobs:
   build-and-push:
@@ -29,7 +29,7 @@ jobs:
       - name: Get the Git tag
         id: git_tag
         run: |
-          git_tag=$(git describe --tags --exact-match 2>/dev/null || echo "none")
+          git_tag=${GITHUB_REF#refs/tags/}
           echo "tag=$git_tag" >> $GITHUB_OUTPUT
 
       - name: Build and Push Docker image
