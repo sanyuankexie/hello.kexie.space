@@ -1,5 +1,11 @@
 import React, { useEffect, useRef } from "react";
-import { CodeFilled, QqCircleFilled, HddFilled } from "@ant-design/icons";
+import {
+  CodeFilled,
+  QqCircleFilled,
+  HddFilled,
+  NumberOutlined,
+  TeamOutlined,
+} from "@ant-design/icons";
 import { Button, Typography } from "antd";
 import { Logo } from "../../static/cos";
 import style from "./css/Jumbotron.module.scss";
@@ -83,6 +89,18 @@ function Jumbotron() {
           target="__blank"
         >
           科协知识库
+        </Button>
+
+        <Button
+          className={style.btn}
+          type="primary"
+          shape="round"
+          icon={<NumberOutlined />}
+          size={"large"}
+          href="https://pd.qq.com/s/5pxzsijx0"
+          target="__blank"
+        >
+          科协QQ频道
         </Button>
       </div>
     </section>
