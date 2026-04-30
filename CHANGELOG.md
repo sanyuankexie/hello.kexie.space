@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.1](https://github.com/sanyuankexie/hello.kexie.space/compare/kexie-web-v1.5.0...kexie-web-v1.5.1) (2026-04-30)
+
+
+### 🧰 Chores
+
+* 手动触发发布 ([9f7db37](https://github.com/sanyuankexie/hello.kexie.space/commit/9f7db37d0e642819a9a84a4a4c812f56d030f9ea))
+
 ## [1.5.0](https://github.com/sanyuankexie/hello.kexie.space/compare/kexie-web-v1.4.1...kexie-web-v1.5.0) (2026-04-30)
 
 
