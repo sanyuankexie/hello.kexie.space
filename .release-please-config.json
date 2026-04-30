@@ -3,7 +3,6 @@
   "packages": {
     ".": {
       "release-type": "node",
-      "package-name": "kexie-web",
       "changelog-path": "CHANGELOG.md",
       "bump-minor-pre-major": false,
       "bump-patch-for-minor-pre-major": false,
