@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.5.0](https://github.com/sanyuankexie/hello.kexie.space/compare/kexie-web-v1.4.1...kexie-web-v1.5.0) (2026-04-30)
+
+
+### ✨ Features
+
+* 添加频道链接 ([5962f5b](https://github.com/sanyuankexie/hello.kexie.space/commit/5962f5b4b0eb44460f85ab1a5d4e792f6547ea62))
+
+
+### 🤖 CI
+
+* **docker:** 添加load选项以加载构建的镜像 ([f870d0e](https://github.com/sanyuankexie/hello.kexie.space/commit/f870d0ea10ecc1c1fb809bb695127e0c8239fd6e))
+* **workflow:** 更新 Docker 登录 action 版本至 v3 ([c4ba169](https://github.com/sanyuankexie/hello.kexie.space/commit/c4ba169c29ea292bd0741916b78ccfa35900ae9f))
+* **workflow:** 添加构建并上传Docker镜像到Release的功能 ([862a5a9](https://github.com/sanyuankexie/hello.kexie.space/commit/862a5a9516416c8e3e20f9a4fb5e291da33e5002))
+* 添加Docker构建检查工作流 ([3f46270](https://github.com/sanyuankexie/hello.kexie.space/commit/3f462705c30c60597af94034c4cc72c8af6d53c3))
+
 ## [1.4.1](https://github.com/sanyuankexie/hello.kexie.space/compare/kexie-web-v1.4.0...kexie-web-v1.4.1) (2026-04-25)
 
 
