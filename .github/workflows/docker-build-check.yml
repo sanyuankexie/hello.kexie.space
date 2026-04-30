@@ -26,6 +26,7 @@ jobs:
           file: ./deploy/Dockerfile
           platforms: linux/amd64
           push: false
+          load: true
           tags: |
             kexie-hello-web:build-check
           provenance: false
