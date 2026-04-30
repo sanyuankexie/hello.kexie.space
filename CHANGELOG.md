@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.5.2](https://github.com/sanyuankexie/hello.kexie.space/compare/kexie-web-v1.5.1...kexie-web-v1.5.2) (2026-04-30)
+
+
+### 🤖 CI
+
+* **workflow:** 允许Docker构建失败时继续执行 ([fec9f08](https://github.com/sanyuankexie/hello.kexie.space/commit/fec9f08efa7485cc5ec62421046a25160f0a0361))
+* 删除Docker构建检查工作流文件 ([d7d2773](https://github.com/sanyuankexie/hello.kexie.space/commit/d7d27733d9c88e941899d80adde464cb094aeb68))
+
 ## [1.5.1](https://github.com/sanyuankexie/hello.kexie.space/compare/kexie-web-v1.5.0...kexie-web-v1.5.1) (2026-04-30)
 
 
