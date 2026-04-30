@@ -43,6 +43,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build and Push Docker image
+        continue-on-error: true
         uses: docker/build-push-action@v7
         with:
           context: .
