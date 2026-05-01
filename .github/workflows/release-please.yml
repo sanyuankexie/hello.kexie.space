@@ -74,7 +74,7 @@ jobs:
           gzip -c /tmp/kexie-hello-web-${{ needs.release-please.outputs.tag_name }}.tar > /tmp/kexie-hello-web-${{ needs.release-please.outputs.tag_name }}.tar.gz
 
       - name: Upload image to Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           tag_name: ${{ needs.release-please.outputs.tag_name }}
           files: |
