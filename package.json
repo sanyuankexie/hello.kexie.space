@@ -12,7 +12,7 @@
     "highlight.js": "^11.9.0",
     "hosted-git-info": "^2.8.9",
     "is-svg": "^6.1.0",
-    "markdown-it": "^14.0.0",
+    "markdown-it": "^14.2.0",
     "postcss": "^8.5.8",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
