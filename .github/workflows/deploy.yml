@@ -9,7 +9,10 @@ env:
 on:
   push:
     tags:
+      # release-please 打出的 tag 形如 kexie-web-v1.5.2(带 component 前缀),
+      # 'v*' 匹配不到。两种格式都保留,兼容历史 tag。
       - 'v*'
+      - 'kexie-web-v*'
   workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
