@@ -8,10 +8,10 @@ WORKDIR /app
 COPY package*.json ./
 
 # 安装依赖
-RUN npm install
+RUN npm ci
 
 # 复制所有源文件
-COPY .. .
+COPY . .
 
 # 运行构建命令
 RUN npm run build
