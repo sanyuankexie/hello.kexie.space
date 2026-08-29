@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import Slider from "react-slick";
 import Section from "../../component/Section";
 import {useScrollHandler} from "../../hooks";
+import {GuethubAppAssets} from "../../static/cos";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -20,12 +21,7 @@ function GuethubApp() {
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
-    const mobileImages = [
-        "https://api.kexie.space/data/resource/hello/docs/introduction/appdev-assets/guethub-app-mobile-1.png",
-        "https://api.kexie.space/data/resource/hello/docs/introduction/appdev-assets/guethub-app-mobile-2.png",
-        "https://api.kexie.space/data/resource/hello/docs/introduction/appdev-assets/guethub-app-mobile-3.png",
-    ];
-
+    const mobileImages = GuethubAppAssets.Screenshots;
 
     const settings = {
         dots: true,
