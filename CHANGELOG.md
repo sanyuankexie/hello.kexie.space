@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.5.4](https://github.com/sanyuankexie/hello.kexie.space/compare/v1.5.3...v1.5.4) (2026-08-29)
+
+
+### 🐛 Fixes
+
+* **assets:** GuethubApp 截图改用 cos.ts 常量并转为 WebP ([#59](https://github.com/sanyuankexie/hello.kexie.space/issues/59)) ([5a65314](https://github.com/sanyuankexie/hello.kexie.space/commit/5a65314557b83ec2fdf56a69c39ca75f5d681aed))
+
+
+### 🧰 Chores
+
+* **ci:** 删除 GitHub Pages 部署工作流 ([#57](https://github.com/sanyuankexie/hello.kexie.space/issues/57)) ([bd31403](https://github.com/sanyuankexie/hello.kexie.space/commit/bd31403b01ff191b70acf28a53acd320c76f2c6d))
+
 ## [1.5.3](https://github.com/sanyuankexie/hello.kexie.space/compare/v1.5.2...v1.5.3) (2026-08-29)
 
 
