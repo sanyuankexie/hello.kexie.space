@@ -5,17 +5,17 @@ import { Interface } from "readline";
 import Section from "../../component/Section";
 import { useScrollHandler } from "../../hooks";
 import style from "./css/Essay.module.scss";
-import essay1 from "./img/essay-1.png";
-import essay2 from "./img/essay-2.png";
-import essay3 from "./img/essay-3.png";
-import patent1 from "./img/patent-1.png";
-import patent2 from "./img/patent-2.png";
-import patent3 from "./img/patent-3.png";
-import soft1 from "./img/soft-1.jpg";
-import soft2 from "./img/soft-2.jpg";
-import soft3 from "./img/soft-3.png";
-import soft4 from "./img/soft-4.jpg";
-import soft5 from "./img/soft-5.jpg";
+import essay1 from "./img/essay-1.webp";
+import essay2 from "./img/essay-2.webp";
+import essay3 from "./img/essay-3.webp";
+import patent1 from "./img/patent-1.webp";
+import patent2 from "./img/patent-2.webp";
+import patent3 from "./img/patent-3.webp";
+import soft1 from "./img/soft-1.webp";
+import soft2 from "./img/soft-2.webp";
+import soft3 from "./img/soft-3.webp";
+import soft4 from "./img/soft-4.webp";
+import soft5 from "./img/soft-5.webp";
 
 interface Achievement{
   type:string,

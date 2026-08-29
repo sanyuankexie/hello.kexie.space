@@ -3,15 +3,17 @@ name: Build and Deploy
 env:
   CI : false
 
-# Controls when the action will run. Triggers the workflow on push or pull request
-# events but only for the master branch
-# on:
-#  push:
-#    branches: [ main ]
-
+# 与 Docker 镜像构建保持一致:仅在打 tag 时部署,
+# 保证 Pages 上线的版本与 registry 中的镜像 tag 对应。
+# workflow_dispatch 保留手动补发部署的能力。
 on:
   push:
-    branches: [ main ]
+    tags:
+      # release-please 打出的 tag 形如 kexie-web-v1.5.2(带 component 前缀),
+      # 'v*' 匹配不到。两种格式都保留,兼容历史 tag。
+      - 'v*'
+      - 'kexie-web-v*'
+  workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
