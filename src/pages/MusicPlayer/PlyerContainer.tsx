@@ -4,7 +4,7 @@ import PlayerPanel from "./PlayerPanel";
 import PlayingSideBar from "./PlayerSidebar";
 import style from "./index.module.scss";
 import { useSelector } from "react-redux";
-import defaultBackground from '../../assets/images/music/dahai.png';
+import defaultBackground from '../../assets/images/music/dahai.webp';
 import { AppReducer } from "../../store/AReducer";
 
 function PlayerContainer() {
