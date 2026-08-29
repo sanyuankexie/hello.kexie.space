@@ -1,5 +1,24 @@
 # Changelog
 
+## [1.5.3](https://github.com/sanyuankexie/hello.kexie.space/compare/v1.5.2...v1.5.3) (2026-08-29)
+
+
+### 🐛 Fixes
+
+* **release:** last-release-sha 移至顶层,上一处放错层级未生效 ([#54](https://github.com/sanyuankexie/hello.kexie.space/issues/54)) ([80dfb92](https://github.com/sanyuankexie/hello.kexie.space/commit/80dfb92a4f30b5b8254abb6e2c787cb582c4c84e))
+* **release:** 锚定上一个 release,修正版本倒退与 changelog 膨胀 ([#52](https://github.com/sanyuankexie/hello.kexie.space/issues/52)) ([2cc7067](https://github.com/sanyuankexie/hello.kexie.space/commit/2cc7067884b58e24dfb49893a4dcb69ab1c8d250))
+
+
+### ⚡ Performance
+
+* **assets:** 图片转 WebP + fix(ci): 修复 Docker 构建缺陷 ([#51](https://github.com/sanyuankexie/hello.kexie.space/issues/51)) ([e973076](https://github.com/sanyuankexie/hello.kexie.space/commit/e97307689444fdb810eeb2d6adc0576e4e43e7b8))
+
+
+### 🧰 Chores
+
+* **ci:** 删除冗余的 deploy-docker.yml ([#56](https://github.com/sanyuankexie/hello.kexie.space/issues/56)) ([04a2677](https://github.com/sanyuankexie/hello.kexie.space/commit/04a26775a777060e145c4b5de6dcc750ccc634ec))
+* 移除 release-please 配置中的 package-name 字段 ([5e803dc](https://github.com/sanyuankexie/hello.kexie.space/commit/5e803dc77c58d65821ee3b7b80ecd35a1b461b1a))
+
 ## [1.5.2](https://github.com/sanyuankexie/hello.kexie.space/compare/kexie-web-v1.5.1...kexie-web-v1.5.2) (2026-04-30)
 
 
