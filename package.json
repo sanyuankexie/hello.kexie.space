@@ -1,6 +1,6 @@
 {
   "name": "kexie-web",
-  "version": "1.5.2",
+  "version": "1.5.3",
   "scripts": {
     "start": "vite --host",
     "build": "tsc && vite build",
