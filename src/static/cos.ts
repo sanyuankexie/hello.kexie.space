@@ -46,3 +46,11 @@ export const Video = {
 export const Docs = {
   PrefixUrl: `${BaseUrl}/docs/introduction`,
 };
+
+export const GuethubAppAssets = {
+  Screenshots: [
+    `${Docs.PrefixUrl}/appdev-assets/guethub-app-mobile-1.webp`,
+    `${Docs.PrefixUrl}/appdev-assets/guethub-app-mobile-2.webp`,
+    `${Docs.PrefixUrl}/appdev-assets/guethub-app-mobile-3.webp`,
+  ],
+} as const;
